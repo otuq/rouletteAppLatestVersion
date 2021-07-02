@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Y6W-OH-hqX">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--New Data View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NewDataViewController" id="Y6W-OH-hqX" customClass="NewDataViewController" customModule="roulette" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PtC-i6-cwD">
+                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NMv-Rm-8tP">
+                                <rect key="frame" x="100" y="54" width="214" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="NMv-Rm-8tP" secondAttribute="trailing" constant="100" id="3Ex-z4-85y"/>
+                            <constraint firstItem="NMv-Rm-8tP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="100" id="8oe-UQ-Oll"/>
+                            <constraint firstItem="PtC-i6-cwD" firstAttribute="top" secondItem="NMv-Rm-8tP" secondAttribute="bottom" constant="50" id="P1I-iZ-17i"/>
+                            <constraint firstItem="PtC-i6-cwD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="UnW-8M-iOL"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="PtC-i6-cwD" secondAttribute="bottom" id="k6T-KZ-cI4"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PtC-i6-cwD" secondAttribute="trailing" id="t7y-Z7-jeQ"/>
+                            <constraint firstItem="NMv-Rm-8tP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="tcm-HS-IAQ"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="060-gX-v4A">
+                        <barButtonItem key="rightBarButtonItem" title="完了" id="jz2-GC-e6w">
+                            <connections>
+                                <action selector="doneButton:" destination="Y6W-OH-hqX" id="Zhx-Zd-r9U"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="newDataTableView" destination="PtC-i6-cwD" id="Mmx-jt-o2q"/>
+                        <outlet property="titleTextView" destination="NMv-Rm-8tP" id="LkM-e3-jiR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1021.7391304347827" y="88.392857142857139"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
