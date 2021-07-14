@@ -15,7 +15,7 @@ class CollectionViewCell: UICollectionViewCell {
         }
     }
     
-    //MARK:-Outlets
+    //MARK:-Outlets,Actions
     @IBOutlet weak var colorSelect: UILabel!
     
     //MARK:-Lifecyle Methods

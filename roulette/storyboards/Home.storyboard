@@ -3,12 +3,13 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Home View Controller-->
+        <!--Home-->
         <scene sceneID="dtN-9l-E7N">
             <objects>
                 <viewController id="6Kk-Jj-ENJ" customClass="HomeViewController" customModule="roulette" customModuleProvider="target" sceneMemberID="viewController">
@@ -23,50 +24,80 @@
                                     <constraint firstAttribute="width" secondItem="kMZ-5R-PM1" secondAttribute="height" multiplier="1:1" id="1Wi-DU-gVX"/>
                                     <constraint firstAttribute="width" constant="150" id="Zic-B4-BtC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
                                 <state key="normal" title="Start">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8m-tL-EoA">
-                                <rect key="frame" x="167" y="623" width="80" height="79"/>
-                                <color key="backgroundColor" red="0.51872502375333029" green="0.96130555868148804" blue="0.83057873881059907" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <rect key="frame" x="0.0" y="683" width="414" height="40"/>
+                                <color key="backgroundColor" red="0.1980996672" green="0.96130555870000001" blue="0.7538765154" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="z8m-tL-EoA" secondAttribute="height" multiplier="1:1" constant="1" id="Y6H-XR-eVe"/>
-                                    <constraint firstAttribute="width" constant="80" id="uhc-KG-pYp"/>
+                                    <constraint firstAttribute="height" constant="40" id="89j-zd-DxR"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="SetData">
-                                    <color key="titleColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <state key="normal" title="LoadData">
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvI-I4-t8J">
-                                <rect key="frame" x="167" y="194" width="80" height="79"/>
-                                <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="623" width="414" height="40"/>
+                                <color key="backgroundColor" red="0.1980996672" green="0.96130555870000001" blue="0.7538765154" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="aWA-Su-JVJ"/>
+                                    <constraint firstAttribute="height" constant="40" id="w61-Qk-oTt"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
                                 <state key="normal" title="NewData">
-                                    <color key="titleColor" systemColor="labelColor"/>
+                                    <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-oc-pIg">
+                                <rect key="frame" x="344" y="108" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="GIl-oc-pIg" secondAttribute="height" multiplier="1:1" id="8Ud-ZP-cld"/>
+                                    <constraint firstAttribute="width" constant="50" id="9AE-EN-ip6"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="gearshape" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="appSettingButton:" destination="6Kk-Jj-ENJ" eventType="touchUpInside" id="0id-QL-uAn"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no setting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-9T-5dZ">
+                                <rect key="frame" x="20" y="223" width="374" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="n2k-hx-ueQ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JG6-uc-vdC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="z8m-tL-EoA" firstAttribute="centerX" secondItem="4lm-6n-g3S" secondAttribute="centerX" id="1Wf-og-Cfn"/>
-                            <constraint firstItem="LvI-I4-t8J" firstAttribute="width" secondItem="LvI-I4-t8J" secondAttribute="height" multiplier="1:1" constant="1" id="7Ta-cs-hUT"/>
+                            <constraint firstItem="LvI-I4-t8J" firstAttribute="top" secondItem="kMZ-5R-PM1" secondAttribute="bottom" constant="100" id="6W0-5D-3XH"/>
+                            <constraint firstItem="GIl-oc-pIg" firstAttribute="top" secondItem="JG6-uc-vdC" secondAttribute="top" constant="20" id="8Yx-xi-snx"/>
+                            <constraint firstItem="JG6-uc-vdC" firstAttribute="trailing" secondItem="GIl-oc-pIg" secondAttribute="trailing" constant="20" id="8ro-XX-FB4"/>
+                            <constraint firstItem="ahe-9T-5dZ" firstAttribute="leading" secondItem="JG6-uc-vdC" secondAttribute="leading" constant="20" id="Pab-5j-ahW"/>
+                            <constraint firstItem="z8m-tL-EoA" firstAttribute="leading" secondItem="JG6-uc-vdC" secondAttribute="leading" id="Tv9-HA-bh0"/>
+                            <constraint firstItem="JG6-uc-vdC" firstAttribute="trailing" secondItem="z8m-tL-EoA" secondAttribute="trailing" id="VUl-nQ-nCH"/>
+                            <constraint firstItem="z8m-tL-EoA" firstAttribute="top" secondItem="LvI-I4-t8J" secondAttribute="bottom" constant="20" id="Vt3-Mr-sTq"/>
+                            <constraint firstItem="kMZ-5R-PM1" firstAttribute="top" secondItem="ahe-9T-5dZ" secondAttribute="bottom" constant="100" id="ZPa-Tn-BcX"/>
                             <constraint firstItem="kMZ-5R-PM1" firstAttribute="centerY" secondItem="4lm-6n-g3S" secondAttribute="centerY" id="Zct-bI-cvD"/>
+                            <constraint firstItem="LvI-I4-t8J" firstAttribute="trailing" secondItem="JG6-uc-vdC" secondAttribute="trailing" id="hTF-xF-Iw1"/>
+                            <constraint firstItem="JG6-uc-vdC" firstAttribute="trailing" secondItem="ahe-9T-5dZ" secondAttribute="trailing" constant="20" id="iME-Tn-h1L"/>
                             <constraint firstItem="kMZ-5R-PM1" firstAttribute="centerX" secondItem="4lm-6n-g3S" secondAttribute="centerX" id="qoH-QD-4AD"/>
-                            <constraint firstItem="LvI-I4-t8J" firstAttribute="centerX" secondItem="4lm-6n-g3S" secondAttribute="centerX" id="rLv-Cq-rZL"/>
-                            <constraint firstItem="z8m-tL-EoA" firstAttribute="top" secondItem="kMZ-5R-PM1" secondAttribute="bottom" constant="100" id="ttF-m4-PE1"/>
-                            <constraint firstItem="kMZ-5R-PM1" firstAttribute="top" secondItem="LvI-I4-t8J" secondAttribute="bottom" constant="100" id="wuV-Xw-ZFN"/>
+                            <constraint firstItem="LvI-I4-t8J" firstAttribute="leading" secondItem="JG6-uc-vdC" secondAttribute="leading" id="xlB-hL-mLb"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="n2t-9k-rck"/>
+                    <navigationItem key="navigationItem" title="Home" id="n2t-9k-rck"/>
                     <connections>
                         <outlet property="newDataButton" destination="LvI-I4-t8J" id="K6d-WD-ZfM"/>
+                        <outlet property="rouletteTitleLabel" destination="ahe-9T-5dZ" id="v28-I7-zcm"/>
                         <outlet property="setDataButton" destination="z8m-tL-EoA" id="KSg-85-HPp"/>
                         <outlet property="startButton" destination="kMZ-5R-PM1" id="AUJ-jD-pFD"/>
                     </connections>
@@ -78,6 +109,7 @@
         <!--Navigation Controller-->
         <scene sceneID="wsH-YP-HtG">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XLb-t7-cjm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="X9t-f4-D55" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="W4H-Pa-HbC">
@@ -89,12 +121,12 @@
                         <segue destination="6Kk-Jj-ENJ" kind="relationship" relationship="rootViewController" id="dTY-2r-1Ru"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="XLb-t7-cjm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1021.7391304347827" y="64.955357142857139"/>
         </scene>
     </scenes>
     <resources>
+        <image name="gearshape" catalog="system" width="128" height="121"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

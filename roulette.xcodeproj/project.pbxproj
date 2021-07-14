@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C444D2681BCB100B8F698 /* AddRowButton.swift */; };
+		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
+		CE449654269D29FA007E4F6A /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* PKHUD */; };
+		CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* CustomCell.swift */; };
+		CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* CustomCell.xib */; };
 		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
+		CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */; };
+		CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5084A7269C341E0049ED7D /* AppSetting.storyboard */; };
 		CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79A56A268AE4A900BBA00C /* Degree.swift */; };
 		CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */; };
 		CE82BC1F26831741009550EB /* ColorSelectPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */; };
@@ -54,7 +60,11 @@
 
 /* Begin PBXFileReference section */
 		CE2C444D2681BCB100B8F698 /* AddRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRowButton.swift; sourceTree = "<group>"; };
+		CE46A6FA269EB91500D33530 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
+		CE46A6FB269EB91500D33530 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		CE4AADFA268C475D00AFD70F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
+		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
 		CE79A56A268AE4A900BBA00C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
 		CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectPresentationController.swift; sourceTree = "<group>"; };
@@ -91,7 +101,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE449654269D29FA007E4F6A /* PKHUD in Frameworks */,
 				CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */,
+				CE449651269D296B007E4F6A /* Eureka in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +185,7 @@
 				CEC5901B26807D79005A47D6 /* Home.storyboard */,
 				CEC5901D26807D85005A47D6 /* NewData.storyboard */,
 				CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */,
+				CE5084A7269C341E0049ED7D /* AppSetting.storyboard */,
 				CE82BC2026831BC7009550EB /* ColorSelect.storyboard */,
 			);
 			path = storyboards;
@@ -196,6 +209,7 @@
 				CEC5901626807D28005A47D6 /* HomeViewController.swift */,
 				CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */,
 				CEC5901826807D3D005A47D6 /* NewDataViewController.swift */,
+				CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */,
 				CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */,
 				CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */,
 			);
@@ -209,6 +223,8 @@
 				CEC5902526808559005A47D6 /* TableViewCell.xib */,
 				CE82BC2226831DD3009550EB /* CollectionViewCell.swift */,
 				CE82BC2326831DD3009550EB /* CollectionViewCell.xib */,
+				CE46A6FA269EB91500D33530 /* CustomCell.swift */,
+				CE46A6FB269EB91500D33530 /* CustomCell.xib */,
 			);
 			name = xib;
 			path = viewControllers;
@@ -232,6 +248,8 @@
 			name = roulette;
 			packageProductDependencies = (
 				CEB6C2D0268F0A6100C597F1 /* RealmSwift */,
+				CE449650269D296B007E4F6A /* Eureka */,
+				CE449653269D29FA007E4F6A /* PKHUD */,
 			);
 			productName = roulette;
 			productReference = CEA611372678688D00751566 /* roulette.app */;
@@ -306,6 +324,8 @@
 			mainGroup = CEA6112E2678688D00751566;
 			packageReferences = (
 				CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */,
+				CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = CEA611382678688D00751566 /* Products */;
 			projectDirPath = "";
@@ -324,6 +344,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */,
+				CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */,
+				CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */,
 				CEA611472678688F00751566 /* LaunchScreen.storyboard in Resources */,
 				CEC5902726808559005A47D6 /* TableViewCell.xib in Resources */,
 				CEC5901E26807D85005A47D6 /* NewData.storyboard in Resources */,
@@ -362,6 +384,8 @@
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
+				CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */,
+				CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */,
 				CEC590212680807E005A47D6 /* Extension.swift in Sources */,
 				CE4AADFB268C475D00AFD70F /* Model.swift in Sources */,
 				CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */,
@@ -704,6 +728,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/xmartlabs/Eureka";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.3;
+			};
+		};
+		CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pkluz/PKHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 		CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -715,6 +755,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE449650269D296B007E4F6A /* Eureka */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */;
+			productName = Eureka;
+		};
+		CE449653269D29FA007E4F6A /* PKHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */;
+			productName = PKHUD;
+		};
 		CEB6C2D0268F0A6100C597F1 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;

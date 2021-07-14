@@ -6,15 +6,15 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ColorSelectViewController: UIViewController {
-    
     //MARK:-properties
     private let cellId = "cellId"
     private let colors: [UIColor] = [.blue,.red,.yellow,.green,.cyan,.purple]
     var cellTag: Int? //変数以外でindex番号格納できないか？
     
-    //MARK:-Outlets
+    //MARK:-Outlets,Actions
     @IBOutlet weak var colorSelectCollectionView: UICollectionView!
     
     //MARK:-Lifecyle Methods
@@ -51,7 +51,11 @@ extension ColorSelectViewController: UICollectionViewDelegate, UICollectionViewD
         guard let nav = presentingViewController as? UINavigationController,
               let newDataVC = nav.viewControllers[nav.viewControllers.count - 1]as? NewDataViewController else { return }
         if let cellTag = cellTag {
-            newDataVC.dataSets[cellTag].color = colors[indexPath.row]
+            //UIColorをextensionしてUIColorからrgb値を取得してデータを保存。realmはUIColorを準拠していないみたいでUIColorの保存ができないみたい。
+            let rgbTemporary = newDataVC.dataSet.temporarys[cellTag]
+            rgbTemporary.rgbTemporary["r"] = colors[indexPath.row].r
+            rgbTemporary.rgbTemporary["g"] = colors[indexPath.row].g
+            rgbTemporary.rgbTemporary["b"] = colors[indexPath.row].b
             newDataVC.newDataTableView.reloadData()
             dismiss(animated: true, completion: nil)
         }

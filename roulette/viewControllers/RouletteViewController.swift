@@ -6,9 +6,9 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RouletteViewController: UIViewController {
-
     //MARK: -Properties
     private let parentLayer = CALayer() //ここに各グラフを統合する
     private let subView = UIView() //parentLayerをセットする。
@@ -18,14 +18,14 @@ class RouletteViewController: UIViewController {
     private var startRatio = 0.0 //グラフの描画開始点に使う
     private var startTime: CFTimeInterval! //アニメーション開始時間
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
-    private var datas: [RouletteData] {
+    private var graphData: List<RouletteGraphData> {
         guard let nav = presentingViewController as? UINavigationController,
               let homeVC = nav.viewControllers[nav.viewControllers.count - 1]as? HomeViewController,
-              let datas = homeVC.dataSets else { return [] }
-        
-        return datas
+              let dataSet = homeVC.dataSet else { return List() }
+        let graphData = dataSet.list
+        return graphData
     }
-    
+    //MARK:-Outlets,Actions
     @IBAction func doneButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -43,7 +43,7 @@ class RouletteViewController: UIViewController {
         subView.frame = view.frame
         subView.backgroundColor = .clear
         view.addSubview(subView)
-//        navigationController?.isNavigationBarHidden = true
+        navigationController?.isNavigationBarHidden = true
     }
 }
 
@@ -53,8 +53,9 @@ extension RouletteViewController {
     private func createGraph(){
         let drawRatios = drawRatios()
         drawRatios.enumerated().forEach { (index,ratio) in
-            let color = datas[index].color.cgColor
-            let textString = datas[index].text
+            let graphData = graphData[index]
+            let color = UIColor.init(r: graphData.r, g: graphData.g, b: graphData.b).cgColor
+            let textString = graphData.text
             let endRatio = startRatio + ratio
             let range = startRatio...endRatio
             let textAngleRatio = startRatio + (ratio / 2)
@@ -68,50 +69,7 @@ extension RouletteViewController {
         }
         subView.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
     }
-    //ルーレットアニメーション
-    func rotationAnimation(){
-        startTime = CACurrentMediaTime()
-        let link = CADisplayLink(target: self, selector: #selector(updateValue))
-        link.preferredFramesPerSecond = 100
-        link.add(to: .current, forMode: .common)
-    }
-    @objc func updateValue(link: CADisplayLink){
-        let dt = CGFloat((link.timestamp - self.startTime) / self.duration) //進捗率
-        let degree = Degree.init(p1: CGPoint(x: 0.42, y: 0), p2: CGPoint(x: 0.2, y: 1)) //進捗率を元にイージングの計算
-        let r = degree.solve(t: dt) //計算の結果を返す //進捗率が1.0に達するとそれ以上増えないように設定されているみたい
-        let stopAngle = (r * dtStop) //止まる位置
-        let rotation = ((around * 10 + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
-        self.subView.transform = CGAffineTransform(rotationAngle: rotation)
-        //ルーレットのストップ
-        if stopAngle >= dtStop {
-            link.invalidate()
-            print("stop link")
-            //止まった地点の数値が各グラフの範囲だった時の判定を返す。
-            graphRange.enumerated().forEach { (index, range) in
-                //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
-                if range.contains(Double(around - stopAngle)) {
-                    print(datas[index])
-                    print(dtStop)
-                    print(range)
-                }
-            }
-            return
-        }
-        print("stop:",stopAngle)
-    }
-    //ランダムでグラフの幅の数値を出し、その合計を100/合計値で比率を算出する。
-    private func drawRatios() -> [Double] {
-        var ratios = [CGFloat]()
-        for _ in 0..<datas.count{
-            let randomValue = CGFloat.random(in: 1...10)
-            ratios.append(randomValue)
-        }
-        let totalValue = ratios.reduce(0){$0+$1}
-        let totalRatio = around/totalValue
-        
-        return ratios.map{Double($0*totalRatio)}
-    }
-    //円弧のパス
+    //円弧形グラフのパス
     private func graphPath(radius: CGFloat, startAngle: Double, endAngle: Double) -> UIBezierPath{
         let path = UIBezierPath(
             arcCenter: CGPoint(x: 0, y: 0),
@@ -138,4 +96,56 @@ extension RouletteViewController {
         //親レイヤーに描画するレイヤーを追加していく
         parentLayer.addSublayer(layer)
     }
-}
+    //ランダムでグラフの幅の数値を出し、その合計を100/合計値で比率を算出する。
+    private func drawRatios() -> [Double] {
+        var ratios = [CGFloat]()
+        for _ in 0..<graphData.count{
+            let randomValue = CGFloat.random(in: 1...10)
+            ratios.append(randomValue)
+        }
+        let totalValue = ratios.reduce(0){$0+$1}
+        let totalRatio = around/totalValue
+        
+        return ratios.map{Double($0*totalRatio)}
+    }
+    //ルーレットアニメーション
+    func rotationAnimation(){
+        startTime = CACurrentMediaTime()
+        let link = CADisplayLink(target: self, selector: #selector(updateValue))
+        link.preferredFramesPerSecond = 100
+        link.add(to: .current, forMode: .common)
+    }
+    @objc func updateValue(link: CADisplayLink){
+        let dt = CGFloat((link.timestamp - self.startTime) / self.duration) //進捗率
+        let degree = Degree.init(p1: CGPoint(x: 0.42, y: 0), p2: CGPoint(x: 0.2, y: 1)) //進捗率を元にイージングの計算
+        let r = degree.solve(t: dt) //計算の結果を返す //進捗率が1.0に達するとそれ以上増えないように設定されているみたい
+        let stopAngle = (r * dtStop) //止まる位置
+        let rotation = ((around * 20 + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
+        self.subView.transform = CGAffineTransform(rotationAngle: rotation)
+        //ルーレットのストップ
+        if stopAngle >= dtStop {
+            link.invalidate()
+            print("stop link")
+            //止まった地点の数値が各グラフの範囲だった時の判定を返す。
+            graphRange.enumerated().forEach { (index, range) in
+                //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
+                if range.contains(Double(around - stopAngle)) {
+                    print(graphData[index].text)
+                    print(dtStop)
+                    print(range)
+                    alertResultRoulette(resultText: graphData[index].text) //ルーレットの結果を表示する。
+                }
+            }
+            return
+        }
+        print("stop:",stopAngle)
+    }
+    
+    private func alertResultRoulette(resultText: String){
+        let alertVC = UIAlertController(title: "result", message: resultText, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "done", style: .default, handler: { _ in
+            self.dismiss(animated: true, completion: nil)
+        }))
+        present(alertVC, animated: true, completion: nil)
+    }
+  }

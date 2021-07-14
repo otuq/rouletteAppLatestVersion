@@ -10,7 +10,7 @@ import UIKit
 protocol AddRowDelegate: AnyObject {
     func addRowInsert()
 }
-
+//tableViewのセルを追加するボタン
 class AddRowButton: UIButton {
     //MARK:-properties
     static let shared = AddRowButton.init(frame: CGRect(origin: .zero, size: CGSize(width: 50, height: 50)))

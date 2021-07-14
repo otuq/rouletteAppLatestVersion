@@ -8,16 +8,19 @@
 import UIKit
 
 class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate, UITextFieldDelegate {
-    
     //MARK:-properties
-    var labelColor: UIColor? {
+    private let selectView = UIView()
+    var graphDataTemporary: RouletteGraphTemporary? {
         didSet{
-            rouletteSetColor.backgroundColor = labelColor ?? .white
+            guard let temporary = graphDataTemporary else { return }
+            let rgb = temporary.rgbTemporary
+            let text = temporary.textTemporary
+            rouletteSetColor.backgroundColor = UIColor.init(r: rgb["r"]!, g: rgb["g"]!, b: rgb["b"]!)
+            rouletteTextView.text = text
         }
     }
-    private let selectView = UIView()
     
-    //MARK:-Outlets
+    //MARK:-Outlets,Actions
     @IBOutlet weak var rouletteSetColor: UILabel!
     @IBOutlet weak var rouletteTextView: UITextField!
     
@@ -35,12 +38,13 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate, UIT
         rouletteSetColor.isUserInteractionEnabled = true
         rouletteTextView.isUserInteractionEnabled = true
     }
-//    func textFieldtextDelivery() {
-//        guard let newDataVC = parentViewController as? NewDataViewController,
-//              let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
-//        newDataVC.dataSets[cellIndexPath.row].text = rouletteTextView.text ?? ""
-//    }
-    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let newDataVC = parentViewController as? NewDataViewController,
+              let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
+        let row = cellIndexPath.row
+        newDataVC.dataSet.temporarys[row].textTemporary = textField.text ?? ""
+        
+    }
     @objc func selectColorViewFetch() {
         let storyboard = UIStoryboard(name: "ColorSelect", bundle: nil)
         let colorSelectVC = storyboard.instantiateViewController(withIdentifier: "ColorSelectViewController")as! ColorSelectViewController
@@ -59,7 +63,4 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate, UIT
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         ColorsSelectPresentationController(presentedViewController: presented, presenting: presenting)
     }
-    //    override func setSelected(_ selected: Bool, animated: Bool) {
-    //        super.setSelected(selected, animated: animated)
-    //    }
 }

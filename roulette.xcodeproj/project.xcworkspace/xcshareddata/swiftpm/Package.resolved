@@ -2,6 +2,24 @@
   "object": {
     "pins": [
       {
+        "package": "Eureka",
+        "repositoryURL": "https://github.com/xmartlabs/Eureka",
+        "state": {
+          "branch": null,
+          "revision": "523af88efc83cdaf39b415446be1ca1529f5664d",
+          "version": "5.3.3"
+        }
+      },
+      {
+        "package": "PKHUD",
+        "repositoryURL": "https://github.com/pkluz/PKHUD",
+        "state": {
+          "branch": null,
+          "revision": "8fd26f23057c6bebd6695524b1c3e05e93aba571",
+          "version": "5.4.0"
+        }
+      },
+      {
         "package": "Realm",
         "repositoryURL": "https://github.com/realm/realm-cocoa",
         "state": {
