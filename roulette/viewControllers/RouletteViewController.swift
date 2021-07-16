@@ -10,6 +10,7 @@ import RealmSwift
 
 class RouletteViewController: UIViewController {
     //MARK: -Properties
+    private let userDefaults = UserDefaults.standard
     private let parentLayer = CALayer() //ここに各グラフを統合する
     private let subView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
@@ -18,12 +19,12 @@ class RouletteViewController: UIViewController {
     private var startRatio = 0.0 //グラフの描画開始点に使う
     private var startTime: CFTimeInterval! //アニメーション開始時間
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
-    private var graphData: List<RouletteGraphData> {
+    private var rouletteDataSet: (RouletteData, List<RouletteGraphData> ){
         guard let nav = presentingViewController as? UINavigationController,
               let homeVC = nav.viewControllers[nav.viewControllers.count - 1]as? HomeViewController,
-              let dataSet = homeVC.dataSet else { return List() }
-        let graphData = dataSet.list
-        return graphData
+              let dataSet = homeVC.dataSet else { return (RouletteData(), List()) }
+        let list = dataSet.list
+        return (dataSet, list)
     }
     //MARK:-Outlets,Actions
     @IBAction func doneButton(_ sender: Any) {
@@ -51,16 +52,19 @@ class RouletteViewController: UIViewController {
 extension RouletteViewController {
     //viewControllerにグラフを追加
     private func createGraph(){
+        let dataSet = rouletteDataSet.0
+        let list = rouletteDataSet.1
         let drawRatios = drawRatios()
         drawRatios.enumerated().forEach { (index,ratio) in
-            let graphData = graphData[index]
+            let graphData = list[index]
             let color = UIColor.init(r: graphData.r, g: graphData.g, b: graphData.b).cgColor
             let textString = graphData.text
+            let textColor = dataSet.textColor
             let endRatio = startRatio + ratio
             let range = startRatio...endRatio
             let textAngleRatio = startRatio + (ratio / 2)
             let textAngle =  CGFloat(2*Double.pi*textAngleRatio/Double(around)+Double.pi/2) //
-            let textLabel = UILabel(frame: subView.frame).rouletteTextLabel(angle: textAngle, text: textString)
+            let textLabel = UILabel(frame: subView.frame).rouletteTextLabel(textAngle, textString, textColor)
             print(textLabel.frame.origin)
             graphRange.append(range)
             drawGraph(fillColor: color, startRatio, endRatio)
@@ -99,7 +103,8 @@ extension RouletteViewController {
     //ランダムでグラフの幅の数値を出し、その合計を100/合計値で比率を算出する。
     private func drawRatios() -> [Double] {
         var ratios = [CGFloat]()
-        for _ in 0..<graphData.count{
+        let list = rouletteDataSet.1
+        for _ in 0..<list.count{
             let randomValue = CGFloat.random(in: 1...10)
             ratios.append(randomValue)
         }
@@ -116,11 +121,13 @@ extension RouletteViewController {
         link.add(to: .current, forMode: .common)
     }
     @objc func updateValue(link: CADisplayLink){
+        let dataSet = rouletteDataSet.0
         let dt = CGFloat((link.timestamp - self.startTime) / self.duration) //進捗率
         let degree = Degree.init(p1: CGPoint(x: 0.42, y: 0), p2: CGPoint(x: 0.2, y: 1)) //進捗率を元にイージングの計算
         let r = degree.solve(t: dt) //計算の結果を返す //進捗率が1.0に達するとそれ以上増えないように設定されているみたい
         let stopAngle = (r * dtStop) //止まる位置
-        let rotation = ((around * 20 + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
+        let speed = dataSet.speed
+        let rotation = ((around * speed + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
         self.subView.transform = CGAffineTransform(rotationAngle: rotation)
         //ルーレットのストップ
         if stopAngle >= dtStop {
@@ -130,10 +137,11 @@ extension RouletteViewController {
             graphRange.enumerated().forEach { (index, range) in
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
-                    print(graphData[index].text)
+                    let list = rouletteDataSet.1
+                    print(list[index].text)
                     print(dtStop)
                     print(range)
-                    alertResultRoulette(resultText: graphData[index].text) //ルーレットの結果を表示する。
+                    alertResultRoulette(resultText: list[index].text) //ルーレットの結果を表示する。
                 }
             }
             return

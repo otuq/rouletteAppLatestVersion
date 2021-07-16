@@ -10,6 +10,7 @@ import Eureka
 
 class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
     
+    let colorPickerVC = UIColorPickerViewController()
     @IBOutlet weak var colorLabel: UILabel!
     
     override func awakeFromNib() {
@@ -23,7 +24,6 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
         self.addGestureRecognizer(gesture)
     }
     @objc func presentColorPicker() {
-        let colorPickerVC = UIColorPickerViewController()
         colorPickerVC.delegate = self
         parentViewController?.present(colorPickerVC, animated: true, completion: nil)
     }
@@ -32,7 +32,6 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
         let color = viewController.selectedColor
         colorLabel.backgroundColor = color
         row.value = [color.r, color.g, color.b]
-        print(row.value)
     }
     //値が変わった時
 //    override func update() {

@@ -33,10 +33,10 @@ extension UIView {
     }
 }
 extension UILabel {
-    func rouletteTextLabel(angle: CGFloat, text: String) -> UILabel{
+    func rouletteTextLabel(_ angle: CGFloat, _ text: String, _ textColor: UIColor) -> UILabel{
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 16),
-            .foregroundColor: UIColor.darkGray
+            .foregroundColor: textColor
         ]
         //ルーレットの外枠からはみ出てしまい余白が欲しいのでラベルの短形サイズで調整
         bounds.size = CGSize(width: frame.width - frame.width / 10, height: frame.height)
