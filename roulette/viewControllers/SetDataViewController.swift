@@ -24,9 +24,10 @@ class SetDataViewController: UIViewController {
     
     //MARK:-Outlets,Actions
     @IBOutlet weak var setDataTableView: UITableView!
-    @IBAction func doneButton(_ sender: Any) {
+    @IBAction func cancelButton(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }    
+    }
+    
     //MARK:-Lifecyle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,18 +38,17 @@ class SetDataViewController: UIViewController {
         setDataTableView.dataSource = self
         setDataTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
     }
     @objc private func editRouletteSets() {
         setDataTableView.setEditing(true, animated: true)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editRouletteSetsDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editRouletteSetsDone))
     }
     @objc private func editRouletteSetsDone() {
         setDataTableView.setEditing(false, animated: true)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
     }
 }
-
 //MARK:-TableViewDelegate,Datasource
 extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -72,6 +72,7 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
                 temporary.rgbTemporary["r"] = list.r
                 temporary.rgbTemporary["g"] = list.g
                 temporary.rgbTemporary["b"] = list.b
+                temporary.ratioTemporary = list.ratio
                 dataSet.temporarys.append(temporary)
             }
             newDataVC.dataSet = dataSet

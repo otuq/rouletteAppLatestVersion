@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AVFoundation
 import RealmSwift
 
 class RouletteViewController: UIViewController {
@@ -16,8 +17,9 @@ class RouletteViewController: UIViewController {
     private let around = CGFloat.pi * 2 //360度 1回転
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) //止まる角度
     private let duration: TimeInterval = 10 //回る時間
-    private var startRatio = 0.0 //グラフの描画開始点に使う
+    private var audioPlayer: AVAudioPlayer!
     private var startTime: CFTimeInterval! //アニメーション開始時間
+    private var startRatio = 0.0 //グラフの描画開始点に使う
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
     private var rouletteDataSet: (RouletteData, List<RouletteGraphData> ){
         guard let nav = presentingViewController as? UINavigationController,
@@ -27,29 +29,108 @@ class RouletteViewController: UIViewController {
         return (dataSet, list)
     }
     //MARK:-Outlets,Actions
-    @IBAction func doneButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
     //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
         createGraph()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
             self.rotationAnimation()
+            self.rouletteSoundSetting()
         }
     }
     private func settingView() {
+        let pointerImageView = UIImageView(image: roulettePointer(w: 30))
+        let centerCircleImageView = rouletteCenterCircle(w: 40)
+        pointerImageView.center = CGPoint(x: view.center.x, y: view.center.y - 180 - 10 )
+        centerCircleImageView.center = view.center
         subView.frame = view.frame
         subView.backgroundColor = .clear
         view.addSubview(subView)
+        view.addSubview(pointerImageView)
+        view.addSubview(centerCircleImageView)
         navigationController?.isNavigationBarHidden = true
     }
+    private func roulettePointer(w: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: w, height: w))
+        let path = UIBezierPath()
+        path.move(to: .zero)
+        path.addLine(to: CGPoint(x: w, y: 0))
+        path.addLine(to: CGPoint(x: w/2, y: w))
+        path.addLine(to: CGPoint(x: 0, y: 0))
+        path.close()
+        UIColor.red.setFill()
+        path.fill()
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image!
+    }
+    private func rouletteCenterCircle(w: CGFloat) -> UILabel {
+        let circleLabel = UILabel()
+        circleLabel.bounds.size = CGSize(width: w, height: w)
+        circleLabel.accesory(bgColor: .white)
+        return circleLabel
+    }
+    private func rouletteSoundSetting() {
+        let dataSet = rouletteDataSet.0
+        guard let soundAsset  = NSDataAsset(name: dataSet.sound) else {
+            print("not found")
+            return
+        }
+        do{
+            audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
+            audioPlayer.prepareToPlay()
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.play()
+        }catch{
+            print(error.localizedDescription)
+            audioPlayer = nil
+        }
+    }
 }
-
 //MARK:-CreateGraph
 extension RouletteViewController {
+    //円弧形グラフのパス
+    private func graphPath(radius: CGFloat, startAngle: Double, endAngle: Double) -> UIBezierPath{
+        let path = UIBezierPath(
+            arcCenter: .zero,
+            radius: radius,
+            startAngle: CGFloat(2*Double.pi*startAngle/Double(around)-Double.pi/2),
+            endAngle: CGFloat(2*Double.pi*endAngle/Double(around)-Double.pi/2),
+            clockwise: true
+        )
+        path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
+        return path
+    }
+    //パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
+    private func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) {
+        let circlePath = graphPath(radius: 90, startAngle: startRatio, endAngle: endRatio)
+        let layer = CAShapeLayer()
+        layer.path = circlePath.cgPath
+        layer.lineWidth = 180
+        layer.lineCap = .butt
+        layer.strokeColor = fillColor
+        layer.fillColor = UIColor.clear.cgColor
+        layer.strokeStart = 0
+        layer.strokeEnd = 1
+        //親レイヤーに描画するレイヤーを追加していく
+        parentLayer.addSublayer(layer)
+    }
+    //ランダムでグラフの幅の数値を出し、その合計を100/合計値で比率を算出する。
+    private func drawRatios() -> [Double] {
+        let dataSet = rouletteDataSet.0
+        let list = rouletteDataSet.1
+        var ratios = [CGFloat]()
+        for i in list{
+            let randomValue = CGFloat.random(in: 1...10)
+            let sliderValue = CGFloat(i.ratio)
+            let ratio = dataSet.randomFlag ? randomValue : sliderValue
+            ratios.append(ratio)
+        }
+        let totalValue = ratios.reduce(0){$0+$1}
+        let totalRatio = around/totalValue
+        return ratios.map{Double($0*totalRatio)}
+    }
     //viewControllerにグラフを追加
     private func createGraph(){
         let dataSet = rouletteDataSet.0
@@ -73,46 +154,6 @@ extension RouletteViewController {
         }
         subView.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
     }
-    //円弧形グラフのパス
-    private func graphPath(radius: CGFloat, startAngle: Double, endAngle: Double) -> UIBezierPath{
-        let path = UIBezierPath(
-            arcCenter: CGPoint(x: 0, y: 0),
-            radius: radius,
-            startAngle: CGFloat(2*Double.pi*startAngle/Double(around)-Double.pi/2),
-            endAngle: CGFloat(2*Double.pi*endAngle/Double(around)-Double.pi/2),
-            clockwise: true
-        )
-        path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
-        
-        return path
-    }
-    //パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
-    private func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) {
-        let circlePath = graphPath(radius: 90, startAngle: startRatio, endAngle: endRatio)
-        let layer = CAShapeLayer()
-        layer.path = circlePath.cgPath
-        layer.lineWidth = 180
-        layer.lineCap = .butt
-        layer.strokeColor = fillColor
-        layer.fillColor = UIColor.clear.cgColor
-        layer.strokeStart = 0
-        layer.strokeEnd = 1
-        //親レイヤーに描画するレイヤーを追加していく
-        parentLayer.addSublayer(layer)
-    }
-    //ランダムでグラフの幅の数値を出し、その合計を100/合計値で比率を算出する。
-    private func drawRatios() -> [Double] {
-        var ratios = [CGFloat]()
-        let list = rouletteDataSet.1
-        for _ in 0..<list.count{
-            let randomValue = CGFloat.random(in: 1...10)
-            ratios.append(randomValue)
-        }
-        let totalValue = ratios.reduce(0){$0+$1}
-        let totalRatio = around/totalValue
-        
-        return ratios.map{Double($0*totalRatio)}
-    }
     //ルーレットアニメーション
     func rotationAnimation(){
         startTime = CACurrentMediaTime()
@@ -123,16 +164,20 @@ extension RouletteViewController {
     @objc func updateValue(link: CADisplayLink){
         let dataSet = rouletteDataSet.0
         let dt = CGFloat((link.timestamp - self.startTime) / self.duration) //進捗率
-        let degree = Degree.init(p1: CGPoint(x: 0.42, y: 0), p2: CGPoint(x: 0.2, y: 1)) //進捗率を元にイージングの計算
+        let degree = Degree.init(p1: CGPoint(x: 0.2, y: 0), p2: CGPoint(x: 0.2, y: 1)) //進捗率を元にイージングの計算
         let r = degree.solve(t: dt) //計算の結果を返す //進捗率が1.0に達するとそれ以上増えないように設定されているみたい
         let stopAngle = (r * dtStop) //止まる位置
-        let speed = dataSet.speed
+        let speed = dataSet.speed //回転数
         let rotation = ((around * speed + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
         self.subView.transform = CGAffineTransform(rotationAngle: rotation)
         //ルーレットのストップ
+        if dt >= 0.99 {
+            audioPlayer.volume = 0
+        }
         if stopAngle >= dtStop {
+            audioPlayer.stop()
             link.invalidate()
-            print("stop link")
+//            print("stop link")
             //止まった地点の数値が各グラフの範囲だった時の判定を返す。
             graphRange.enumerated().forEach { (index, range) in
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
@@ -146,9 +191,9 @@ extension RouletteViewController {
             }
             return
         }
-        print("stop:",stopAngle)
+//        print("stop:",stopAngle)
     }
-    
+    //ルーレット結果
     private func alertResultRoulette(resultText: String){
         let alertVC = UIAlertController(title: "result", message: resultText, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "done", style: .default, handler: { _ in
@@ -156,4 +201,4 @@ extension RouletteViewController {
         }))
         present(alertVC, animated: true, completion: nil)
     }
-  }
+}

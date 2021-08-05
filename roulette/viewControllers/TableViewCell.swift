@@ -7,43 +7,54 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate, UITextFieldDelegate {
+class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
     //MARK:-properties
     private let selectView = UIView()
+    private var editField: UITextField?
+    private var overlap: CGFloat = 0.0
+    private var lastOffset: CGFloat = 0.0
     var graphDataTemporary: RouletteGraphTemporary? {
         didSet{
             guard let temporary = graphDataTemporary else { return }
             let rgb = temporary.rgbTemporary
             let text = temporary.textTemporary
+            let ratio = temporary.ratioTemporary
             rouletteSetColor.backgroundColor = UIColor.init(r: rgb["r"]!, g: rgb["g"]!, b: rgb["b"]!)
-            rouletteTextView.text = text
+            rouletteTextField.text = text
+            rouletteRatioSlider.value = ratio
         }
     }
     
     //MARK:-Outlets,Actions
     @IBOutlet weak var rouletteSetColor: UILabel!
-    @IBOutlet weak var rouletteTextView: UITextField!
+    @IBOutlet weak var rouletteTextField: UITextField!
+    @IBOutlet weak var rouletteRatioSlider: UISlider!
     
     //MARK:-LifeCycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        settingUI()
+        keyboardNotification()
+    }
+    private func settingUI() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(selectColorViewFetch))
         selectView.backgroundColor = .clear
         selectedBackgroundView = selectView
-        rouletteTextView.delegate = self
-        
+        rouletteTextField.delegate = self
         rouletteSetColor.layer.cornerRadius = rouletteSetColor.bounds.width / 2
         rouletteSetColor.layer.masksToBounds = true
+        rouletteSetColor.layer.borderWidth = 0.5
         rouletteSetColor.addGestureRecognizer(gesture)
         rouletteSetColor.isUserInteractionEnabled = true
-        rouletteTextView.isUserInteractionEnabled = true
+        rouletteTextField.isUserInteractionEnabled = true
+        rouletteRatioSlider.addTarget(self, action: #selector(saveRatio), for: .touchUpInside)
     }
-    func textFieldDidEndEditing(_ textField: UITextField) {
+    @objc func saveRatio(sender: UISlider) {
         guard let newDataVC = parentViewController as? NewDataViewController,
               let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
         let row = cellIndexPath.row
-        newDataVC.dataSet.temporarys[row].textTemporary = textField.text ?? ""
-        
+        newDataVC.dataSet.temporarys[row].ratioTemporary = sender.value
+        print(sender.value)
     }
     @objc func selectColorViewFetch() {
         let storyboard = UIStoryboard(name: "ColorSelect", bundle: nil)
@@ -62,5 +73,57 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate, UIT
     //PresentationControllerをカスタムするためのdelegateメソッド
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         ColorsSelectPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+//MARK: - TextFieldDelegate
+extension TableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let newDataVC = parentViewController as? NewDataViewController,
+              let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
+        let row = cellIndexPath.row
+        editField = nil
+        newDataVC.dataSet.temporarys[row].textTemporary = textField.text ?? ""
+    }
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        endEditing(true)
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        editField = textField
+    }
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        editField = textField
+    }
+}
+//MARK: -KeyboardNotification
+extension TableViewCell {
+    private func keyboardNotification() {
+        let notification = NotificationCenter.default
+        notification.addObserver(self, selector: #selector(keyboardFrameChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+    }
+    @objc func keyboardFrameChange(notification: Notification) {
+        guard let fld = editField,
+              let newDataVC = parentViewController as? NewDataViewController else { return }
+        let userInfo = (notification as NSNotification).userInfo!
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
+        let fldFrame = newDataVC.view.convert(fld.frame, from: contentView) //textfieldの座標系をviewに合わせる
+        overlap = fldFrame.maxY - keyboardFrame.minY
+        print(fldFrame.maxY,keyboardFrame.minY,overlap)
+        if overlap > 0 {
+            guard let tableView = newDataVC.newDataTableView else { return }
+            overlap += tableView.contentOffset.y + 20
+            tableView.setContentOffset(CGPoint(x: 0, y: overlap), animated: true)
+        }
+    }
+    @objc func keyboardWillShow(notification: Notification){
+        guard let newDataVC = parentViewController as? NewDataViewController else { return }
+        lastOffset = newDataVC.newDataTableView.contentOffset.y
+    }
+    @objc func keyboardDidHide(notification: Notification){
+        guard let newDataVC = parentViewController as? NewDataViewController,
+              let tableView = newDataVC.newDataTableView else { return }
+        tableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
     }
 }

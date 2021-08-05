@@ -17,6 +17,8 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
         super.awakeFromNib()
         colorLabel.layer.cornerRadius = colorLabel.bounds.width / 2
         colorLabel.layer.masksToBounds = true
+        colorLabel.layer.borderWidth = 0.5
+        colorLabel.layer.borderColor = UIColor.label.cgColor
     }
     override func setup() {
         super.setup()

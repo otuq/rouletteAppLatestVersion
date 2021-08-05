@@ -41,9 +41,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="RouletteData Sets" id="9sG-js-BCX">
-                        <barButtonItem key="rightBarButtonItem" systemItem="cancel" id="pCq-Kr-GSn">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pCq-Kr-GSn">
                             <connections>
-                                <action selector="doneButton:" destination="Y6W-OH-hqX" id="PiZ-tg-V3M"/>
+                                <action selector="cancelButton:" destination="Y6W-OH-hqX" id="PiZ-tg-V3M"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -21,6 +21,7 @@ class CollectionViewCell: UICollectionViewCell {
     //MARK:-Lifecyle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = .red
         colorSelect.layer.cornerRadius = colorSelect.bounds.width / 2
         colorSelect.layer.masksToBounds = true
     }

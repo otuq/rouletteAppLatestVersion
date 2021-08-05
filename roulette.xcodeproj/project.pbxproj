@@ -39,6 +39,7 @@
 		CEC590212680807E005A47D6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC590202680807E005A47D6 /* Extension.swift */; };
 		CEC5902626808559005A47D6 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5902426808559005A47D6 /* TableViewCell.swift */; };
 		CEC5902726808559005A47D6 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC5902526808559005A47D6 /* TableViewCell.xib */; };
+		CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF696BD26B7D2DE00564381 /* Sound.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +95,7 @@
 		CEC590202680807E005A47D6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CEC5902426808559005A47D6 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		CEC5902526808559005A47D6 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		CEF696BD26B7D2DE00564381 /* Sound.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sound.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +156,7 @@
 				CEC5902326808510005A47D6 /* xib */,
 				CEC5901A26807D5D005A47D6 /* storyboards */,
 				CEA611432678688F00751566 /* Assets.xcassets */,
+				CEF696BD26B7D2DE00564381 /* Sound.xcassets */,
 				CEA611452678688F00751566 /* LaunchScreen.storyboard */,
 				CEA611482678688F00751566 /* Info.plist */,
 			);
@@ -350,6 +353,7 @@
 				CEC5902726808559005A47D6 /* TableViewCell.xib in Resources */,
 				CEC5901E26807D85005A47D6 /* NewData.storyboard in Resources */,
 				CE82BC2126831BC7009550EB /* ColorSelect.storyboard in Resources */,
+				CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */,
 				CEA611442678688F00751566 /* Assets.xcassets in Resources */,
 				CEA611422678688D00751566 /* Roulette.storyboard in Resources */,
 				CE82BC2526831DD3009550EB /* CollectionViewCell.xib in Resources */,

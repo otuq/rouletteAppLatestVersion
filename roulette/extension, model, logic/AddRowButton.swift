@@ -12,21 +12,13 @@ protocol AddRowDelegate: AnyObject {
 }
 //tableViewのセルを追加するボタン
 class AddRowButton: UIButton {
-    //MARK:-properties
     static let shared = AddRowButton.init(frame: CGRect(origin: .zero, size: CGSize(width: 50, height: 50)))
     weak var delegate: AddRowDelegate?
     
-    //MARK:-LyfeCycle Methods
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layer.backgroundColor = UIColor.lightGray.cgColor
-        layer.opacity = 0.5
-        layer.borderWidth = 0.5
-        layer.cornerRadius = bounds.width / 2
-        layer.shadowOffset = .init(width: 1, height: 1.5)
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.3
-        layer.shadowRadius = 1
+        accesory()
+        layer.backgroundColor = UIColor.init(r: 255, g: 31, b: 169).cgColor //255, 31, 169
         addTarget(self, action: #selector(addRowDelegate), for: .touchUpInside)
     }
     @objc func addRowDelegate() {

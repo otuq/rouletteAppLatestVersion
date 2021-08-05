@@ -61,9 +61,15 @@ class HomeViewController: UIViewController {
         let storyboard = UIStoryboard.init(name: "NewData", bundle: nil)
         let viewController = storyboard.instantiateViewController(withIdentifier: "NewDataViewController")
         let nav = UINavigationController.init(rootViewController: viewController)
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         nav.modalPresentationStyle = .overFullScreen
         present(nav, animated: true, completion: nil)
     }
+    
+    @objc private func cancel() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     private func settingAccesory() {
         startButton.accesory()
     }

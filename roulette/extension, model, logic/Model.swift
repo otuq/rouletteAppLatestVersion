@@ -11,14 +11,31 @@ import RealmSwift
 enum Speed: String {
     case slow, normal, fast
 }
-
+//MARK:- RouletteData
 class RouletteData: Object {
     @objc dynamic var title: String = ""
+    @objc dynamic var randomFlag: Bool = false
+
     var list = List<RouletteGraphData>()
     //初期色cyan colorselectVCで色を選択したらここに一時保存してnewDataVCの方でデータ保存する。
     var temporarys = [RouletteGraphTemporary]()
     var index: Int = 0
-    
+}
+//MARK:- RouletteGraphData
+class RouletteGraphData: Object {
+    @objc dynamic var text: String = ""
+    @objc dynamic var r: Int = 0
+    @objc dynamic var g: Int = 255
+    @objc dynamic var b: Int = 255
+    @objc dynamic var ratio: Float = 1
+}
+class RouletteGraphTemporary {
+    var textTemporary: String = ""
+    var rgbTemporary = ["r": 0,"g": 255, "b": 255] //初期値cyan
+    var ratioTemporary: Float = 1
+}
+//MARK: -AppSettingForm
+extension RouletteData {
     var formValues: [String: Any] {
         let userDefaults = UserDefaults.standard
         let values = userDefaults.object(forKey: "form")as? [String: Any] ?? [:]
@@ -40,14 +57,7 @@ class RouletteData: Object {
         let color = UIColor.init(r: rgb[0], g: rgb[1], b: rgb[2])
         return color
     }
-}
-class RouletteGraphData: Object {
-    @objc dynamic var text: String = ""
-    @objc dynamic var r: Int = 0
-    @objc dynamic var g: Int = 255
-    @objc dynamic var b: Int = 255
-}
-class RouletteGraphTemporary {
-    var textTemporary: String = ""
-    var rgbTemporary = ["r": 0,"g": 255, "b": 255] //初期値cyan
+    var sound: String {
+        formValues["sound"] as? String ?? "Timpani"
+    }
 }
