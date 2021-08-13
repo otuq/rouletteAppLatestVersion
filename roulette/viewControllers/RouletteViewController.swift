@@ -40,18 +40,22 @@ class RouletteViewController: UIViewController {
         }
     }
     private func settingView() {
-        let pointerImageView = UIImageView(image: roulettePointer(w: 30))
-        let centerCircleImageView = rouletteCenterCircle(w: 40)
+        let pointerImageView = UIImageView(image: roulettePointerImage(w: 30))
+        let centerCircleLabel = rouletteCenterCircleLabel(w: 40)
+        let flameCircleView = rouletteFlameCircle(w: 360)
         pointerImageView.center = CGPoint(x: view.center.x, y: view.center.y - 180 - 10 )
-        centerCircleImageView.center = view.center
+        centerCircleLabel.center = view.center
+        flameCircleView.center = view.center
         subView.frame = view.frame
         subView.backgroundColor = .clear
         view.addSubview(subView)
         view.addSubview(pointerImageView)
-        view.addSubview(centerCircleImageView)
+        view.addSubview(centerCircleLabel)
+        view.addSubview(flameCircleView)
+        view.bringSubviewToFront(pointerImageView)
         navigationController?.isNavigationBarHidden = true
     }
-    private func roulettePointer(w: CGFloat) -> UIImage {
+    private func roulettePointerImage(w: CGFloat) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: w, height: w))
         let path = UIBezierPath()
         path.move(to: .zero)
@@ -65,11 +69,20 @@ class RouletteViewController: UIViewController {
         UIGraphicsEndImageContext()
         return image!
     }
-    private func rouletteCenterCircle(w: CGFloat) -> UILabel {
+    private func rouletteCenterCircleLabel(w: CGFloat) -> UILabel {
         let circleLabel = UILabel()
         circleLabel.bounds.size = CGSize(width: w, height: w)
         circleLabel.accesory(bgColor: .white)
         return circleLabel
+    }
+    private func rouletteFlameCircle(w: CGFloat) -> UIView {
+        let flameCircleView = UIView()
+        flameCircleView.bounds.size = CGSize(width: w, height: w)
+        flameCircleView.backgroundColor = .clear
+        flameCircleView.layer.cornerRadius = flameCircleView.bounds.width / 2
+        flameCircleView.layer.borderWidth = 2
+        flameCircleView.layer.masksToBounds = true
+        return flameCircleView
     }
     private func rouletteSoundSetting() {
         let dataSet = rouletteDataSet.0
@@ -152,6 +165,7 @@ extension RouletteViewController {
             subView.addSubview(textLabel)
             startRatio = endRatio //次のグラフのスタート値を更新
         }
+        
         subView.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
     }
     //ルーレットアニメーション
@@ -187,11 +201,28 @@ extension RouletteViewController {
                     print(dtStop)
                     print(range)
                     alertResultRoulette(resultText: list[index].text) //ルーレットの結果を表示する。
+                    soundEffect()
                 }
             }
             return
         }
 //        print("stop:",stopAngle)
+    }
+    //ルーレット結果の効果音
+    private func soundEffect() {
+        let dataSet = rouletteDataSet.0
+        guard let soundAsset  = NSDataAsset(name: dataSet.effect) else {
+            print("not found")
+            return
+        }
+        do{
+            audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
+        }catch{
+            print(error.localizedDescription)
+            audioPlayer = nil
+        }
     }
     //ルーレット結果
     private func alertResultRoulette(resultText: String){

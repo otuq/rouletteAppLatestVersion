@@ -47,6 +47,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     //MARK:-LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         settingView()
         settingUI()
     }
@@ -177,9 +178,18 @@ extension NewDataViewController {
     @objc private func saveRouletteData() {
         guard let nav = presentingViewController as? UINavigationController,
               let homeVC = nav.topViewController as? HomeViewController else { return }
+        if dataSet.temporarys.isEmpty { return }
         view.endEditing(true)
-        //新規データの作成or更新
-        if navigationController?.viewControllers.first is SetDataViewController{
+        //新規データの作成
+        if homeVC.newDataButton.isSelected{
+            realmWrite()
+            try! realm.write({
+                realm.add(dataSet)
+            })
+            self.setAndDismiss(homeVC)
+            print("データを新規作成しました。")
+        //データセットの更新
+        }else if homeVC.setDataButton.isSelected{
             let alertVC = UIAlertController(title: "データセット", message: "", preferredStyle: .alert)
             let updataSetAction = UIAlertAction(title: "上書きしてセット", style: .default) { _ in
                 try! self.realm.write({
@@ -190,6 +200,7 @@ extension NewDataViewController {
                 print("データを更新しました。")
             }
             let setAction = UIAlertAction(title: "保存せずにセット", style: .default) { _ in
+                self.withoutSavingSet()
                 self.setAndDismiss(homeVC)
             }
             let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
@@ -197,13 +208,26 @@ extension NewDataViewController {
             alertVC.addAction(setAction)
             alertVC.addAction(cancelAction)
             self.present(alertVC, animated: true, completion: nil)
+        //homeVCにセットしてあるデータの更新
         }else{
-            realmWrite()
-            try! realm.write({
-                realm.add(dataSet)
-            })
-            self.setAndDismiss(homeVC)
-            print("データを新規作成しました。")
+            let alertVC = UIAlertController(title: "データの上書き", message: "", preferredStyle: .alert)
+            let updataSetAction = UIAlertAction(title: "上書きをする", style: .default) { _ in
+                try! self.realm.write({
+                    self.dataSet.list.removeAll()
+                })
+                self.realmWrite()
+                self.setAndDismiss(homeVC)
+                print("データを更新しました。")
+            }
+            let setAction = UIAlertAction(title: "保存せずにセット", style: .default) { _ in
+                self.withoutSavingSet()
+                self.setAndDismiss(homeVC)
+            }
+            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+            alertVC.addAction(updataSetAction)
+            alertVC.addAction(setAction)
+            alertVC.addAction(cancelAction)
+            self.present(alertVC, animated: true, completion: nil)
         }
     }
     private func realmWrite() {
@@ -225,9 +249,24 @@ extension NewDataViewController {
             })
         }
     }
+    //保存をしないで元のデータでセット。
+    private func withoutSavingSet() {
+        dataSet.temporarys.removeAll()
+        dataSet.list.forEach { list in
+            let temporary = RouletteGraphTemporary()
+            temporary.textTemporary = list.text
+            temporary.rgbTemporary["r"] = list.r
+            temporary.rgbTemporary["g"] = list.g
+            temporary.rgbTemporary["b"] = list.b
+            temporary.ratioTemporary = list.ratio
+            dataSet.temporarys.append(temporary)
+        }
+    }
     private func setAndDismiss(_ homeVC: HomeViewController) {
         homeVC.dataSet = dataSet
         homeVC.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
+        homeVC.newDataButton.isSelected = false
+        homeVC.setDataButton.isSelected = false
         dismiss(animated: true, completion: nil)
     }
 }

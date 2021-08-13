@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--RouletteData Create-->
+        <!--New Data-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="NewDataViewController" id="Y6W-OH-hqX" customClass="NewDataViewController" customModule="roulette" customModuleProvider="target" sceneMemberID="viewController">
@@ -81,7 +81,7 @@
                             <constraint firstItem="NMv-Rm-8tP" firstAttribute="leading" secondItem="J76-FZ-FCL" secondAttribute="trailing" constant="30" id="zZ4-nH-u0j"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="RouletteData Create" id="060-gX-v4A"/>
+                    <navigationItem key="navigationItem" title="New Data" id="060-gX-v4A"/>
                     <connections>
                         <outlet property="newDataTableView" destination="PtC-i6-cwD" id="Mmx-jt-o2q"/>
                         <outlet property="randomSwitchButton" destination="A7y-e8-7Pi" id="dQp-dC-Bpk"/>

@@ -35,7 +35,8 @@
                                     <constraint firstAttribute="height" constant="40" id="89j-zd-DxR"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
-                                <state key="normal" title="LoadData">
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="SetData">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
@@ -46,6 +47,7 @@
                                     <constraint firstAttribute="height" constant="40" id="w61-Qk-oTt"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="NewData">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
@@ -65,7 +67,7 @@
                                     <action selector="appSettingButton:" destination="6Kk-Jj-ENJ" eventType="touchUpInside" id="0id-QL-uAn"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no setting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-9T-5dZ">
+                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no setting" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-9T-5dZ">
                                 <rect key="frame" x="20" y="223" width="374" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="n2k-hx-ueQ"/>

@@ -20,28 +20,34 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
         colorLabel.layer.borderWidth = 0.5
         colorLabel.layer.borderColor = UIColor.label.cgColor
     }
-    override func setup() {
-        super.setup()
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(presentColorPicker))
-        self.addGestureRecognizer(gesture)
-    }
-    @objc func presentColorPicker() {
+    //    override func setup() {
+    //        super.setup()
+    //        let gesture = UITapGestureRecognizer(target: self, action: #selector(presentColorPicker))
+    //        self.addGestureRecognizer(gesture)
+    //    }
+    //    @objc func presentColorPicker() {
+    //        colorPickerVC.delegate = self
+    //        parentViewController?.present(colorPickerVC, animated: true, completion: nil)
+    //    }
+    override func didSelect() {
         colorPickerVC.delegate = self
-        parentViewController?.present(colorPickerVC, animated: true, completion: nil)
+        //
+        formViewController()?.present(colorPickerVC, animated: true, completion: nil)
     }
-    //UIColorPickerVCを閉じた時
+    //    UIColorPickerVCを閉じた時
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         let color = viewController.selectedColor
         colorLabel.backgroundColor = color
         row.value = [color.r, color.g, color.b]
+        row.deselect(animated: true)
     }
     //値が変わった時
-//    override func update() {
-//        <#code#>
-//    }
+    //    override func update() {
+    //        <#code#>
+    //    }
 }
 //CustomCellをセットする
-final class CustomRow: Row<CustomCell>, RowType {
+final class CustomRow: SelectorRow<CustomCell>, RowType {
     required init(tag: String?) {
         super.init(tag: tag)
         cellProvider = CellProvider<CustomCell>(nibName: "CustomCell")

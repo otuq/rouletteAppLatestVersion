@@ -24,9 +24,6 @@ class SetDataViewController: UIViewController {
     
     //MARK:-Outlets,Actions
     @IBOutlet weak var setDataTableView: UITableView!
-    @IBAction func cancelButton(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
     
     //MARK:-Lifecyle Methods
     override func viewDidLoad() {

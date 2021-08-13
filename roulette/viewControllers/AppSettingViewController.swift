@@ -15,6 +15,9 @@ enum FormName: String {
 enum Sound: String {
     case Timpani, Pop, Funk, Samba
 }
+enum Effect: String {
+    case Symbal, Hits, Conga, Rhodes
+}
 
 class AppSettingViewController: FormViewController {
     //MARK:-properties
@@ -76,7 +79,7 @@ class AppSettingViewController: FormViewController {
                 //selectorのカスタマイズ。selectableRowSetup、selectableRowCellUpdateおよびselectableRowCellSetupプロパティで選択可能なセルのカスタマイズが可能
                 to.selectableRowCellUpdate = { _, row in
                     //選択されたリストの
-                    row.cellUpdate { _, row in
+                    row.onChange { row in
                         let value = Sound(rawValue: row.value ?? "")
                         switch value {
                         case .Timpani:
@@ -93,6 +96,37 @@ class AppSettingViewController: FormViewController {
                     }
                 }
             })
+            //ルーレットの効果音を選択
+            <<< PushRow<String>("effect"){
+                $0.options = ["Symbal","Hits","Conga","Rhodes"]
+                $0.title = "effect"
+                $0.value = formValues["effect"] as? Cell<String>.Value ?? $0.options?[0]
+                $0.noValueDisplayText = $0.value
+            }.onPresent({ from, to in
+                //デフォルトだとリストのセルを選択すると閉じるようになってる。
+                to.dismissOnSelection = false
+                to.dismissOnChange = false
+                to.enableDeselection = false
+                //selectorのカスタマイズ。selectableRowSetup、selectableRowCellUpdateおよびselectableRowCellSetupプロパティで選択可能なセルのカスタマイズが可能
+                to.selectableRowCellUpdate = { _, row in
+                    //選択されたリストが列挙で指定した値と一致したらsoundSelectメソッドを発火
+                    row.onChange { row in //cellUpdateだとカラーピッカーを閉じた後PushRowから遷移するだけでsoundSelectメソッドまで読み込まれてしまうバグがあってハマった。
+                        let value = Effect(rawValue: row.value ?? "")
+                        switch value {
+                        case .Symbal:
+                            self.soundSelect(soundString: value!.rawValue)
+                        case .Hits:
+                            self.soundSelect(soundString: value!.rawValue)
+                        case .Conga:
+                            self.soundSelect(soundString: value!.rawValue)
+                        case .Rhodes:
+                            self.soundSelect(soundString: value!.rawValue)
+                        case .none:
+                            break
+                        }
+                    }
+                }
+            })
             //CustomCellにカスタムロウを定義。UIColorPickerVCでルーレットのテキストカラーを選択
             <<< CustomRow("colorPicker"){
                 let rgb = formValues["colorPicker"] as? [Int] ?? [0,255,255]
@@ -101,7 +135,9 @@ class AppSettingViewController: FormViewController {
                 $0.cell.colorLabel.backgroundColor = color
                 $0.cell.colorPickerVC.selectedColor = color
                 $0.value = formValues["colorPicker"] as? Cell<[Int]>.Value ?? [0,255,255]
+                
             }
+        //現在のversion
         form +++ Section("Information")
             <<< TextRow("version"){
                 $0.title = "version"

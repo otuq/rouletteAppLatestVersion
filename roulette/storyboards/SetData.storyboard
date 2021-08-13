@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--RouletteData Sets-->
+        <!--Data Sets-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="SetDataViewController" id="Y6W-OH-hqX" customClass="SetDataViewController" customModule="roulette" customModuleProvider="target" sceneMemberID="viewController">
@@ -40,13 +40,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3gU-Ac-BRo" secondAttribute="trailing" id="rcj-AS-3qm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="RouletteData Sets" id="9sG-js-BCX">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pCq-Kr-GSn">
-                            <connections>
-                                <action selector="cancelButton:" destination="Y6W-OH-hqX" id="PiZ-tg-V3M"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Data Sets" id="9sG-js-BCX"/>
                     <connections>
                         <outlet property="setDataTableView" destination="3gU-Ac-BRo" id="01Q-Kv-PXU"/>
                     </connections>
