@@ -47,7 +47,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     //MARK:-LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         settingView()
         settingUI()
     }
@@ -219,17 +218,13 @@ extension NewDataViewController {
                 self.setAndDismiss(homeVC)
                 print("データを更新しました。")
             }
-            let setAction = UIAlertAction(title: "保存せずにセット", style: .default) { _ in
-                self.withoutSavingSet()
-                self.setAndDismiss(homeVC)
-            }
             let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
             alertVC.addAction(updataSetAction)
-            alertVC.addAction(setAction)
             alertVC.addAction(cancelAction)
             self.present(alertVC, animated: true, completion: nil)
         }
     }
+    //データベースへの書き込み
     private func realmWrite() {
         //titleのデータの保存、更新
         try! realm.write({

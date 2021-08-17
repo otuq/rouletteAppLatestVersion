@@ -129,7 +129,7 @@ extension RouletteViewController {
         //親レイヤーに描画するレイヤーを追加していく
         parentLayer.addSublayer(layer)
     }
-    //ランダムでグラフの幅の数値を出し、その合計を100/合計値で比率を算出する。
+    //グラフの幅の数値の合計を100/合計値で比率を算出する。
     private func drawRatios() -> [Double] {
         let dataSet = rouletteDataSet.0
         let list = rouletteDataSet.1
@@ -156,13 +156,14 @@ extension RouletteViewController {
             let textColor = dataSet.textColor
             let endRatio = startRatio + ratio
             let range = startRatio...endRatio
-            let textAngleRatio = startRatio + (ratio / 2)
+            let textAngleRatio = startRatio + (ratio / 2) //2番目のレイヤーだとしたら1番目のendratioからratioの半分の位置が文字列の角度 start:25 ratio40 文字列角度45
             let textAngle =  CGFloat(2*Double.pi*textAngleRatio/Double(around)+Double.pi/2) //
-            let textLabel = UILabel(frame: subView.frame).rouletteTextLabel(textAngle, textString, textColor)
-            print(textLabel.frame.origin)
+            let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 350, height: 20)))
+            textLabelView.rouletteTextSetting(textString, textColor, textAngle)
+            textLabelView.center = view.center
             graphRange.append(range)
             drawGraph(fillColor: color, startRatio, endRatio)
-            subView.addSubview(textLabel)
+            subView.addSubview(textLabelView)
             startRatio = endRatio //次のグラフのスタート値を更新
         }
         

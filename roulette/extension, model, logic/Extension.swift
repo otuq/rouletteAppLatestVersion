@@ -31,19 +31,20 @@ extension UIView {
             parentResponder = nextResponder
         }
     }
-}
-extension UILabel {
-    func rouletteTextLabel(_ angle: CGFloat, _ text: String, _ textColor: UIColor) -> UILabel{
+    func rouletteTextSetting(_ text: String, _ textColor: UIColor,_ textAngle: CGFloat) {
+        let textLabel = UILabel()
+        textLabel.frame.size = CGSize(width: 150, height: 20)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: 16),
             .foregroundColor: textColor
         ]
+        textLabel.attributedText = NSAttributedString(string: text, attributes: attributes)
         //ルーレットの外枠からはみ出てしまい余白が欲しいのでラベルの短形サイズで調整
-        bounds.size = CGSize(width: frame.width - frame.width / 10, height: frame.height)
-        attributedText = NSAttributedString(string: text, attributes: attributes)
-        transform = CGAffineTransform(rotationAngle: angle)
-        return self
+        addSubview(textLabel)
+        transform = CGAffineTransform(rotationAngle: textAngle)
     }
+}
+extension UILabel {
     func accesory(bgColor: UIColor) {
         layer.backgroundColor = bgColor.cgColor
         layer.cornerRadius = bounds.width / 2
@@ -54,10 +55,8 @@ extension UILabel {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
     }
-
 }
 extension UIColor {
-    
     var r: Int {
         Int(self.cgColor.components![0] * 255)
     }
@@ -74,14 +73,13 @@ extension UIColor {
     convenience init(r: Int,g: Int, b: Int, a: CGFloat = 1.0){
         self.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: a)
     }
-    
-    class var paleBlue: UIColor {
+    static var paleBlue: UIColor {
         UIColor.init(r: 3, g: 157, b: 252)
     }
-    class var paleRed: UIColor {
+    static var paleRed: UIColor {
         UIColor.init(r: 252, g: 3, b: 157)
     }
-    class var yellowGreen: UIColor {
+    static var yellowGreen: UIColor {
         UIColor.init(r: 211, g: 252, b: 3)
     }
 }
