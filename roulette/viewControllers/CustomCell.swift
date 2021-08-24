@@ -9,7 +9,6 @@ import UIKit
 import Eureka
 
 class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
-    
     let colorPickerVC = UIColorPickerViewController()
     @IBOutlet weak var colorLabel: UILabel!
     
@@ -20,18 +19,8 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
         colorLabel.layer.borderWidth = 0.5
         colorLabel.layer.borderColor = UIColor.label.cgColor
     }
-    //    override func setup() {
-    //        super.setup()
-    //        let gesture = UITapGestureRecognizer(target: self, action: #selector(presentColorPicker))
-    //        self.addGestureRecognizer(gesture)
-    //    }
-    //    @objc func presentColorPicker() {
-    //        colorPickerVC.delegate = self
-    //        parentViewController?.present(colorPickerVC, animated: true, completion: nil)
-    //    }
     override func didSelect() {
         colorPickerVC.delegate = self
-        //
         formViewController()?.present(colorPickerVC, animated: true, completion: nil)
     }
     //    UIColorPickerVCを閉じた時
@@ -41,10 +30,6 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
         row.value = [color.r, color.g, color.b]
         row.deselect(animated: true)
     }
-    //値が変わった時
-    //    override func update() {
-    //        <#code#>
-    //    }
 }
 //CustomCellをセットする
 final class CustomRow: SelectorRow<CustomCell>, RowType {

@@ -17,10 +17,20 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private let colors: [UIColor] = [.blue,.red,.yellow,.green,.purple,.brown,.cyan,.magenta,.orange,.paleBlue,.paleRed,.yellowGreen]
     private var colorIndex = 0
     private var realm: Realm {
-        var config = Realm.Configuration()
-        //migration データベースはデータモデルを変更すると新しいバージョンに移行処理を行わないとダメらしい。今は毎回バージョンが初期化される設定にしているが、リリースしてデータモデルを変更してアップデートする場合はmigrationを行う。現在バージョンが1で変更したらバージョンを2以下はmigration
-        config.deleteRealmIfMigrationNeeded = true
-        let realm = try! Realm(configuration: config)
+//        var config = Realm.Configuration()
+//        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+//            schemaVersion: 1, //初期値は0
+//            migrationBlock: { migration, oldSchemeVersion in
+        //現在のversionより古いversionはデータ構造の移行をしますよ〜
+//                if oldSchemeVersion < 1 {
+//                    //保存先の変数名が変わった例
+//                    migration.renameProperty(onType: RouletteData.className(), from: "name", to: "fullName")
+//                }
+//        })
+//        //migration データベースはデータモデルを変更すると新しいバージョンに移行処理を行わないとダメらしい。今は毎回バージョンが初期化される設定にしているが、リリースしてデータモデルを変更してアップデートする場合はmigrationを行う。現在バージョンが1で変更したらバージョンを2以下はmigration
+//        config.deleteRealmIfMigrationNeeded = true //versionを初期化
+//        let realm = try! Realm(configuration: config)
+        let realm = try! Realm()
         return realm
     }
     private var addRowButton: AddRowButton {
@@ -93,7 +103,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
                 cell.rouletteRatioSlider.layer.opacity = 0.3
             }
         }else{
-            randomSwitchButton.backgroundColor = UIColor.init(r: 255, g: 64, b: 255)
+            randomSwitchButton.backgroundColor = UIColor.init(r: 51, g: 245, b: 192)
             randomSwitchLabel.text = "OFF"
             getAllCells.enumerated().forEach { (index,cell) in
                 cell.rouletteRatioSlider.isUserInteractionEnabled = true

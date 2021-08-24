@@ -24,12 +24,10 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
             rouletteRatioSlider.value = ratio
         }
     }
-    
     //MARK:-Outlets,Actions
     @IBOutlet weak var rouletteSetColor: UILabel!
     @IBOutlet weak var rouletteTextField: UITextField!
     @IBOutlet weak var rouletteRatioSlider: UISlider!
-    
     //MARK:-LifeCycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -75,7 +73,6 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
         ColorsSelectPresentationController(presentedViewController: presented, presenting: presenting)
     }
 }
-
 //MARK: - TextFieldDelegate
 extension TableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {

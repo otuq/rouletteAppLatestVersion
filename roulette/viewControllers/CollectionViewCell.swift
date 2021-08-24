@@ -14,10 +14,8 @@ class CollectionViewCell: UICollectionViewCell {
             colorSelect.backgroundColor = color ?? .white
         }
     }
-    
     //MARK:-Outlets,Actions
     @IBOutlet weak var colorSelect: UILabel!
-    
     //MARK:-Lifecyle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
