@@ -8,6 +8,7 @@
 import UIKit
 import Eureka
 import AVFoundation
+import SafariServices
 
 enum FormName: String {
     case speed, sound, colorPicker, formKey
@@ -63,7 +64,6 @@ class AppSettingViewController: FormViewController {
                 //segmentedControlの幅を変更
                 $0.cell.segmentedControl.widthAnchor.constraint(equalToConstant: 200).isActive = true
                 $0.value = formValues["speed"] as? Cell<String>.Value ?? $0.options?[1]
-                
             }
             //ルーレットのドラムロール音を選択
             <<< PushRow<String>("sound"){
@@ -135,13 +135,24 @@ class AppSettingViewController: FormViewController {
                 $0.cell.colorLabel.backgroundColor = color
                 $0.cell.colorPickerVC.selectedColor = color
                 $0.value = formValues["colorPicker"] as? Cell<[Int]>.Value ?? [0,255,255]
-                
             }
         //現在のversion
         form +++ Section("Information")
             <<< TextRow("version"){
                 $0.title = "version"
                 $0.value = "1.0"
+                $0.cell.isUserInteractionEnabled = false
+            }
+            //プライバシー情報のwebページに遷移
+            <<< ButtonRow(){
+                $0.title = "privacy"
+                $0.presentationMode = .presentModally(controllerProvider: ControllerProvider.callback(builder: {
+                    if let url = URL(string: "https://lab316.github.io/app-static-page/ja/privacy.html?company=oq"){
+                        let safariVC = SFSafariViewController(url: url)
+                        return safariVC
+                    }
+                    return UIViewController()
+                }), onDismiss: nil)
             }
     }
 }

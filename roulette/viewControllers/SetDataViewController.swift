@@ -11,12 +11,7 @@ import RealmSwift
 class SetDataViewController: UIViewController {
     //MARK:-properties
     private let cellId = "cellId"
-    var realm: Realm {
-        var config = Realm.Configuration()
-        config.deleteRealmIfMigrationNeeded = true
-        let realm = try! Realm(configuration: config)
-        return realm
-    }
+    private var realm = try! Realm()
     private var dataSets: Results<RouletteData> {
         let data = realm.objects(RouletteData.self)
         return data
@@ -53,6 +48,7 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        
         let graphTitle = dataSets[indexPath.row].title
         cell.textLabel?.text = graphTitle.isEmpty ? "No title" : graphTitle
         return cell
@@ -62,7 +58,7 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
         if let newDataVC = storyboard.instantiateViewController(withIdentifier: "NewDataViewController")as? NewDataViewController {
             //選択したグラフデータのインデックスとrgb情報を
             let dataSet = dataSets[indexPath.row]
-            dataSet.index = indexPath.row
+//            dataSet.index = indexPath.row
             dataSet.list.forEach { list in
                 let temporary = RouletteGraphTemporary()
                 temporary.textTemporary = list.text

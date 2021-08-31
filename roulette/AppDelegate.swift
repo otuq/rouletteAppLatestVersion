@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -14,6 +15,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+        //            schemaVersion: 1, //初期値は0
+        //            migrationBlock: { migration, oldSchemeVersion in
+        ////                現在のversionより古いversionはデータ構造の移行をしますよ〜
+        //                if oldSchemeVersion < 1 {
+        //                    //保存先の変数名が変わった例
+        ////                    migration.renameProperty(onType: RouletteData.className(), from: "name", to: "fullName")
+        //                }
+        //            })
+        //
+        var config = Realm.Configuration()
+        config.deleteRealmIfMigrationNeeded = true
+        Realm.Configuration.defaultConfiguration = config
+
         return true
     }
 
