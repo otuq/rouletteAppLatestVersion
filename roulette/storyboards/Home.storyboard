@@ -23,8 +23,8 @@
                                     <constraint firstAttribute="width" secondItem="kMZ-5R-PM1" secondAttribute="height" multiplier="1:1" id="1Wi-DU-gVX"/>
                                     <constraint firstAttribute="width" constant="150" id="Zic-B4-BtC"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="20"/>
-                                <state key="normal" title="Start">
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="16"/>
+                                <state key="normal" title="Please Set">
                                     <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>

@@ -75,7 +75,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         randomSwitch()
     }
     private func randomSwitch() {
-//        guard let cells = newDataTableView.visibleCells as? [TableViewCell] else { return } //visiblecellsは完全に表示されているセルの意味らしい
         if randomSwitchButton.isSelected {
             randomSwitchButton.backgroundColor = .lightGray
             randomSwitchLabel.text = "ON"
@@ -94,7 +93,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     }
     //一番下までスクロールしたらaddボタンを退場
     private func scrollDidEndRemoveAddRow(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y, (scrollView.contentSize.height - scrollView.frame.height) )
         if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.height) {
             UIView.animate(withDuration: 1) {
                 //CGAffinetransformではうまく動いてくれなかった。
@@ -253,6 +251,8 @@ extension NewDataViewController {
         homeVC.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
         homeVC.newDataButton.isSelected = false
         homeVC.setDataButton.isSelected = false
+        homeVC.startButton.titleLabel?.removeFromSuperview()
+        homeVC.view.addSubview(homeVC.setDataLabel)
         dismiss(animated: true, completion: nil)
     }
 }

@@ -83,7 +83,11 @@ extension TableViewCell: UITextFieldDelegate {
         newDataVC.dataSet.temporarys[row].textTemporary = textField.text ?? ""
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        endEditing(true)
+        if let newDataVC = parentViewController as? NewDataViewController,let tableView = newDataVC.newDataTableView{
+            tableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
+            endEditing(true)
+        }
+        return true
     }
     func textFieldDidBeginEditing(_ textField: UITextField) {
         editField = textField
@@ -98,7 +102,7 @@ extension TableViewCell {
         let notification = NotificationCenter.default
         notification.addObserver(self, selector: #selector(keyboardFrameChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
+//        notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     @objc func keyboardFrameChange(notification: Notification) {
         guard let fld = editField,
@@ -118,9 +122,9 @@ extension TableViewCell {
         guard let newDataVC = parentViewController as? NewDataViewController else { return }
         lastOffset = newDataVC.newDataTableView.contentOffset.y
     }
-    @objc func keyboardDidHide(notification: Notification){
-        guard let newDataVC = parentViewController as? NewDataViewController,
-              let tableView = newDataVC.newDataTableView else { return }
-        tableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
-    }
+//    @objc func keyboardDidHide(notification: Notification){
+//        guard let newDataVC = parentViewController as? NewDataViewController,
+//              let tableView = newDataVC.newDataTableView else { return }
+//        tableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
+//    }
 }

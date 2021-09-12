@@ -17,6 +17,7 @@ extension UIButton {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
+        //透明になったり戻ったりのアニメーション　データがセットされた時発動
     }
 }
 //チェーンレスポンダー

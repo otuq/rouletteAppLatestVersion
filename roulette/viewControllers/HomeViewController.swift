@@ -9,8 +9,23 @@ import UIKit
 
 class HomeViewController: UIViewController {
     //MARK:- Properties
+    var setDataLabel: UILabel {
+        let label = UILabel()
+        label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
+        label.center = view.center
+        label.textAlignment = .center
+        label.text = "TAP Roulette Set"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        UIView.transition(with: label, duration: 2.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
+            label.layer.opacity = 0
+        }) { _ in
+            label.layer.opacity = 1
+            label.text = "T A P"
+        }
+        return label
+    }
     var dataSet: RouletteData?
-    
+    var parentLayer = CALayer()
     //MARK:-Outlets,Actions
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var setDataButton: UIButton!
@@ -29,6 +44,7 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         settingGesture()
         settingAccesory()
+        
     }
     private func settingGesture() {
         let startGesture = UITapGestureRecognizer(target: self, action: #selector(startGesture))
@@ -99,7 +115,7 @@ class HomeViewController: UIViewController {
         setDataButton.isSelected = false
         dismiss(animated: true, completion: nil)
     }
-    private func settingAccesory() {
+    func settingAccesory() {
         startButton.accesory()
     }
 }

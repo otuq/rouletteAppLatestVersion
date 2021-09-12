@@ -13,10 +13,11 @@ class RouletteViewController: UIViewController {
     //MARK: -Properties
     private let userDefaults = UserDefaults.standard
     private let parentLayer = CALayer() //ここに各グラフを統合する
+    private let frameLayer = CALayer()
     private let subView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) //止まる角度
-    private let duration: TimeInterval = 10 //回る時間
+    private let duration: TimeInterval = 10 //回る時間(秒)
     private var audioPlayer: AVAudioPlayer!
     private var startTime: CFTimeInterval! //アニメーション開始時間
     private var startRatio = 0.0 //グラフの描画開始点に使う
@@ -29,14 +30,34 @@ class RouletteViewController: UIViewController {
         return (dataSet, list)
     }
     //MARK:-Outlets,Actions
+    @IBOutlet var tapStartLabel: [UILabel]!
+    
     //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
         createGraph()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        tapStartAnimation(labels: tapStartLabel)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
+        view.addGestureRecognizer(tapGesture)
+    }
+    @objc private func viewTapStart() {
+        tapStartLabel.forEach { label in
+            label.isHidden = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.rotationAnimation()
             self.rouletteSoundSetting()
+        }
+    }
+    private func tapStartAnimation(labels: [UILabel]) {
+        labels.forEach { label in
+            UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
+                label.layer.opacity = 0
+            }) { _ in
+                label.layer.opacity = 1
+            }
         }
     }
     private func settingView() {
@@ -115,6 +136,19 @@ extension RouletteViewController {
         path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
         return path
     }
+    private func graphFrameBoarder(startRatio: Double) {
+        let path = UIBezierPath()
+        let layer = CAShapeLayer()
+        let angle = CGFloat(2*Double.pi*startRatio/Double(around)-Double.pi/2)
+        path.move(to: .zero)
+        path.addLine(to: CGPoint(x: 180, y: 0))
+        path.apply(CGAffineTransform(rotationAngle: angle))
+        path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
+        layer.path = path.cgPath
+        layer.strokeColor = UIColor.white.cgColor
+        layer.lineWidth = 3
+        frameLayer.addSublayer(layer)
+    }
     //パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
     private func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) {
         let circlePath = graphPath(radius: 90, startAngle: startRatio, endAngle: endRatio)
@@ -163,10 +197,11 @@ extension RouletteViewController {
             textLabelView.center = view.center
             graphRange.append(range)
             drawGraph(fillColor: color, startRatio, endRatio)
+            graphFrameBoarder(startRatio: startRatio)
             subView.addSubview(textLabelView)
             startRatio = endRatio //次のグラフのスタート値を更新
         }
-        
+        subView.layer.addSublayer(frameLayer)
         subView.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
     }
     //ルーレットアニメーション
@@ -227,7 +262,7 @@ extension RouletteViewController {
     }
     //ルーレット結果
     private func alertResultRoulette(resultText: String){
-        let alertVC = UIAlertController(title: "result", message: resultText, preferredStyle: .alert)
+        let alertVC = UIAlertController(title: .none, message: resultText, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "done", style: .default, handler: { _ in
             self.dismiss(animated: true, completion: nil)
         }))
