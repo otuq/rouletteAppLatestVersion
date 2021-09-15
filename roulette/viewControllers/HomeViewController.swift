@@ -14,13 +14,13 @@ class HomeViewController: UIViewController {
         label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
         label.center = view.center
         label.textAlignment = .center
-        label.text = "TAP Roulette Set"
+        label.text = "Tap Set"
         label.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        label.textColor = .darkGray
         UIView.transition(with: label, duration: 2.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
             label.layer.opacity = 0
         }) { _ in
             label.layer.opacity = 1
-            label.text = "T A P"
         }
         return label
     }

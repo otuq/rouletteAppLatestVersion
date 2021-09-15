@@ -27,12 +27,33 @@
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mAL-Fe-exi">
+                                <rect key="frame" x="20" y="108" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="20" id="PTJ-Gq-Du8"/>
+                                    <constraint firstAttribute="width" secondItem="mAL-Fe-exi" secondAttribute="height" multiplier="1:1" id="kGe-Wg-bMt"/>
+                                </constraints>
+                                <state key="normal" image="cross"/>
+                                <connections>
+                                    <action selector="quitButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q6U-jf-dOT"/>
+                                </connections>
+                            </button>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="255" translatesAutoresizingMaskIntoConstraints="NO" id="D2A-Rb-aBh">
+                                <rect key="frame" x="130" y="812" width="154" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="bcl-z1-8mN"/>
+                                </constraints>
+                            </slider>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" red="0.97254901960784312" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
+                            <constraint firstItem="mAL-Fe-exi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8pX-mQ-mto"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="D2A-Rb-aBh" secondAttribute="bottom" constant="20" id="Hkt-Fk-nxX"/>
                             <constraint firstItem="f5D-8C-UZg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Jec-En-FXd"/>
                             <constraint firstItem="f5D-8C-UZg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Npg-ds-1qQ"/>
+                            <constraint firstItem="mAL-Fe-exi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Xqf-2c-NqZ"/>
+                            <constraint firstItem="D2A-Rb-aBh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kFi-a2-4Wm"/>
                             <constraint firstItem="ZjH-Pa-wIc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="oSk-sB-v1L"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ZjH-Pa-wIc" secondAttribute="bottom" constant="100" id="xEK-2Q-ZeR"/>
                         </constraints>
@@ -66,4 +87,7 @@
             <point key="canvasLocation" x="111.59420289855073" y="64.955357142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="cross" width="62" height="62"/>
+    </resources>
 </document>

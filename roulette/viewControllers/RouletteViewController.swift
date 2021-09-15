@@ -14,8 +14,9 @@ class RouletteViewController: UIViewController {
     private let userDefaults = UserDefaults.standard
     private let parentLayer = CALayer() //ここに各グラフを統合する
     private let frameLayer = CALayer()
-    private let subView = UIView() //parentLayerをセットする。
+    var subView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
+    private let diameter: CGFloat = 360 //直径
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) //止まる角度
     private let duration: TimeInterval = 10 //回る時間(秒)
     private var audioPlayer: AVAudioPlayer!
@@ -31,18 +32,41 @@ class RouletteViewController: UIViewController {
     }
     //MARK:-Outlets,Actions
     @IBOutlet var tapStartLabel: [UILabel]!
-    
+    @IBAction func quitButton(_ sender: Any) {
+        let alertVC = UIAlertController(title: .none, message: "ルーレットを中止しますか？", preferredStyle: .alert)
+        let action = UIAlertAction(title: "done", style: .default) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertVC.addAction(action)
+        present(alertVC, animated: true, completion: nil)
+    }
     //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
         createGraph()
         tapStartAnimation(labels: tapStartLabel)
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
-        view.addGestureRecognizer(tapGesture)
     }
-    @objc private func viewTapStart() {
+    private func settingView() {
+        let pointerImageView = UIImageView(image: roulettePointerImage(w: 30))
+        let centerCircleLabel = rouletteCenterCircleLabel(w: 40)
+        let flameCircleView = rouletteFlameCircle(w: diameter)
+        let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
+
+        pointerImageView.center = CGPoint(x: view.center.x, y: view.center.y - diameter/2 - 10 )
+        centerCircleLabel.center = view.center
+        flameCircleView.center = view.center
+        subView.frame = view.frame
+        subView.backgroundColor = .clear
+        view.addGestureRecognizer(startTapGesture)
+        view.addSubview(subView)
+        view.addSubview(pointerImageView)
+        view.addSubview(centerCircleLabel)
+        view.addSubview(flameCircleView)
+        view.bringSubviewToFront(pointerImageView)
+        navigationController?.isNavigationBarHidden = true
+    }
+    @objc private func viewTapStart(tapGesture: UITapGestureRecognizer) {
         tapStartLabel.forEach { label in
             label.isHidden = true
         }
@@ -50,6 +74,7 @@ class RouletteViewController: UIViewController {
             self.rotationAnimation()
             self.rouletteSoundSetting()
         }
+        view.removeGestureRecognizer(tapGesture)
     }
     private func tapStartAnimation(labels: [UILabel]) {
         labels.forEach { label in
@@ -59,22 +84,6 @@ class RouletteViewController: UIViewController {
                 label.layer.opacity = 1
             }
         }
-    }
-    private func settingView() {
-        let pointerImageView = UIImageView(image: roulettePointerImage(w: 30))
-        let centerCircleLabel = rouletteCenterCircleLabel(w: 40)
-        let flameCircleView = rouletteFlameCircle(w: 360)
-        pointerImageView.center = CGPoint(x: view.center.x, y: view.center.y - 180 - 10 )
-        centerCircleLabel.center = view.center
-        flameCircleView.center = view.center
-        subView.frame = view.frame
-        subView.backgroundColor = .clear
-        view.addSubview(subView)
-        view.addSubview(pointerImageView)
-        view.addSubview(centerCircleLabel)
-        view.addSubview(flameCircleView)
-        view.bringSubviewToFront(pointerImageView)
-        navigationController?.isNavigationBarHidden = true
     }
     private func roulettePointerImage(w: CGFloat) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: w, height: w))
@@ -141,7 +150,7 @@ extension RouletteViewController {
         let layer = CAShapeLayer()
         let angle = CGFloat(2*Double.pi*startRatio/Double(around)-Double.pi/2)
         path.move(to: .zero)
-        path.addLine(to: CGPoint(x: 180, y: 0))
+        path.addLine(to: CGPoint(x: diameter/2, y: 0))
         path.apply(CGAffineTransform(rotationAngle: angle))
         path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
         layer.path = path.cgPath
@@ -149,6 +158,18 @@ extension RouletteViewController {
         layer.lineWidth = 3
         frameLayer.addSublayer(layer)
     }
+    private func graphFrameCircleBoarder() {
+        let path = UIBezierPath()
+        let layer = CAShapeLayer()
+        path.addArc(withCenter: .zero, radius: diameter/2 - 3, startAngle: 0, endAngle: around, clockwise: true)
+        path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
+        layer.fillColor = UIColor.clear.cgColor
+        layer.path = path.cgPath
+        layer.strokeColor = UIColor.white.cgColor
+        layer.lineWidth = 3
+        frameLayer.addSublayer(layer)
+    }
+
     //パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
     private func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) {
         let circlePath = graphPath(radius: 90, startAngle: startRatio, endAngle: endRatio)
@@ -192,12 +213,13 @@ extension RouletteViewController {
             let range = startRatio...endRatio
             let textAngleRatio = startRatio + (ratio / 2) //2番目のレイヤーだとしたら1番目のendratioからratioの半分の位置が文字列の角度 start:25 ratio40 文字列角度45
             let textAngle =  CGFloat(2*Double.pi*textAngleRatio/Double(around)+Double.pi/2) //
-            let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: 350, height: 20)))
+            let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: diameter - 10, height: 20)))
             textLabelView.rouletteTextSetting(textString, textColor, textAngle)
             textLabelView.center = view.center
             graphRange.append(range)
             drawGraph(fillColor: color, startRatio, endRatio)
             graphFrameBoarder(startRatio: startRatio)
+            graphFrameCircleBoarder()
             subView.addSubview(textLabelView)
             startRatio = endRatio //次のグラフのスタート値を更新
         }
@@ -232,11 +254,11 @@ extension RouletteViewController {
             graphRange.enumerated().forEach { (index, range) in
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
-                    let list = rouletteDataSet.1
-                    print(list[index].text)
+                    let list = rouletteDataSet.1[index]
+                    print(list.text)
                     print(dtStop)
                     print(range)
-                    alertResultRoulette(resultText: list[index].text) //ルーレットの結果を表示する。
+                    alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) //ルーレットの結果を表示する。
                     soundEffect()
                 }
             }
@@ -260,12 +282,33 @@ extension RouletteViewController {
             audioPlayer = nil
         }
     }
+    //MARK:- resultRoulette
     //ルーレット結果
-    private func alertResultRoulette(resultText: String){
-        let alertVC = UIAlertController(title: .none, message: resultText, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "done", style: .default, handler: { _ in
-            self.dismiss(animated: true, completion: nil)
-        }))
-        present(alertVC, animated: true, completion: nil)
+    private func alertResultRoulette(resultText: String, r: Int, g: Int, b: Int){
+        let backView = UIView(frame: CGRect(origin: .zero, size: view.bounds.size))
+        let resultLabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: 100)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDismiss))
+        
+        resultLabel.center = view.center
+        resultLabel.font = UIFont.italicSystemFont(ofSize: 32)
+        resultLabel.transform = CGAffineTransform(translationX: view.frame.maxX, y: .zero)
+        resultLabel.backgroundColor = UIColor(r: r, g: g, b: b)
+        resultLabel.text = resultText
+        resultLabel.textAlignment = .center
+        if r&g&b >= 128{
+            resultLabel.textColor = .black
+        }
+        backView.backgroundColor = .black
+        backView.alpha = 0.5
+        backView.addGestureRecognizer(tapGesture)
+        view.addSubview(backView)
+        view.addSubview(resultLabel)
+        
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseInOut) {
+            resultLabel.transform = .identity
+        }
+    }
+    @objc private func tapDismiss() {
+        dismiss(animated: true, completion: nil)
     }
 }
