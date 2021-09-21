@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
 		CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C444D2681BCB100B8F698 /* AddRowButton.swift */; };
 		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
 		CE449654269D29FA007E4F6A /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* PKHUD */; };
@@ -60,6 +61,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CE2C444D2681BCB100B8F698 /* AddRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRowButton.swift; sourceTree = "<group>"; };
 		CE46A6FA269EB91500D33530 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		CE46A6FB269EB91500D33530 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXGroup;
 			children = (
 				CEC590202680807E005A47D6 /* Extension.swift */,
+				CE15301226F332150051DCA3 /* Colors.swift */,
 				CE79A56A268AE4A900BBA00C /* Degree.swift */,
 				CE2C444D2681BCB100B8F698 /* AddRowButton.swift */,
 				CE4AADFA268C475D00AFD70F /* Model.swift */,
@@ -385,6 +388,7 @@
 				CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */,
 				CEA6113B2678688D00751566 /* AppDelegate.swift in Sources */,
 				CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */,
+				CE15301326F332150051DCA3 /* Colors.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,

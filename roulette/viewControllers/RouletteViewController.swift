@@ -14,7 +14,7 @@ class RouletteViewController: UIViewController {
     private let userDefaults = UserDefaults.standard
     private let parentLayer = CALayer() //ここに各グラフを統合する
     private let frameLayer = CALayer()
-    var subView = UIView() //parentLayerをセットする。
+    private let subView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
     private let diameter: CGFloat = 360 //直径
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) //止まる角度
@@ -32,19 +32,13 @@ class RouletteViewController: UIViewController {
     }
     //MARK:-Outlets,Actions
     @IBOutlet var tapStartLabel: [UILabel]!
-    @IBAction func quitButton(_ sender: Any) {
-        let alertVC = UIAlertController(title: .none, message: "ルーレットを中止しますか？", preferredStyle: .alert)
-        let action = UIAlertAction(title: "done", style: .default) { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
-        alertVC.addAction(action)
-        present(alertVC, animated: true, completion: nil)
-    }
+    @IBOutlet weak var quitButton: UIButton!
+    
     //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        settingView()
         createGraph()
+        settingView()
         tapStartAnimation(labels: tapStartLabel)
     }
     private func settingView() {
@@ -52,10 +46,11 @@ class RouletteViewController: UIViewController {
         let centerCircleLabel = rouletteCenterCircleLabel(w: 40)
         let flameCircleView = rouletteFlameCircle(w: diameter)
         let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
-
         pointerImageView.center = CGPoint(x: view.center.x, y: view.center.y - diameter/2 - 10 )
         centerCircleLabel.center = view.center
         flameCircleView.center = view.center
+        
+        quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
         subView.frame = view.frame
         subView.backgroundColor = .clear
         view.addGestureRecognizer(startTapGesture)
@@ -63,13 +58,23 @@ class RouletteViewController: UIViewController {
         view.addSubview(pointerImageView)
         view.addSubview(centerCircleLabel)
         view.addSubview(flameCircleView)
+        view.sendSubviewToBack(subView)
         view.bringSubviewToFront(pointerImageView)
         navigationController?.isNavigationBarHidden = true
+    }
+    @objc private func quitTapDismiss() {
+        let alertVC = UIAlertController(title: .none, message: "ルーレットを中止しますか？", preferredStyle: .alert)
+        let action = UIAlertAction(title: "done", style: .default) { _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        alertVC.addAction(action)
+        present(alertVC, animated: true, completion: nil)
     }
     @objc private func viewTapStart(tapGesture: UITapGestureRecognizer) {
         tapStartLabel.forEach { label in
             label.isHidden = true
         }
+        quitButton.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             self.rotationAnimation()
             self.rouletteSoundSetting()
@@ -169,7 +174,7 @@ extension RouletteViewController {
         layer.lineWidth = 3
         frameLayer.addSublayer(layer)
     }
-
+    
     //パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
     private func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) {
         let circlePath = graphPath(radius: 90, startAngle: startRatio, endAngle: endRatio)
@@ -249,7 +254,7 @@ extension RouletteViewController {
         if stopAngle >= dtStop {
             audioPlayer.stop()
             link.invalidate()
-//            print("stop link")
+            //            print("stop link")
             //止まった地点の数値が各グラフの範囲だった時の判定を返す。
             graphRange.enumerated().forEach { (index, range) in
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
@@ -264,7 +269,7 @@ extension RouletteViewController {
             }
             return
         }
-//        print("stop:",stopAngle)
+        //        print("stop:",stopAngle)
     }
     //ルーレット結果の効果音
     private func soundEffect() {

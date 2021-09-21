@@ -14,7 +14,16 @@ import RealmSwift
 class NewDataViewController: UIViewController, UITextFieldDelegate {
     //MARK:-properties
     private let cellId = "cellId"
-    private let colors: [UIColor] = [.blue,.red,.yellow,.green,.purple,.brown,.cyan,.magenta,.orange,.paleBlue,.paleRed,.yellowGreen]
+//    private let colors: [UIColor] = [.blue,.red,.yellow,.green,.purple,.brown,.cyan,.magenta,.orange,.paleBlue,.paleRed,.yellowGreen]
+    private var colors: [UIColor] {
+        var colors = [UIColor]()
+        stride(from: 0, to: 360, by: 18).forEach { i in
+            let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
+            colors.append(color)
+            print(color.r, color.g, color.b)
+        }
+        return colors
+    }
     private var colorIndex = 0
     private var realm = try! Realm()
     private var addRowButton: AddRowButton {

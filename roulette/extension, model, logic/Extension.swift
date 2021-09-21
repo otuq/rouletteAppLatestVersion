@@ -20,8 +20,8 @@ extension UIButton {
         //透明になったり戻ったりのアニメーション　データがセットされた時発動
     }
 }
-//チェーンレスポンダー
 extension UIView {
+    //チェーンレスポンダー
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while true {
@@ -55,33 +55,6 @@ extension UILabel {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
-    }
-}
-extension UIColor {
-    var r: Int {
-        Int(self.cgColor.components![0] * 255)
-    }
-    var g: Int {
-        Int(self.cgColor.components![1] * 255)
-    }
-    var b: Int {
-        Int(self.cgColor.components![2] * 255)
-    }
-    var a: Int {
-        Int(self.cgColor.components![3] * 255)
-    }
-    //rgb値を分割して取得
-    convenience init(r: Int,g: Int, b: Int, a: CGFloat = 1.0){
-        self.init(red: CGFloat(r)/255.0, green: CGFloat(g)/255.0, blue: CGFloat(b)/255.0, alpha: a)
-    }
-    static var paleBlue: UIColor {
-        UIColor.init(r: 3, g: 157, b: 252)
-    }
-    static var paleRed: UIColor {
-        UIColor.init(r: 252, g: 3, b: 157)
-    }
-    static var yellowGreen: UIColor {
-        UIColor.init(r: 211, g: 252, b: 3)
     }
 }
 extension NSAttributedString {

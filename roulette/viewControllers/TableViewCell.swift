@@ -65,6 +65,7 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
               let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
         //cellのindex番号を遷移先のVCに渡す
         colorSelectVC.cellTag = cellIndexPath.row
+        colorSelectVC.currentColor = rouletteSetColor.backgroundColor
         //親ViewControllerを取得　extensionにて
         parentViewController?.present(colorSelectVC, animated: true, completion: nil)
     }

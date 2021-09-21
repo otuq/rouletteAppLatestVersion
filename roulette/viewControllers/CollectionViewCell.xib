@@ -28,18 +28,28 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qcM-q5-ply">
+                        <rect key="frame" x="32" y="25" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Nd4-Pe-GKL"/>
+                            <constraint firstAttribute="width" secondItem="qcM-q5-ply" secondAttribute="height" multiplier="1:1" id="UGk-NO-T0F"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
                 <constraint firstItem="iV8-Lh-ZX0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="1wM-YY-IJK"/>
                 <constraint firstItem="iV8-Lh-ZX0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="6am-hj-zkN"/>
+                <constraint firstItem="qcM-q5-ply" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="j6x-ts-iWe"/>
+                <constraint firstItem="qcM-q5-ply" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="vfB-br-JAl"/>
             </constraints>
             <size key="customSize" width="104" height="90"/>
             <connections>
+                <outlet property="checkImageView" destination="qcM-q5-ply" id="M6C-Es-FJv"/>
                 <outlet property="colorSelect" destination="iV8-Lh-ZX0" id="jDN-mC-4bO"/>
             </connections>
-            <point key="canvasLocation" x="21.739130434782609" y="-22.098214285714285"/>
+            <point key="canvasLocation" x="-143.47826086956522" y="-115.17857142857142"/>
         </collectionViewCell>
     </objects>
     <resources>

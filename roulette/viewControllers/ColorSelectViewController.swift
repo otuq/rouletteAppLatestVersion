@@ -11,8 +11,17 @@ import RealmSwift
 class ColorSelectViewController: UIViewController {
     //MARK:-properties
     private let cellId = "cellId"
-    private let colors: [UIColor] = [.blue,.red,.yellow,.green,.purple,.brown,.cyan,.magenta,.orange,.paleBlue,.paleRed,.yellowGreen]
-    var cellTag: Int? //変数以外でindex番号格納できないか？
+//    private let colors: [UIColor] = [.blue,.red,.yellow,.green,.purple,.brown,.cyan,.magenta,.orange,.paleBlue,.paleRed,.yellowGreen]
+    private var colors: [UIColor] {
+        var colors = [UIColor]()
+        stride(from: 0, to: 360, by: 18).forEach { i in
+            let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
+            colors.append(color)
+        }
+        return colors
+    }
+    var cellTag: Int? //cellのインデックス
+    var currentColor: UIColor? //タップされた現在の色
     
     //MARK:-Outlets,Actions
     @IBOutlet weak var colorSelectCollectionView: UICollectionView!
@@ -36,14 +45,17 @@ extension ColorSelectViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)as! CollectionViewCell
         cell.color = colors[indexPath.row]
-        
+        //色のチェックマーク
+        if currentColor == colors[indexPath.row]{
+            cell.checkImageView.isHidden = false
+        }
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let colum: CGFloat = 5
         let row: CGFloat = CGFloat(colors.count) / colum
         
-        return CGSize(width: view.frame.width / colum, height: (view.frame.height / row) / 2)
+        return CGSize(width: view.frame.width / colum, height: (view.frame.height / row) / 2 + 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

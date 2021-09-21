@@ -9,7 +9,7 @@ import UIKit
 
 class ColorsSelectPresentationController: UIPresentationController {
     //MARK:-properties
-    private let margin = (x: CGFloat(50), y: CGFloat(500))
+    private let margin = (x: CGFloat(50), y: CGFloat(400))
     //バックビュー
     private let overLayView: UIView = {
         let overLay = UIView()

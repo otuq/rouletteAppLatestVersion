@@ -14,12 +14,17 @@ class CollectionViewCell: UICollectionViewCell {
             colorSelect.backgroundColor = color ?? .white
         }
     }
+    
     //MARK:-Outlets,Actions
     @IBOutlet weak var colorSelect: UILabel!
+    @IBOutlet weak var checkImageView: UIImageView!
+    
     //MARK:-Lifecyle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         colorSelect.layer.cornerRadius = colorSelect.bounds.width / 2
         colorSelect.layer.masksToBounds = true
+        checkImageView.image = UIImage(named: "bakuhatsuGray")
+        bringSubviewToFront(checkImageView)
     }
 }
