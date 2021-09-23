@@ -39,34 +39,40 @@ class RouletteViewController: UIViewController {
         super.viewDidLoad()
         createGraph()
         settingView()
+        settingGesture()
         tapStartAnimation(labels: tapStartLabel)
     }
     private func settingView() {
         let pointerImageView = UIImageView(image: roulettePointerImage(w: 30))
         let centerCircleLabel = rouletteCenterCircleLabel(w: 40)
         let flameCircleView = rouletteFlameCircle(w: diameter)
-        let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
         pointerImageView.center = CGPoint(x: view.center.x, y: view.center.y - diameter/2 - 10 )
         centerCircleLabel.center = view.center
         flameCircleView.center = view.center
         
-        quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
         subView.frame = view.frame
         subView.backgroundColor = .clear
-        view.addGestureRecognizer(startTapGesture)
         view.addSubview(subView)
         view.addSubview(pointerImageView)
         view.addSubview(centerCircleLabel)
         view.addSubview(flameCircleView)
         view.sendSubviewToBack(subView)
         view.bringSubviewToFront(pointerImageView)
+        quitButton.homeButtonAccesory()
         navigationController?.isNavigationBarHidden = true
+    }
+    private func settingGesture() {
+        let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
+        view.addGestureRecognizer(startTapGesture)
+        quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
     }
     @objc private func quitTapDismiss() {
         let alertVC = UIAlertController(title: .none, message: "ルーレットを中止しますか？", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "cancel", style: .cancel, handler: nil)
         let action = UIAlertAction(title: "done", style: .default) { _ in
             self.dismiss(animated: true, completion: nil)
         }
+        alertVC.addAction(cancel)
         alertVC.addAction(action)
         present(alertVC, animated: true, completion: nil)
     }

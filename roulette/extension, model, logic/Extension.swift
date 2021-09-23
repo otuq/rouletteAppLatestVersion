@@ -8,6 +8,13 @@
 import UIKit
 
 extension UIButton {
+    func homeButtonAccesory() {
+        let imageNormal = UIImage(named: "buttonNormal")
+        let imageHighlight = UIImage(named: "buttonHighlight")
+        setBackgroundImage(imageNormal, for: .normal)
+        setBackgroundImage(imageHighlight, for: .highlighted)
+        
+    }
     //丸ボタンの装飾
     func accesory() {
         layer.cornerRadius = bounds.width / 2
@@ -17,7 +24,6 @@ extension UIButton {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
-        //透明になったり戻ったりのアニメーション　データがセットされた時発動
     }
 }
 extension UIView {

@@ -14,9 +14,10 @@ class HomeViewController: UIViewController {
         label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
         label.center = view.center
         label.textAlignment = .center
-        label.text = "Tap Set"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .light)
-        label.textColor = .darkGray
+        label.baselineAdjustment = .alignCenters
+        label.text = "T A P"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = UIColor.init(r: 153, g: 153, b: 153)
         UIView.transition(with: label, duration: 2.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
             label.layer.opacity = 0
         }) { _ in
@@ -31,30 +32,20 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var setDataButton: UIButton!
     @IBOutlet weak var newDataButton: UIButton!
     @IBOutlet weak var rouletteTitleLabel: UILabel!
-    @IBAction func appSettingButton(_ sender: Any) {
-        let storyboard = UIStoryboard.init(name: "AppSetting", bundle: nil)
-        let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AppSettingViewController")
-        let nav = UINavigationController.init(rootViewController: viewcontroller)
-        nav.modalPresentationStyle = .overFullScreen
-        present(nav, animated: true, completion: nil)
-    }
+    @IBOutlet weak var appSettingButton: UIButton!
     
     //MARK:-Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingGesture()
         settingAccesory()
-        
     }
     private func settingGesture() {
-        let startGesture = UITapGestureRecognizer(target: self, action: #selector(startGesture))
-        let setGesture = UITapGestureRecognizer(target: self, action: #selector(setGesture))
-        let newGesture = UITapGestureRecognizer(target: self, action: #selector(newGesture))
         let editGesture = UITapGestureRecognizer(target: self, action: #selector(editGesture))
-        
-        startButton.addGestureRecognizer(startGesture)
-        setDataButton.addGestureRecognizer(setGesture)
-        newDataButton.addGestureRecognizer(newGesture)
+        startButton.addTarget(self, action: #selector(startGesture), for: .touchUpInside)
+        setDataButton.addTarget(self, action: #selector(setGesture), for: .touchUpInside)
+        newDataButton.addTarget(self, action: #selector(newGesture), for: .touchUpInside)
+        appSettingButton.addTarget(self, action: #selector(appSettingGesture), for: .touchUpInside)
         rouletteTitleLabel.addGestureRecognizer(editGesture)
         navigationController?.isNavigationBarHidden = true
     }
@@ -115,8 +106,18 @@ class HomeViewController: UIViewController {
         setDataButton.isSelected = false
         dismiss(animated: true, completion: nil)
     }
+    @objc private func appSettingGesture() {
+        let storyboard = UIStoryboard.init(name: "AppSetting", bundle: nil)
+        let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AppSettingViewController")
+        let nav = UINavigationController.init(rootViewController: viewcontroller)
+        nav.modalPresentationStyle = .overFullScreen
+        present(nav, animated: true, completion: nil)
+    }
     func settingAccesory() {
-        startButton.accesory()
+        startButton.homeButtonAccesory()
+        newDataButton.homeButtonAccesory()
+        setDataButton.homeButtonAccesory()
+        appSettingButton.homeButtonAccesory()
     }
 }
 

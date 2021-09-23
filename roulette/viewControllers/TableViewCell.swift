@@ -32,19 +32,23 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
     override func awakeFromNib() {
         super.awakeFromNib()
         settingUI()
+        settingGesture()
         keyboardNotification()
     }
     private func settingUI() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(selectColorViewFetch))
+        backgroundColor = .clear
         selectView.backgroundColor = .clear
         selectedBackgroundView = selectView
         rouletteTextField.delegate = self
         rouletteSetColor.layer.cornerRadius = rouletteSetColor.bounds.width / 2
         rouletteSetColor.layer.masksToBounds = true
         rouletteSetColor.layer.borderWidth = 0.5
-        rouletteSetColor.addGestureRecognizer(gesture)
         rouletteSetColor.isUserInteractionEnabled = true
         rouletteTextField.isUserInteractionEnabled = true
+    }
+    private func settingGesture() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(selectColorViewFetch))
+        rouletteSetColor.addGestureRecognizer(gesture)
         rouletteRatioSlider.addTarget(self, action: #selector(saveRatio), for: .touchUpInside)
     }
     @objc func saveRatio(sender: UISlider) {
