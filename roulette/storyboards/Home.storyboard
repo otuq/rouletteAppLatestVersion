@@ -3,7 +3,6 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,13 +28,13 @@
                             </button>
                             <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GIl-oc-pIg">
                                 <rect key="frame" x="334" y="108" width="60" height="60"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="GIl-oc-pIg" secondAttribute="height" multiplier="1:1" id="8Ud-ZP-cld"/>
                                     <constraint firstAttribute="width" constant="60" id="9AE-EN-ip6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="gearshape" catalog="system"/>
                             </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahe-9T-5dZ">
                                 <rect key="frame" x="20" y="223" width="374" height="50"/>
@@ -49,7 +48,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="tXq-6X-6CP">
                                 <rect key="frame" x="82" y="623" width="250" height="100"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvI-I4-t8J">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LvI-I4-t8J">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="LvI-I4-t8J" secondAttribute="height" multiplier="1:1" id="QnQ-Kz-djt"/>
@@ -60,7 +59,7 @@
                                             <color key="titleColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8m-tL-EoA">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z8m-tL-EoA">
                                         <rect key="frame" x="150" y="0.0" width="100" height="100"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="z8m-tL-EoA" secondAttribute="height" multiplier="1:1" id="Hjd-Kb-x2X"/>
@@ -74,30 +73,31 @@
                                     </button>
                                 </subviews>
                             </stackView>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vk2-Di-fbs">
-                                <rect key="frame" x="349" y="124.5" width="30" height="26.5"/>
-                                <color key="tintColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OFQ-sc-IjU">
+                                <rect key="frame" x="264" y="108" width="60" height="60"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="30" id="c0A-dN-4Tn"/>
-                                    <constraint firstAttribute="width" secondItem="Vk2-Di-fbs" secondAttribute="height" multiplier="1:1" id="ocB-WQ-4rQ"/>
+                                    <constraint firstAttribute="width" constant="60" id="8o8-0T-52b"/>
+                                    <constraint firstAttribute="width" secondItem="OFQ-sc-IjU" secondAttribute="height" multiplier="1:1" id="f2y-9A-Pwg"/>
                                 </constraints>
-                                <imageReference key="image" image="gearshape" catalog="system" symbolScale="small"/>
-                            </imageView>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="tintColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="square.and.arrow.up" catalog="system"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JG6-uc-vdC"/>
                         <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="OFQ-sc-IjU" firstAttribute="top" secondItem="JG6-uc-vdC" secondAttribute="top" constant="20" id="0u4-km-1gw"/>
                             <constraint firstItem="GIl-oc-pIg" firstAttribute="top" secondItem="JG6-uc-vdC" secondAttribute="top" constant="20" id="8Yx-xi-snx"/>
                             <constraint firstItem="JG6-uc-vdC" firstAttribute="trailing" secondItem="GIl-oc-pIg" secondAttribute="trailing" constant="20" id="8ro-XX-FB4"/>
-                            <constraint firstItem="Vk2-Di-fbs" firstAttribute="centerY" secondItem="GIl-oc-pIg" secondAttribute="centerY" id="NDF-Ug-ryz"/>
                             <constraint firstItem="ahe-9T-5dZ" firstAttribute="leading" secondItem="JG6-uc-vdC" secondAttribute="leading" constant="20" id="Pab-5j-ahW"/>
                             <constraint firstItem="tXq-6X-6CP" firstAttribute="centerX" secondItem="4lm-6n-g3S" secondAttribute="centerX" id="QJJ-bf-C4Q"/>
                             <constraint firstItem="tXq-6X-6CP" firstAttribute="top" secondItem="kMZ-5R-PM1" secondAttribute="bottom" constant="100" id="YOP-JF-6FF"/>
                             <constraint firstItem="kMZ-5R-PM1" firstAttribute="top" secondItem="ahe-9T-5dZ" secondAttribute="bottom" constant="100" id="ZPa-Tn-BcX"/>
                             <constraint firstItem="kMZ-5R-PM1" firstAttribute="centerY" secondItem="4lm-6n-g3S" secondAttribute="centerY" id="Zct-bI-cvD"/>
-                            <constraint firstItem="Vk2-Di-fbs" firstAttribute="centerX" secondItem="GIl-oc-pIg" secondAttribute="centerX" id="cRy-VG-TpY"/>
                             <constraint firstItem="JG6-uc-vdC" firstAttribute="trailing" secondItem="ahe-9T-5dZ" secondAttribute="trailing" constant="20" id="iME-Tn-h1L"/>
                             <constraint firstItem="kMZ-5R-PM1" firstAttribute="centerX" secondItem="4lm-6n-g3S" secondAttribute="centerX" id="qoH-QD-4AD"/>
+                            <constraint firstItem="GIl-oc-pIg" firstAttribute="leading" secondItem="OFQ-sc-IjU" secondAttribute="trailing" constant="10" id="qy2-Sp-Zah"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Home" id="n2t-9k-rck"/>
@@ -106,6 +106,7 @@
                         <outlet property="newDataButton" destination="LvI-I4-t8J" id="K6d-WD-ZfM"/>
                         <outlet property="rouletteTitleLabel" destination="ahe-9T-5dZ" id="v28-I7-zcm"/>
                         <outlet property="setDataButton" destination="z8m-tL-EoA" id="KSg-85-HPp"/>
+                        <outlet property="shareButton" destination="OFQ-sc-IjU" id="Jut-ev-6Ff"/>
                         <outlet property="startButton" destination="kMZ-5R-PM1" id="AUJ-jD-pFD"/>
                     </connections>
                 </viewController>
@@ -134,5 +135,6 @@
     </scenes>
     <resources>
         <image name="gearshape" catalog="system" width="128" height="121"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
     </resources>
 </document>

@@ -24,7 +24,6 @@ class CollectionViewCell: UICollectionViewCell {
         super.awakeFromNib()
         colorSelect.layer.cornerRadius = colorSelect.bounds.width / 2
         colorSelect.layer.masksToBounds = true
-        checkImageView.image = UIImage(named: "bakuhatsuGray")
         bringSubviewToFront(checkImageView)
     }
 }

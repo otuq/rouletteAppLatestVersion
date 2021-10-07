@@ -34,22 +34,14 @@
                                     <constraint firstAttribute="width" constant="60" id="PTJ-Gq-Du8"/>
                                     <constraint firstAttribute="width" secondItem="mAL-Fe-exi" secondAttribute="height" multiplier="1:1" id="kGe-Wg-bMt"/>
                                 </constraints>
+                                <color key="tintColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" image="xmark" catalog="system"/>
                             </button>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xmark.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="aXw-0o-r4J">
-                                <rect key="frame" x="35" y="123.5" width="30" height="29"/>
-                                <color key="tintColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="aXw-0o-r4J" secondAttribute="height" multiplier="1:1" id="Ki8-f9-gdt"/>
-                                    <constraint firstAttribute="width" constant="30" id="bMc-ft-ZPE"/>
-                                </constraints>
-                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="aXw-0o-r4J" firstAttribute="centerY" secondItem="mAL-Fe-exi" secondAttribute="centerY" id="2Nu-kU-wzE"/>
                             <constraint firstItem="mAL-Fe-exi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="8pX-mQ-mto"/>
-                            <constraint firstItem="aXw-0o-r4J" firstAttribute="centerX" secondItem="mAL-Fe-exi" secondAttribute="centerX" id="BbW-Iw-4Km"/>
                             <constraint firstItem="f5D-8C-UZg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="50" id="Jec-En-FXd"/>
                             <constraint firstItem="f5D-8C-UZg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Npg-ds-1qQ"/>
                             <constraint firstItem="mAL-Fe-exi" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="Xqf-2c-NqZ"/>
@@ -88,6 +80,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="xmark.circle" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
     </resources>
 </document>

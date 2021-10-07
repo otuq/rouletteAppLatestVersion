@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
+class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
     //MARK:-properties
     private let selectView = UIView()
     private var editField: UITextField?
@@ -56,7 +56,6 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
               let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
         let row = cellIndexPath.row
         newDataVC.dataSet.temporarys[row].ratioTemporary = sender.value
-        print(sender.value)
     }
     @objc func selectColorViewFetch() {
         let storyboard = UIStoryboard(name: "ColorSelect", bundle: nil)
@@ -79,7 +78,7 @@ class TableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
     }
 }
 //MARK: - TextFieldDelegate
-extension TableViewCell: UITextFieldDelegate {
+extension NewDataTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         guard let newDataVC = parentViewController as? NewDataViewController,
               let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
@@ -102,7 +101,7 @@ extension TableViewCell: UITextFieldDelegate {
     }
 }
 //MARK: -KeyboardNotification
-extension TableViewCell {
+extension NewDataTableViewCell {
     private func keyboardNotification() {
         let notification = NotificationCenter.default
         notification.addObserver(self, selector: #selector(keyboardFrameChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
@@ -116,7 +115,6 @@ extension TableViewCell {
         let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
         let fldFrame = newDataVC.view.convert(fld.frame, from: contentView) //textfieldの座標系をviewに合わせる
         overlap = fldFrame.maxY - keyboardFrame.minY
-        print(fldFrame.maxY,keyboardFrame.minY,overlap)
         if overlap > 0 {
             guard let tableView = newDataVC.newDataTableView else { return }
             overlap += tableView.contentOffset.y + 20

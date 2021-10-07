@@ -15,6 +15,7 @@ enum Speed: String {
 class RouletteData: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var randomFlag: Bool = false
+    @objc dynamic var date: Date = Date()
     var list = List<RouletteGraphData>()
     //初期色cyan colorselectVCで色を選択したらここに一時保存してnewDataVCの方でデータ保存する。
     var temporarys = [RouletteGraphTemporary]()

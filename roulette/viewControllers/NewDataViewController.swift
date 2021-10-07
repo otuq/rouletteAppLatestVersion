@@ -20,7 +20,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         stride(from: 0, to: 360, by: 18).forEach { i in
             let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
             colors.append(color)
-            print(color.r, color.g, color.b)
         }
         return colors
     }
@@ -34,7 +33,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     //        addRowButton.delegate = self
     //        return addRowButton
     //    }
-    private var getAllCells = [TableViewCell]()
+    private var getAllCells = [NewDataTableViewCell]()
     var dataSet = RouletteData()
     
     //MARK:-Outlets,Actions
@@ -44,6 +43,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var addRowButton: UIButton!
     @IBOutlet weak var randomSwitchButton: UIButton!
     @IBOutlet weak var randomSwitchLabel: UILabel!
+    @IBOutlet weak var operationView: UIView!
     
     //MARK:-LifeCycle Methods
     override func viewDidLoad() {
@@ -57,7 +57,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         newDataTableView.dataSource = self
         newDataTableView.separatorStyle = .none
         newDataTableView.keyboardDismissMode = .interactive 
-        newDataTableView.register(UINib(nibName: "TableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
+        newDataTableView.register(UINib(nibName: "NewDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
         titleTextView.delegate = self
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
     }
@@ -120,6 +120,22 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
     }
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let frameHeight = scrollView.frame.height
+        let contentHeight = scrollView.contentSize.height
+        //一番下までスクロールしたらUIで隠れている
+        let offset = scrollView.contentOffset.y
+        let calcContentHeight = contentHeight - frameHeight
+        if contentHeight >= frameHeight {
+            if offset >= calcContentHeight {
+                newDataTableView.contentInset.bottom = offset < operationView.frame.height ? offset - calcContentHeight : operationView.frame.height
+            }
+        }
+        //            //セルを追加していきcontentSizeがframeheightより大きくなった場合に発動
+        //            if frameHeight <= contentHeight {
+        //                scrollDidEndRemoveAddRow(scrollView)
+        //            }
+    }
     //一番下までスクロールしたらaddボタンを退場
     //    private func scrollDidEndRemoveAddRow(_ scrollView: UIScrollView) {
     //        if scrollView.contentOffset.y >= (scrollView.contentSize.height - scrollView.frame.height) {
@@ -133,14 +149,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     //            }
     //        }
     //    }
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //        let frameHeight = scrollView.frame.height
-    //        let contentHeight = scrollView.contentSize.height
-    //        //セルを追加していきcontentSizeがframeheightより大きくなった場合に発動
-    //        if frameHeight <= contentHeight {
-    //            scrollDidEndRemoveAddRow(scrollView)
-    //        }
-    //    }
 }
 //MARK:-TableViewDelegate,Datasource
 extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
@@ -148,7 +156,7 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
         dataSet.temporarys.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! TableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! NewDataTableViewCell
         let temporary = dataSet.temporarys[indexPath.row]
         cell.graphDataTemporary = temporary
         getAllCells.append(cell)
@@ -245,6 +253,7 @@ extension NewDataViewController {
         try! realm.write({
             dataSet.title = titleTextView.text ?? ""
             dataSet.randomFlag = randomSwitchButton.isSelected
+            dataSet.date = Date()
         })
         //cellの情報のデータの保存、更新
         dataSet.temporarys.enumerated().forEach { (index, temporary) in
@@ -273,12 +282,14 @@ extension NewDataViewController {
         }
     }
     private func setAndDismiss(_ homeVC: HomeViewController) {
+        if homeVC.dataSet == nil  {
+            homeVC.startButton.titleLabel?.removeFromSuperview()
+            homeVC.view.addSubview(homeVC.setDataLabel)
+        }
         homeVC.dataSet = dataSet
         homeVC.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
         homeVC.newDataButton.isSelected = false
         homeVC.setDataButton.isSelected = false
-        homeVC.startButton.titleLabel?.removeFromSuperview()
-        homeVC.view.addSubview(homeVC.setDataLabel)
         dismiss(animated: true, completion: nil)
     }
 }

@@ -154,5 +154,16 @@ class AppSettingViewController: FormViewController {
                     return UIViewController()
                 }), onDismiss: nil)
             }
+            <<< ButtonRow(){
+                $0.title = "contact"
+                $0.cellStyle = .value1
+            }.cellUpdate { cell, row in
+                cell.tintColor = .black
+                cell.accessoryType = .disclosureIndicator
+            }.onCellSelection { _, _ in
+                if let url = URL(string: "https://twitter.com/OPQR64013140"){
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+            }
     }
 }

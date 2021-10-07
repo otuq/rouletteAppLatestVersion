@@ -17,6 +17,8 @@
 		CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */; };
 		CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5084A7269C341E0049ED7D /* AppSetting.storyboard */; };
 		CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79A56A268AE4A900BBA00C /* Degree.swift */; };
+		CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */; };
+		CE82294E2706D7B900C75D6D /* SetDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */; };
 		CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */; };
 		CE82BC1F26831741009550EB /* ColorSelectPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */; };
 		CE82BC2126831BC7009550EB /* ColorSelect.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE82BC2026831BC7009550EB /* ColorSelect.storyboard */; };
@@ -38,8 +40,8 @@
 		CEC5901C26807D79005A47D6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC5901B26807D79005A47D6 /* Home.storyboard */; };
 		CEC5901E26807D85005A47D6 /* NewData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC5901D26807D85005A47D6 /* NewData.storyboard */; };
 		CEC590212680807E005A47D6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC590202680807E005A47D6 /* Extension.swift */; };
-		CEC5902626808559005A47D6 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5902426808559005A47D6 /* TableViewCell.swift */; };
-		CEC5902726808559005A47D6 /* TableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC5902526808559005A47D6 /* TableViewCell.xib */; };
+		CEC5902626808559005A47D6 /* NewDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */; };
+		CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */; };
 		CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF696BD26B7D2DE00564381 /* Sound.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -69,6 +71,8 @@
 		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
 		CE79A56A268AE4A900BBA00C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
+		CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataTableViewCell.swift; sourceTree = "<group>"; };
+		CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDataTableViewCell.xib; sourceTree = "<group>"; };
 		CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
 		CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectPresentationController.swift; sourceTree = "<group>"; };
 		CE82BC2026831BC7009550EB /* ColorSelect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ColorSelect.storyboard; sourceTree = "<group>"; };
@@ -95,8 +99,8 @@
 		CEC5901B26807D79005A47D6 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
 		CEC5901D26807D85005A47D6 /* NewData.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewData.storyboard; sourceTree = "<group>"; };
 		CEC590202680807E005A47D6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		CEC5902426808559005A47D6 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
-		CEC5902526808559005A47D6 /* TableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCell.xib; sourceTree = "<group>"; };
+		CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataTableViewCell.swift; sourceTree = "<group>"; };
+		CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewDataTableViewCell.xib; sourceTree = "<group>"; };
 		CEF696BD26B7D2DE00564381 /* Sound.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sound.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -225,8 +229,10 @@
 		CEC5902326808510005A47D6 /* xib */ = {
 			isa = PBXGroup;
 			children = (
-				CEC5902426808559005A47D6 /* TableViewCell.swift */,
-				CEC5902526808559005A47D6 /* TableViewCell.xib */,
+				CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */,
+				CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */,
+				CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */,
+				CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */,
 				CE82BC2226831DD3009550EB /* CollectionViewCell.swift */,
 				CE82BC2326831DD3009550EB /* CollectionViewCell.xib */,
 				CE46A6FA269EB91500D33530 /* CustomCell.swift */,
@@ -350,10 +356,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */,
+				CE82294E2706D7B900C75D6D /* SetDataTableViewCell.xib in Resources */,
 				CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */,
 				CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */,
 				CEA611472678688F00751566 /* LaunchScreen.storyboard in Resources */,
-				CEC5902726808559005A47D6 /* TableViewCell.xib in Resources */,
+				CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */,
 				CEC5901E26807D85005A47D6 /* NewData.storyboard in Resources */,
 				CE82BC2126831BC7009550EB /* ColorSelect.storyboard in Resources */,
 				CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */,
@@ -397,10 +404,11 @@
 				CEC590212680807E005A47D6 /* Extension.swift in Sources */,
 				CE4AADFB268C475D00AFD70F /* Model.swift in Sources */,
 				CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */,
-				CEC5902626808559005A47D6 /* TableViewCell.swift in Sources */,
+				CEC5902626808559005A47D6 /* NewDataTableViewCell.swift in Sources */,
 				CEC5901726807D28005A47D6 /* HomeViewController.swift in Sources */,
 				CE82BC1F26831741009550EB /* ColorSelectPresentationController.swift in Sources */,
 				CE82BC2426831DD3009550EB /* CollectionViewCell.swift in Sources */,
+				CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */,
 				CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

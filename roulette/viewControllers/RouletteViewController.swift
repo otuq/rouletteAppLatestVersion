@@ -13,7 +13,7 @@ class RouletteViewController: UIViewController {
     //MARK: -Properties
     private let userDefaults = UserDefaults.standard
     private let parentLayer = CALayer() //ここに各グラフを統合する
-    private let frameLayer = CALayer()
+    private let frameLayer = CALayer() //ここに各グラフごとの境界線を統合する。
     private let subView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
     private let diameter: CGFloat = 360 //直径
@@ -156,6 +156,7 @@ extension RouletteViewController {
         path.apply(CGAffineTransform(translationX: view.center.x, y: view.center.y))
         return path
     }
+    //円弧形グラフごとの境界線
     private func graphFrameBoarder(startRatio: Double) {
         let path = UIBezierPath()
         let layer = CAShapeLayer()
@@ -169,6 +170,7 @@ extension RouletteViewController {
         layer.lineWidth = 3
         frameLayer.addSublayer(layer)
     }
+    //円グラフの内側円線
     private func graphFrameCircleBoarder() {
         let path = UIBezierPath()
         let layer = CAShapeLayer()
@@ -180,13 +182,12 @@ extension RouletteViewController {
         layer.lineWidth = 3
         frameLayer.addSublayer(layer)
     }
-    
     //パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
     private func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) {
-        let circlePath = graphPath(radius: 90, startAngle: startRatio, endAngle: endRatio)
+        let circlePath = graphPath(radius: diameter / 4, startAngle: startRatio, endAngle: endRatio)
         let layer = CAShapeLayer()
         layer.path = circlePath.cgPath
-        layer.lineWidth = 180
+        layer.lineWidth = diameter / 2
         layer.lineCap = .butt
         layer.strokeColor = fillColor
         layer.fillColor = UIColor.clear.cgColor
@@ -225,7 +226,7 @@ extension RouletteViewController {
             let textAngleRatio = startRatio + (ratio / 2) //2番目のレイヤーだとしたら1番目のendratioからratioの半分の位置が文字列の角度 start:25 ratio40 文字列角度45
             let textAngle =  CGFloat(2*Double.pi*textAngleRatio/Double(around)+Double.pi/2) //
             let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: diameter - 10, height: 20)))
-            textLabelView.rouletteTextSetting(textString, textColor, textAngle)
+            textLabelView.rouletteTextSetting(textString, textColor, textAngle, textSize: 16)
             textLabelView.center = view.center
             graphRange.append(range)
             drawGraph(fillColor: color, startRatio, endRatio)
@@ -260,15 +261,14 @@ extension RouletteViewController {
         if stopAngle >= dtStop {
             audioPlayer.stop()
             link.invalidate()
-            //            print("stop link")
             //止まった地点の数値が各グラフの範囲だった時の判定を返す。
             graphRange.enumerated().forEach { (index, range) in
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
                     let list = rouletteDataSet.1[index]
-                    print(list.text)
-                    print(dtStop)
-                    print(range)
+//                    print(list.text)
+//                    print(dtStop)
+//                    print(range)
                     alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) //ルーレットの結果を表示する。
                     soundEffect()
                 }

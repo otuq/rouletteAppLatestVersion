@@ -38,11 +38,11 @@ extension UIView {
             parentResponder = nextResponder
         }
     }
-    func rouletteTextSetting(_ text: String, _ textColor: UIColor,_ textAngle: CGFloat) {
+    func rouletteTextSetting(_ text: String, _ textColor: UIColor,_ textAngle: CGFloat, textSize: CGFloat) {
         let textLabel = UILabel()
         textLabel.frame.size = CGSize(width: 150, height: 20)
         let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: 16),
+            .font: UIFont.systemFont(ofSize: textSize),
             .foregroundColor: textColor
         ]
         textLabel.attributedText = NSAttributedString(string: text, attributes: attributes)

@@ -13,7 +13,7 @@ class SetDataViewController: UIViewController {
     private let cellId = "cellId"
     private var realm = try! Realm()
     private var dataSets: Results<RouletteData> {
-        let data = realm.objects(RouletteData.self)
+        let data = realm.objects(RouletteData.self).sorted(byKeyPath: "date", ascending: false)
         return data
     }
     
@@ -24,11 +24,13 @@ class SetDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
+        
+        
     }
     private func settingView() {
         setDataTableView.delegate = self
         setDataTableView.dataSource = self
-        setDataTableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        setDataTableView.register(UINib(nibName: "SetDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
     }
@@ -47,10 +49,9 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
         dataSets.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        
-        let graphTitle = dataSets[indexPath.row].title
-        cell.textLabel?.text = graphTitle.isEmpty ? "No title" : graphTitle
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! SetDataTableViewCell
+        let dataSet = dataSets[indexPath.row]
+        cell.dataset = dataSet
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

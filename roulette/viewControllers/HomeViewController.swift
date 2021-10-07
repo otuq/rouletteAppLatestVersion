@@ -18,7 +18,7 @@ class HomeViewController: UIViewController {
         label.text = "T A P"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = UIColor.init(r: 153, g: 153, b: 153)
-        UIView.transition(with: label, duration: 2.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
+        UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
             label.layer.opacity = 0
         }) { _ in
             label.layer.opacity = 1
@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var newDataButton: UIButton!
     @IBOutlet weak var rouletteTitleLabel: UILabel!
     @IBOutlet weak var appSettingButton: UIButton!
+    @IBOutlet weak var shareButton: UIButton!
     
     //MARK:-Lifecycle Methods
     override func viewDidLoad() {
@@ -46,6 +47,7 @@ class HomeViewController: UIViewController {
         setDataButton.addTarget(self, action: #selector(setGesture), for: .touchUpInside)
         newDataButton.addTarget(self, action: #selector(newGesture), for: .touchUpInside)
         appSettingButton.addTarget(self, action: #selector(appSettingGesture), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(shareGesture), for: .touchUpInside)
         rouletteTitleLabel.addGestureRecognizer(editGesture)
         navigationController?.isNavigationBarHidden = true
     }
@@ -95,7 +97,6 @@ class HomeViewController: UIViewController {
                 dataSet.temporarys.append(temporary)
             }
             newVC.dataSet = dataSet
-            print(dataSet.temporarys.count)
             newVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
             nav.modalPresentationStyle = .overFullScreen
             present(nav, animated: true, completion: nil)
@@ -113,11 +114,18 @@ class HomeViewController: UIViewController {
         nav.modalPresentationStyle = .overFullScreen
         present(nav, animated: true, completion: nil)
     }
+    @objc private func shareGesture() {
+        let text = "ぺぺぺぺぺ"
+        let items = [text]
+        let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(activityVC, animated: true, completion: nil)
+    }
     func settingAccesory() {
         startButton.homeButtonAccesory()
         newDataButton.homeButtonAccesory()
         setDataButton.homeButtonAccesory()
         appSettingButton.homeButtonAccesory()
+        shareButton.homeButtonAccesory()
     }
 }
 
