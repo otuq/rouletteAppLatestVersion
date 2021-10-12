@@ -38,7 +38,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     
     //MARK:-Outlets,Actions
     @IBOutlet weak var newDataTableView: UITableView!
-    @IBOutlet weak var titleTextView: UITextField!
+    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var addRowButton: UIButton!
     @IBOutlet weak var randomSwitchButton: UIButton!
@@ -58,15 +58,17 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         newDataTableView.separatorStyle = .none
         newDataTableView.keyboardDismissMode = .interactive 
         newDataTableView.register(UINib(nibName: "NewDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
-        titleTextView.delegate = self
+        titleTextField.delegate = self
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelRouletteSets))
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
     }
     private func settingUI(){
-        titleTextView.text = dataSet.title
+        titleTextField.text = dataSet.title
+        titleTextField.overrideUserInterfaceStyle = .light
         randomSwitchButton.isSelected = dataSet.randomFlag
-        saveButton.homeButtonAccesory()
-        addRowButton.homeButtonAccesory()
-        randomSwitchButton.homeButtonAccesory()
+        saveButton.homeButtonDecoration()
+        addRowButton.homeButtonDecoration()
+        randomSwitchButton.homeButtonDecoration()
         
         DispatchQueue.main.async {
             self.randomSwitch()
@@ -104,6 +106,21 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         newDataTableView.insertRows(at: [indexPath], with: .fade)
         newDataTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         randomSwitch()
+    }
+    @objc private func cancelRouletteSets() {
+        let alertController = UIAlertController(title: .none, message: "編集を中止してウィンドウを閉じますか？", preferredStyle: .alert)
+        let actionA = UIAlertAction(title: "キャンセル", style: .cancel, handler: .none)
+        let actionB = UIAlertAction(title: "閉じる", style: .default) { _ in
+            let count = (self.navigationController?.viewControllers.count)! - 2
+            if count < 0 {
+                self.dismiss(animated: true, completion: nil)
+            }else{
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        alertController.addAction(actionA)
+        alertController.addAction(actionB)
+        present(alertController, animated: true, completion: nil)
     }
     @objc private func editRouletteSets() {
         newDataTableView.setEditing(true, animated: true)
@@ -160,6 +177,7 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
         let temporary = dataSet.temporarys[indexPath.row]
         cell.graphDataTemporary = temporary
         getAllCells.append(cell)
+        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -251,7 +269,7 @@ extension NewDataViewController {
     private func realmWrite() {
         //titleのデータの保存、更新
         try! realm.write({
-            dataSet.title = titleTextView.text ?? ""
+            dataSet.title = titleTextField.text ?? ""
             dataSet.randomFlag = randomSwitchButton.isSelected
             dataSet.date = Date()
         })

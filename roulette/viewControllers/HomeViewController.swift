@@ -7,8 +7,13 @@
 
 import UIKit
 
+protocol StatusBarStyleChangeDelegate {
+    func statusBarStyleChange(style: UIStatusBarStyle)
+}
+
 class HomeViewController: UIViewController {
     //MARK:- Properties
+    var statusBarStyleChange: UIStatusBarStyle = .darkContent
     var setDataLabel: UILabel {
         let label = UILabel()
         label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
@@ -40,6 +45,20 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         settingGesture()
         settingAccesory()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("okkk")
+        if let presented = presentedViewController {
+            print("ok")
+            if type(of: presented) == UINavigationController.self {
+                statusBarStyleChange = .darkContent
+                setNeedsStatusBarAppearanceUpdate()
+            }
+        }
+    }
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return statusBarStyleChange
     }
     private func settingGesture() {
         let editGesture = UITapGestureRecognizer(target: self, action: #selector(editGesture))
@@ -112,7 +131,10 @@ class HomeViewController: UIViewController {
         let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AppSettingViewController")
         let nav = UINavigationController.init(rootViewController: viewcontroller)
         nav.modalPresentationStyle = .overFullScreen
-        present(nav, animated: true, completion: nil)
+        present(nav, animated: true) {
+            self.statusBarStyleChange = .lightContent
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
     @objc private func shareGesture() {
         let text = "ぺぺぺぺぺ"
@@ -121,12 +143,17 @@ class HomeViewController: UIViewController {
         present(activityVC, animated: true, completion: nil)
     }
     func settingAccesory() {
-        startButton.homeButtonAccesory()
-        newDataButton.homeButtonAccesory()
-        setDataButton.homeButtonAccesory()
-        appSettingButton.homeButtonAccesory()
-        shareButton.homeButtonAccesory()
+        startButton.homeButtonDecoration()
+        newDataButton.homeButtonDecoration()
+        setDataButton.homeButtonDecoration()
+        appSettingButton.homeButtonDecoration()
+        shareButton.homeButtonDecoration()
     }
 }
-
-
+//extension HomeViewController: StatusBarStyleChangeDelegate {
+//    func statusBarStyleChange(style: UIStatusBarStyle) {
+//        statusBarStyleChange = style
+//        setNeedsStatusBarAppearanceUpdate()
+//        print("ok")
+//    }
+//}

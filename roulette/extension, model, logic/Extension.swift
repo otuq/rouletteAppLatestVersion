@@ -7,8 +7,13 @@
 
 import UIKit
 
+extension UINavigationController {
+    open override var childForStatusBarStyle: UIViewController? {
+        return visibleViewController
+    }
+}
 extension UIButton {
-    func homeButtonAccesory() {
+    func homeButtonDecoration() {
         let imageNormal = UIImage(named: "buttonNormal")
         let imageHighlight = UIImage(named: "buttonHighlight")
         setBackgroundImage(imageNormal, for: .normal)
@@ -16,7 +21,7 @@ extension UIButton {
         
     }
     //丸ボタンの装飾
-    func accesory() {
+    func decoration() {
         layer.cornerRadius = bounds.width / 2
         layer.borderWidth = 0.5
         layer.borderColor = UIColor.darkGray.cgColor
@@ -52,7 +57,7 @@ extension UIView {
     }
 }
 extension UILabel {
-    func accesory(bgColor: UIColor) {
+    func decoration(bgColor: UIColor) {
         layer.backgroundColor = bgColor.cgColor
         layer.cornerRadius = bounds.width / 2
         layer.borderWidth = 0.5
@@ -76,3 +81,18 @@ extension NSAttributedString {
         self.init(string: string, attributes: attribute)
     }
 }
+//extension UITextField {
+//    func decoration(placeholderString: String) {
+//        attributedPlaceholder = NSAttributedString(string: placeholderString, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightestGray])
+//        borderStyle = .none
+//        //文字の左端に余白を設ける
+//        if textAlignment == .left || textAlignment == .natural {
+//            leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
+//            leftViewMode = .always
+//        }
+//        layer.borderColor = UIColor.lightestGray.cgColor
+//        layer.borderWidth = 1
+//        layer.cornerRadius = 5
+//        layer.masksToBounds = true
+//    }
+//}

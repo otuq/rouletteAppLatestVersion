@@ -36,18 +36,24 @@ class SetDataTableViewCell: UITableViewCell {
     //MARK: -LifeCycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        overrideUserInterfaceStyle = .light
+        settingView()
+    }
+    private func settingView() {
         let centerCircleLabel = rouletteCenterCircleLabel(w: 15)
         let flameCircleView = rouletteFlameCircle(w: diameter)
+        let selectView = UIView()
         centerCircleLabel.center = maxPoint
         flameCircleView.center = maxPoint
-        
+//        selectView.backgroundColor = UIColor.init(r: 0, g: 0, b: 0, a: 0.1)
+        selectedBackgroundView = selectView
         rouletteView.addSubview(centerCircleLabel)
         rouletteView.addSubview(flameCircleView)
     }
     private func rouletteCenterCircleLabel(w: CGFloat) -> UILabel {
         let circleLabel = UILabel()
         circleLabel.bounds.size = CGSize(width: w, height: w)
-        circleLabel.accesory(bgColor: .white)
+        circleLabel.decoration(bgColor: .white)
         return circleLabel
     }
     private func rouletteFlameCircle(w: CGFloat) -> UIView {

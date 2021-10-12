@@ -147,7 +147,7 @@ class AppSettingViewController: FormViewController {
             <<< ButtonRow(){
                 $0.title = "privacy"
                 $0.presentationMode = .presentModally(controllerProvider: ControllerProvider.callback(builder: {
-                    if let url = URL(string: "https://lab316.github.io/app-static-page/ja/privacy.html?company=oq"){
+                    if let url = URL(string: "https://otuq.github.io/"){
                         let safariVC = SFSafariViewController(url: url)
                         return safariVC
                     }
@@ -156,9 +156,10 @@ class AppSettingViewController: FormViewController {
             }
             <<< ButtonRow(){
                 $0.title = "contact"
-                $0.cellStyle = .value1
+                $0.cellStyle = .value1 //初期ではセルが中央揃えのtintColorがblueに設定してあるので左揃えになるスタイルに変更
             }.cellUpdate { cell, row in
-                cell.tintColor = .black
+                //このコールバック関数内にアクセサリーの設定を他のセルのスタイルに合わせる。
+                cell.tintColor = UIColor.dynamicColor(light: .black, dark: .white)
                 cell.accessoryType = .disclosureIndicator
             }.onCellSelection { _, _ in
                 if let url = URL(string: "https://twitter.com/OPQR64013140"){

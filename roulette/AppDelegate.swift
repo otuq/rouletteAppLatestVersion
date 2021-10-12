@@ -7,6 +7,8 @@
 
 import UIKit
 import RealmSwift
+import Firebase
+import FirebaseAnalytics
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -28,7 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         var config = Realm.Configuration()
         config.deleteRealmIfMigrationNeeded = true
         Realm.Configuration.defaultConfiguration = config
-
+        FirebaseApp.configure()
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .normal)
+        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .highlighted)
         return true
     }
 

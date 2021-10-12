@@ -16,7 +16,6 @@ class SetDataViewController: UIViewController {
         let data = realm.objects(RouletteData.self).sorted(byKeyPath: "date", ascending: false)
         return data
     }
-    
     //MARK:-Outlets,Actions
     @IBOutlet weak var setDataTableView: UITableView!
     
@@ -24,8 +23,14 @@ class SetDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
-        
-        
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let indexPath = setDataTableView.indexPathForSelectedRow {
+            UIView.animate(withDuration: 1) {
+                self.setDataTableView.deselectRow(at: indexPath, animated: true)
+            }
+        }
     }
     private func settingView() {
         setDataTableView.delegate = self

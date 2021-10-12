@@ -31,7 +31,7 @@
                     </label>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qcM-q5-ply">
                         <rect key="frame" x="37" y="32" width="30" height="26.5"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="30" id="Nd4-Pe-GKL"/>
                             <constraint firstAttribute="width" secondItem="qcM-q5-ply" secondAttribute="height" multiplier="1:1" id="UGk-NO-T0F"/>

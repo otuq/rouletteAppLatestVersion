@@ -17,7 +17,7 @@ class AddRowButton: UIButton {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        accesory()
+        decoration()
         layer.backgroundColor = UIColor.init(r: 255, g: 31, b: 169).cgColor //255, 31, 169
         setTitle("＋", for: .normal)
         titleLabel?.font = UIFont.systemFont(ofSize: 24)

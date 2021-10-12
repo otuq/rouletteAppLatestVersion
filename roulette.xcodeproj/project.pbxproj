@@ -7,16 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7239E82635E449868F9750FC /* Pods_roulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */; };
+		CB805B5AEED5CED4F9C760DD /* Pods_rouletteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */; };
 		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
 		CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C444D2681BCB100B8F698 /* AddRowButton.swift */; };
-		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
-		CE449654269D29FA007E4F6A /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* PKHUD */; };
+		CE449651269D296B007E4F6A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* SwiftPackageProductDependency */; };
+		CE449654269D29FA007E4F6A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* SwiftPackageProductDependency */; };
 		CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* CustomCell.swift */; };
 		CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* CustomCell.xib */; };
 		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
 		CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */; };
 		CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5084A7269C341E0049ED7D /* AppSetting.storyboard */; };
 		CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79A56A268AE4A900BBA00C /* Degree.swift */; };
+		CE7F7165270EFDC200CEB18F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CE7F7164270EFDC200CEB18F /* GoogleService-Info.plist */; };
 		CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */; };
 		CE82294E2706D7B900C75D6D /* SetDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */; };
 		CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */; };
@@ -34,7 +37,7 @@
 		CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6116A267868D600751566 /* RouletteViewController.swift */; };
 		CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */; };
 		CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */; };
-		CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEB6C2D0268F0A6100C597F1 /* RealmSwift */; };
+		CEB6C2D1268F0A6100C597F1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = CEB6C2D0268F0A6100C597F1 /* SwiftPackageProductDependency */; };
 		CEC5901726807D28005A47D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901626807D28005A47D6 /* HomeViewController.swift */; };
 		CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901826807D3D005A47D6 /* NewDataViewController.swift */; };
 		CEC5901C26807D79005A47D6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC5901B26807D79005A47D6 /* Home.storyboard */; };
@@ -43,6 +46,7 @@
 		CEC5902626808559005A47D6 /* NewDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */; };
 		CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */; };
 		CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF696BD26B7D2DE00564381 /* Sound.xcassets */; };
+		CFADB919B56D35D70E57D504 /* Pods_roulette_rouletteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D66F10F002A8BC95A2D8C3 /* Pods_roulette_rouletteUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +67,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0179B30845E1C5E54C835D7D /* Pods-roulette-rouletteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette-rouletteUITests.debug.xcconfig"; path = "Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		3E35597ECC6887638B28E4FD /* Pods-roulette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.debug.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.debug.xcconfig"; sourceTree = "<group>"; };
+		6811510BBA86DE4022A6975A /* Pods-roulette-rouletteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette-rouletteUITests.release.xcconfig"; path = "Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests.release.xcconfig"; sourceTree = "<group>"; };
+		C3D66F10F002A8BC95A2D8C3 /* Pods_roulette_rouletteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roulette_rouletteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roulette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.release.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.release.xcconfig"; sourceTree = "<group>"; };
+		CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.debug.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CE2C444D2681BCB100B8F698 /* AddRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRowButton.swift; sourceTree = "<group>"; };
 		CE46A6FA269EB91500D33530 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
@@ -71,6 +82,7 @@
 		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
 		CE79A56A268AE4A900BBA00C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
+		CE7F7164270EFDC200CEB18F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataTableViewCell.swift; sourceTree = "<group>"; };
 		CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDataTableViewCell.xib; sourceTree = "<group>"; };
 		CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +114,8 @@
 		CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewDataTableViewCell.xib; sourceTree = "<group>"; };
 		CEF696BD26B7D2DE00564381 /* Sound.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sound.xcassets; sourceTree = "<group>"; };
+		D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rouletteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.release.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,9 +123,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE449654269D29FA007E4F6A /* PKHUD in Frameworks */,
-				CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */,
-				CE449651269D296B007E4F6A /* Eureka in Frameworks */,
+				CE449654269D29FA007E4F6A /* BuildFile in Frameworks */,
+				CEB6C2D1268F0A6100C597F1 /* BuildFile in Frameworks */,
+				CE449651269D296B007E4F6A /* BuildFile in Frameworks */,
+				7239E82635E449868F9750FC /* Pods_roulette.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -119,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB805B5AEED5CED4F9C760DD /* Pods_rouletteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,12 +142,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CFADB919B56D35D70E57D504 /* Pods_roulette_rouletteUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0122C12D35BEEF1F0B20BCD6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */,
+				C3D66F10F002A8BC95A2D8C3 /* Pods_roulette_rouletteUITests.framework */,
+				D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CEA6112E2678688D00751566 = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +166,8 @@
 				CEA611502678689000751566 /* rouletteTests */,
 				CEA6115B2678689000751566 /* rouletteUITests */,
 				CEA611382678688D00751566 /* Products */,
+				F4ED4A3918A50101ABBABB71 /* Pods */,
+				0122C12D35BEEF1F0B20BCD6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -165,6 +194,7 @@
 				CEF696BD26B7D2DE00564381 /* Sound.xcassets */,
 				CEA611452678688F00751566 /* LaunchScreen.storyboard */,
 				CEA611482678688F00751566 /* Info.plist */,
+				CE7F7164270EFDC200CEB18F /* GoogleService-Info.plist */,
 			);
 			path = roulette;
 			sourceTree = "<group>";
@@ -242,6 +272,20 @@
 			path = viewControllers;
 			sourceTree = "<group>";
 		};
+		F4ED4A3918A50101ABBABB71 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3E35597ECC6887638B28E4FD /* Pods-roulette.debug.xcconfig */,
+				C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */,
+				0179B30845E1C5E54C835D7D /* Pods-roulette-rouletteUITests.debug.xcconfig */,
+				6811510BBA86DE4022A6975A /* Pods-roulette-rouletteUITests.release.xcconfig */,
+				CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */,
+				D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -249,9 +293,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA611612678689000751566 /* Build configuration list for PBXNativeTarget "roulette" */;
 			buildPhases = (
+				24342CEE362E67C02E051D56 /* [CP] Check Pods Manifest.lock */,
 				CEA611332678688D00751566 /* Sources */,
 				CEA611342678688D00751566 /* Frameworks */,
 				CEA611352678688D00751566 /* Resources */,
+				CDEA20D57D3449A79D4E4F16 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -259,9 +305,9 @@
 			);
 			name = roulette;
 			packageProductDependencies = (
-				CEB6C2D0268F0A6100C597F1 /* RealmSwift */,
-				CE449650269D296B007E4F6A /* Eureka */,
-				CE449653269D29FA007E4F6A /* PKHUD */,
+				CEB6C2D0268F0A6100C597F1 /* SwiftPackageProductDependency */,
+				CE449650269D296B007E4F6A /* SwiftPackageProductDependency */,
+				CE449653269D29FA007E4F6A /* SwiftPackageProductDependency */,
 			);
 			productName = roulette;
 			productReference = CEA611372678688D00751566 /* roulette.app */;
@@ -271,6 +317,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA611642678689000751566 /* Build configuration list for PBXNativeTarget "rouletteTests" */;
 			buildPhases = (
+				F50B2C271FB07168C409A863 /* [CP] Check Pods Manifest.lock */,
 				CEA611492678689000751566 /* Sources */,
 				CEA6114A2678689000751566 /* Frameworks */,
 				CEA6114B2678689000751566 /* Resources */,
@@ -289,9 +336,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA611672678689000751566 /* Build configuration list for PBXNativeTarget "rouletteUITests" */;
 			buildPhases = (
+				00D845A9CEFA299757CA66FC /* [CP] Check Pods Manifest.lock */,
 				CEA611542678689000751566 /* Sources */,
 				CEA611552678689000751566 /* Frameworks */,
 				CEA611562678689000751566 /* Resources */,
+				5A86420BC19ADBD09C609A05 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -335,9 +384,9 @@
 			);
 			mainGroup = CEA6112E2678688D00751566;
 			packageReferences = (
-				CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
-				CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */,
-				CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */,
+				CEB6C2CF268F0A6100C597F1 /* RemoteSwiftPackageReference */,
+				CE44964F269D296B007E4F6A /* RemoteSwiftPackageReference */,
+				CE449652269D29FA007E4F6A /* RemoteSwiftPackageReference */,
 			);
 			productRefGroup = CEA611382678688D00751566 /* Products */;
 			projectDirPath = "";
@@ -368,6 +417,7 @@
 				CEA611422678688D00751566 /* Roulette.storyboard in Resources */,
 				CE82BC2526831DD3009550EB /* CollectionViewCell.xib in Resources */,
 				CEC5901C26807D79005A47D6 /* Home.storyboard in Resources */,
+				CE7F7165270EFDC200CEB18F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,6 +436,109 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00D845A9CEFA299757CA66FC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-roulette-rouletteUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		24342CEE362E67C02E051D56 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-roulette-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5A86420BC19ADBD09C609A05 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CDEA20D57D3449A79D4E4F16 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roulette/Pods-roulette-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roulette/Pods-roulette-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roulette/Pods-roulette-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F50B2C271FB07168C409A863 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-rouletteTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CEA611332678688D00751566 /* Sources */ = {
@@ -582,6 +735,7 @@
 		};
 		CEA611622678689000751566 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3E35597ECC6887638B28E4FD /* Pods-roulette.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -603,6 +757,7 @@
 		};
 		CEA611632678689000751566 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -624,6 +779,7 @@
 		};
 		CEA611652678689000751566 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -646,6 +802,7 @@
 		};
 		CEA611662678689000751566 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -668,6 +825,7 @@
 		};
 		CEA611682678689000751566 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0179B30845E1C5E54C835D7D /* Pods-roulette-rouletteUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -688,6 +846,7 @@
 		};
 		CEA611692678689000751566 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6811510BBA86DE4022A6975A /* Pods-roulette-rouletteUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -748,7 +907,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */ = {
+		CE44964F269D296B007E4F6A /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/xmartlabs/Eureka";
 			requirement = {
@@ -756,7 +915,7 @@
 				minimumVersion = 5.3.3;
 			};
 		};
-		CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */ = {
+		CE449652269D29FA007E4F6A /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pkluz/PKHUD";
 			requirement = {
@@ -764,7 +923,7 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		CEB6C2CF268F0A6100C597F1 /* RemoteSwiftPackageReference */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
 			requirement = {
@@ -775,19 +934,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE449650269D296B007E4F6A /* Eureka */ = {
+		CE449650269D296B007E4F6A /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */;
+			package = CE44964F269D296B007E4F6A /* RemoteSwiftPackageReference */;
 			productName = Eureka;
 		};
-		CE449653269D29FA007E4F6A /* PKHUD */ = {
+		CE449653269D29FA007E4F6A /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */;
+			package = CE449652269D29FA007E4F6A /* RemoteSwiftPackageReference */;
 			productName = PKHUD;
 		};
-		CEB6C2D0268F0A6100C597F1 /* RealmSwift */ = {
+		CEB6C2D0268F0A6100C597F1 /* SwiftPackageProductDependency */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = CEB6C2CF268F0A6100C597F1 /* RemoteSwiftPackageReference */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -72,4 +72,16 @@ extension UIColor {
         }
         return UIColor.init(r: Int(r), g: Int(g), b: Int(b))
     }
+    static var lightestGray: UIColor {
+        return UIColor.init(r: 223, g: 223, b: 223)
+    }
+    static func dynamicColor(light: UIColor, dark: UIColor) -> UIColor {
+        UIColor { (traitCollection: UITraitCollection) -> UIColor in
+            if traitCollection.userInterfaceStyle == .dark{
+                return dark
+            }else{
+                return light
+            }
+        }
+    }
 }

@@ -90,9 +90,12 @@
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NMv-Rm-8tP">
                                 <rect key="frame" x="82" y="93" width="250" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="250" id="6cY-CH-bnk"/>
+                                    <constraint firstAttribute="height" constant="34" id="7Jg-cU-0am"/>
                                 </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -126,7 +129,7 @@
                         <outlet property="randomSwitchButton" destination="A7y-e8-7Pi" id="dQp-dC-Bpk"/>
                         <outlet property="randomSwitchLabel" destination="vAd-JL-xsD" id="yS4-hy-eUM"/>
                         <outlet property="saveButton" destination="J76-FZ-FCL" id="dWZ-XP-00S"/>
-                        <outlet property="titleTextView" destination="NMv-Rm-8tP" id="LkM-e3-jiR"/>
+                        <outlet property="titleTextField" destination="NMv-Rm-8tP" id="LkM-e3-jiR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

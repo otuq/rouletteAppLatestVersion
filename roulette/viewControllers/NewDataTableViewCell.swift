@@ -31,25 +31,29 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
     //MARK:-LifeCycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
-        settingUI()
+        overrideUserInterfaceStyle = .light
+        settingDelegate()
         settingGesture()
+        settingUI()
         keyboardNotification()
     }
-    private func settingUI() {
-        backgroundColor = .clear
-        selectView.backgroundColor = .clear
-        selectedBackgroundView = selectView
+    private func settingDelegate() {
         rouletteTextField.delegate = self
-        rouletteSetColor.layer.cornerRadius = rouletteSetColor.bounds.width / 2
-        rouletteSetColor.layer.masksToBounds = true
-        rouletteSetColor.layer.borderWidth = 0.5
-        rouletteSetColor.isUserInteractionEnabled = true
-        rouletteTextField.isUserInteractionEnabled = true
     }
     private func settingGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(selectColorViewFetch))
         rouletteSetColor.addGestureRecognizer(gesture)
         rouletteRatioSlider.addTarget(self, action: #selector(saveRatio), for: .touchUpInside)
+    }
+    private func settingUI() {
+        backgroundColor = .clear
+        selectView.backgroundColor = .clear
+        selectedBackgroundView = selectView
+        rouletteSetColor.layer.cornerRadius = rouletteSetColor.bounds.width / 2
+        rouletteSetColor.layer.masksToBounds = true
+        rouletteSetColor.layer.borderWidth = 0.5
+        rouletteSetColor.isUserInteractionEnabled = true
+        rouletteTextField.isUserInteractionEnabled = true
     }
     @objc func saveRatio(sender: UISlider) {
         guard let newDataVC = parentViewController as? NewDataViewController,

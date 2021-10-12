@@ -37,6 +37,7 @@ class RouletteViewController: UIViewController {
     //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        overrideUserInterfaceStyle = .light
         createGraph()
         settingView()
         settingGesture()
@@ -58,7 +59,7 @@ class RouletteViewController: UIViewController {
         view.addSubview(flameCircleView)
         view.sendSubviewToBack(subView)
         view.bringSubviewToFront(pointerImageView)
-        quitButton.homeButtonAccesory()
+        quitButton.homeButtonDecoration()
         navigationController?.isNavigationBarHidden = true
     }
     private func settingGesture() {
@@ -113,7 +114,7 @@ class RouletteViewController: UIViewController {
     private func rouletteCenterCircleLabel(w: CGFloat) -> UILabel {
         let circleLabel = UILabel()
         circleLabel.bounds.size = CGSize(width: w, height: w)
-        circleLabel.accesory(bgColor: .white)
+        circleLabel.decoration(bgColor: .white)
         return circleLabel
     }
     private func rouletteFlameCircle(w: CGFloat) -> UIView {
