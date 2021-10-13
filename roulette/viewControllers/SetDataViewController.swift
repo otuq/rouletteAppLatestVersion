@@ -36,16 +36,22 @@ class SetDataViewController: UIViewController {
         setDataTableView.delegate = self
         setDataTableView.dataSource = self
         setDataTableView.register(UINib(nibName: "SetDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
+        statusBarStyleChange(style: .lightContent)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
     }
-    @objc private func editRouletteSets() {
+    @objc private func cancelBarButton() {
+        dismiss(animated: true, completion: nil)
+        statusBarStyleChange(style: .darkContent)
+    }
+    @objc private func editBarButton() {
         setDataTableView.setEditing(true, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editRouletteSetsDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editBarButtonDone))
     }
-    @objc private func editRouletteSetsDone() {
+    @objc private func editBarButtonDone() {
         setDataTableView.setEditing(false, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
     }
 }
 //MARK:-TableViewDelegate,Datasource
@@ -85,6 +91,13 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
         if editingStyle == .delete {
             //データベースからルーレット情報を削除する。
             try! realm.write {
+                
+                //現在セットしているデータIDと一致した場合アラートを表示させる
+                let alertController = UIAlertController(title: .none, message: "現在セットされているデータは消せません", preferredStyle: .alert)
+                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(alertAction)
+                present(alertController, animated: true, completion: nil)
+                
                 realm.delete(dataSets[indexPath.row])
                 setDataTableView.deleteRows(at: [indexPath], with: .fade)
             }

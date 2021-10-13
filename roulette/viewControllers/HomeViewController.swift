@@ -48,14 +48,14 @@ class HomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("okkk")
-        if let presented = presentedViewController {
-            print("ok")
-            if type(of: presented) == UINavigationController.self {
-                statusBarStyleChange = .darkContent
-                setNeedsStatusBarAppearanceUpdate()
-            }
-        }
+//        print("okkk")
+//        if let presented = presentedViewController {
+//            print("ok")
+//            if type(of: presented) == UINavigationController.self {
+//                statusBarStyleChange = .darkContent
+//                setNeedsStatusBarAppearanceUpdate()
+//            }
+//        }
     }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyleChange
@@ -131,10 +131,7 @@ class HomeViewController: UIViewController {
         let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AppSettingViewController")
         let nav = UINavigationController.init(rootViewController: viewcontroller)
         nav.modalPresentationStyle = .overFullScreen
-        present(nav, animated: true) {
-            self.statusBarStyleChange = .lightContent
-            self.setNeedsStatusBarAppearanceUpdate()
-        }
+        present(nav, animated: true, completion: nil)
     }
     @objc private func shareGesture() {
         let text = "ぺぺぺぺぺ"

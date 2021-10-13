@@ -28,6 +28,7 @@ class AppSettingViewController: FormViewController {
     @IBAction func doneButton(_ sender: Any) {
         let formValues = form.values()
         userDefaults.set(formValues, forKey: "form")
+        statusBarStyleChange(style: .darkContent)
         dismiss(animated: true, completion: nil)
     }
     
@@ -38,6 +39,7 @@ class AppSettingViewController: FormViewController {
         settingForm()
     }
     private func settingView() {
+        self.statusBarStyleChange(style: .lightContent)
         navigationController?.isNavigationBarHidden = false
     }
     private func soundSelect(soundString: String) {

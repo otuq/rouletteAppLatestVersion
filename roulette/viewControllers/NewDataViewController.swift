@@ -59,8 +59,10 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         newDataTableView.keyboardDismissMode = .interactive 
         newDataTableView.register(UINib(nibName: "NewDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
         titleTextField.delegate = self
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelRouletteSets))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
+        statusBarStyleChange(style: .lightContent)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
     }
     private func settingUI(){
         titleTextField.text = dataSet.title
@@ -107,12 +109,13 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         newDataTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         randomSwitch()
     }
-    @objc private func cancelRouletteSets() {
+    @objc private func cancelBarButton() {
         let alertController = UIAlertController(title: .none, message: "編集を中止してウィンドウを閉じますか？", preferredStyle: .alert)
         let actionA = UIAlertAction(title: "キャンセル", style: .cancel, handler: .none)
         let actionB = UIAlertAction(title: "閉じる", style: .default) { _ in
             let count = (self.navigationController?.viewControllers.count)! - 2
             if count < 0 {
+                self.statusBarStyleChange(style: .darkContent)
                 self.dismiss(animated: true, completion: nil)
             }else{
                 self.navigationController?.popViewController(animated: true)
@@ -122,13 +125,13 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         alertController.addAction(actionB)
         present(alertController, animated: true, completion: nil)
     }
-    @objc private func editRouletteSets() {
+    @objc private func editBarButton() {
         newDataTableView.setEditing(true, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editRouletteSetsDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editBarButtonDone))
     }
-    @objc private func editRouletteSetsDone() {
+    @objc private func editBarButtonDone() {
         newDataTableView.setEditing(false, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editRouletteSets))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
     }
     @objc private func randomRatio() {
         randomSwitchButton.isSelected = !randomSwitchButton.isSelected
@@ -224,6 +227,8 @@ extension NewDataViewController {
         if homeVC.newDataButton.isSelected{
             realmWrite()
             try! realm.write({
+                //データにIDを付ける
+                dataSet.dataId = NSUUID().uuidString
                 realm.add(dataSet)
             })
             self.setAndDismiss(homeVC)
@@ -308,6 +313,7 @@ extension NewDataViewController {
         homeVC.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
         homeVC.newDataButton.isSelected = false
         homeVC.setDataButton.isSelected = false
+        statusBarStyleChange(style: .darkContent)
         dismiss(animated: true, completion: nil)
     }
 }

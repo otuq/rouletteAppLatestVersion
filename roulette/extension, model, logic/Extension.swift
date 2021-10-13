@@ -11,6 +11,9 @@ extension UINavigationController {
     open override var childForStatusBarStyle: UIViewController? {
         return visibleViewController
     }
+    func statusBarDark() {
+        
+    }
 }
 extension UIButton {
     func homeButtonDecoration() {
@@ -54,6 +57,17 @@ extension UIView {
         //ルーレットの外枠からはみ出てしまい余白が欲しいのでラベルの短形サイズで調整
         addSubview(textLabel)
         transform = CGAffineTransform(rotationAngle: textAngle)
+    }
+}
+extension UIViewController {
+    //ステータスバーの色スタイルを動的に変更する
+    func statusBarStyleChange(style: UIStatusBarStyle) {
+        guard let nav = presentingViewController as? UINavigationController,
+              let rootVC = nav.viewControllers.first as? HomeViewController else { return }
+        rootVC.statusBarStyleChange = style
+        UIView.animate(withDuration: 1) {
+            self.setNeedsStatusBarAppearanceUpdate()
+        }
     }
 }
 extension UILabel {
