@@ -7,21 +7,13 @@
 
 import UIKit
 
-extension UINavigationController {
-    open override var childForStatusBarStyle: UIViewController? {
-        return visibleViewController
-    }
-    func statusBarDark() {
-        
-    }
-}
+
 extension UIButton {
-    func homeButtonDecoration() {
+    func imageSet() {
         let imageNormal = UIImage(named: "buttonNormal")
         let imageHighlight = UIImage(named: "buttonHighlight")
         setBackgroundImage(imageNormal, for: .normal)
         setBackgroundImage(imageHighlight, for: .highlighted)
-        
     }
     //丸ボタンの装飾
     func decoration() {
@@ -33,6 +25,20 @@ extension UIButton {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
     }
+    //randomボタンのonoffを判定する
+    private struct flagFunc {
+        static var flag: Bool = true
+    }
+    var flag: Bool {
+        get {
+            guard let hoge = objc_getAssociatedObject(self, &flagFunc.flag)as? Bool else { return true }
+            return hoge
+        }
+        set {
+            objc_setAssociatedObject(self, &flagFunc.flag, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+    }
+
 }
 extension UIView {
     //チェーンレスポンダー
@@ -62,11 +68,14 @@ extension UIView {
 extension UIViewController {
     //ステータスバーの色スタイルを動的に変更する
     func statusBarStyleChange(style: UIStatusBarStyle) {
-        guard let nav = presentingViewController as? UINavigationController,
-              let rootVC = nav.viewControllers.first as? HomeViewController else { return }
-        rootVC.statusBarStyleChange = style
-        UIView.animate(withDuration: 1) {
-            self.setNeedsStatusBarAppearanceUpdate()
+        //インターフェースがダークモードに設定されている時に発動
+        if UITraitCollection.current.userInterfaceStyle == .dark {
+            guard let nav = presentingViewController as? UINavigationController,
+                  let rootVC = nav.viewControllers.first as? HomeViewController else { return }
+            rootVC.statusBarStyleChange = style
+            UIView.animate(withDuration: 1) {
+                self.setNeedsStatusBarAppearanceUpdate()
+            }
         }
     }
 }
@@ -95,18 +104,3 @@ extension NSAttributedString {
         self.init(string: string, attributes: attribute)
     }
 }
-//extension UITextField {
-//    func decoration(placeholderString: String) {
-//        attributedPlaceholder = NSAttributedString(string: placeholderString, attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightestGray])
-//        borderStyle = .none
-//        //文字の左端に余白を設ける
-//        if textAlignment == .left || textAlignment == .natural {
-//            leftView = UIView(frame: CGRect(x: 0, y: 0, width: 5, height: 0))
-//            leftViewMode = .always
-//        }
-//        layer.borderColor = UIColor.lightestGray.cgColor
-//        layer.borderWidth = 1
-//        layer.cornerRadius = 5
-//        layer.masksToBounds = true
-//    }
-//}

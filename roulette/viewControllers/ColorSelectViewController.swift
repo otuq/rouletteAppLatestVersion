@@ -11,7 +11,6 @@ import RealmSwift
 class ColorSelectViewController: UIViewController {
     //MARK:-properties
     private let cellId = "cellId"
-//    private let colors: [UIColor] = [.blue,.red,.yellow,.green,.purple,.brown,.cyan,.magenta,.orange,.paleBlue,.paleRed,.yellowGreen]
     private var colors: [UIColor] {
         var colors = [UIColor]()
         stride(from: 0, to: 360, by: 18).forEach { i in

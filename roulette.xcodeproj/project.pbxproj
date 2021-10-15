@@ -10,9 +10,8 @@
 		7239E82635E449868F9750FC /* Pods_roulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */; };
 		CB805B5AEED5CED4F9C760DD /* Pods_rouletteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */; };
 		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
-		CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE2C444D2681BCB100B8F698 /* AddRowButton.swift */; };
-		CE449651269D296B007E4F6A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* SwiftPackageProductDependency */; };
-		CE449654269D29FA007E4F6A /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* SwiftPackageProductDependency */; };
+		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
+		CE449654269D29FA007E4F6A /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* PKHUD */; };
 		CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* CustomCell.swift */; };
 		CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* CustomCell.xib */; };
 		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
@@ -37,7 +36,7 @@
 		CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6116A267868D600751566 /* RouletteViewController.swift */; };
 		CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */; };
 		CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */; };
-		CEB6C2D1268F0A6100C597F1 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; productRef = CEB6C2D0268F0A6100C597F1 /* SwiftPackageProductDependency */; };
+		CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEB6C2D0268F0A6100C597F1 /* RealmSwift */; };
 		CEC5901726807D28005A47D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901626807D28005A47D6 /* HomeViewController.swift */; };
 		CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901826807D3D005A47D6 /* NewDataViewController.swift */; };
 		CEC5901C26807D79005A47D6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC5901B26807D79005A47D6 /* Home.storyboard */; };
@@ -75,7 +74,6 @@
 		C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.release.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.release.xcconfig"; sourceTree = "<group>"; };
 		CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.debug.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		CE2C444D2681BCB100B8F698 /* AddRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRowButton.swift; sourceTree = "<group>"; };
 		CE46A6FA269EB91500D33530 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		CE46A6FB269EB91500D33530 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		CE4AADFA268C475D00AFD70F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
@@ -123,9 +121,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE449654269D29FA007E4F6A /* BuildFile in Frameworks */,
-				CEB6C2D1268F0A6100C597F1 /* BuildFile in Frameworks */,
-				CE449651269D296B007E4F6A /* BuildFile in Frameworks */,
+				CE449654269D29FA007E4F6A /* PKHUD in Frameworks */,
+				CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */,
+				CE449651269D296B007E4F6A /* Eureka in Frameworks */,
 				7239E82635E449868F9750FC /* Pods_roulette.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -188,8 +186,8 @@
 				CEA6113C2678688D00751566 /* SceneDelegate.swift */,
 				CEC5901F2680805F005A47D6 /* extension, model, logic */,
 				CEC59022268080A4005A47D6 /* viewControllers */,
-				CEC5902326808510005A47D6 /* xib */,
 				CEC5901A26807D5D005A47D6 /* storyboards */,
+				CEC5902326808510005A47D6 /* xib */,
 				CEA611432678688F00751566 /* Assets.xcassets */,
 				CEF696BD26B7D2DE00564381 /* Sound.xcassets */,
 				CEA611452678688F00751566 /* LaunchScreen.storyboard */,
@@ -236,7 +234,6 @@
 				CEC590202680807E005A47D6 /* Extension.swift */,
 				CE15301226F332150051DCA3 /* Colors.swift */,
 				CE79A56A268AE4A900BBA00C /* Degree.swift */,
-				CE2C444D2681BCB100B8F698 /* AddRowButton.swift */,
 				CE4AADFA268C475D00AFD70F /* Model.swift */,
 			);
 			path = "extension, model, logic";
@@ -282,7 +279,6 @@
 				CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */,
 				D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -305,9 +301,9 @@
 			);
 			name = roulette;
 			packageProductDependencies = (
-				CEB6C2D0268F0A6100C597F1 /* SwiftPackageProductDependency */,
-				CE449650269D296B007E4F6A /* SwiftPackageProductDependency */,
-				CE449653269D29FA007E4F6A /* SwiftPackageProductDependency */,
+				CEB6C2D0268F0A6100C597F1 /* RealmSwift */,
+				CE449650269D296B007E4F6A /* Eureka */,
+				CE449653269D29FA007E4F6A /* PKHUD */,
 			);
 			productName = roulette;
 			productReference = CEA611372678688D00751566 /* roulette.app */;
@@ -384,9 +380,9 @@
 			);
 			mainGroup = CEA6112E2678688D00751566;
 			packageReferences = (
-				CEB6C2CF268F0A6100C597F1 /* RemoteSwiftPackageReference */,
-				CE44964F269D296B007E4F6A /* RemoteSwiftPackageReference */,
-				CE449652269D29FA007E4F6A /* RemoteSwiftPackageReference */,
+				CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
+				CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */,
+				CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = CEA611382678688D00751566 /* Products */;
 			projectDirPath = "";
@@ -550,7 +546,6 @@
 				CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */,
 				CE15301326F332150051DCA3 /* Colors.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
-				CE2C444E2681BCB100B8F698 /* AddRowButton.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
 				CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */,
 				CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */,
@@ -907,7 +902,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CE44964F269D296B007E4F6A /* RemoteSwiftPackageReference */ = {
+		CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/xmartlabs/Eureka";
 			requirement = {
@@ -915,7 +910,7 @@
 				minimumVersion = 5.3.3;
 			};
 		};
-		CE449652269D29FA007E4F6A /* RemoteSwiftPackageReference */ = {
+		CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pkluz/PKHUD";
 			requirement = {
@@ -923,7 +918,7 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		CEB6C2CF268F0A6100C597F1 /* RemoteSwiftPackageReference */ = {
+		CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
 			requirement = {
@@ -934,19 +929,19 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CE449650269D296B007E4F6A /* SwiftPackageProductDependency */ = {
+		CE449650269D296B007E4F6A /* Eureka */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE44964F269D296B007E4F6A /* RemoteSwiftPackageReference */;
+			package = CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */;
 			productName = Eureka;
 		};
-		CE449653269D29FA007E4F6A /* SwiftPackageProductDependency */ = {
+		CE449653269D29FA007E4F6A /* PKHUD */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CE449652269D29FA007E4F6A /* RemoteSwiftPackageReference */;
+			package = CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */;
 			productName = PKHUD;
 		};
-		CEB6C2D0268F0A6100C597F1 /* SwiftPackageProductDependency */ = {
+		CEB6C2D0268F0A6100C597F1 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CEB6C2CF268F0A6100C597F1 /* RemoteSwiftPackageReference */;
+			package = CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

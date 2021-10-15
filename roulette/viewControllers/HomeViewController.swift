@@ -46,17 +46,6 @@ class HomeViewController: UIViewController {
         settingGesture()
         settingAccesory()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        print("okkk")
-//        if let presented = presentedViewController {
-//            print("ok")
-//            if type(of: presented) == UINavigationController.self {
-//                statusBarStyleChange = .darkContent
-//                setNeedsStatusBarAppearanceUpdate()
-//            }
-//        }
-    }
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyleChange
     }
@@ -140,17 +129,10 @@ class HomeViewController: UIViewController {
         present(activityVC, animated: true, completion: nil)
     }
     func settingAccesory() {
-        startButton.homeButtonDecoration()
-        newDataButton.homeButtonDecoration()
-        setDataButton.homeButtonDecoration()
-        appSettingButton.homeButtonDecoration()
-        shareButton.homeButtonDecoration()
+        startButton.imageSet()
+        newDataButton.imageSet()
+        setDataButton.imageSet()
+        appSettingButton.imageSet()
+        shareButton.imageSet()
     }
 }
-//extension HomeViewController: StatusBarStyleChangeDelegate {
-//    func statusBarStyleChange(style: UIStatusBarStyle) {
-//        statusBarStyleChange = style
-//        setNeedsStatusBarAppearanceUpdate()
-//        print("ok")
-//    }
-//}

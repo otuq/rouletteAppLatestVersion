@@ -42,8 +42,11 @@ class SetDataViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
     }
     @objc private func cancelBarButton() {
-        dismiss(animated: true, completion: nil)
+        guard let nav = presentingViewController as? UINavigationController,
+              let homeVC = nav.viewControllers.first as? HomeViewController else { return }
+        homeVC.setDataButton.isSelected = false
         statusBarStyleChange(style: .darkContent)
+        dismiss(animated: true, completion: nil)
     }
     @objc private func editBarButton() {
         setDataTableView.setEditing(true, animated: true)
@@ -91,15 +94,17 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
         if editingStyle == .delete {
             //データベースからルーレット情報を削除する。
             try! realm.write {
-                
-                //現在セットしているデータIDと一致した場合アラートを表示させる
-                let alertController = UIAlertController(title: .none, message: "現在セットされているデータは消せません", preferredStyle: .alert)
-                let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
-                alertController.addAction(alertAction)
-                present(alertController, animated: true, completion: nil)
-                
-                realm.delete(dataSets[indexPath.row])
-                setDataTableView.deleteRows(at: [indexPath], with: .fade)
+                guard let nav = self.presentingViewController as? UINavigationController,
+                      let rootVC = nav.viewControllers.first as? HomeViewController else { return }
+                if rootVC.dataSet?.dataId == dataSets[indexPath.row].dataId {
+                    let alertController = UIAlertController(title: .none, message: "現在セットされているデータは消せません", preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(alertAction)
+                    present(alertController, animated: true, completion: nil)
+                }else{
+                    realm.delete(dataSets[indexPath.row])
+                    setDataTableView.deleteRows(at: [indexPath], with: .fade)
+                }
             }
         }
     }

@@ -59,7 +59,7 @@ class RouletteViewController: UIViewController {
         view.addSubview(flameCircleView)
         view.sendSubviewToBack(subView)
         view.bringSubviewToFront(pointerImageView)
-        quitButton.homeButtonDecoration()
+        quitButton.imageSet()
         navigationController?.isNavigationBarHidden = true
     }
     private func settingGesture() {
@@ -267,16 +267,12 @@ extension RouletteViewController {
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
                     let list = rouletteDataSet.1[index]
-//                    print(list.text)
-//                    print(dtStop)
-//                    print(range)
                     alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) //ルーレットの結果を表示する。
                     soundEffect()
                 }
             }
             return
         }
-        //        print("stop:",stopAngle)
     }
     //ルーレット結果の効果音
     private func soundEffect() {

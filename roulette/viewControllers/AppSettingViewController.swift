@@ -140,11 +140,6 @@ class AppSettingViewController: FormViewController {
             }
         //現在のversion
         form +++ Section("Information")
-            <<< TextRow("version"){
-                $0.title = "version"
-                $0.value = "1.0"
-                $0.cell.isUserInteractionEnabled = false
-            }
             //プライバシー情報のwebページに遷移
             <<< ButtonRow(){
                 $0.title = "privacy"
@@ -156,8 +151,9 @@ class AppSettingViewController: FormViewController {
                     return UIViewController()
                 }), onDismiss: nil)
             }
+            //Twitter
             <<< ButtonRow(){
-                $0.title = "contact"
+                $0.title = "Twitter"
                 $0.cellStyle = .value1 //初期ではセルが中央揃えのtintColorがblueに設定してあるので左揃えになるスタイルに変更
             }.cellUpdate { cell, row in
                 //このコールバック関数内にアクセサリーの設定を他のセルのスタイルに合わせる。
@@ -167,6 +163,12 @@ class AppSettingViewController: FormViewController {
                 if let url = URL(string: "https://twitter.com/OPQR64013140"){
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
+            }
+            //version情報
+            <<< TextRow("version"){
+                $0.title = "version"
+                $0.value = "1.0"
+                $0.cell.isUserInteractionEnabled = false
             }
     }
 }
