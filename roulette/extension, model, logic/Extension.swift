@@ -52,15 +52,14 @@ extension UIView {
             parentResponder = nextResponder
         }
     }
-    func rouletteTextSetting(_ text: String, _ textColor: UIColor,_ textAngle: CGFloat, textSize: CGFloat) {
+    func rouletteTextSetting(width: CGFloat, height: CGFloat,_ text: String, _ textColor: UIColor,_ textAngle: CGFloat, textSize: CGFloat) {
         let textLabel = UILabel()
-        textLabel.frame.size = CGSize(width: 150, height: 20)
+        textLabel.frame.size = CGSize(width: width, height: height)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: textSize),
             .foregroundColor: textColor
         ]
         textLabel.attributedText = NSAttributedString(string: text, attributes: attributes)
-        //ルーレットの外枠からはみ出てしまい余白が欲しいのでラベルの短形サイズで調整
         addSubview(textLabel)
         transform = CGAffineTransform(rotationAngle: textAngle)
     }
@@ -89,6 +88,15 @@ extension UILabel {
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
+    }
+}
+extension String {
+    func textSizeCalc(width: CGFloat, attribute: [NSAttributedString.Key: Any]) -> CGSize {
+        let bounds = CGSize(width: width, height: .greatestFiniteMagnitude)
+        let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
+        let rect = (self as NSString).boundingRect(with: bounds, options: options, attributes: attribute, context: nil)
+        let size = CGSize(width: rect.size.width, height: rect.size.height)
+        return size
     }
 }
 extension NSAttributedString {

@@ -6,13 +6,15 @@
 //
 
 import UIKit
-
-protocol StatusBarStyleChangeDelegate {
-    func statusBarStyleChange(style: UIStatusBarStyle)
-}
+import RealmSwift
 
 class HomeViewController: UIViewController {
     //MARK:- Properties
+    private var excuteOnce = {}
+    typealias ExcuteOnce = () -> ()
+    private var realm = try! Realm()
+    var dataSet: RouletteData?
+    var parentLayer = CALayer()
     var statusBarStyleChange: UIStatusBarStyle = .darkContent
     var setDataLabel: UILabel {
         let label = UILabel()
@@ -30,8 +32,7 @@ class HomeViewController: UIViewController {
         }
         return label
     }
-    var dataSet: RouletteData?
-    var parentLayer = CALayer()
+    
     //MARK:-Outlets,Actions
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var setDataButton: UIButton!
@@ -43,9 +44,27 @@ class HomeViewController: UIViewController {
     //MARK:-Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        excuteOnce()
         settingGesture()
         settingAccesory()
     }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        excuteOnce = justOnceMethod {
+            let object = self.realm.objects(RouletteData.self).sorted(byKeyPath: "lastDate", ascending: true)
+            self.dataSet = object.last
+        }
+    }
+    private func justOnceMethod(excute: @escaping () -> () ) -> ExcuteOnce {
+        var once = true
+        return {
+            if once {
+                once = false
+                excute()
+            }
+        }
+    }
+    //ステータスバーのスタイルを変更
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyleChange
     }
@@ -134,5 +153,11 @@ class HomeViewController: UIViewController {
         setDataButton.imageSet()
         appSettingButton.imageSet()
         shareButton.imageSet()
+        
+        if let dataSet = self.dataSet {
+            self.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
+            self.startButton.titleLabel?.removeFromSuperview()
+            self.view.addSubview(self.setDataLabel)
+        }
     }
 }

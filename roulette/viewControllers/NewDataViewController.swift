@@ -58,7 +58,8 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private func settingUI(){
         titleTextField.text = dataSet.title
         titleTextField.overrideUserInterfaceStyle = .light
-        randomSwitchButton.isSelected = dataSet.randomFlag
+        randomSwitchButton.flag = dataSet.randomFlag
+        colorIndex = dataSet.colorIndex
         saveButton.imageSet()
         addRowButton.imageSet()
         randomSwitchButton.imageSet()
@@ -192,8 +193,9 @@ extension NewDataViewController {
         if homeVC.newDataButton.isSelected{
             realmWrite()
             try! realm.write({
-                //データにIDを付ける
+                //データにIDを付ける。現在セット中のデータを削除できないようにするため。
                 dataSet.dataId = NSUUID().uuidString
+                dataSet.date = Date()
                 realm.add(dataSet)
             })
             self.setAndDismiss(homeVC)
@@ -240,8 +242,8 @@ extension NewDataViewController {
         //titleのデータの保存、更新
         try! realm.write({
             dataSet.title = titleTextField.text ?? ""
-            dataSet.randomFlag = randomSwitchButton.isSelected
-            dataSet.date = Date()
+            dataSet.randomFlag = randomSwitchButton.flag
+            dataSet.colorIndex = colorIndex
         })
         //cellの情報のデータの保存、更新
         dataSet.temporarys.enumerated().forEach { (index, temporary) in
@@ -279,6 +281,10 @@ extension NewDataViewController {
         homeVC.newDataButton.isSelected = false
         homeVC.setDataButton.isSelected = false
         statusBarStyleChange(style: .darkContent)
+        try! realm.write({
+            //Dateを保存して起動時に最後にセットしたデータをセットする
+            dataSet.lastDate = Date()
+        })
         dismiss(animated: true, completion: nil)
     }
 }

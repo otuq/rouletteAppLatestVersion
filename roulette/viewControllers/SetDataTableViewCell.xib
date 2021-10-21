@@ -16,9 +16,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view alpha="0.20000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPh-Tr-oYd">
+                    <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPh-Tr-oYd">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="75"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </view>
                 </subviews>
                 <constraints>

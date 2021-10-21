@@ -14,10 +14,10 @@ enum FormName: String {
     case speed, sound, colorPicker, formKey
 }
 enum Sound: String {
-    case Timpani, Pop, Funk, Samba
+    case timpani, pop, funk, samba
 }
 enum Effect: String {
-    case Symbal, Hits, Conga, Rhodes
+    case symbal, hits, conga, rhodes
 }
 
 class AppSettingViewController: FormViewController {
@@ -58,7 +58,7 @@ class AppSettingViewController: FormViewController {
     }
     private func settingForm() {
         let formValues = userDefaults.object(forKey: "form")as? [String: Any] ?? [:]
-        form +++ Section("Custom")
+        form +++ Section("custom")
             //ルーレットの回るスピードを選択
             <<< SegmentedRow<String>("speed"){
                 $0.options = ["slow","normal","fast"]
@@ -69,7 +69,7 @@ class AppSettingViewController: FormViewController {
             }
             //ルーレットのドラムロール音を選択
             <<< PushRow<String>("sound"){
-                $0.options = ["Timpani","Pop","Funk","Samba"]
+                $0.options = ["timpani","pop","funk","samba"]
                 $0.title = "sound"
                 $0.value = formValues["sound"] as? Cell<String>.Value ?? $0.options?[0]
                 $0.noValueDisplayText = $0.value
@@ -84,13 +84,13 @@ class AppSettingViewController: FormViewController {
                     row.onChange { row in
                         let value = Sound(rawValue: row.value ?? "")
                         switch value {
-                        case .Timpani:
+                        case .timpani:
                             self.soundSelect(soundString: value!.rawValue)
-                        case .Pop:
+                        case .pop:
                             self.soundSelect(soundString: value!.rawValue)
-                        case .Funk:
+                        case .funk:
                             self.soundSelect(soundString: value!.rawValue)
-                        case .Samba:
+                        case .samba:
                             self.soundSelect(soundString: value!.rawValue)
                         case .none:
                             break
@@ -100,7 +100,7 @@ class AppSettingViewController: FormViewController {
             })
             //ルーレットの効果音を選択
             <<< PushRow<String>("effect"){
-                $0.options = ["Symbal","Hits","Conga","Rhodes"]
+                $0.options = ["symbal","hits","conga","rhodes"]
                 $0.title = "effect"
                 $0.value = formValues["effect"] as? Cell<String>.Value ?? $0.options?[0]
                 $0.noValueDisplayText = $0.value
@@ -115,13 +115,13 @@ class AppSettingViewController: FormViewController {
                     row.onChange { row in //cellUpdateだとカラーピッカーを閉じた後PushRowから遷移するだけでsoundSelectメソッドまで読み込まれてしまうバグがあってハマった。
                         let value = Effect(rawValue: row.value ?? "")
                         switch value {
-                        case .Symbal:
+                        case .symbal:
                             self.soundSelect(soundString: value!.rawValue)
-                        case .Hits:
+                        case .hits:
                             self.soundSelect(soundString: value!.rawValue)
-                        case .Conga:
+                        case .conga:
                             self.soundSelect(soundString: value!.rawValue)
-                        case .Rhodes:
+                        case .rhodes:
                             self.soundSelect(soundString: value!.rawValue)
                         case .none:
                             break
@@ -131,15 +131,15 @@ class AppSettingViewController: FormViewController {
             })
             //CustomCellにカスタムロウを定義。UIColorPickerVCでルーレットのテキストカラーを選択
             <<< CustomRow("colorPicker"){
-                let rgb = formValues["colorPicker"] as? [Int] ?? [0,255,255]
+                let rgb = formValues["colorPicker"] as? [Int] ?? [0,0,0]
                 let color = UIColor.init(r: rgb[0], g: rgb[1], b: rgb[2])
                 $0.title = "text color"
                 $0.cell.colorLabel.backgroundColor = color
                 $0.cell.colorPickerVC.selectedColor = color
-                $0.value = formValues["colorPicker"] as? Cell<[Int]>.Value ?? [0,255,255]
+                $0.value = formValues["colorPicker"] as? Cell<[Int]>.Value ?? [0,0,0]
             }
         //現在のversion
-        form +++ Section("Information")
+        form +++ Section("information")
             //プライバシー情報のwebページに遷移
             <<< ButtonRow(){
                 $0.title = "privacy"
@@ -153,7 +153,7 @@ class AppSettingViewController: FormViewController {
             }
             //Twitter
             <<< ButtonRow(){
-                $0.title = "Twitter"
+                $0.title = "twitter"
                 $0.cellStyle = .value1 //初期ではセルが中央揃えのtintColorがblueに設定してあるので左揃えになるスタイルに変更
             }.cellUpdate { cell, row in
                 //このコールバック関数内にアクセサリーの設定を他のセルのスタイルに合わせる。

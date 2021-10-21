@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Edit Data-->
+        <!--Edit data-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="NewDataViewController" id="Y6W-OH-hqX" customClass="NewDataViewController" customModule="roulette" customModuleProvider="target" sceneMemberID="viewController">
@@ -16,7 +16,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PtC-i6-cwD">
-                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
+                                <rect key="frame" x="0.0" y="142" width="414" height="720"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                             <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4Y-SF-gxk">
@@ -88,7 +88,7 @@
                                 </subviews>
                             </stackView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NMv-Rm-8tP">
-                                <rect key="frame" x="82" y="93" width="250" height="34"/>
+                                <rect key="frame" x="82" y="98" width="250" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -106,12 +106,12 @@
                             <constraint firstItem="5Yp-ET-Jzw" firstAttribute="top" secondItem="zhm-Dz-9bB" secondAttribute="top" id="00b-Kx-Uzt"/>
                             <constraint firstAttribute="bottom" secondItem="u4Y-SF-gxk" secondAttribute="bottom" id="2x2-2b-dbo"/>
                             <constraint firstItem="PtC-i6-cwD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="HW0-ow-KwV"/>
-                            <constraint firstItem="NMv-Rm-8tP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="5" id="JZa-bc-pch"/>
+                            <constraint firstItem="NMv-Rm-8tP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="JZa-bc-pch"/>
                             <constraint firstItem="Gzw-3f-fq7" firstAttribute="top" secondItem="zhm-Dz-9bB" secondAttribute="top" id="N5k-e4-0AG"/>
                             <constraint firstItem="Gzw-3f-fq7" firstAttribute="leading" secondItem="zhm-Dz-9bB" secondAttribute="trailing" constant="30" id="PeY-Vh-W5J"/>
                             <constraint firstItem="u4Y-SF-gxk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SJs-wI-RWT"/>
                             <constraint firstItem="zhm-Dz-9bB" firstAttribute="leading" secondItem="5Yp-ET-Jzw" secondAttribute="trailing" constant="30" id="Xjr-LH-JTV"/>
-                            <constraint firstItem="PtC-i6-cwD" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="50" id="aTv-9D-mdG"/>
+                            <constraint firstItem="PtC-i6-cwD" firstAttribute="top" secondItem="NMv-Rm-8tP" secondAttribute="bottom" constant="10" id="aTv-9D-mdG"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="PtC-i6-cwD" secondAttribute="bottom" id="bPu-Wr-Z6Z"/>
                             <constraint firstItem="u4Y-SF-gxk" firstAttribute="top" secondItem="zhm-Dz-9bB" secondAttribute="top" priority="1" constant="-10" id="fKT-B9-qsr"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="zhm-Dz-9bB" secondAttribute="bottom" constant="20" id="h0z-iC-kK0"/>
@@ -121,7 +121,7 @@
                             <constraint firstItem="NMv-Rm-8tP" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="xiz-ha-OL9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Edit Data" id="060-gX-v4A"/>
+                    <navigationItem key="navigationItem" title="Edit data" id="060-gX-v4A"/>
                     <connections>
                         <outlet property="addRowButton" destination="cKZ-ki-PIk" id="3dq-yu-bbQ"/>
                         <outlet property="newDataTableView" destination="PtC-i6-cwD" id="Mmx-jt-o2q"/>
