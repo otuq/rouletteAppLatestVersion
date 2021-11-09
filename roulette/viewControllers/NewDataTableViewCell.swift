@@ -19,13 +19,13 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
             let rgb = temporary.rgbTemporary
             let text = temporary.textTemporary
             let ratio = temporary.ratioTemporary
-            rouletteSetColor.backgroundColor = UIColor.init(r: rgb["r"]!, g: rgb["g"]!, b: rgb["b"]!)
+            rouletteSetColorLabel.backgroundColor = UIColor.init(r: rgb["r"]!, g: rgb["g"]!, b: rgb["b"]!)
             rouletteTextField.text = text
             rouletteRatioSlider.value = ratio
         }
     }
     //MARK:-Outlets,Actions
-    @IBOutlet weak var rouletteSetColor: UILabel!
+    @IBOutlet weak var rouletteSetColorLabel: UILabel!
     @IBOutlet weak var rouletteTextField: UITextField!
     @IBOutlet weak var rouletteRatioSlider: UISlider!
     //MARK:-LifeCycle Methods
@@ -34,25 +34,28 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         overrideUserInterfaceStyle = .light
         settingDelegate()
         settingGesture()
-        settingUI()
         keyboardNotification()
+        //CustomLayoutConstant（デバイス毎にAutoLayoutを再計算するカスタムメソッド）を設定しているためか描画のタイミングのずれがあって、rouletteSetColorLabelが狂うのでDispatchQueueで対応
+        DispatchQueue.main.async {
+            self.settingUI()
+        }
     }
     private func settingDelegate() {
         rouletteTextField.delegate = self
     }
     private func settingGesture() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(selectColorViewFetch))
-        rouletteSetColor.addGestureRecognizer(gesture)
+        rouletteSetColorLabel.addGestureRecognizer(gesture)
         rouletteRatioSlider.addTarget(self, action: #selector(saveRatio), for: .touchUpInside)
     }
     private func settingUI() {
         backgroundColor = .clear
         selectView.backgroundColor = .clear
         selectedBackgroundView = selectView
-        rouletteSetColor.layer.cornerRadius = rouletteSetColor.bounds.width / 2
-        rouletteSetColor.layer.masksToBounds = true
-        rouletteSetColor.layer.borderWidth = 0.5
-        rouletteSetColor.isUserInteractionEnabled = true
+        rouletteSetColorLabel.layer.cornerRadius = rouletteSetColorLabel.bounds.width / 2
+        rouletteSetColorLabel.layer.masksToBounds = true
+        rouletteSetColorLabel.layer.borderWidth = 0.5
+        rouletteSetColorLabel.isUserInteractionEnabled = true
         rouletteTextField.isUserInteractionEnabled = true
     }
     @objc func saveRatio(sender: UISlider) {
@@ -72,7 +75,7 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
               let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
         //cellのindex番号を遷移先のVCに渡す
         colorSelectVC.cellTag = cellIndexPath.row
-        colorSelectVC.currentColor = rouletteSetColor.backgroundColor
+        colorSelectVC.currentColor = rouletteSetColorLabel.backgroundColor
         //親ViewControllerを取得　extensionにて
         parentViewController?.present(colorSelectVC, animated: true, completion: nil)
     }

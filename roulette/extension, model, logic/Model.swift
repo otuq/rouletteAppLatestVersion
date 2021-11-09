@@ -45,7 +45,7 @@ extension RouletteData {
         return values
     }
     var speed: CGFloat {
-        let speedString = formValues["speed"] as? String ?? ""
+        let speedString = formValues["speed"] as? String ?? "normal"
         if let speed = Speed.init(rawValue: speedString){
             switch speed {
             case .slow:     return 10.0

@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
         label.text = "T A P"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         label.textColor = UIColor.init(r: 153, g: 153, b: 153)
+        label.fontSizeRecalcForEachDevice()
         UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
             label.layer.opacity = 0
         }) { _ in
@@ -46,7 +47,9 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
         excuteOnce()
         settingGesture()
-        settingAccesory()
+        settingUI()
+        fontSizeRecalcForEachDevice()
+        print(UIScreen.main.bounds)
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -147,7 +150,7 @@ class HomeViewController: UIViewController {
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(activityVC, animated: true, completion: nil)
     }
-    func settingAccesory() {
+    func settingUI() {
         startButton.imageSet()
         newDataButton.imageSet()
         setDataButton.imageSet()
@@ -159,5 +162,13 @@ class HomeViewController: UIViewController {
             self.startButton.titleLabel?.removeFromSuperview()
             self.view.addSubview(self.setDataLabel)
         }
+    }
+    private func fontSizeRecalcForEachDevice() {
+        startButton.fontSizeRecalcForEachDevice()
+        newDataButton.fontSizeRecalcForEachDevice()
+        setDataButton.fontSizeRecalcForEachDevice()
+        rouletteTitleLabel.fontSizeRecalcForEachDevice()
+        appSettingButton.fontSizeRecalcForEachDevice()
+        shareButton.fontSizeRecalcForEachDevice()
     }
 }

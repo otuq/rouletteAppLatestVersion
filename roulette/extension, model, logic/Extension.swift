@@ -25,6 +25,17 @@ extension UIButton {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
     }
+    //UIButtonのテキストサイズをデバイス毎に再計算する
+    func fontSizeRecalcForEachDevice() {
+        if let font = titleLabel?.font {
+            titleLabel?.font = UIFont.systemFont(ofSize: font.pointSize.recalcValue, weight: font.weight)
+        }
+        let insetValue: CGFloat = 20
+        let recalcValue = insetValue.recalcValue
+        contentMode = .scaleAspectFit
+        print(recalcValue)
+        imageEdgeInsets = UIEdgeInsets(top: recalcValue, left: recalcValue, bottom: recalcValue, right: recalcValue)
+    }
     //randomボタンのonoffを判定する
     private struct flagFunc {
         static var flag: Bool = true
@@ -38,8 +49,8 @@ extension UIButton {
             objc_setAssociatedObject(self, &flagFunc.flag, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
-
 }
+
 extension UIView {
     //チェーンレスポンダー
     var parentViewController: UIViewController? {
@@ -89,6 +100,10 @@ extension UILabel {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
     }
+    //UILabelのテキストサイズをデバイス毎に再計算する
+    func fontSizeRecalcForEachDevice() {
+        font = UIFont.systemFont(ofSize: font.pointSize.recalcValue, weight: font.weight)
+    }
 }
 extension String {
     func textSizeCalc(width: CGFloat, attribute: [NSAttributedString.Key: Any]) -> CGSize {
@@ -110,5 +125,39 @@ extension NSAttributedString {
         paragraphStyle.lineSpacing = lineSpacing
         attribute.updateValue(paragraphStyle, forKey: .paragraphStyle)
         self.init(string: string, attributes: attribute)
+    }
+}
+extension CGFloat {
+    //デバイス毎に再計算する
+    var recalcValue: CGFloat {
+        let refDeviceHeight: CGFloat = 812
+        let deviceHeight: CGFloat = UIScreen.main.bounds.height
+        let reCalc = refDeviceHeight / self
+        if refDeviceHeight != deviceHeight {
+            return deviceHeight / reCalc
+        }
+        return self
+    }
+}
+extension UIFont {
+    //UIFontの装飾の情報を取得する
+    private var traits: [UIFontDescriptor.TraitKey: Any] {
+        fontDescriptor.object(forKey: .traits)as? [UIFontDescriptor.TraitKey: Any] ?? [:]
+    }
+    //文字の太さを取得
+    var weight: UIFont.Weight {
+        guard let weight = traits[.weight]as? NSNumber else { return .regular}
+        return UIFont.Weight(rawValue: CGFloat(truncating: weight))
+    }
+}
+//AutoLayoutをデバイス毎に再計算
+class CustomLayoutConstant: NSLayoutConstraint {
+    override var constant: CGFloat {
+        get {
+            super.constant.recalcValue
+        }
+        set {
+            super.constant = newValue
+        }
     }
 }

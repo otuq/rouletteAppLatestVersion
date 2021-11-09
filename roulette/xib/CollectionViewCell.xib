@@ -22,8 +22,8 @@
                         <rect key="frame" x="27" y="20" width="50" height="50"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="iV8-Lh-ZX0" secondAttribute="height" multiplier="1:1" id="2IL-Vw-2po"/>
-                            <constraint firstAttribute="width" constant="50" id="NyK-Kc-6Kh"/>
+                            <constraint firstAttribute="width" secondItem="iV8-Lh-ZX0" secondAttribute="height" multiplier="1:1" id="2IL-Vw-2po" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                            <constraint firstAttribute="width" constant="50" id="NyK-Kc-6Kh" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -33,8 +33,8 @@
                         <rect key="frame" x="37" y="32" width="30" height="26.5"/>
                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="30" id="Nd4-Pe-GKL"/>
-                            <constraint firstAttribute="width" secondItem="qcM-q5-ply" secondAttribute="height" multiplier="1:1" id="UGk-NO-T0F"/>
+                            <constraint firstAttribute="width" constant="30" id="Nd4-Pe-GKL" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                            <constraint firstAttribute="width" secondItem="qcM-q5-ply" secondAttribute="height" multiplier="1:1" id="UGk-NO-T0F" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
                         </constraints>
                         <imageReference key="image" image="checkmark" catalog="system" renderingMode="template"/>
                     </imageView>
@@ -42,10 +42,10 @@
             </view>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <constraints>
-                <constraint firstItem="iV8-Lh-ZX0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="1wM-YY-IJK"/>
-                <constraint firstItem="iV8-Lh-ZX0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="6am-hj-zkN"/>
-                <constraint firstItem="qcM-q5-ply" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="j6x-ts-iWe"/>
-                <constraint firstItem="qcM-q5-ply" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="vfB-br-JAl"/>
+                <constraint firstItem="iV8-Lh-ZX0" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="1wM-YY-IJK" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                <constraint firstItem="iV8-Lh-ZX0" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="6am-hj-zkN" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                <constraint firstItem="qcM-q5-ply" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="j6x-ts-iWe" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                <constraint firstItem="qcM-q5-ply" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="vfB-br-JAl" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
             </constraints>
             <size key="customSize" width="104" height="90"/>
             <connections>

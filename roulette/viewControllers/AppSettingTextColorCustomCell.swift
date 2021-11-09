@@ -8,20 +8,25 @@
 import UIKit
 import Eureka
 
-class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
+class AppSettingTextColorCustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
     let colorPickerVC = UIColorPickerViewController()
     @IBOutlet weak var colorLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        colorLabel.layer.cornerRadius = colorLabel.bounds.width / 2
-        colorLabel.layer.masksToBounds = true
-        colorLabel.layer.borderWidth = 0.5
-        colorLabel.layer.borderColor = UIColor.label.cgColor
+        DispatchQueue.main.async {
+            self.settingUI()
+        }
     }
     override func didSelect() {
         colorPickerVC.delegate = self
         formViewController()?.present(colorPickerVC, animated: true, completion: nil)
+    }
+    private func settingUI() {
+        colorLabel.layer.cornerRadius = colorLabel.bounds.width / 2
+        colorLabel.layer.masksToBounds = true
+        colorLabel.layer.borderWidth = 0.5
+        colorLabel.layer.borderColor = UIColor.label.cgColor
     }
     //    UIColorPickerVCを閉じた時
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
@@ -32,9 +37,9 @@ class CustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
     }
 }
 //CustomCellをセットする
-final class CustomRow: SelectorRow<CustomCell>, RowType {
+final class CustomRow: SelectorRow<AppSettingTextColorCustomCell>, RowType {
     required init(tag: String?) {
         super.init(tag: tag)
-        cellProvider = CellProvider<CustomCell>(nibName: "CustomCell")
+        cellProvider = CellProvider<AppSettingTextColorCustomCell>(nibName: "AppSettingTextColorCustomCell")
     }
 }

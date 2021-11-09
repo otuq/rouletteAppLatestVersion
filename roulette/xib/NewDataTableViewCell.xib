@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" rowHeight="179" id="KGk-i7-Jjw" customClass="NewDataTableViewCell" customModule="roulette" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellId" id="KGk-i7-Jjw" customClass="NewDataTableViewCell" customModule="roulette" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="490" height="179"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -21,8 +21,8 @@
                         <rect key="frame" x="10" y="64.5" width="50" height="50"/>
                         <color key="backgroundColor" systemColor="systemTealColor"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="Zfi-At-aqx" secondAttribute="height" multiplier="1:1" id="VGh-bc-5VU"/>
-                            <constraint firstAttribute="width" constant="50" id="ZZ2-kR-aeV"/>
+                            <constraint firstAttribute="width" secondItem="Zfi-At-aqx" secondAttribute="height" multiplier="1:1" id="VGh-bc-5VU" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                            <constraint firstAttribute="width" constant="50" id="ZZ2-kR-aeV" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
@@ -35,7 +35,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="410" height="34"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="34" id="2dZ-pN-MRt"/>
+                                    <constraint firstAttribute="height" constant="34" id="2dZ-pN-MRt" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
@@ -48,17 +48,17 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="wrI-on-LYT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5sf-X4-eRl"/>
-                    <constraint firstItem="Zfi-At-aqx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9Yd-6P-dU1"/>
-                    <constraint firstItem="Zfi-At-aqx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="N75-HC-szL"/>
-                    <constraint firstItem="wrI-on-LYT" firstAttribute="leading" secondItem="Zfi-At-aqx" secondAttribute="trailing" constant="10" id="Qcc-Ki-ojh"/>
-                    <constraint firstAttribute="trailing" secondItem="wrI-on-LYT" secondAttribute="trailing" constant="10" id="Zh0-0f-WMv"/>
+                    <constraint firstItem="wrI-on-LYT" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="5sf-X4-eRl" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                    <constraint firstItem="Zfi-At-aqx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9Yd-6P-dU1" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                    <constraint firstItem="Zfi-At-aqx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="N75-HC-szL" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                    <constraint firstItem="wrI-on-LYT" firstAttribute="leading" secondItem="Zfi-At-aqx" secondAttribute="trailing" constant="10" id="Qcc-Ki-ojh" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
+                    <constraint firstAttribute="trailing" secondItem="wrI-on-LYT" secondAttribute="trailing" constant="10" id="Zh0-0f-WMv" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="rouletteRatioSlider" destination="5YB-Tn-nR8" id="mjZ-dm-agg"/>
-                <outlet property="rouletteSetColor" destination="Zfi-At-aqx" id="ZPR-WW-Gzt"/>
+                <outlet property="rouletteSetColorLabel" destination="Zfi-At-aqx" id="ZPR-WW-Gzt"/>
                 <outlet property="rouletteTextField" destination="UVD-YC-0Mf" id="BvV-UF-1Uy"/>
             </connections>
             <point key="canvasLocation" x="115.94202898550725" y="104.79910714285714"/>

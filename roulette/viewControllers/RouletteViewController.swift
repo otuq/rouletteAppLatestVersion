@@ -16,13 +16,15 @@ class RouletteViewController: UIViewController {
     private let frameLayer = CALayer() //ここに各グラフごとの境界線を統合する。
     private let subView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
-    private let calcValue: CGFloat = 13  //サイズ等の計算用の値
     private var diameter: CGFloat {
         let width = view.frame.width
-        let subtraction = (width / calcValue) / 2
+        let subtraction = (width / 13) / 2
         return (width - subtraction)
     } //直径
-    private var objectWidth: CGFloat { (diameter / calcValue) }
+    private var objectWidth: CGFloat {
+        let value: CGFloat = 30
+        return value.recalcValue
+    }
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) //止まる角度
     private let duration: TimeInterval = 10 //回る時間(秒)
     private var audioPlayer: AVAudioPlayer!
@@ -45,9 +47,15 @@ class RouletteViewController: UIViewController {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
         createGraph()
+        settingUI()
         settingView()
         settingGesture()
+        fontSizeRecalcForEachDevice()
         tapStartAnimation(labels: tapStartLabel)
+    }
+    private func settingUI() {
+        quitButton.imageSet()
+        quitButton.fontSizeRecalcForEachDevice()
     }
     private func settingView() {
         let pointerImageView = UIImageView(image: roulettePointerImage(w: objectWidth))
@@ -65,13 +73,16 @@ class RouletteViewController: UIViewController {
         view.addSubview(frameCircleView)
         view.sendSubviewToBack(subView)
         view.bringSubviewToFront(pointerImageView)
-        quitButton.imageSet()
         navigationController?.isNavigationBarHidden = true
     }
     private func settingGesture() {
         let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
         view.addGestureRecognizer(startTapGesture)
         quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
+    }
+    private func fontSizeRecalcForEachDevice() {
+        tapStartLabel.forEach { $0.fontSizeRecalcForEachDevice() }
+        quitButton.fontSizeRecalcForEachDevice()
     }
     //ルーレットを中止
     @objc private func quitTapDismiss() {

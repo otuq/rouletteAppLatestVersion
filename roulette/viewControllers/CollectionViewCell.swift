@@ -22,6 +22,12 @@ class CollectionViewCell: UICollectionViewCell {
     //MARK:-Lifecyle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
+        DispatchQueue.main.async {
+            self.settingUI()
+        }
+    }
+    
+    private func settingUI() {
         colorSelect.layer.cornerRadius = colorSelect.bounds.width / 2
         colorSelect.layer.masksToBounds = true
         bringSubviewToFront(checkImageView)

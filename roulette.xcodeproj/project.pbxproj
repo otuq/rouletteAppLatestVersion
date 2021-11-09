@@ -12,8 +12,8 @@
 		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
 		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
 		CE449654269D29FA007E4F6A /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* PKHUD */; };
-		CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* CustomCell.swift */; };
-		CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* CustomCell.xib */; };
+		CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */; };
+		CE46A6FD269EB91500D33530 /* AppSettingTextColorCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */; };
 		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
 		CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */; };
 		CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5084A7269C341E0049ED7D /* AppSetting.storyboard */; };
@@ -74,8 +74,8 @@
 		C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.release.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.release.xcconfig"; sourceTree = "<group>"; };
 		CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.debug.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.debug.xcconfig"; sourceTree = "<group>"; };
 		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
-		CE46A6FA269EB91500D33530 /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
-		CE46A6FB269EB91500D33530 /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTextColorCustomCell.swift; sourceTree = "<group>"; };
+		CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppSettingTextColorCustomCell.xib; sourceTree = "<group>"; };
 		CE4AADFA268C475D00AFD70F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
@@ -187,7 +187,8 @@
 				CEC5901F2680805F005A47D6 /* extension, model, logic */,
 				CEC59022268080A4005A47D6 /* viewControllers */,
 				CEC5901A26807D5D005A47D6 /* storyboards */,
-				CEC5902326808510005A47D6 /* xib */,
+				CEC5902326808510005A47D6 /* xib.swift */,
+				CEADE44C27350651008918ED /* xib */,
 				CEA611432678688F00751566 /* Assets.xcassets */,
 				CEF696BD26B7D2DE00564381 /* Sound.xcassets */,
 				CEA611452678688F00751566 /* LaunchScreen.storyboard */,
@@ -213,6 +214,17 @@
 				CEA6115E2678689000751566 /* Info.plist */,
 			);
 			path = rouletteUITests;
+			sourceTree = "<group>";
+		};
+		CEADE44C27350651008918ED /* xib */ = {
+			isa = PBXGroup;
+			children = (
+				CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */,
+				CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */,
+				CE82BC2326831DD3009550EB /* CollectionViewCell.xib */,
+				CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */,
+			);
+			path = xib;
 			sourceTree = "<group>";
 		};
 		CEC5901A26807D5D005A47D6 /* storyboards */ = {
@@ -253,19 +265,15 @@
 			path = viewControllers;
 			sourceTree = "<group>";
 		};
-		CEC5902326808510005A47D6 /* xib */ = {
+		CEC5902326808510005A47D6 /* xib.swift */ = {
 			isa = PBXGroup;
 			children = (
 				CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */,
-				CE82294C2706D7B900C75D6D /* SetDataTableViewCell.xib */,
 				CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */,
-				CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */,
 				CE82BC2226831DD3009550EB /* CollectionViewCell.swift */,
-				CE82BC2326831DD3009550EB /* CollectionViewCell.xib */,
-				CE46A6FA269EB91500D33530 /* CustomCell.swift */,
-				CE46A6FB269EB91500D33530 /* CustomCell.xib */,
+				CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */,
 			);
-			name = xib;
+			name = xib.swift;
 			path = viewControllers;
 			sourceTree = "<group>";
 		};
@@ -402,7 +410,7 @@
 			files = (
 				CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */,
 				CE82294E2706D7B900C75D6D /* SetDataTableViewCell.xib in Resources */,
-				CE46A6FD269EB91500D33530 /* CustomCell.xib in Resources */,
+				CE46A6FD269EB91500D33530 /* AppSettingTextColorCustomCell.xib in Resources */,
 				CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */,
 				CEA611472678688F00751566 /* LaunchScreen.storyboard in Resources */,
 				CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */,
@@ -547,7 +555,7 @@
 				CE15301326F332150051DCA3 /* Colors.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
-				CE46A6FC269EB91500D33530 /* CustomCell.swift in Sources */,
+				CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */,
 				CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */,
 				CEC590212680807E005A47D6 /* Extension.swift in Sources */,
 				CE4AADFB268C475D00AFD70F /* Model.swift in Sources */,

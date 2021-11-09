@@ -1,5 +1,5 @@
 //
-//  EditViewController.swift
+//  NewViewController.swift
 //  roulette
 //
 //  Created by USER on 2021/06/21.
@@ -33,6 +33,8 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var addRowButton: UIButton!
     @IBOutlet weak var randomSwitchButton: UIButton!
+    @IBOutlet weak var saveLabel: UILabel!
+    @IBOutlet weak var addRowLabel: UILabel!
     @IBOutlet weak var randomSwitchLabel: UILabel!
     @IBOutlet weak var operationView: UIView!
     
@@ -40,8 +42,9 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
-        settingGesture()
         settingUI()
+        settingGesture()
+        fontSizeRecalcForEachDevice()
     }
     private func settingView() {
         newDataTableView.delegate = self
@@ -63,7 +66,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         saveButton.imageSet()
         addRowButton.imageSet()
         randomSwitchButton.imageSet()
-        
         DispatchQueue.main.async {
             self.randomSwitch()
         }
@@ -72,7 +74,14 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         saveButton.addTarget(self, action: #selector(saveRouletteData), for: .touchUpInside)
         addRowButton.addTarget(self, action: #selector(addRowInsert), for: .touchUpInside)
         randomSwitchButton.addTarget(self, action: #selector(randomRatio), for: .touchUpInside)
-        
+    }
+    private func fontSizeRecalcForEachDevice() {
+        saveButton.fontSizeRecalcForEachDevice()
+        saveLabel.fontSizeRecalcForEachDevice()
+        addRowButton.fontSizeRecalcForEachDevice()
+        addRowLabel.fontSizeRecalcForEachDevice()
+        randomSwitchButton.fontSizeRecalcForEachDevice()
+        randomSwitchLabel.fontSizeRecalcForEachDevice()
     }
     @objc private func addRowInsert() {
         let indexPath = IndexPath(row: 0, section: 0)
@@ -165,7 +174,7 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        80
+        return CGFloat(80).recalcValue
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {

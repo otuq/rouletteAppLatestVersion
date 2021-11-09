@@ -14,15 +14,12 @@ class SetDataTableViewCell: UITableViewCell {
     private let parentLayer = CALayer() //ここに各グラフを統合する
     private let frameLayer = CALayer() //ここに各グラフごとの境界線を統合する。
     private let around = CGFloat.pi * 2 //360度 1回転
-    private var diameter: CGFloat { frame.height * 2 } //直径
-    private var objectWidth: CGFloat {
-        let calcValue: CGFloat = 5
-        return (diameter / calcValue) }
+    private let contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat(80).recalcValue)
+    private var diameter: CGFloat { contentSize.height * 2 } //直径
+    private var objectWidth: CGFloat { diameter / CGFloat(7).recalcValue } //オブジェクトサイズ
     private var startRatio = 0.0 //グラフの描画開始点に使う
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
-    private var maxPoint: CGPoint {
-        CGPoint(x: (UIScreen.main.bounds.width / 1.3), y: rouletteView.bounds.height + 10)
-    }
+    private var maxPoint: CGPoint { CGPoint(x: (contentSize.width / 1.3), y: contentSize.height) } //オブジェクトの位置
     var dataset: RouletteData? {
         didSet{
             guard let dataset = dataset else { return }
@@ -43,27 +40,29 @@ class SetDataTableViewCell: UITableViewCell {
     }
     private func settingView() {
         let centerCircleLabel = rouletteCenterCircleLabel(w: objectWidth)
-        let frameCircleView = rouletteFrameCircle(w: diameter + 10)
+        let frameCircleView = rouletteFrameCircle(w: diameter)
         let selectView = UIView()
         selectedBackgroundView = selectView
         centerCircleLabel.center = maxPoint
         frameCircleView.center = maxPoint
-        rouletteView.addSubview(centerCircleLabel)
         rouletteView.addSubview(frameCircleView)
+        contentView.addSubview(centerCircleLabel)
+        rouletteView.alpha = 0.3
     }
     //ルーレットの真ん中のオブジェクト
     private func rouletteCenterCircleLabel(w: CGFloat) -> UILabel {
         let circleLabel = UILabel()
-        circleLabel.bounds.size = CGSize(width: w, height: w)
+        circleLabel.frame.size = CGSize(width: w, height: w)
         circleLabel.decoration(bgColor: .white)
+        circleLabel.layer.borderColor = UIColor.init(r: 255, g: 255, b: 255, a: 0.3).cgColor
         return circleLabel
     }
     //ルーレットの外側円線
     private func rouletteFrameCircle(w: CGFloat) -> UIView {
         let frameCircleView = UIView()
-        frameCircleView.bounds.size = CGSize(width: w, height: w)
+        frameCircleView.frame.size = CGSize(width: w, height: w)
         frameCircleView.backgroundColor = .clear
-        frameCircleView.layer.cornerRadius = frameCircleView.bounds.width / 2
+        frameCircleView.layer.cornerRadius = frameCircleView.frame.width / 2
         frameCircleView.layer.borderWidth = 1
         frameCircleView.layer.masksToBounds = true
         return frameCircleView
@@ -144,9 +143,9 @@ class SetDataTableViewCell: UITableViewCell {
             let range = startRatio...endRatio
             let textAngleRatio = startRatio + (ratio / 2) //2番目のレイヤーだとしたら1番目のendratioからratioの半分の位置が文字列の角度 start:25 ratio40 文字列角度45
             let textAngle =  CGFloat(2 * Double.pi * textAngleRatio / Double(around) + Double.pi / 2)
-            let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: diameter - 10, height: 15)))
+            let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: diameter - CGFloat(10).recalcValue, height: CGFloat(15).recalcValue)))
             let textLabelSize = textLabelView.frame.size
-            textLabelView.rouletteTextSetting(width: textLabelSize.width / 2, height: textLabelSize.height, textString, textColor, textAngle, textSize: 10)
+            textLabelView.rouletteTextSetting(width: textLabelSize.width / 2, height: textLabelSize.height, textString, textColor, textAngle, textSize: CGFloat(10).recalcValue)
             textLabelView.center = maxPoint
             graphRange.append(range)
             drawGraph(fillColor: color, startRatio, endRatio)
