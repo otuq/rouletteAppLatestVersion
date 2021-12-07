@@ -33,7 +33,6 @@ extension UIButton {
         let insetValue: CGFloat = 20
         let recalcValue = insetValue.recalcValue
         contentMode = .scaleAspectFit
-        print(recalcValue)
         imageEdgeInsets = UIEdgeInsets(top: recalcValue, left: recalcValue, bottom: recalcValue, right: recalcValue)
     }
     //randomボタンのonoffを判定する

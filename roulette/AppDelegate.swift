@@ -28,8 +28,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            })
         FirebaseApp.configure()
         //ステータスバーのボタンをダークモードに対応
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .normal)
-        UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .highlighted)
+        //ios15以降からUINavigationBarが透明になったり黒くなったりする問題が発生したため（仕様が変わったため）、その対処法でstandardAppearanceとscrollEdgeAppearanceにデザインを指定するみたい。
+        if #available(iOS 15.0, *) {
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            navBarAppearance.buttonAppearance.normal.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)]
+            navBarAppearance.buttonAppearance.highlighted.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)]
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+        }else{
+            //ios15以前の設定
+            UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .normal)
+            UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .highlighted)
+        }
+        
+        
+        
         return true
     }
     

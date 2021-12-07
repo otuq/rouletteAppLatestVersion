@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Src-RU-6Ay">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Src-RU-6Ay">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Data sets-->
+        <!--Roulette data-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
                 <viewController storyboardIdentifier="SetDataViewController" id="Y6W-OH-hqX" customClass="SetDataViewController" customModule="roulette" customModuleProvider="target" sceneMemberID="viewController">
@@ -30,7 +31,7 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="3gU-Ac-BRo" secondAttribute="trailing" id="rcj-AS-3qm"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Data sets" id="9sG-js-BCX"/>
+                    <navigationItem key="navigationItem" title="Roulette data" id="9sG-js-BCX"/>
                     <connections>
                         <outlet property="setDataTableView" destination="3gU-Ac-BRo" id="01Q-Kv-PXU"/>
                     </connections>

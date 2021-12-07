@@ -15,11 +15,12 @@ class SetDataTableViewCell: UITableViewCell {
     private let frameLayer = CALayer() //ここに各グラフごとの境界線を統合する。
     private let around = CGFloat.pi * 2 //360度 1回転
     private let contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat(80).recalcValue)
-    private var diameter: CGFloat { contentSize.height * 2 } //直径
+    private var rouletteView = UIView()
+    private var diameter: CGFloat { (contentSize.height * 2 ) - CGFloat(10).recalcValue } //直径
     private var objectWidth: CGFloat { diameter / CGFloat(7).recalcValue } //オブジェクトサイズ
     private var startRatio = 0.0 //グラフの描画開始点に使う
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
-    private var maxPoint: CGPoint { CGPoint(x: (contentSize.width / 1.3), y: contentSize.height) } //オブジェクトの位置
+    private var maxPoint: CGPoint { CGPoint(x: (contentSize.width - (diameter / 2) - CGFloat(10).recalcValue ), y: contentSize.height) } //オブジェクトの位置 x:（スクリーン幅 - 直径 - 10）y:セル高さ
     var dataset: RouletteData? {
         didSet{
             guard let dataset = dataset else { return }
@@ -28,25 +29,30 @@ class SetDataTableViewCell: UITableViewCell {
             createGraph(data: dataset, list: list)
         }
     }
-
-    //MARK: -Outletes, Actions
-    @IBOutlet weak var rouletteView: UIView!
     
     //MARK: -LifeCycle Methods
-    override func awakeFromNib() {
-        super.awakeFromNib()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         overrideUserInterfaceStyle = .light
         settingView()
+    }
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     private func settingView() {
         let centerCircleLabel = rouletteCenterCircleLabel(w: objectWidth)
         let frameCircleView = rouletteFrameCircle(w: diameter)
-        let selectView = UIView()
-        selectedBackgroundView = selectView
+        
         centerCircleLabel.center = maxPoint
         frameCircleView.center = maxPoint
+        addSubview(rouletteView)
+        addSubview(centerCircleLabel) //これだけ透過させたくないのでcontentViewに追加
         rouletteView.addSubview(frameCircleView)
-        contentView.addSubview(centerCircleLabel)
+        rouletteView.frame = CGRect(origin: .zero, size: CGSize(width: contentSize.width, height: contentSize.height))
+        
+        clipsToBounds = true
+        rouletteView.clipsToBounds = true //これしないとグラフとかがはみ出る
         rouletteView.alpha = 0.3
     }
     //ルーレットの真ん中のオブジェクト

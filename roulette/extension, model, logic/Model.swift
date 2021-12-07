@@ -11,7 +11,7 @@ import RealmSwift
 enum Speed: String {
     case slow, normal, fast
 }
-//MARK:- RouletteData
+//MARK: -RouletteData
 class RouletteData: Object {
     @objc dynamic var title: String = ""
     @objc dynamic var dataId: String = ""
@@ -24,7 +24,7 @@ class RouletteData: Object {
     var temporarys = [RouletteGraphTemporary]()
     var index: Int = 0
 }
-//MARK:- RouletteGraphData
+//MARK: -RouletteGraphData
 class RouletteGraphData: Object {
     @objc dynamic var text: String = ""
     @objc dynamic var r: Int = 255

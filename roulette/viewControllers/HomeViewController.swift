@@ -9,32 +9,16 @@ import UIKit
 import RealmSwift
 
 class HomeViewController: UIViewController {
-    //MARK:- Properties
+    //MARK: -Properties
     private var excuteOnce = {}
     typealias ExcuteOnce = () -> ()
     private var realm = try! Realm()
     var dataSet: RouletteData?
     var parentLayer = CALayer()
     var statusBarStyleChange: UIStatusBarStyle = .darkContent
-    var setDataLabel: UILabel {
-        let label = UILabel()
-        label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
-        label.center = view.center
-        label.textAlignment = .center
-        label.baselineAdjustment = .alignCenters
-        label.text = "T A P"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.init(r: 153, g: 153, b: 153)
-        label.fontSizeRecalcForEachDevice()
-        UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
-            label.layer.opacity = 0
-        }) { _ in
-            label.layer.opacity = 1
-        }
-        return label
-    }
+    var startLabel = UILabel()
     
-    //MARK:-Outlets,Actions
+    //MARK: -Outlets,Actions
     @IBOutlet weak var startButton: UIButton!
     @IBOutlet weak var setDataButton: UIButton!
     @IBOutlet weak var newDataButton: UIButton!
@@ -42,14 +26,14 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var appSettingButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
     
-    //MARK:-Lifecycle Methods
+    //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         excuteOnce()
         settingGesture()
         settingUI()
         fontSizeRecalcForEachDevice()
-        print(UIScreen.main.bounds)
+//        print(UIScreen.main.bounds)
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -82,9 +66,11 @@ class HomeViewController: UIViewController {
         navigationController?.isNavigationBarHidden = true
     }
     @objc private func startGesture() {
-        if dataSet != nil {
+        if let dataSet = dataSet {
             let storyboard = UIStoryboard(name: "Roulette", bundle: nil)
-            let viewController = storyboard.instantiateViewController(withIdentifier: "RouletteViewController")
+            let viewController = storyboard.instantiateViewController(withIdentifier: "RouletteViewController")as! RouletteViewController
+            viewController.rouletteDataSet = (dataSet, dataSet.list)
+            
             let nav = UINavigationController(rootViewController: viewController)
             nav.modalPresentationStyle = .overFullScreen
             nav.modalTransitionStyle = .crossDissolve
@@ -145,23 +131,42 @@ class HomeViewController: UIViewController {
         present(nav, animated: true, completion: nil)
     }
     @objc private func shareGesture() {
-        let text = "ぺぺぺぺぺ"
+        let text = ""
         let items = [text]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        
         present(activityVC, animated: true, completion: nil)
     }
-    func settingUI() {
+    private func settingUI() {
         startButton.imageSet()
         newDataButton.imageSet()
         setDataButton.imageSet()
         appSettingButton.imageSet()
         shareButton.imageSet()
+        startLabel = self.createStartLabel()
         
         if let dataSet = self.dataSet {
             self.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
             self.startButton.titleLabel?.removeFromSuperview()
-            self.view.addSubview(self.setDataLabel)
+            self.view.addSubview(startLabel)
         }
+    }
+    private func createStartLabel() -> UILabel {
+        let label = UILabel()
+        label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
+        label.center = view.center
+        label.textAlignment = .center
+        label.baselineAdjustment = .alignCenters
+        label.text = "T A P"
+        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = UIColor.init(r: 153, g: 153, b: 153)
+        label.fontSizeRecalcForEachDevice()
+        UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
+            label.layer.opacity = 0
+        }) { _ in
+            label.layer.opacity = 1
+        }
+        return label
     }
     private func fontSizeRecalcForEachDevice() {
         startButton.fontSizeRecalcForEachDevice()

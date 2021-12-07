@@ -9,17 +9,15 @@ import UIKit
 import RealmSwift
 
 class SetDataViewController: UIViewController {
-    //MARK:-properties
+    //MARK: -properties
     private let cellId = "cellId"
     private var realm = try! Realm()
-    private var dataSets: Results<RouletteData> {
-        let data = realm.objects(RouletteData.self).sorted(byKeyPath: "date", ascending: false)
-        return data
-    }
-    //MARK:-Outlets,Actions
+    private var dataSets: Results<RouletteData>!
+    
+    //MARK: -Outlets,Actions
     @IBOutlet weak var setDataTableView: UITableView!
     
-    //MARK:-Lifecyle Methods
+    //MARK: -Lifecyle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
@@ -33,13 +31,14 @@ class SetDataViewController: UIViewController {
         }
     }
     private func settingView() {
+        dataSets = realm.objects(RouletteData.self).sorted(byKeyPath: "date", ascending: false)
         setDataTableView.delegate = self
         setDataTableView.dataSource = self
-        setDataTableView.register(UINib(nibName: "SetDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
+        setDataTableView.register(SetDataTableViewCell.self, forCellReuseIdentifier: cellId)
         statusBarStyleChange(style: .lightContent)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBarButton))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
     @objc private func cancelBarButton() {
         guard let nav = presentingViewController as? UINavigationController,
@@ -50,14 +49,14 @@ class SetDataViewController: UIViewController {
     }
     @objc private func editBarButton() {
         setDataTableView.setEditing(true, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editBarButtonDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(editBarButtonDone))
     }
     @objc private func editBarButtonDone() {
         setDataTableView.setEditing(false, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
 }
-//MARK:-TableViewDelegate,Datasource
+//MARK: -TableViewDelegate,Datasource
 extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSets.count
@@ -73,7 +72,6 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
         if let newDataVC = storyboard.instantiateViewController(withIdentifier: "NewDataViewController")as? NewDataViewController {
             //選択したグラフデータのインデックスとrgb情報を
             let dataSet = dataSets[indexPath.row]
-//            dataSet.index = indexPath.row
             dataSet.list.forEach { list in
                 let temporary = RouletteGraphTemporary()
                 temporary.textTemporary = list.text

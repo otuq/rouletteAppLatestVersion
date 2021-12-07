@@ -21,10 +21,11 @@ enum Effect: String {
 }
 
 class AppSettingViewController: FormViewController {
-    //MARK:-properties
+    //MARK: -properties
     private let userDefaults = UserDefaults.standard
     private var audioPlayer: AVAudioPlayer!
-    //MARK:-Outlets,Actions
+    
+    //MARK: -Outlets,Actions
     @IBAction func doneButton(_ sender: Any) {
         let formValues = form.values()
         userDefaults.set(formValues, forKey: "form")
@@ -32,7 +33,7 @@ class AppSettingViewController: FormViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    //MARK:-Lifecyle Methods
+    //MARK: -Lifecyle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()

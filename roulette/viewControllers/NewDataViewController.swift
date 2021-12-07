@@ -12,22 +12,15 @@ import RealmSwift
 //newData→temporarysに一時データを格納してsaveボタンを押された時にデータベースに保存
 //loadData→setVC→list（データベースに保存したデータ）のデータをtemporarysに格納する。
 class NewDataViewController: UIViewController, UITextFieldDelegate {
-    //MARK:-properties
+    //MARK: -properties
     private let cellId = "cellId"
-    private var colors: [UIColor] {
-        var colors = [UIColor]()
-        stride(from: 0, to: 360, by: 18).forEach { i in
-            let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
-            colors.append(color)
-        }
-        return colors
-    }
     private var colorIndex = 0
     private var realm = try! Realm()
     private var getAllCells = [NewDataTableViewCell]()
+    private var colors = [UIColor]()
     var dataSet = RouletteData()
     
-    //MARK:-Outlets,Actions
+    //MARK: -Outlets,Actions
     @IBOutlet weak var newDataTableView: UITableView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
@@ -38,7 +31,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var randomSwitchLabel: UILabel!
     @IBOutlet weak var operationView: UIView!
     
-    //MARK:-LifeCycle Methods
+    //MARK: -LifeCycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
@@ -55,14 +48,18 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         titleTextField.delegate = self
         statusBarStyleChange(style: .lightContent)
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelBarButton))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
     private func settingUI(){
         titleTextField.text = dataSet.title
         titleTextField.overrideUserInterfaceStyle = .light
         randomSwitchButton.flag = dataSet.randomFlag
         colorIndex = dataSet.colorIndex
+        stride(from: 0, to: 360, by: 18).forEach { i in
+            let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
+            colors.append(color)
+        }
         saveButton.imageSet()
         addRowButton.imageSet()
         randomSwitchButton.imageSet()
@@ -88,17 +85,18 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         let addRow = RouletteGraphTemporary()
         let rgb = colors[colorIndex]
         addRow.rgbTemporary = ["r": rgb.r, "g": rgb.g, "b": rgb.b]
-        colorIndex = colorIndex < colors.count - 1 ? colorIndex + 1 : 0
+        colorIndex = colorIndex < colors.count  - 1 ? colorIndex + 1 : 0
         //先頭から行を追加していく
         dataSet.temporarys.insert(addRow, at: 0)
         newDataTableView.insertRows(at: [indexPath], with: .fade)
         newDataTableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        newDataTableView.contentInset.bottom = newDataTableView.frame.height - newDataTableView.contentSize.height
         randomSwitch()
     }
     @objc private func cancelBarButton() {
-        let alertController = UIAlertController(title: .none, message: "編集を中止してウィンドウを閉じますか？", preferredStyle: .alert)
-        let actionA = UIAlertAction(title: "キャンセル", style: .cancel, handler: .none)
-        let actionB = UIAlertAction(title: "閉じる", style: .default) { _ in
+        let alertController = UIAlertController(title: .none, message: "編集を中止してウィンドウを閉じますか？", preferredStyle: .actionSheet)
+        let actionA = UIAlertAction(title: "編集を続ける", style: .cancel, handler: .none)
+        let actionB = UIAlertAction(title: "ウィンドウを閉じる", style: .default) { _ in
             guard let nav = self.presentingViewController as? UINavigationController,
                   let homeVC = nav.viewControllers.first as? HomeViewController else { return }
             //Newボタンから遷移
@@ -119,11 +117,11 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     }
     @objc private func editBarButton() {
         newDataTableView.setEditing(true, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(editBarButtonDone))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(editBarButtonDone))
     }
     @objc private func editBarButtonDone() {
         newDataTableView.setEditing(false, animated: true)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editBarButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
     @objc private func randomRatio() {
         randomSwitchButton.flag = !randomSwitchButton.flag
@@ -144,25 +142,16 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField)  -> Bool {
         view.endEditing(true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let frameHeight = scrollView.frame.height
-        let contentHeight = scrollView.contentSize.height
-        //一番下までスクロールしたらUIで隠れている
-        let offset = scrollView.contentOffset.y
-        let calcContentHeight = contentHeight - frameHeight
-        if contentHeight >= frameHeight {
-            if offset >= calcContentHeight {
-                newDataTableView.contentInset.bottom = offset < operationView.frame.height ? offset - calcContentHeight : operationView.frame.height
-            }
-        }
+        newDataTableView.contentInset.bottom = operationView.frame.height //スクロールした時の停止位置を指定。セルがoperationViewに被らないようにする。
     }
 }
-//MARK:-TableViewDelegate,Datasource
+//MARK: -TableViewDelegate,Datasource
 extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int)  -> Int {
         dataSet.temporarys.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,7 +180,7 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
         dataSet.temporarys.insert(data, at: destinationIndexPath.row)
     }
 }
-//MARK:- ButtonActionMethods
+//MARK: -ButtonActionMethods
 extension NewDataViewController {
     @objc private func saveRouletteData() {
         guard let nav = presentingViewController as? UINavigationController,
@@ -211,8 +200,8 @@ extension NewDataViewController {
             print("データを新規作成しました。")
             //データセットの更新
         }else if homeVC.setDataButton.isSelected{
-            let alertVC = UIAlertController(title: "データセット", message: "", preferredStyle: .alert)
-            let updataSetAction = UIAlertAction(title: "上書きしてセット", style: .default) { _ in
+            let alertVC = UIAlertController(title: .none, message: "データを保存してセットしますか？", preferredStyle: .actionSheet)
+            let updataSetAction = UIAlertAction(title: "保存してセットする", style: .default) { _ in
                 try! self.realm.write({
                     self.dataSet.list.removeAll()
                 })
@@ -220,19 +209,14 @@ extension NewDataViewController {
                 self.setAndDismiss(homeVC)
                 print("データを更新しました。")
             }
-            let setAction = UIAlertAction(title: "保存せずにセット", style: .default) { _ in
-                self.withoutSavingSet()
-                self.setAndDismiss(homeVC)
-            }
-            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "編集を続ける", style: .cancel, handler: nil)
             alertVC.addAction(updataSetAction)
-            alertVC.addAction(setAction)
             alertVC.addAction(cancelAction)
             self.present(alertVC, animated: true, completion: nil)
             //homeVCにセットしてあるデータの更新
         }else{
-            let alertVC = UIAlertController(title: "データの上書き", message: "", preferredStyle: .alert)
-            let updataSetAction = UIAlertAction(title: "上書きをする", style: .default) { _ in
+            let alertVC = UIAlertController(title: .none, message: "データを上書きしますか？", preferredStyle: .actionSheet)
+            let updataSetAction = UIAlertAction(title: "上書きする", style: .default) { _ in
                 try! self.realm.write({
                     self.dataSet.list.removeAll()
                 })
@@ -240,7 +224,7 @@ extension NewDataViewController {
                 self.setAndDismiss(homeVC)
                 print("データを更新しました。")
             }
-            let cancelAction = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
+            let cancelAction = UIAlertAction(title: "編集を続ける", style: .cancel, handler: nil)
             alertVC.addAction(updataSetAction)
             alertVC.addAction(cancelAction)
             self.present(alertVC, animated: true, completion: nil)
@@ -267,23 +251,10 @@ extension NewDataViewController {
             })
         }
     }
-    //保存をしないで元のデータでセット。
-    private func withoutSavingSet() {
-        dataSet.temporarys.removeAll()
-        dataSet.list.forEach { list in
-            let temporary = RouletteGraphTemporary()
-            temporary.textTemporary = list.text
-            temporary.rgbTemporary["r"] = list.r
-            temporary.rgbTemporary["g"] = list.g
-            temporary.rgbTemporary["b"] = list.b
-            temporary.ratioTemporary = list.ratio
-            dataSet.temporarys.append(temporary)
-        }
-    }
     private func setAndDismiss(_ homeVC: HomeViewController) {
         if homeVC.dataSet == nil  {
             homeVC.startButton.titleLabel?.removeFromSuperview()
-            homeVC.view.addSubview(homeVC.setDataLabel)
+            homeVC.view.addSubview(homeVC.startLabel)
         }
         homeVC.dataSet = dataSet
         homeVC.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title

@@ -8,7 +8,7 @@
 import UIKit
 
 class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
-    //MARK:-properties
+    //MARK: -properties
     private let selectView = UIView()
     private var editField: UITextField?
     private var overlap: CGFloat = 0.0
@@ -24,11 +24,13 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
             rouletteRatioSlider.value = ratio
         }
     }
-    //MARK:-Outlets,Actions
+    
+    //MARK: -Outlets,Actions
     @IBOutlet weak var rouletteSetColorLabel: UILabel!
     @IBOutlet weak var rouletteTextField: UITextField!
     @IBOutlet weak var rouletteRatioSlider: UISlider!
-    //MARK:-LifeCycle Methods
+    
+    //MARK: -LifeCycle Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         overrideUserInterfaceStyle = .light
@@ -57,6 +59,7 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         rouletteSetColorLabel.layer.borderWidth = 0.5
         rouletteSetColorLabel.isUserInteractionEnabled = true
         rouletteTextField.isUserInteractionEnabled = true
+        
     }
     @objc func saveRatio(sender: UISlider) {
         guard let newDataVC = parentViewController as? NewDataViewController,
@@ -113,7 +116,6 @@ extension NewDataTableViewCell {
         let notification = NotificationCenter.default
         notification.addObserver(self, selector: #selector(keyboardFrameChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-//        notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     @objc func keyboardFrameChange(notification: Notification) {
         guard let fld = editField,
@@ -132,9 +134,4 @@ extension NewDataTableViewCell {
         guard let newDataVC = parentViewController as? NewDataViewController else { return }
         lastOffset = newDataVC.newDataTableView.contentOffset.y
     }
-//    @objc func keyboardDidHide(notification: Notification){
-//        guard let newDataVC = parentViewController as? NewDataViewController,
-//              let tableView = newDataVC.newDataTableView else { return }
-//        tableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
-//    }
 }

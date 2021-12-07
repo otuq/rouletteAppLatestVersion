@@ -9,23 +9,23 @@ import UIKit
 import RealmSwift
 
 class ColorSelectViewController: UIViewController {
-    //MARK:-properties
+    //MARK: -properties
     private let cellId = "cellId"
-    private var colors: [UIColor] {
+    private let colors: [UIColor] = {
         var colors = [UIColor]()
         stride(from: 0, to: 360, by: 18).forEach { i in
             let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
             colors.append(color)
         }
         return colors
-    }
+    }()
     var cellTag: Int? //cellのインデックス
     var currentColor: UIColor? //タップされた現在の色
     
-    //MARK:-Outlets,Actions
+    //MARK: -Outlets,Actions
     @IBOutlet weak var colorSelectCollectionView: UICollectionView!
     
-    //MARK:-Lifecyle Methods
+    //MARK: -Lifecyle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
@@ -36,7 +36,7 @@ class ColorSelectViewController: UIViewController {
         colorSelectCollectionView.register(UINib(nibName: "CollectionViewCell", bundle: nil), forCellWithReuseIdentifier: cellId)
     }
 }
-//MARK:- CollectionViewDelegate,Datasource
+//MARK: - CollectionViewDelegate,Datasource
 extension ColorSelectViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         colors.count

@@ -14,31 +14,23 @@ class RouletteViewController: UIViewController {
     private let userDefaults = UserDefaults.standard
     private let parentLayer = CALayer() //ここに各グラフを統合する
     private let frameLayer = CALayer() //ここに各グラフごとの境界線を統合する。
-    private let subView = UIView() //parentLayerをセットする。
+    private let rouletteView = UIView() //parentLayerをセットする。
     private let around = CGFloat.pi * 2 //360度 1回転
-    private var diameter: CGFloat {
-        let width = view.frame.width
-        let subtraction = (width / 13) / 2
-        return (width - subtraction)
-    } //直径
-    private var objectWidth: CGFloat {
-        let value: CGFloat = 30
-        return value.recalcValue
-    }
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) //止まる角度
     private let duration: TimeInterval = 10 //回る時間(秒)
+    private let objectWidth: CGFloat = CGFloat(30).recalcValue
     private var audioPlayer: AVAudioPlayer!
     private var startTime: CFTimeInterval! //アニメーション開始時間
     private var startRatio = 0.0 //グラフの描画開始点に使う
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
-    private var rouletteDataSet: (dataSet: RouletteData, list: List<RouletteGraphData>){
-        guard let nav = presentingViewController as? UINavigationController,
-              let homeVC = nav.viewControllers[nav.viewControllers.count - 1]as? HomeViewController,
-              let dataSet = homeVC.dataSet else { return (RouletteData(), List()) }
-        let list = dataSet.list
-        return (dataSet, list)
-    }
-    //MARK:-Outlets,Actions
+    private let diameter: CGFloat = {
+        let width = UIScreen.main.bounds.width
+        let subtraction = (width / 13) / 2
+        return (width - subtraction)
+    }() //直径
+    var rouletteDataSet: (dataSet: RouletteData, list: List<RouletteGraphData>)!
+    
+    //MARK: -Outlets,Actions
     @IBOutlet var tapStartLabel: [UILabel]!
     @IBOutlet weak var quitButton: UIButton!
     
@@ -51,7 +43,7 @@ class RouletteViewController: UIViewController {
         settingView()
         settingGesture()
         fontSizeRecalcForEachDevice()
-        tapStartAnimation(labels: tapStartLabel)
+        blinkAnimation(labels: tapStartLabel)
     }
     private func settingUI() {
         quitButton.imageSet()
@@ -65,13 +57,14 @@ class RouletteViewController: UIViewController {
         centerCircleLabel.center = view.center
         frameCircleView.center = view.center
         
-        subView.frame = view.frame
-        subView.backgroundColor = .clear
-        view.addSubview(subView)
+        rouletteView.frame = view.frame
+        rouletteView.backgroundColor = .clear
+        
+        view.addSubview(rouletteView)
         view.addSubview(pointerImageView)
         view.addSubview(centerCircleLabel)
         view.addSubview(frameCircleView)
-        view.sendSubviewToBack(subView)
+        view.sendSubviewToBack(rouletteView)
         view.bringSubviewToFront(pointerImageView)
         navigationController?.isNavigationBarHidden = true
     }
@@ -80,6 +73,7 @@ class RouletteViewController: UIViewController {
         view.addGestureRecognizer(startTapGesture)
         quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
     }
+    //デバイス毎にUIのテキストサイズを再計算
     private func fontSizeRecalcForEachDevice() {
         tapStartLabel.forEach { $0.fontSizeRecalcForEachDevice() }
         quitButton.fontSizeRecalcForEachDevice()
@@ -102,13 +96,13 @@ class RouletteViewController: UIViewController {
         }
         quitButton.isHidden = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.rotationAnimation()
+            self.rotateAnimation()
             self.rouletteSoundSetting()
         }
         view.removeGestureRecognizer(tapGesture)
     }
     //テキストの点滅
-    private func tapStartAnimation(labels: [UILabel]) {
+    private func blinkAnimation(labels: [UILabel]) {
         labels.forEach { label in
             UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
                 label.layer.opacity = 0
@@ -167,8 +161,9 @@ class RouletteViewController: UIViewController {
         }
     }
 }
-//MARK:-CreateGraph
+//MARK: -CreateGraph
 extension RouletteViewController {
+    
     //円弧形グラフのパス
     private func graphPath(radius: CGFloat, startAngle: Double, endAngle: Double) -> UIBezierPath{
         let path = UIBezierPath(
@@ -258,17 +253,17 @@ extension RouletteViewController {
             drawGraph(fillColor: color, startRatio, endRatio)
             graphFrameBoarder(startRatio: startRatio)
             graphFrameCircleBoarder()
-            subView.addSubview(textLabelView)
+            rouletteView.addSubview(textLabelView)
             startRatio = endRatio //次のグラフのスタート値を更新
         }
-        subView.layer.addSublayer(frameLayer)
-        subView.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
+        rouletteView.layer.addSublayer(frameLayer)
+        rouletteView.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
     }
 }
 //MARK: -RouletteAnimation
 extension RouletteViewController {
     //ルーレットアニメーション
-    func rotationAnimation(){
+    func rotateAnimation(){
         startTime = CACurrentMediaTime()
         let link = CADisplayLink(target: self, selector: #selector(updateValue))
         link.preferredFramesPerSecond = 100
@@ -282,7 +277,7 @@ extension RouletteViewController {
         let stopAngle = (r * dtStop) //止まる位置
         let speed = dataSet.speed //回転数
         let rotation = ((around * speed + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
-        self.subView.transform = CGAffineTransform(rotationAngle: rotation)
+        self.rouletteView.transform = CGAffineTransform(rotationAngle: rotation)
 //        print(r, stopAngle, rotation)
         //ルーレットのストップ
         if dt >= 0.99 {
@@ -323,7 +318,7 @@ extension RouletteViewController {
         }
     }
 }
-//MARK:- RouletteResult
+//MARK: -RouletteResult
 extension RouletteViewController {
     //ルーレット結果
     private func alertResultRoulette(resultText: String, r: Int, g: Int, b: Int){

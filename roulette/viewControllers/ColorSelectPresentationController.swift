@@ -8,7 +8,7 @@
 import UIKit
 
 class ColorsSelectPresentationController: UIPresentationController {
-    //MARK:-properties
+    //MARK: -properties
     //バックビュー
     private let overLayView: UIView = {
         let overLay = UIView()
@@ -19,10 +19,11 @@ class ColorsSelectPresentationController: UIPresentationController {
     private var margin: (x: CGFloat, y: CGFloat) {
         let marginX = (containerView?.bounds.width ?? 50) / 10
         let marginY = (containerView?.bounds.height ?? 400) / 2
-        print(marginX, marginY)
         return (marginX, marginY)
     }
-    //MARK:-LifeCycle Methods
+    
+    //MARK: -LifeCycle Methods
+    
     //親コンテナのサイズをmarginで差し引いたサイズを計算する。
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
