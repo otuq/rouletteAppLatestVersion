@@ -8,12 +8,10 @@
 import UIKit
 import RealmSwift
 import Firebase
-import FirebaseAnalytics
+import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -27,6 +25,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //                }
 //            })
         FirebaseApp.configure()
+        GADMobileAds.sharedInstance().start(completionHandler: nil)
+        
         //ステータスバーのボタンをダークモードに対応
         //ios15以降からUINavigationBarが透明になったり黒くなったりする問題が発生したため（仕様が変わったため）、その対処法でstandardAppearanceとscrollEdgeAppearanceにデザインを指定するみたい。
         if #available(iOS 15.0, *) {
@@ -41,9 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .normal)
             UIBarButtonItem.appearance().setTitleTextAttributes([.font: UIFont.systemFont(ofSize: 16),.foregroundColor: UIColor.dynamicColor(light: .black, dark: .white)], for: .highlighted)
         }
-        
-        
-        
         return true
     }
     

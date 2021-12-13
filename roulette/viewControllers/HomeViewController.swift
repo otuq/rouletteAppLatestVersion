@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import GoogleMobileAds
 
 class HomeViewController: UIViewController {
     //MARK: -Properties
@@ -25,15 +26,16 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var rouletteTitleLabel: UILabel!
     @IBOutlet weak var appSettingButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
+    var bannerView: GADBannerView!
     
     //MARK: -Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         excuteOnce()
-        settingGesture()
         settingUI()
+        settingGesture()
+        adUnitId()
         fontSizeRecalcForEachDevice()
-//        print(UIScreen.main.bounds)
     }
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -54,6 +56,20 @@ class HomeViewController: UIViewController {
     //ステータスバーのスタイルを変更
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyleChange
+    }
+    private func settingUI() {
+        startButton.imageSet()
+        newDataButton.imageSet()
+        setDataButton.imageSet()
+        appSettingButton.imageSet()
+        shareButton.imageSet()
+        startLabel = self.createStartLabel()
+        
+        if let dataSet = self.dataSet {
+            self.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
+            self.startButton.titleLabel?.removeFromSuperview()
+            self.view.addSubview(startLabel)
+        }
     }
     private func settingGesture() {
         let editGesture = UITapGestureRecognizer(target: self, action: #selector(editGesture))
@@ -137,20 +153,6 @@ class HomeViewController: UIViewController {
         
         present(activityVC, animated: true, completion: nil)
     }
-    private func settingUI() {
-        startButton.imageSet()
-        newDataButton.imageSet()
-        setDataButton.imageSet()
-        appSettingButton.imageSet()
-        shareButton.imageSet()
-        startLabel = self.createStartLabel()
-        
-        if let dataSet = self.dataSet {
-            self.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
-            self.startButton.titleLabel?.removeFromSuperview()
-            self.view.addSubview(startLabel)
-        }
-    }
     private func createStartLabel() -> UILabel {
         let label = UILabel()
         label.frame = CGRect(origin: .zero, size: CGSize(width: 200, height: 20))
@@ -167,6 +169,17 @@ class HomeViewController: UIViewController {
             label.layer.opacity = 1
         }
         return label
+    }
+    //広告IDの設定
+    private func adUnitId() {
+        bannerView = GADBannerView(adSize: GADAdSizeBanner)
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        [bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+         bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)].forEach{$0.isActive = true}
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716" //テスト用広告ユニットID
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
     }
     private func fontSizeRecalcForEachDevice() {
         startButton.fontSizeRecalcForEachDevice()

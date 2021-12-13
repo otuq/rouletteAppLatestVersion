@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7239E82635E449868F9750FC /* Pods_roulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */; };
-		CB805B5AEED5CED4F9C760DD /* Pods_rouletteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */; };
+		3EE726E165741F1BF941BC19 /* Pods_rouletteTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8FB80BDEDFBDE3898BDC64F1 /* Pods_rouletteTests.framework */; };
+		7419F255024742794EE3B3F6 /* Pods_roulette.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9ADAB592B4143ACE2BEE1617 /* Pods_roulette.framework */; };
+		C0C10AA8D5D925DD79A8A8CA /* Pods_roulette_rouletteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D867046AEEAFD5D0E981E2A /* Pods_roulette_rouletteUITests.framework */; };
 		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
 		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
-		CE449654269D29FA007E4F6A /* PKHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE449653269D29FA007E4F6A /* PKHUD */; };
 		CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */; };
 		CE46A6FD269EB91500D33530 /* AppSettingTextColorCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */; };
 		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
@@ -44,7 +44,6 @@
 		CEC5902626808559005A47D6 /* NewDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */; };
 		CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */; };
 		CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF696BD26B7D2DE00564381 /* Sound.xcassets */; };
-		CFADB919B56D35D70E57D504 /* Pods_roulette_rouletteUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3D66F10F002A8BC95A2D8C3 /* Pods_roulette_rouletteUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,13 +64,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0179B30845E1C5E54C835D7D /* Pods-roulette-rouletteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette-rouletteUITests.debug.xcconfig"; path = "Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		3E35597ECC6887638B28E4FD /* Pods-roulette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.debug.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.debug.xcconfig"; sourceTree = "<group>"; };
-		6811510BBA86DE4022A6975A /* Pods-roulette-rouletteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette-rouletteUITests.release.xcconfig"; path = "Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests.release.xcconfig"; sourceTree = "<group>"; };
-		C3D66F10F002A8BC95A2D8C3 /* Pods_roulette_rouletteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roulette_rouletteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roulette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.release.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.release.xcconfig"; sourceTree = "<group>"; };
-		CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.debug.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		19A5FA157C51ABA497A0ED82 /* Pods-rouletteTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.debug.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.debug.xcconfig"; sourceTree = "<group>"; };
+		262EBD8719B68444FC39503E /* Pods-rouletteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.release.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.release.xcconfig"; sourceTree = "<group>"; };
+		6923024213D4B11B53C774A1 /* Pods-roulette-rouletteUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette-rouletteUITests.release.xcconfig"; path = "Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests.release.xcconfig"; sourceTree = "<group>"; };
+		7F62931BF645AB9DCAE8A491 /* Pods-roulette.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.release.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.release.xcconfig"; sourceTree = "<group>"; };
+		8CED9290EB5F7504ACC8017F /* Pods-roulette.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette.debug.xcconfig"; path = "Target Support Files/Pods-roulette/Pods-roulette.debug.xcconfig"; sourceTree = "<group>"; };
+		8FB80BDEDFBDE3898BDC64F1 /* Pods_rouletteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rouletteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9ADAB592B4143ACE2BEE1617 /* Pods_roulette.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roulette.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D867046AEEAFD5D0E981E2A /* Pods_roulette_rouletteUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_roulette_rouletteUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTextColorCustomCell.swift; sourceTree = "<group>"; };
 		CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppSettingTextColorCustomCell.xib; sourceTree = "<group>"; };
@@ -110,8 +110,7 @@
 		CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewDataTableViewCell.xib; sourceTree = "<group>"; };
 		CEF696BD26B7D2DE00564381 /* Sound.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sound.xcassets; sourceTree = "<group>"; };
-		D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_rouletteTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-rouletteTests.release.xcconfig"; path = "Target Support Files/Pods-rouletteTests/Pods-rouletteTests.release.xcconfig"; sourceTree = "<group>"; };
+		E6BD4CC124956BF5E02C73AA /* Pods-roulette-rouletteUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-roulette-rouletteUITests.debug.xcconfig"; path = "Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,10 +118,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE449654269D29FA007E4F6A /* PKHUD in Frameworks */,
 				CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */,
 				CE449651269D296B007E4F6A /* Eureka in Frameworks */,
-				7239E82635E449868F9750FC /* Pods_roulette.framework in Frameworks */,
+				7419F255024742794EE3B3F6 /* Pods_roulette.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,7 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CB805B5AEED5CED4F9C760DD /* Pods_rouletteTests.framework in Frameworks */,
+				3EE726E165741F1BF941BC19 /* Pods_rouletteTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,19 +136,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CFADB919B56D35D70E57D504 /* Pods_roulette_rouletteUITests.framework in Frameworks */,
+				C0C10AA8D5D925DD79A8A8CA /* Pods_roulette_rouletteUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0122C12D35BEEF1F0B20BCD6 /* Frameworks */ = {
+		58881DF8445524E6A3A0CFF8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				C698130BA7B8E1B12E826A2A /* Pods_roulette.framework */,
-				C3D66F10F002A8BC95A2D8C3 /* Pods_roulette_rouletteUITests.framework */,
-				D639BD43B23A11B8D980599D /* Pods_rouletteTests.framework */,
+				8CED9290EB5F7504ACC8017F /* Pods-roulette.debug.xcconfig */,
+				7F62931BF645AB9DCAE8A491 /* Pods-roulette.release.xcconfig */,
+				E6BD4CC124956BF5E02C73AA /* Pods-roulette-rouletteUITests.debug.xcconfig */,
+				6923024213D4B11B53C774A1 /* Pods-roulette-rouletteUITests.release.xcconfig */,
+				19A5FA157C51ABA497A0ED82 /* Pods-rouletteTests.debug.xcconfig */,
+				262EBD8719B68444FC39503E /* Pods-rouletteTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		B34425366C87B720CF57D7A6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9ADAB592B4143ACE2BEE1617 /* Pods_roulette.framework */,
+				9D867046AEEAFD5D0E981E2A /* Pods_roulette_rouletteUITests.framework */,
+				8FB80BDEDFBDE3898BDC64F1 /* Pods_rouletteTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -162,8 +173,8 @@
 				CEA611502678689000751566 /* rouletteTests */,
 				CEA6115B2678689000751566 /* rouletteUITests */,
 				CEA611382678688D00751566 /* Products */,
-				F4ED4A3918A50101ABBABB71 /* Pods */,
-				0122C12D35BEEF1F0B20BCD6 /* Frameworks */,
+				58881DF8445524E6A3A0CFF8 /* Pods */,
+				B34425366C87B720CF57D7A6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -274,19 +285,6 @@
 			path = viewControllers;
 			sourceTree = "<group>";
 		};
-		F4ED4A3918A50101ABBABB71 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3E35597ECC6887638B28E4FD /* Pods-roulette.debug.xcconfig */,
-				C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */,
-				0179B30845E1C5E54C835D7D /* Pods-roulette-rouletteUITests.debug.xcconfig */,
-				6811510BBA86DE4022A6975A /* Pods-roulette-rouletteUITests.release.xcconfig */,
-				CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */,
-				D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -294,11 +292,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA611612678689000751566 /* Build configuration list for PBXNativeTarget "roulette" */;
 			buildPhases = (
-				24342CEE362E67C02E051D56 /* [CP] Check Pods Manifest.lock */,
+				47C24E20604F39C535ECE0A1 /* [CP] Check Pods Manifest.lock */,
 				CEA611332678688D00751566 /* Sources */,
 				CEA611342678688D00751566 /* Frameworks */,
 				CEA611352678688D00751566 /* Resources */,
-				CDEA20D57D3449A79D4E4F16 /* [CP] Embed Pods Frameworks */,
+				CE72DE5527608472007E4FEB /* ShellScript */,
+				56C6B49CC573BDB076A1A594 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -308,7 +307,6 @@
 			packageProductDependencies = (
 				CEB6C2D0268F0A6100C597F1 /* RealmSwift */,
 				CE449650269D296B007E4F6A /* Eureka */,
-				CE449653269D29FA007E4F6A /* PKHUD */,
 			);
 			productName = roulette;
 			productReference = CEA611372678688D00751566 /* roulette.app */;
@@ -318,7 +316,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA611642678689000751566 /* Build configuration list for PBXNativeTarget "rouletteTests" */;
 			buildPhases = (
-				F50B2C271FB07168C409A863 /* [CP] Check Pods Manifest.lock */,
+				0C675EE09F2A51F25ED31690 /* [CP] Check Pods Manifest.lock */,
 				CEA611492678689000751566 /* Sources */,
 				CEA6114A2678689000751566 /* Frameworks */,
 				CEA6114B2678689000751566 /* Resources */,
@@ -337,11 +335,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = CEA611672678689000751566 /* Build configuration list for PBXNativeTarget "rouletteUITests" */;
 			buildPhases = (
-				00D845A9CEFA299757CA66FC /* [CP] Check Pods Manifest.lock */,
+				5DE1792E90E636FD63C14E8C /* [CP] Check Pods Manifest.lock */,
 				CEA611542678689000751566 /* Sources */,
 				CEA611552678689000751566 /* Frameworks */,
 				CEA611562678689000751566 /* Resources */,
-				5A86420BC19ADBD09C609A05 /* [CP] Embed Pods Frameworks */,
+				CA0AFBB493922EB1CE9F4418 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -387,7 +385,6 @@
 			packageReferences = (
 				CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */,
-				CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */,
 			);
 			productRefGroup = CEA611382678688D00751566 /* Products */;
 			projectDirPath = "";
@@ -438,7 +435,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		00D845A9CEFA299757CA66FC /* [CP] Check Pods Manifest.lock */ = {
+		0C675EE09F2A51F25ED31690 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -453,14 +450,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-roulette-rouletteUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-rouletteTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		24342CEE362E67C02E051D56 /* [CP] Check Pods Manifest.lock */ = {
+		47C24E20604F39C535ECE0A1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -482,24 +479,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5A86420BC19ADBD09C609A05 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CDEA20D57D3449A79D4E4F16 /* [CP] Embed Pods Frameworks */ = {
+		56C6B49CC573BDB076A1A594 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -516,7 +496,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roulette/Pods-roulette-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F50B2C271FB07168C409A863 /* [CP] Check Pods Manifest.lock */ = {
+		5DE1792E90E636FD63C14E8C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -531,12 +511,48 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-rouletteTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-roulette-rouletteUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CA0AFBB493922EB1CE9F4418 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-roulette-rouletteUITests/Pods-roulette-rouletteUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CE72DE5527608472007E4FEB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/${DWARF_DSYM_FILE_NAME}/Contents/Resources/DWARF/${TARGET_NAME}",
+				"$(SRCROOT)/$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/FirebaseCrashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -671,6 +687,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -725,6 +742,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -734,18 +752,21 @@
 		};
 		CEA611622678689000751566 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3E35597ECC6887638B28E4FD /* Pods-roulette.debug.xcconfig */;
+			baseConfigurationReference = 8CED9290EB5F7504ACC8017F /* Pods-roulette.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: masato yamada (98N8TAVGKD)";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "";
 				DEVELOPMENT_TEAM = 98N8TAVGKD;
+				GADApplicationIdentifier = "ca-app-pub-8680460926919908~9001248899\n";
 				INFOPLIST_FILE = roulette/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.roulette;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "roulette type AdHoc";
@@ -756,18 +777,21 @@
 		};
 		CEA611632678689000751566 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = C77FDABC42DAF577892C5333 /* Pods-roulette.release.xcconfig */;
+			baseConfigurationReference = 7F62931BF645AB9DCAE8A491 /* Pods-roulette.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: masato yamada (98N8TAVGKD)";
 				CODE_SIGN_STYLE = Manual;
+				DEBUG_INFORMATION_FORMAT = "";
 				DEVELOPMENT_TEAM = 98N8TAVGKD;
+				GADApplicationIdentifier = "ca-app-pub-8680460926919908/4678860505\n";
 				INFOPLIST_FILE = roulette/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_LDFLAGS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.roulette;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "roulette type AdHoc";
@@ -778,7 +802,7 @@
 		};
 		CEA611652678689000751566 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD31074EDCBB384EA0B26B7F /* Pods-rouletteTests.debug.xcconfig */;
+			baseConfigurationReference = 19A5FA157C51ABA497A0ED82 /* Pods-rouletteTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -801,7 +825,7 @@
 		};
 		CEA611662678689000751566 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D6970BF1B9FB2F3BE8DE4302 /* Pods-rouletteTests.release.xcconfig */;
+			baseConfigurationReference = 262EBD8719B68444FC39503E /* Pods-rouletteTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -824,7 +848,7 @@
 		};
 		CEA611682678689000751566 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 0179B30845E1C5E54C835D7D /* Pods-roulette-rouletteUITests.debug.xcconfig */;
+			baseConfigurationReference = E6BD4CC124956BF5E02C73AA /* Pods-roulette-rouletteUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -845,7 +869,7 @@
 		};
 		CEA611692678689000751566 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6811510BBA86DE4022A6975A /* Pods-roulette-rouletteUITests.release.xcconfig */;
+			baseConfigurationReference = 6923024213D4B11B53C774A1 /* Pods-roulette-rouletteUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -914,14 +938,6 @@
 				minimumVersion = 5.3.3;
 			};
 		};
-		CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pkluz/PKHUD";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.4.0;
-			};
-		};
 		CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-cocoa";
@@ -937,11 +953,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */;
 			productName = Eureka;
-		};
-		CE449653269D29FA007E4F6A /* PKHUD */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CE449652269D29FA007E4F6A /* XCRemoteSwiftPackageReference "PKHUD" */;
-			productName = PKHUD;
 		};
 		CEB6C2D0268F0A6100C597F1 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;

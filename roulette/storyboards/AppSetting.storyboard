@@ -20,7 +20,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" title="Setting" id="p3c-52-xKE">
-                        <barButtonItem key="leftBarButtonItem" title="Done" style="plain" id="eE7-gV-89c">
+                        <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="eE7-gV-89c">
                             <connections>
                                 <action selector="doneButton:" destination="Y6W-OH-hqX" id="37z-WE-b77"/>
                             </connections>
