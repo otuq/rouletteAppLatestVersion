@@ -15,18 +15,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-//        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-//            schemaVersion: 1, //初期値は0
-//            migrationBlock: { migration, oldSchemeVersion in
-//                //現在のversionより古いversionはデータ構造の移行をしますよ〜
-//                if oldSchemeVersion < 1 {
-//                    //保存先の変数名が変わった例
-//                    //migration.renameProperty(onType: RouletteData.className(), from: "name", to: "fullName")
-//                }
-//            })
+        //        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+        //            schemaVersion: 1, //初期値は0
+        //            migrationBlock: { migration, oldSchemeVersion in
+        //                //現在のversionより古いversionはデータ構造の移行をしますよ〜
+        //                if oldSchemeVersion < 1 {
+        //                    //保存先の変数名が変わった例
+        //                    //migration.renameProperty(onType: RouletteData.className(), from: "name", to: "fullName")
+        //                }
+        //            })
         FirebaseApp.configure()
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        
         //ステータスバーのボタンをダークモードに対応
         //ios15以降からUINavigationBarが透明になったり黒くなったりする問題が発生したため（仕様が変わったため）、その対処法でstandardAppearanceとscrollEdgeAppearanceにデザインを指定するみたい。
         if #available(iOS 15.0, *) {

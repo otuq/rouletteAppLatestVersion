@@ -19,13 +19,7 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Setting" id="p3c-52-xKE">
-                        <barButtonItem key="leftBarButtonItem" title="Done" style="done" id="eE7-gV-89c">
-                            <connections>
-                                <action selector="doneButton:" destination="Y6W-OH-hqX" id="37z-WE-b77"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Setting" id="p3c-52-xKE"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

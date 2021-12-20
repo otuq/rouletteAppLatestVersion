@@ -159,7 +159,6 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
         let temporary = dataSet.temporarys[indexPath.row]
         cell.graphDataTemporary = temporary
         getAllCells.append(cell)
-        
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

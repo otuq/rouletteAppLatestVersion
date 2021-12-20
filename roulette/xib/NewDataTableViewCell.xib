@@ -39,7 +39,7 @@
                                     <constraint firstAttribute="height" constant="34" id="2dZ-pN-MRt" customClass="CustomLayoutConstant" customModule="roulette" customModuleProvider="target"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
                             </textField>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="10" translatesAutoresizingMaskIntoConstraints="NO" id="5YB-Tn-nR8">
                                 <rect key="frame" x="-2" y="34" width="414" height="31"/>

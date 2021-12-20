@@ -12,7 +12,7 @@ class SetDataViewController: UIViewController {
     //MARK: -properties
     private let cellId = "cellId"
     private var realm = try! Realm()
-    private var dataSets: Results<RouletteData>!
+    var dataSets: Results<RouletteData>!
     
     //MARK: -Outlets,Actions
     @IBOutlet weak var setDataTableView: UITableView!

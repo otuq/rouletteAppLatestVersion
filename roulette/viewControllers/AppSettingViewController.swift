@@ -25,14 +25,6 @@ class AppSettingViewController: FormViewController {
     private let userDefaults = UserDefaults.standard
     private var audioPlayer: AVAudioPlayer!
     
-    //MARK: -Outlets,Actions
-    @IBAction func doneButton(_ sender: Any) {
-        let formValues = form.values()
-        userDefaults.set(formValues, forKey: "form")
-        statusBarStyleChange(style: .darkContent)
-        dismiss(animated: true, completion: nil)
-    }
-    
     //MARK: -Lifecyle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +34,13 @@ class AppSettingViewController: FormViewController {
     private func settingView() {
         self.statusBarStyleChange(style: .lightContent)
         navigationController?.isNavigationBarHidden = false
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(doneBarButton))
+    }
+    @objc private func doneBarButton() {
+        let formValues = form.values()
+        userDefaults.set(formValues, forKey: "form")
+        statusBarStyleChange(style: .darkContent)
+        dismiss(animated: true, completion: nil)
     }
     private func soundSelect(soundString: String) {
         guard let soundAsset  = NSDataAsset(name: soundString) else {

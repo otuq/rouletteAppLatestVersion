@@ -10,9 +10,12 @@ import UIKit
 class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelegate {
     //MARK: -properties
     private let selectView = UIView()
+    private let notification = NotificationCenter.default
     private var editField: UITextField?
     private var overlap: CGFloat = 0.0
     private var lastOffset: CGFloat = 0.0
+    private var newDataVC: NewDataViewController { parentViewController as! NewDataViewController }
+    private var cellIndex: Int { newDataVC.newDataTableView.indexPath(for: self)!.row } //現在のcellのindex番号
     var graphDataTemporary: RouletteGraphTemporary? {
         didSet{
             guard let temporary = graphDataTemporary else { return }
@@ -24,7 +27,13 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
             rouletteRatioSlider.value = ratio
         }
     }
-    
+    private lazy var inputAccessory: InputAccessoryView = {
+        let view = InputAccessoryView()
+        view.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 50)
+        view.delegate = self
+        return view
+    }()
+
     //MARK: -Outlets,Actions
     @IBOutlet weak var rouletteSetColorLabel: UILabel!
     @IBOutlet weak var rouletteTextField: UITextField!
@@ -36,11 +45,18 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         overrideUserInterfaceStyle = .light
         settingDelegate()
         settingGesture()
-        keyboardNotification()
         //CustomLayoutConstant（デバイス毎にAutoLayoutを再計算するカスタムメソッド）を設定しているためか描画のタイミングのずれがあって、rouletteSetColorLabelが狂うのでDispatchQueueで対応
         DispatchQueue.main.async {
             self.settingUI()
         }
+    }
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        //最初awakeFromNib、textFieldDidBeginEditingのタイミングで実行したけど正常に動作しないことがあった。setSelectedのタイミングが良いっぽい。
+        notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    override var inputAccessoryView: UIView? {
+        inputAccessory
     }
     private func settingDelegate() {
         rouletteTextField.delegate = self
@@ -59,13 +75,9 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         rouletteSetColorLabel.layer.borderWidth = 0.5
         rouletteSetColorLabel.isUserInteractionEnabled = true
         rouletteTextField.isUserInteractionEnabled = true
-        
     }
     @objc func saveRatio(sender: UISlider) {
-        guard let newDataVC = parentViewController as? NewDataViewController,
-              let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
-        let row = cellIndexPath.row
-        newDataVC.dataSet.temporarys[row].ratioTemporary = sender.value
+        newDataVC.dataSet.temporarys[cellIndex].ratioTemporary = sender.value
     }
     @objc func selectColorViewFetch() {
         let storyboard = UIStoryboard(name: "ColorSelect", bundle: nil)
@@ -74,10 +86,8 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         colorSelectVC.transitioningDelegate = self
         colorSelectVC.modalPresentationStyle = .custom
         //色のラベルをタップした時にタップされたセルのindex番号を取得する。セルをタップした場合はindexPathSelectRowを使うがラベルにタップした時には検出されないので下記のコードで取得する。
-        guard let newDataVC = parentViewController as? NewDataViewController,
-              let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
         //cellのindex番号を遷移先のVCに渡す
-        colorSelectVC.cellTag = cellIndexPath.row
+        colorSelectVC.cellTag = cellIndex
         colorSelectVC.currentColor = rouletteSetColorLabel.backgroundColor
         //親ViewControllerを取得　extensionにて
         parentViewController?.present(colorSelectVC, animated: true, completion: nil)
@@ -90,16 +100,20 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
 //MARK: - TextFieldDelegate
 extension NewDataTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let newDataVC = parentViewController as? NewDataViewController,
-              let cellIndexPath = newDataVC.newDataTableView.indexPath(for: self) else { return }
-        let row = cellIndexPath.row
         editField = nil
-        newDataVC.dataSet.temporarys[row].textTemporary = textField.text ?? ""
+        newDataVC.dataSet.temporarys[cellIndex].textTemporary = textField.text ?? ""
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        if let newDataVC = parentViewController as? NewDataViewController,let tableView = newDataVC.newDataTableView{
-            tableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
-            endEditing(true)
+        //リターンキーを押したら次のtextFieldにフォーカス。最後までいったらoffsetを戻しフォーカスを外す。
+        if newDataVC.dataSet.temporarys.count == cellIndex + 1 {
+            newDataVC.newDataTableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
+            textField.resignFirstResponder()
+        }else{
+            let indexPath = IndexPath(row: cellIndex + 1, section: 0)
+            let nextCell = newDataVC.newDataTableView.cellForRow(at: indexPath)as? NewDataTableViewCell
+            nextCell?.rouletteTextField.becomeFirstResponder()
+            //willShowで通知すると正常に動作しない時があるっぽいからこっちの通知を使う
+            notification.addObserver(self, selector: #selector(keyboardDidChangeFrame), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
         }
         return true
     }
@@ -112,14 +126,14 @@ extension NewDataTableViewCell: UITextFieldDelegate {
 }
 //MARK: -KeyboardNotification
 extension NewDataTableViewCell {
-    private func keyboardNotification() {
-        let notification = NotificationCenter.default
-        notification.addObserver(self, selector: #selector(keyboardFrameChange), name: UIResponder.keyboardDidChangeFrameNotification, object: nil)
-        notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    @objc func keyboardWillShow(notification: Notification){
+        calcFrameOverlap(notification: notification)
     }
-    @objc func keyboardFrameChange(notification: Notification) {
-        guard let fld = editField,
-              let newDataVC = parentViewController as? NewDataViewController else { return }
+    @objc func keyboardDidChangeFrame(notification : Notification) {
+        calcFrameOverlap(notification: notification)
+    }
+    private func calcFrameOverlap(notification: Notification) {
+        guard let fld = editField else { return }
         let userInfo = (notification as NSNotification).userInfo!
         let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
         let fldFrame = newDataVC.view.convert(fld.frame, from: contentView) //textfieldの座標系をviewに合わせる
@@ -128,10 +142,15 @@ extension NewDataTableViewCell {
             guard let tableView = newDataVC.newDataTableView else { return }
             overlap += tableView.contentOffset.y + 20
             tableView.setContentOffset(CGPoint(x: 0, y: overlap), animated: true)
+            lastOffset = newDataVC.newDataTableView.contentOffset.y
         }
     }
-    @objc func keyboardWillShow(notification: Notification){
-        guard let newDataVC = parentViewController as? NewDataViewController else { return }
-        lastOffset = newDataVC.newDataTableView.contentOffset.y
+}
+//MARK: -InputAccessoryViewDelegate
+
+extension NewDataTableViewCell: InputAccessoryViewDelegate {
+    func textFieldEndEditingButton() {
+        newDataVC.newDataTableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
+        editField?.resignFirstResponder()
     }
 }

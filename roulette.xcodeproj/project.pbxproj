@@ -33,6 +33,8 @@
 		CEA611522678689000751566 /* rouletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA611512678689000751566 /* rouletteTests.swift */; };
 		CEA6115D2678689000751566 /* rouletteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6115C2678689000751566 /* rouletteUITests.swift */; };
 		CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6116A267868D600751566 /* RouletteViewController.swift */; };
+		CEA6C8FF27706A9B00D5A9ED /* InputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA6C8FE27706A9A00D5A9ED /* InputAccessoryView.xib */; };
+		CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */; };
 		CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */; };
 		CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */; };
 		CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEB6C2D0268F0A6100C597F1 /* RealmSwift */; };
@@ -100,6 +102,8 @@
 		CEA6115C2678689000751566 /* rouletteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rouletteUITests.swift; sourceTree = "<group>"; };
 		CEA6115E2678689000751566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6116A267868D600751566 /* RouletteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewController.swift; sourceTree = "<group>"; };
+		CEA6C8FE27706A9A00D5A9ED /* InputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputAccessoryView.xib; sourceTree = "<group>"; };
+		CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAccessoryView.swift; sourceTree = "<group>"; };
 		CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataViewController.swift; sourceTree = "<group>"; };
 		CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetData.storyboard; sourceTree = "<group>"; };
 		CEC5901626807D28005A47D6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -231,6 +235,7 @@
 				CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */,
 				CE82BC2326831DD3009550EB /* CollectionViewCell.xib */,
 				CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */,
+				CEA6C8FE27706A9A00D5A9ED /* InputAccessoryView.xib */,
 			);
 			path = xib;
 			sourceTree = "<group>";
@@ -280,6 +285,7 @@
 				CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */,
 				CE82BC2226831DD3009550EB /* CollectionViewCell.swift */,
 				CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */,
+				CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */,
 			);
 			name = xib.swift;
 			path = viewControllers;
@@ -408,6 +414,7 @@
 				CEA611472678688F00751566 /* LaunchScreen.storyboard in Resources */,
 				CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */,
 				CEC5901E26807D85005A47D6 /* NewData.storyboard in Resources */,
+				CEA6C8FF27706A9B00D5A9ED /* InputAccessoryView.xib in Resources */,
 				CE82BC2126831BC7009550EB /* ColorSelect.storyboard in Resources */,
 				CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */,
 				CEA611442678688F00751566 /* Assets.xcassets in Resources */,
@@ -565,6 +572,7 @@
 				CEA6113B2678688D00751566 /* AppDelegate.swift in Sources */,
 				CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */,
 				CE15301326F332150051DCA3 /* Colors.swift in Sources */,
+				CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
 				CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */,
@@ -756,12 +764,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BANNER_ID = "ca-app-pub-3940256099942544/2934735716";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: masato yamada (98N8TAVGKD)";
 				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 98N8TAVGKD;
-				GADApplicationIdentifier = "ca-app-pub-8680460926919908~9001248899\n";
+				GADApplicationIdentifier = "ca-app-pub-3940256099942544~1458002511";
 				INFOPLIST_FILE = roulette/Info.plist;
+				INTERSTITIAL_ID = "ca-app-pub-3940256099942544/4411468910";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -781,12 +791,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BANNER_ID = "ca-app-pub-8680460926919908/4678860505";
 				CODE_SIGN_IDENTITY = "iPhone Distribution: masato yamada (98N8TAVGKD)";
 				CODE_SIGN_STYLE = Manual;
-				DEBUG_INFORMATION_FORMAT = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 98N8TAVGKD;
-				GADApplicationIdentifier = "ca-app-pub-8680460926919908/4678860505\n";
+				GADApplicationIdentifier = "ca-app-pub-8680460926919908~9001248899";
 				INFOPLIST_FILE = roulette/Info.plist;
+				INTERSTITIAL_ID = "ca-app-pub-8680460926919908/1043254868";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

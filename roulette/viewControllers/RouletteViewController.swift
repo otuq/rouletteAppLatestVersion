@@ -8,6 +8,7 @@
 import UIKit
 import AVFoundation
 import RealmSwift
+import GoogleMobileAds
 
 class RouletteViewController: UIViewController {
     //MARK: -Properties
@@ -23,6 +24,7 @@ class RouletteViewController: UIViewController {
     private var startTime: CFTimeInterval! //アニメーション開始時間
     private var startRatio = 0.0 //グラフの描画開始点に使う
     private var graphRange = [ClosedRange<Double>]() //各グラフの範囲
+    private var interstitial: GADInterstitialAd? //インタースティシャル広告
     private let diameter: CGFloat = {
         let width = UIScreen.main.bounds.width
         let subtraction = (width / 13) / 2
@@ -42,6 +44,7 @@ class RouletteViewController: UIViewController {
         settingUI()
         settingView()
         settingGesture()
+        createInterstitial()
         fontSizeRecalcForEachDevice()
         blinkAnimation(labels: tapStartLabel)
     }
@@ -73,6 +76,24 @@ class RouletteViewController: UIViewController {
         view.addGestureRecognizer(startTapGesture)
         quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
     }
+    //インタースティシャル広告を読み込む
+    private func createInterstitial() {
+        guard let adUnitID = Bundle.main.object(forInfoDictionaryKey: "AdUnitID")as? [String: String],
+              let interstitialID = adUnitID["interstitial"] else { return }
+        let request = GADRequest()
+        GADInterstitialAd.load(withAdUnitID: interstitialID,
+                               request: request,
+                               completionHandler: { [self] ad, error in
+            if let error = error {
+                print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                return
+            }
+            interstitial = ad
+            interstitial?.fullScreenContentDelegate = self
+        }
+        )
+    }
+
     //デバイス毎にUIのテキストサイズを再計算
     private func fontSizeRecalcForEachDevice() {
         tapStartLabel.forEach { $0.fontSizeRecalcForEachDevice() }
@@ -278,7 +299,7 @@ extension RouletteViewController {
         let speed = dataSet.speed //回転数
         let rotation = ((around * speed + dtStop) * r) //回転 360度*回転数+止まる角度*進捗率
         self.rouletteView.transform = CGAffineTransform(rotationAngle: rotation)
-//        print(r, stopAngle, rotation)
+        //        print(r, stopAngle, rotation)
         //ルーレットのストップ
         if dt >= 0.99 {
             audioPlayer.volume = 0
@@ -291,9 +312,9 @@ extension RouletteViewController {
                 //ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
                     let list = rouletteDataSet.1[index]
-//                    print(list.text)
-//                    print(dtStop)
-//                    print(range)
+                    //                    print(list.text)
+                    //                    print(dtStop)
+                    //                    print(range)
                     alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) //ルーレットの結果を表示する。
                     soundEffect()
                 }
@@ -319,7 +340,7 @@ extension RouletteViewController {
     }
 }
 //MARK: -RouletteResult
-extension RouletteViewController {
+extension RouletteViewController: GADFullScreenContentDelegate {
     //ルーレット結果
     private func alertResultRoulette(resultText: String, r: Int, g: Int, b: Int){
         let attribute: [NSAttributedString.Key: Any] = [.font: UIFont.italicSystemFont(ofSize: 32)]
@@ -327,7 +348,7 @@ extension RouletteViewController {
         let resultLabel = UILabel(frame: CGRect(origin: .zero, size: CGSize(width: textSize.width, height: textSize.height + 50)))
         let resultView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: resultLabel.frame.height)))
         let backView = UIView(frame: CGRect(origin: .zero, size: view.bounds.size))
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDismiss))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapAppearInterstitial))
         
         resultLabel.center = resultView.center
         resultLabel.attributedText = NSAttributedString(string: resultText, attributes: attribute)
@@ -351,7 +372,26 @@ extension RouletteViewController {
             resultView.transform = .identity
         }
     }
-    @objc private func tapDismiss() {
+    @objc private func tapAppearInterstitial() {
+        if self.interstitial != nil {
+            self.interstitial?.present(fromRootViewController: self)
+        } else {
+            print("Ad wasn't ready")
+        }
+    }
+    /// Tells the delegate that the ad failed to present full screen content.
+    func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+        print("広告表示の失敗　Ad did fail to present full screen content.")
+    }
+    
+    /// Tells the delegate that the ad presented full screen content.
+    func adDidPresentFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("広告表示の成功　Ad did present full screen content.")
+    }
+    
+    /// Tells the delegate that the ad dismissed full screen content.
+    func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+        print("広告を閉じる　Ad did dismiss full screen content.")
         dismiss(animated: true, completion: nil)
     }
 }
