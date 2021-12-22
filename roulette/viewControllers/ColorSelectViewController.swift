@@ -53,10 +53,14 @@ extension ColorSelectViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let colum: CGFloat = 5
         let row: CGFloat = CGFloat(colors.count) / colum
-        
-        return CGSize(width: view.frame.width / colum, height: (view.frame.height / row) / 2 + 10)
+        return CGSize(width: view.frame.width / colum, height: view.frame.height / row)
     }
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        .zero
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        .zero
+    }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //カラーを選択したらindexPath.rowの番号とcolorsのインデックス番号をtableViewに渡して更新する。
         guard let nav = presentingViewController as? UINavigationController,

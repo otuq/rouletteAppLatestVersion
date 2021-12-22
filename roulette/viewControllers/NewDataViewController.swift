@@ -14,6 +14,8 @@ import RealmSwift
 class NewDataViewController: UIViewController, UITextFieldDelegate {
     //MARK: -properties
     private let cellId = "cellId"
+    private let notification = NotificationCenter.default
+    private var userInfo: [AnyHashable: Any]?
     private var colorIndex = 0
     private var realm = try! Realm()
     private var getAllCells = [NewDataTableViewCell]()
@@ -38,6 +40,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         settingUI()
         settingGesture()
         fontSizeRecalcForEachDevice()
+        
     }
     private func settingView() {
         newDataTableView.delegate = self
@@ -50,6 +53,9 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBarButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
+        
+        notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     private func settingUI(){
         titleTextField.text = dataSet.title
@@ -146,7 +152,19 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        newDataTableView.contentInset.bottom = operationView.frame.height //スクロールした時の停止位置を指定。セルがoperationViewに被らないようにする。
+        //keyboardが表示している時はinsetをkeyboardのframe、非表示の時はoperationViewのframe。keyboardが表示されている時でも最下のcellまでスクロールできるようにする。
+        if userInfo != nil {
+            let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
+            newDataTableView.contentInset.bottom = keyboardFrame.size.height
+        }else{
+            newDataTableView.contentInset.bottom = operationView.frame.height //スクロールした時の停止位置を指定。セルがoperationViewに被らないようにする。
+        }
+    }
+    @objc private func keyboardWillShow(notification: Notification) {
+        userInfo = (notification as NSNotification).userInfo
+    }
+    @objc private func keyboardDidHide() {
+        userInfo = nil
     }
 }
 //MARK: -TableViewDelegate,Datasource

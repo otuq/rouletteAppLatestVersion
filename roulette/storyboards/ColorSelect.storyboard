@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="2JZ-Mm-6ZP">
-                                <rect key="frame" x="0.0" y="64" width="414" height="778"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="BUO-QK-aFw">
                                     <size key="itemSize" width="128" height="128"/>
@@ -32,10 +32,10 @@
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2JZ-Mm-6ZP" secondAttribute="bottom" constant="20" id="BbA-lP-lNi"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="2JZ-Mm-6ZP" secondAttribute="trailing" id="Upd-r6-FaO"/>
-                            <constraint firstItem="2JZ-Mm-6ZP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="mhe-H5-Nf3"/>
-                            <constraint firstItem="2JZ-Mm-6ZP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="uCY-Ne-L3q"/>
+                            <constraint firstItem="2JZ-Mm-6ZP" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="DF1-CU-QvS"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="2JZ-Mm-6ZP" secondAttribute="bottom" id="dCV-cw-Jkx"/>
+                            <constraint firstItem="2JZ-Mm-6ZP" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="fLA-w0-tJi"/>
+                            <constraint firstItem="2JZ-Mm-6ZP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="jw4-Kt-DXR"/>
                         </constraints>
                     </view>
                     <size key="freeformSize" width="414" height="896"/>

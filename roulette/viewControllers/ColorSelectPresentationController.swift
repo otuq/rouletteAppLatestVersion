@@ -16,14 +16,21 @@ class ColorsSelectPresentationController: UIPresentationController {
         overLay.alpha = 0
         return overLay
     }()
-    private var margin: (x: CGFloat, y: CGFloat) {
-        let marginX = (containerView?.bounds.width ?? 50) / 10
-        let marginY = (containerView?.bounds.height ?? 400) / 2
+    private let margin: (x: CGFloat, y: CGFloat) = {
+        //割り切れない数字だと5列が4列に改行されたりすることがあるのでviewのframeに対して行列の数を決めてcellのsizeの計算が割り切れる計算の方が良い。
+        let refW = UIScreen.main.bounds.width
+        let refH = UIScreen.main.bounds.height
+        let subW = refW - (floor(refW / 10) * 10) //widthの1の位
+        let subH = refH - (floor(refH / 10) * 10) //heightの1の位
+        let calcW = (floor(refW / 100) * 100) / 10 //
+        let calcH = (floor(refH / 100) * 100) / 2
+        let marginX = subW + calcW
+        let marginY = subH + calcH
+        print(marginX, marginY, calcW, calcH, refW, refH)
         return (marginX, marginY)
-    }
+    }()
     
     //MARK: -LifeCycle Methods
-    
     //親コンテナのサイズをmarginで差し引いたサイズを計算する。
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         CGSize(width: parentSize.width - margin.x, height: parentSize.height - margin.y)
