@@ -15,7 +15,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     //MARK: -properties
     private let cellId = "cellId"
     private let notification = NotificationCenter.default
-    private var userInfo: [AnyHashable: Any]?
+    var userInfo: [AnyHashable: Any]?
     private var colorIndex = 0
     private var realm = try! Realm()
     private var getAllCells = [NewDataTableViewCell]()
@@ -162,6 +162,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     }
     @objc private func keyboardWillShow(notification: Notification) {
         userInfo = (notification as NSNotification).userInfo
+        print("show")
     }
     @objc private func keyboardDidHide() {
         userInfo = nil
@@ -182,6 +183,7 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(80).recalcValue
     }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             dataSet.temporarys.remove(at: indexPath.row)

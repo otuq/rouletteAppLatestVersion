@@ -11,9 +11,10 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
     //MARK: -properties
     private let selectView = UIView()
     private let notification = NotificationCenter.default
-    private var userInfo: [AnyHashable: Any]?
+    private var editField: UITextField?
     private var overlap: CGFloat = 0.0
     private var lastOffset: CGFloat = 0.0
+    private var contentHeight: CGFloat = 0.0
     private var newDataVC: NewDataViewController { parentViewController as! NewDataViewController }
     private var cellIndex: Int { newDataVC.newDataTableView.indexPath(for: self)!.row } //現在のcellのindex番号
     private lazy var inputAccessory: InputAccessoryView = {
@@ -34,7 +35,6 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
             rouletteRatioSlider.value = ratio
         }
     }
-
     //MARK: -Outlets,Actions
     @IBOutlet weak var rouletteSetColorLabel: UILabel!
     @IBOutlet weak var rouletteTextField: UITextField!
@@ -50,10 +50,6 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         DispatchQueue.main.async {
             self.settingUI()
         }
-    }
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        //最初awakeFromNib、textFieldDidBeginEditingのタイミングで実行したけど正常に動作しないことがあった。setSelectedのタイミングが良いっぽい。
         notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     override var inputAccessoryView: UIView? {
@@ -100,8 +96,33 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
 }
 //MARK: - TextFieldDelegate
 extension NewDataTableViewCell: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        editField = textField
+    }
+    @objc func keyboardWillShow(notification: Notification){
+        guard let fld = editField else { return }
+        let userInfo = (notification as NSNotification).userInfo!
+        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
+        let fldFrame = newDataVC.view.convert(fld.frame, from: contentView) //textfieldの座標系をviewに合わせる
+        overlap = fldFrame.maxY - keyboardFrame.minY
+        if overlap > 0 {
+            let tableView = newDataVC.newDataTableView!
+            let frameHeight = tableView.frame.height
+            let contentHeight = tableView.contentSize.height
+            let operationHeight = newDataVC.operationView.frame.height
+            //contentOffsetの最下を算出する。
+            let limitOffset = frameHeight < contentHeight ? (contentHeight - frameHeight) + operationHeight : 0.0
+            //隠れている部分をoverlap分下げて見えるようにする。
+            overlap += tableView.contentOffset.y + 20
+            tableView.setContentOffset(CGPoint(x: 0, y: overlap), animated: true)
+            //contentOffsetがlimitを超えてしまうとキーボードを閉じた時に余計にスクロールしたように表示されるので最下を超えないようにする。
+            lastOffset = limitOffset < tableView.contentOffset.y ? limitOffset : tableView.contentOffset.y
+            print(limitOffset)
+        }
+        print("overlap: \(overlap), lastoffset: \(lastOffset)")
+    }
     func textFieldDidEndEditing(_ textField: UITextField) {
-        userInfo = nil
+        editField = nil
         newDataVC.dataSet.temporarys[cellIndex].textTemporary = textField.text ?? ""
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -113,33 +134,8 @@ extension NewDataTableViewCell: UITextFieldDelegate {
             let indexPath = IndexPath(row: cellIndex + 1, section: 0)
             let nextCell = newDataVC.newDataTableView.cellForRow(at: indexPath)as? NewDataTableViewCell
             nextCell?.rouletteTextField.becomeFirstResponder()
-            let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
-            let fldFrame = newDataVC.view.convert(rouletteTextField.frame, from: contentView) //textfieldの座標系をviewに合わせる
-            overlap = fldFrame.maxY - keyboardFrame.minY
-            if overlap > 0 {
-                let tableView = newDataVC.newDataTableView!
-                overlap += tableView.contentOffset.y + 20
-                tableView.setContentOffset(CGPoint(x: 0, y: overlap), animated: true)
-                lastOffset = tableView.contentOffset.y
-            }
         }
         return true
-    }
-}
-//MARK: -KeyboardNotification
-extension NewDataTableViewCell {
-    @objc func keyboardWillShow(notification: Notification){
-        userInfo = (notification as NSNotification).userInfo!
-        let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue //keyboardの座標を取得
-        let fldFrame = newDataVC.view.convert(rouletteTextField.frame, from: contentView) //textfieldの座標系をviewに合わせる
-        overlap = fldFrame.maxY - keyboardFrame.minY
-        if overlap > 0 {
-            let tableView = newDataVC.newDataTableView!
-            overlap += tableView.contentOffset.y + 20
-            tableView.setContentOffset(CGPoint(x: 0, y: overlap), animated: true)
-            lastOffset = tableView.contentOffset.y
-        }
-        print("overlap: \(overlap), lastoffset: \(lastOffset)")
     }
 }
 //MARK: -InputAccessoryViewDelegate
