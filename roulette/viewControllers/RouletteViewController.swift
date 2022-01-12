@@ -376,7 +376,9 @@ extension RouletteViewController: GADFullScreenContentDelegate {
         if self.interstitial != nil {
             self.interstitial?.present(fromRootViewController: self)
         } else {
-            print("Ad wasn't ready")
+            //Appleからrejectされた原因　interstitialが読み込まれなかった時にelseにdissmissを追加していなかった
+            print("広告の読み込みできませんでした　Ad wasn't ready")
+            dismiss(animated: true)
         }
     }
     /// Tells the delegate that the ad failed to present full screen content.
