@@ -2,13 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AdUnitID</key>
-	<dict>
-		<key>banner</key>
-		<string>$(BANNER_ID)</string>
-		<key>interstitial</key>
-		<string>$(INTERSTITIAL_ID)</string>
-	</dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>ja_JP</string>
 	<key>CFBundleExecutable</key>
@@ -29,8 +22,6 @@
 	<string>$(GADApplicationIdentifier)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>NSUserTrackingUsageDescription</key>
-	<string>表示する広告を適切に選択するために使用します。</string>
 	<key>SKAdNetworkItems</key>
 	<array>
 		<dict>

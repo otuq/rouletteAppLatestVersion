@@ -7,9 +7,6 @@
 
 import UIKit
 import RealmSwift
-import GoogleMobileAds
-import AppTrackingTransparency
-import AdSupport
 
 class HomeViewController: UIViewController {
     //MARK: -Properties
@@ -28,13 +25,9 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var rouletteTitleLabel: UILabel!
     @IBOutlet weak var appSettingButton: UIButton!
     @IBOutlet weak var shareButton: UIButton!
-    var bannerView: GADBannerView!
     
     //MARK: -Lifecycle Methods
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        adUnitId()
-    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         excuteOnce()
@@ -185,92 +178,5 @@ class HomeViewController: UIViewController {
         rouletteTitleLabel.fontSizeRecalcForEachDevice()
         appSettingButton.fontSizeRecalcForEachDevice()
         shareButton.fontSizeRecalcForEachDevice()
-    }
-}
-//MARK: GoogleADs
-extension HomeViewController: GADBannerViewDelegate {
-    //広告IDの設定
-    private func adUnitId() {
-        guard let adUnitID = Bundle.main.object(forInfoDictionaryKey: "AdUnitID")as? [String: String],
-              let bannerID = adUnitID["banner"] else { return }
-        bannerView = GADBannerView(adSize: GADAdSizeBanner)
-        bannerView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(bannerView)
-        [bannerView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-         bannerView.centerXAnchor.constraint(equalTo: view.centerXAnchor)].forEach{$0.isActive = true}
-        bannerView.adUnitID = bannerID
-        bannerView.rootViewController = self
-        bannerView.delegate = self
-        GADMobileAds.sharedInstance().start(completionHandler: nil)
-        //IDFAを取得してから広告を読み込む。
-        //トラッキングアラートの表示はタイミングを間違えると表示されずに拒否されてしまうのでメインキューに追加して最後に実行されるようにする。
-        DispatchQueue.main.async {
-            self.getIDFAAndRequest()
-        }
-    }
-    //IDFAの取得
-    private func getIDFAAndRequest() {
-        if #available(iOS 14, *) {
-            switch ATTrackingManager.trackingAuthorizationStatus {
-            case .authorized:
-                print("authorized 許可されました")
-                print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
-                self.bannerView.load(GADRequest()); print("広告がリクエストされました")
-            case .denied:
-                print("denied 拒否されました")
-                self.bannerView.load(GADRequest()); print("広告がリクエストされました")
-            case .restricted:
-                print("restriced 制限されました")
-                self.bannerView.load(GADRequest()); print("広告がリクエストされました")
-            case .notDetermined:
-                print("not determind まだ決まってません")
-                self.trackingAuthorizationAlert()
-            @unknown default:
-                fatalError()
-            }
-        }else{
-            self.bannerView.load(GADRequest()); print("広告がリクエストされました")
-        }
-    }
-    //トラッキングのアラートを表示
-    private func trackingAuthorizationAlert() {
-        ATTrackingManager.requestTrackingAuthorization(completionHandler: { status in
-            switch status {
-            case .authorized:
-                print("authorized 許可されました")
-                print("IDFA: \(ASIdentifierManager.shared().advertisingIdentifier)")
-            case .denied, .restricted, .notDetermined:
-                print("not authorized")
-            @unknown default:
-                fatalError()
-            }
-            self.bannerView.load(GADRequest()); print("広告がリクエストされました")
-        })
-    }
-    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
-        bannerView.alpha = 0
-        UIView.animate(withDuration: 1, animations: {
-            bannerView.alpha = 1
-        })
-    }
-    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
-        print("広告のリクエストに失敗　bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
-    }
-    
-    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
-        print("広告のリクエストに成功　bannerViewDidRecordImpression")
-        
-    }
-    
-    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
-        print("広告を開きます　bannerViewWillPresentScreen")
-    }
-    
-    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
-        print("広告を閉じます　bannerViewWillDIsmissScreen")
-    }
-    
-    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
-        print("広告を閉じました　bannerViewDidDismissScreen")
     }
 }

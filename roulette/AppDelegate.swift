@@ -7,8 +7,6 @@
 
 import UIKit
 import RealmSwift
-import Firebase
-import GoogleMobileAds
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +22,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //                    //migration.renameProperty(onType: RouletteData.className(), from: "name", to: "fullName")
         //                }
         //            })
-        FirebaseApp.configure()
         //ステータスバーのボタンをダークモードに対応
         //ios15以降からUINavigationBarが透明になったり黒くなったりする問題が発生したため（仕様が変わったため）、その対処法でstandardAppearanceとscrollEdgeAppearanceにデザインを指定するみたい。
         if #available(iOS 15.0, *) {
