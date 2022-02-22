@@ -7,11 +7,13 @@
 import CoreGraphics
 
 struct Degree {
+    // MARK: Properties
     private let a: CGPoint
     private let b: CGPoint
     private let c: CGPoint
-    private let epsilon: CGFloat = 0.000001
+    private let epsilon: CGFloat = 0.000_001
 
+    // MARK: Init
     init(p1: CGPoint, p2: CGPoint) {
         // pre-calculate the polynomial coefficients
         // First and last control points are implied to be (0, 0) and (1, 1)
@@ -23,6 +25,7 @@ struct Degree {
                     y: 1 - c.y - b.y)
     }
 
+    // MARK: Methods
     /// Find new T as a function of Y along curve X
     func solve(t: CGFloat) -> CGFloat {
         sampleCurveY(t: solveCurveX(t: t))

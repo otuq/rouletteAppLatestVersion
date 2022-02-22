@@ -8,18 +8,18 @@
 import UIKit
 
 class CollectionViewCell: UICollectionViewCell {
-    //MARK: -properties
+    // MARK: properties
     var color: UIColor? {
-        didSet{
+        didSet {
             colorSelect.backgroundColor = color ?? .white
         }
     }
-    
-    //MARK: -Outlets,Actions
-    @IBOutlet weak var colorSelect: UILabel!
-    @IBOutlet weak var checkImageView: UIImageView!
-    
-    //MARK: -Lifecyle Methods
+
+    // MARK: Outlets,Actions
+    @IBOutlet var colorSelect: UILabel!
+    @IBOutlet var checkImageView: UIImageView!
+
+    // MARK: Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         DispatchQueue.main.async {
