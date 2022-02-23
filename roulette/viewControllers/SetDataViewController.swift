@@ -5,19 +5,19 @@
 //  Created by USER on 2021/07/02.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class SetDataViewController: UIViewController {
-    //MARK: -properties
+    // MARK: - properties
     private let cellId = "cellId"
     private var realm = try! Realm()
     var dataSets: Results<RouletteData>!
-    
-    //MARK: -Outlets,Actions
-    @IBOutlet weak var setDataTableView: UITableView!
-    
-    //MARK: -Lifecyle Methods
+
+    // MARK: - Outlets,Actions
+    @IBOutlet var setDataTableView: UITableView!
+
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         settingView()
@@ -36,7 +36,7 @@ class SetDataViewController: UIViewController {
         setDataTableView.dataSource = self
         setDataTableView.register(SetDataTableViewCell.self, forCellReuseIdentifier: cellId)
         statusBarStyleChange(style: .lightContent)
-        
+
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBarButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
@@ -56,8 +56,8 @@ class SetDataViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
 }
-//MARK: -TableViewDelegate,Datasource
-extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
+// MARK: - TableViewDelegate,Datasource
+extension SetDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         dataSets.count
     }
@@ -68,9 +68,9 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard.init(name: "NewData", bundle: nil)
+        let storyboard = UIStoryboard(name: "NewData", bundle: nil)
         if let newDataVC = storyboard.instantiateViewController(withIdentifier: "NewDataViewController")as? NewDataViewController {
-            //選択したグラフデータのインデックスとrgb情報を
+            // 選択したグラフデータのインデックスとrgb情報を
             let dataSet = dataSets[indexPath.row]
             dataSet.list.forEach { list in
                 let temporary = RouletteGraphTemporary()
@@ -90,7 +90,7 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            //データベースからルーレット情報を削除する。
+            // データベースからルーレット情報を削除する。
             try! realm.write {
                 guard let nav = self.presentingViewController as? UINavigationController,
                       let rootVC = nav.viewControllers.first as? HomeViewController else { return }
@@ -99,7 +99,7 @@ extension SetDataViewController: UITableViewDelegate,UITableViewDataSource {
                     let alertAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(alertAction)
                     present(alertController, animated: true, completion: nil)
-                }else{
+                } else {
                     realm.delete(dataSets[indexPath.row])
                     setDataTableView.deleteRows(at: [indexPath], with: .fade)
                 }

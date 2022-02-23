@@ -5,13 +5,17 @@
 //  Created by USER on 2021/07/14.
 //
 
-import UIKit
 import Eureka
+import UIKit
 
 class AppSettingTextColorCustomCell: Cell<[Int]>, CellType, UIColorPickerViewControllerDelegate {
+    // MARK: Properties
     let colorPickerVC = UIColorPickerViewController()
-    @IBOutlet weak var colorLabel: UILabel!
-    
+
+    // MARK: Outletes,acitons
+    @IBOutlet var colorLabel: UILabel!
+
+    // MARK: Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         DispatchQueue.main.async {
@@ -36,7 +40,8 @@ class AppSettingTextColorCustomCell: Cell<[Int]>, CellType, UIColorPickerViewCon
         row.deselect(animated: true)
     }
 }
-//CustomCellをセットする
+// MARK: - CustomRow
+// CustomCellをセットする
 final class CustomRow: SelectorRow<AppSettingTextColorCustomCell>, RowType {
     required init(tag: String?) {
         super.init(tag: tag)

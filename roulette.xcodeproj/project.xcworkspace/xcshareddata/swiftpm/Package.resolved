@@ -6,17 +6,8 @@
         "repositoryURL": "https://github.com/xmartlabs/Eureka",
         "state": {
           "branch": null,
-          "revision": "523af88efc83cdaf39b415446be1ca1529f5664d",
-          "version": "5.3.3"
-        }
-      },
-      {
-        "package": "Realm",
-        "repositoryURL": "https://github.com/realm/realm-cocoa",
-        "state": {
-          "branch": null,
-          "revision": "4cbe20f31b1bcc20190c724632143b4f9b8ac3e3",
-          "version": "10.15.1"
+          "revision": "975e8d5e0ea3c86aff828537b2d4abe4430d6312",
+          "version": "5.3.4"
         }
       },
       {
@@ -26,6 +17,15 @@
           "branch": null,
           "revision": "23f60515a00f076a9e3f2dc672fe1ae07601ee90",
           "version": "11.4.1"
+        }
+      },
+      {
+        "package": "Realm",
+        "repositoryURL": "https://github.com/realm/realm-swift",
+        "state": {
+          "branch": null,
+          "revision": "9f43d0da902c55b493d6c8bb63203764caa8acbe",
+          "version": "10.18.0"
         }
       }
     ]

@@ -5,29 +5,28 @@
 //  Created by USER on 2021/06/21.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class HomeViewController: UIViewController {
-    //MARK: -Properties
+    // MARK: Properties
     private var excuteOnce = {}
-    typealias ExcuteOnce = () -> ()
+    typealias ExcuteOnce = () -> Void
     private var realm = try! Realm()
     var dataSet: RouletteData?
     var parentLayer = CALayer()
     var statusBarStyleChange: UIStatusBarStyle = .darkContent
     var startLabel = UILabel()
-    
-    //MARK: -Outlets,Actions
-    @IBOutlet weak var startButton: UIButton!
-    @IBOutlet weak var setDataButton: UIButton!
-    @IBOutlet weak var newDataButton: UIButton!
-    @IBOutlet weak var rouletteTitleLabel: UILabel!
-    @IBOutlet weak var appSettingButton: UIButton!
-    @IBOutlet weak var shareButton: UIButton!
-    
-    //MARK: -Lifecycle Methods
-    
+
+    // MARK: Outlets,Actions
+    @IBOutlet var startButton: UIButton!
+    @IBOutlet var setDataButton: UIButton!
+    @IBOutlet var newDataButton: UIButton!
+    @IBOutlet var rouletteTitleLabel: UILabel!
+    @IBOutlet var appSettingButton: UIButton!
+    @IBOutlet var shareButton: UIButton!
+
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         excuteOnce()
@@ -38,11 +37,13 @@ class HomeViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         excuteOnce = justOnceMethod {
+            // 最後にセットしていたデータを取得
             let object = self.realm.objects(RouletteData.self).sorted(byKeyPath: "lastDate", ascending: true)
             self.dataSet = object.last
         }
     }
-    private func justOnceMethod(excute: @escaping () -> () ) -> ExcuteOnce {
+    // 起動時にのみ実行
+    private func justOnceMethod(excute: @escaping () -> Void ) -> ExcuteOnce {
         var once = true
         return {
             if once {
@@ -51,7 +52,7 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    //ステータスバーのスタイルを変更
+    // ステータスバーのスタイルを変更
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return statusBarStyleChange
     }
@@ -62,7 +63,7 @@ class HomeViewController: UIViewController {
         appSettingButton.imageSet()
         shareButton.imageSet()
         startLabel = self.createStartLabel()
-        
+
         if let dataSet = self.dataSet {
             self.rouletteTitleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
             self.startButton.titleLabel?.removeFromSuperview()
@@ -91,33 +92,33 @@ class HomeViewController: UIViewController {
         }
     }
     @objc private func setGesture() {
-        //初期起動時データが空なのでデータがない時はSedDataVCに遷移しない。
+        // 初期起動時データが空なのでデータがない時はSedDataVCに遷移しない。
         if realm.objects(RouletteData.self).isEmpty { return }
-        
-        let storyboard = UIStoryboard.init(name: "SetData", bundle: nil)
+
+        let storyboard = UIStoryboard(name: "SetData", bundle: nil)
         let setDataVC = storyboard.instantiateViewController(withIdentifier: "SetDataViewController")as! SetDataViewController
-        let nav = UINavigationController.init(rootViewController: setDataVC)
+        let nav = UINavigationController(rootViewController: setDataVC)
         nav.modalPresentationStyle = .overFullScreen
         setDataVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         setDataButton.isSelected = true
         present(nav, animated: true, completion: nil)
     }
     @objc private func newGesture() {
-        let storyboard = UIStoryboard.init(name: "NewData", bundle: nil)
+        let storyboard = UIStoryboard(name: "NewData", bundle: nil)
         let newVC = storyboard.instantiateViewController(withIdentifier: "NewDataViewController")
-        let nav = UINavigationController.init(rootViewController: newVC)
+        let nav = UINavigationController(rootViewController: newVC)
         newVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
         nav.modalPresentationStyle = .overFullScreen
-        //newButtonの選択状態で新規か更新の分岐をする
+        // newButtonの選択状態で新規か更新の分岐をする
         newDataButton.isSelected = true
         present(nav, animated: true, completion: nil)
     }
     @objc private func editGesture() {
         if let dataSet = dataSet {
-            let storyboard = UIStoryboard.init(name: "NewData", bundle: nil)
+            let storyboard = UIStoryboard(name: "NewData", bundle: nil)
             guard let newVC = storyboard.instantiateViewController(withIdentifier: "NewDataViewController")as? NewDataViewController else { return }
-            let nav = UINavigationController.init(rootViewController: newVC)
-            //listに保存されたデータをtemporaryに代入しないとcancelしても前のセルが上書きされる。
+            let nav = UINavigationController(rootViewController: newVC)
+            // listに保存されたデータをtemporaryに代入しないとcancelしても前のセルが上書きされる。
             dataSet.temporarys.removeAll()
             dataSet.list.forEach { list in
                 let temporary = RouletteGraphTemporary()
@@ -140,18 +141,18 @@ class HomeViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     @objc private func appSettingGesture() {
-        let storyboard = UIStoryboard.init(name: "AppSetting", bundle: nil)
+        let storyboard = UIStoryboard(name: "AppSetting", bundle: nil)
         let viewcontroller = storyboard.instantiateViewController(withIdentifier: "AppSettingViewController")
-        let nav = UINavigationController.init(rootViewController: viewcontroller)
+        let nav = UINavigationController(rootViewController: viewcontroller)
         nav.modalPresentationStyle = .overFullScreen
         present(nav, animated: true, completion: nil)
     }
     @objc private func shareGesture() {
         let textString = "友人や家族にこのアプリを紹介しよう♪"
         let urlString = "https://apps.apple.com/jp/app/thee-roulette/id1602651709"
-        let items = [textString,urlString]
+        let items = [textString, urlString]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        
+
         present(activityVC, animated: true, completion: nil)
     }
     private func createStartLabel() -> UILabel {
@@ -162,15 +163,16 @@ class HomeViewController: UIViewController {
         label.baselineAdjustment = .alignCenters
         label.text = "T A P"
         label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        label.textColor = UIColor.init(r: 153, g: 153, b: 153)
+        label.textColor = UIColor(r: 153, g: 153, b: 153)
         label.fontSizeRecalcForEachDevice()
         UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
             label.layer.opacity = 0
-        }) { _ in
+        }, completion: { _ in
             label.layer.opacity = 1
-        }
+        })
         return label
     }
+    // テキストサイズをデバイスごとに再計算する
     private func fontSizeRecalcForEachDevice() {
         startButton.fontSizeRecalcForEachDevice()
         newDataButton.fontSizeRecalcForEachDevice()

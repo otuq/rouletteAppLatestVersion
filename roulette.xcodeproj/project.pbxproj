@@ -10,15 +10,18 @@
 		CE032D9B27C3500C000F5892 /* CreateRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032D9A27C3500C000F5892 /* CreateRoulette.swift */; };
 		CE032DA327C395BB000F5892 /* CreateRouletteRotateAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DA227C395BB000F5892 /* CreateRouletteRotateAnimation.swift */; };
 		CE032DA827C3CEA9000F5892 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DA727C3CEA9000F5892 /* UIExtension.swift */; };
-		CE032DAB27C3DA77000F5892 /* NewDataMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DAA27C3DA77000F5892 /* NewDataMethods.swift */; };
 		CE032DAD27C3DCAA000F5892 /* SaveRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DAC27C3DCAA000F5892 /* SaveRoulette.swift */; };
 		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
+		CE1A21E327C60312008EA814 /* RouletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA611512678689000751566 /* RouletteTests.swift */; };
 		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
 		CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */; };
 		CE46A6FD269EB91500D33530 /* AppSettingTextColorCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */; };
 		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
 		CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */; };
 		CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5084A7269C341E0049ED7D /* AppSetting.storyboard */; };
+		CE69C67F27C4C8EA00FD5426 /* FormRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69C67E27C4C8EA00FD5426 /* FormRows.swift */; };
+		CE69C69027C564C200FD5426 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE69C68F27C564C200FD5426 /* Realm */; };
+		CE69C69227C564C200FD5426 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE69C69127C564C200FD5426 /* RealmSwift */; };
 		CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79A56A268AE4A900BBA00C /* Degree.swift */; };
 		CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */; };
 		CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */; };
@@ -31,14 +34,11 @@
 		CEA611422678688D00751566 /* Roulette.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA611402678688D00751566 /* Roulette.storyboard */; };
 		CEA611442678688F00751566 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEA611432678688F00751566 /* Assets.xcassets */; };
 		CEA611472678688F00751566 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEA611452678688F00751566 /* LaunchScreen.storyboard */; };
-		CEA611522678689000751566 /* rouletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA611512678689000751566 /* rouletteTests.swift */; };
-		CEA6115D2678689000751566 /* rouletteUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6115C2678689000751566 /* rouletteUITests.swift */; };
 		CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6116A267868D600751566 /* RouletteViewController.swift */; };
 		CEA6C8FF27706A9B00D5A9ED /* InputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEA6C8FE27706A9A00D5A9ED /* InputAccessoryView.xib */; };
 		CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */; };
 		CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */; };
 		CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */; };
-		CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CEB6C2D0268F0A6100C597F1 /* RealmSwift */; };
 		CEC5901726807D28005A47D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901626807D28005A47D6 /* HomeViewController.swift */; };
 		CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901826807D3D005A47D6 /* NewDataViewController.swift */; };
 		CEC5901C26807D79005A47D6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC5901B26807D79005A47D6 /* Home.storyboard */; };
@@ -57,20 +57,12 @@
 			remoteGlobalIDString = CEA611362678688D00751566;
 			remoteInfo = roulette;
 		};
-		CEA611592678689000751566 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CEA6112F2678688D00751566 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CEA611362678688D00751566;
-			remoteInfo = roulette;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CE032D9A27C3500C000F5892 /* CreateRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoulette.swift; sourceTree = "<group>"; };
 		CE032DA227C395BB000F5892 /* CreateRouletteRotateAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRouletteRotateAnimation.swift; sourceTree = "<group>"; };
 		CE032DA727C3CEA9000F5892 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
-		CE032DAA27C3DA77000F5892 /* NewDataMethods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataMethods.swift; sourceTree = "<group>"; };
 		CE032DAC27C3DCAA000F5892 /* SaveRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRoulette.swift; sourceTree = "<group>"; };
 		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTextColorCustomCell.swift; sourceTree = "<group>"; };
@@ -78,6 +70,7 @@
 		CE4AADFA268C475D00AFD70F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
+		CE69C67E27C4C8EA00FD5426 /* FormRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRows.swift; sourceTree = "<group>"; };
 		CE79A56A268AE4A900BBA00C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataTableViewCell.swift; sourceTree = "<group>"; };
 		CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
@@ -93,11 +86,8 @@
 		CEA611462678688F00751566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEA611482678688F00751566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6114D2678689000751566 /* rouletteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rouletteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEA611512678689000751566 /* rouletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rouletteTests.swift; sourceTree = "<group>"; };
+		CEA611512678689000751566 /* RouletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteTests.swift; sourceTree = "<group>"; };
 		CEA611532678689000751566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEA611582678689000751566 /* rouletteUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rouletteUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEA6115C2678689000751566 /* rouletteUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rouletteUITests.swift; sourceTree = "<group>"; };
-		CEA6115E2678689000751566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6116A267868D600751566 /* RouletteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewController.swift; sourceTree = "<group>"; };
 		CEA6C8FE27706A9A00D5A9ED /* InputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputAccessoryView.xib; sourceTree = "<group>"; };
 		CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAccessoryView.swift; sourceTree = "<group>"; };
@@ -118,7 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEB6C2D1268F0A6100C597F1 /* RealmSwift in Frameworks */,
+				CE69C69227C564C200FD5426 /* RealmSwift in Frameworks */,
+				CE69C69027C564C200FD5426 /* Realm in Frameworks */,
 				CE449651269D296B007E4F6A /* Eureka in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,29 +121,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEA611552678689000751566 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		58881DF8445524E6A3A0CFF8 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		CE032D9927C34FE8000F5892 /* module */ = {
 			isa = PBXGroup;
 			children = (
 				CE032D9A27C3500C000F5892 /* CreateRoulette.swift */,
 				CE032DA227C395BB000F5892 /* CreateRouletteRotateAnimation.swift */,
 				CE032DAC27C3DCAA000F5892 /* SaveRoulette.swift */,
+				CE69C67E27C4C8EA00FD5426 /* FormRows.swift */,
 			);
 			name = module;
 			path = "extension, model, logic";
@@ -163,9 +141,7 @@
 			children = (
 				CEA611392678688D00751566 /* roulette */,
 				CEA611502678689000751566 /* rouletteTests */,
-				CEA6115B2678689000751566 /* rouletteUITests */,
 				CEA611382678688D00751566 /* Products */,
-				58881DF8445524E6A3A0CFF8 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -174,7 +150,6 @@
 			children = (
 				CEA611372678688D00751566 /* roulette.app */,
 				CEA6114D2678689000751566 /* rouletteTests.xctest */,
-				CEA611582678689000751566 /* rouletteUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -201,19 +176,10 @@
 		CEA611502678689000751566 /* rouletteTests */ = {
 			isa = PBXGroup;
 			children = (
-				CEA611512678689000751566 /* rouletteTests.swift */,
+				CEA611512678689000751566 /* RouletteTests.swift */,
 				CEA611532678689000751566 /* Info.plist */,
 			);
 			path = rouletteTests;
-			sourceTree = "<group>";
-		};
-		CEA6115B2678689000751566 /* rouletteUITests */ = {
-			isa = PBXGroup;
-			children = (
-				CEA6115C2678689000751566 /* rouletteUITests.swift */,
-				CEA6115E2678689000751566 /* Info.plist */,
-			);
-			path = rouletteUITests;
 			sourceTree = "<group>";
 		};
 		CEADE44C27350651008918ED /* xib */ = {
@@ -259,7 +225,6 @@
 				CEC5901626807D28005A47D6 /* HomeViewController.swift */,
 				CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */,
 				CEC5901826807D3D005A47D6 /* NewDataViewController.swift */,
-				CE032DAA27C3DA77000F5892 /* NewDataMethods.swift */,
 				CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */,
 				CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */,
 				CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */,
@@ -290,6 +255,7 @@
 				CEA611332678688D00751566 /* Sources */,
 				CEA611342678688D00751566 /* Frameworks */,
 				CEA611352678688D00751566 /* Resources */,
+				CE1A21E527C603D0008EA814 /* Swiftlint Script */,
 			);
 			buildRules = (
 			);
@@ -297,8 +263,9 @@
 			);
 			name = roulette;
 			packageProductDependencies = (
-				CEB6C2D0268F0A6100C597F1 /* RealmSwift */,
 				CE449650269D296B007E4F6A /* Eureka */,
+				CE69C68F27C564C200FD5426 /* Realm */,
+				CE69C69127C564C200FD5426 /* RealmSwift */,
 			);
 			productName = roulette;
 			productReference = CEA611372678688D00751566 /* roulette.app */;
@@ -322,24 +289,6 @@
 			productReference = CEA6114D2678689000751566 /* rouletteTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		CEA611572678689000751566 /* rouletteUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CEA611672678689000751566 /* Build configuration list for PBXNativeTarget "rouletteUITests" */;
-			buildPhases = (
-				CEA611542678689000751566 /* Sources */,
-				CEA611552678689000751566 /* Frameworks */,
-				CEA611562678689000751566 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CEA6115A2678689000751566 /* PBXTargetDependency */,
-			);
-			name = rouletteUITests;
-			productName = rouletteUITests;
-			productReference = CEA611582678689000751566 /* rouletteUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -356,10 +305,6 @@
 						CreatedOnToolsVersion = 12.5;
 						TestTargetID = CEA611362678688D00751566;
 					};
-					CEA611572678689000751566 = {
-						CreatedOnToolsVersion = 12.5;
-						TestTargetID = CEA611362678688D00751566;
-					};
 				};
 			};
 			buildConfigurationList = CEA611322678688D00751566 /* Build configuration list for PBXProject "roulette" */;
@@ -372,8 +317,8 @@
 			);
 			mainGroup = CEA6112E2678688D00751566;
 			packageReferences = (
-				CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */,
 				CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */,
+				CE69C68E27C564C200FD5426 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = CEA611382678688D00751566 /* Products */;
 			projectDirPath = "";
@@ -381,7 +326,6 @@
 			targets = (
 				CEA611362678688D00751566 /* roulette */,
 				CEA6114C2678689000751566 /* rouletteTests */,
-				CEA611572678689000751566 /* rouletteUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -414,14 +358,28 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CEA611562678689000751566 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		CE1A21E527C603D0008EA814 /* Swiftlint Script */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Swiftlint Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"SwiftLint does not exist, download from https://github.com/realm/SwiftLint\"\nfi\n\n";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		CEA611332678688D00751566 /* Sources */ = {
@@ -436,7 +394,6 @@
 				CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
-				CE032DAB27C3DA77000F5892 /* NewDataMethods.swift in Sources */,
 				CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */,
 				CE032DA327C395BB000F5892 /* CreateRouletteRotateAnimation.swift in Sources */,
 				CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */,
@@ -451,6 +408,7 @@
 				CE032D9B27C3500C000F5892 /* CreateRoulette.swift in Sources */,
 				CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */,
 				CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */,
+				CE69C67F27C4C8EA00FD5426 /* FormRows.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -458,15 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEA611522678689000751566 /* rouletteTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CEA611542678689000751566 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CEA6115D2678689000751566 /* rouletteUITests.swift in Sources */,
+				CE1A21E327C60312008EA814 /* RouletteTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -477,11 +427,6 @@
 			isa = PBXTargetDependency;
 			target = CEA611362678688D00751566 /* roulette */;
 			targetProxy = CEA6114E2678689000751566 /* PBXContainerItemProxy */;
-		};
-		CEA6115A2678689000751566 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CEA611362678688D00751566 /* roulette */;
-			targetProxy = CEA611592678689000751566 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -723,46 +668,6 @@
 			};
 			name = Release;
 		};
-		CEA611682678689000751566 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98N8TAVGKD;
-				INFOPLIST_FILE = rouletteUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.rouletteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = roulette;
-			};
-			name = Debug;
-		};
-		CEA611692678689000751566 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 98N8TAVGKD;
-				INFOPLIST_FILE = rouletteUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.rouletteUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = roulette;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -793,15 +698,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEA611672678689000751566 /* Build configuration list for PBXNativeTarget "rouletteUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CEA611682678689000751566 /* Debug */,
-				CEA611692678689000751566 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -813,12 +709,12 @@
 				minimumVersion = 5.3.3;
 			};
 		};
-		CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */ = {
+		CE69C68E27C564C200FD5426 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-cocoa";
+			repositoryURL = "https://github.com/realm/realm-swift";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.9.0;
+				kind = upToNextMinorVersion;
+				minimumVersion = 10.18.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -829,9 +725,14 @@
 			package = CE44964F269D296B007E4F6A /* XCRemoteSwiftPackageReference "Eureka" */;
 			productName = Eureka;
 		};
-		CEB6C2D0268F0A6100C597F1 /* RealmSwift */ = {
+		CE69C68F27C564C200FD5426 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CEB6C2CF268F0A6100C597F1 /* XCRemoteSwiftPackageReference "realm-cocoa" */;
+			package = CE69C68E27C564C200FD5426 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CE69C69127C564C200FD5426 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE69C68E27C564C200FD5426 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */

@@ -7,9 +7,8 @@
 
 import UIKit
 
-
 extension UIView {
-    //チェーンレスポンダー
+    // チェーンレスポンダー
     var parentViewController: UIViewController? {
         var parentResponder: UIResponder? = self
         while true {
@@ -20,9 +19,9 @@ extension UIView {
             parentResponder = nextResponder
         }
     }
-    func rouletteTextSetting(width: CGFloat, height: CGFloat,_ text: String, _ textColor: UIColor,_ textAngle: CGFloat, textSize: CGFloat) {
+    func rouletteTextSetting(_ text: String, _ textColor: UIColor, _ textAngle: CGFloat, textSize: CGFloat) {
         let textLabel = UILabel()
-        textLabel.frame.size = CGSize(width: width, height: height)
+        textLabel.frame.size = CGSize(width: frame.width / 2, height: frame.height)
         let attributes: [NSAttributedString.Key: Any] = [
             .font: UIFont.systemFont(ofSize: textSize),
             .foregroundColor: textColor
@@ -33,9 +32,9 @@ extension UIView {
     }
 }
 extension UIViewController {
-    //ステータスバーの色スタイルを動的に変更する
+    // ステータスバーの色スタイルを動的に変更する
     func statusBarStyleChange(style: UIStatusBarStyle) {
-        //インターフェースがダークモードに設定されている時に発動
+        // インターフェースがダークモードに設定されている時に発動
         if UITraitCollection.current.userInterfaceStyle == .dark {
             guard let nav = presentingViewController as? UINavigationController,
                   let rootVC = nav.viewControllers.first as? HomeViewController else { return }
@@ -47,7 +46,7 @@ extension UIViewController {
     }
 }
 extension UIAlertController {
-    func selectTwoChoice(titleA: String, titleB: String, action: @escaping ()->()) {
+    func selectTwoChoice(titleA: String, titleB: String, action: @escaping () -> Void) {
         let actionA = UIAlertAction(title: titleA, style: .cancel, handler: .none)
         let actionB = UIAlertAction(title: titleB, style: .default) { _ in
             action()
@@ -63,7 +62,7 @@ extension UIButton {
         setBackgroundImage(imageNormal, for: .normal)
         setBackgroundImage(imageHighlight, for: .highlighted)
     }
-    //丸ボタンの装飾
+    // 丸ボタンの装飾
     func decoration() {
         layer.cornerRadius = bounds.width / 2
         layer.borderWidth = 0.5
@@ -73,7 +72,7 @@ extension UIButton {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
     }
-    //UIButtonのテキストサイズをデバイス毎に再計算する
+    // UIButtonのテキストサイズをデバイス毎に再計算する
     func fontSizeRecalcForEachDevice() {
         if let font = titleLabel?.font {
             titleLabel?.font = UIFont.systemFont(ofSize: font.pointSize.recalcValue, weight: font.weight)
@@ -83,17 +82,17 @@ extension UIButton {
         contentMode = .scaleAspectFit
         imageEdgeInsets = UIEdgeInsets(top: recalcValue, left: recalcValue, bottom: recalcValue, right: recalcValue)
     }
-    //randomボタンのonoffを判定する
-    private struct flagFunc {
-        static var flag: Bool = true
+    // randomボタンのonoffを判定する
+    private struct FlagFunc {
+        static var flag = true
     }
     var flag: Bool {
         get {
-            guard let hoge = objc_getAssociatedObject(self, &flagFunc.flag)as? Bool else { return true }
+            guard let hoge = objc_getAssociatedObject(self, &FlagFunc.flag)as? Bool else { return true }
             return hoge
         }
         set {
-            objc_setAssociatedObject(self, &flagFunc.flag, newValue, .OBJC_ASSOCIATION_RETAIN)
+            objc_setAssociatedObject(self, &FlagFunc.flag, newValue, .OBJC_ASSOCIATION_RETAIN)
         }
     }
 }
@@ -108,19 +107,19 @@ extension UILabel {
         layer.shadowOpacity = 0.3
         layer.shadowRadius = 1
     }
-    //UILabelのテキストサイズをデバイス毎に再計算する
+    // UILabelのテキストサイズをデバイス毎に再計算する
     func fontSizeRecalcForEachDevice() {
         font = UIFont.systemFont(ofSize: font.pointSize.recalcValue, weight: font.weight)
     }
 }
 extension UIFont {
-    //UIFontの装飾の情報を取得する
+    // UIFontの装飾の情報を取得する
     private var traits: [UIFontDescriptor.TraitKey: Any] {
         fontDescriptor.object(forKey: .traits)as? [UIFontDescriptor.TraitKey: Any] ?? [:]
     }
-    //文字の太さを取得
+    // 文字の太さを取得
     var weight: UIFont.Weight {
-        guard let weight = traits[.weight]as? NSNumber else { return .regular}
+        guard let weight = traits[.weight]as? NSNumber else { return .regular }
         return UIFont.Weight(rawValue: CGFloat(truncating: weight))
     }
 }

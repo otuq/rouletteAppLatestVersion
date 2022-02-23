@@ -8,6 +8,7 @@
 import UIKit
 
 extension String {
+    // テキストサイズを再計算
     func textSizeCalc(width: CGFloat, attribute: [NSAttributedString.Key: Any]) -> CGSize {
         let bounds = CGSize(width: width, height: .greatestFiniteMagnitude)
         let options: NSStringDrawingOptions = [.usesLineFragmentOrigin, .usesFontLeading]
@@ -30,7 +31,7 @@ extension NSAttributedString {
     }
 }
 extension CGFloat {
-    //デバイス毎に再計算する
+    // デバイス毎に再計算する
     var recalcValue: CGFloat {
         let refDeviceHeight: CGFloat = 812
         let deviceHeight: CGFloat = UIScreen.main.bounds.height
@@ -41,7 +42,7 @@ extension CGFloat {
         return self
     }
 }
-//AutoLayoutをデバイス毎に再計算
+// AutoLayoutをデバイス毎に再計算
 class CustomLayoutConstant: NSLayoutConstraint {
     override var constant: CGFloat {
         get {
