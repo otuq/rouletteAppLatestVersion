@@ -3,7 +3,6 @@
 //  rouletteTests
 //
 //  Created by USER on 2021/06/15.
-//
 
 @testable import roulette
 import XCTest

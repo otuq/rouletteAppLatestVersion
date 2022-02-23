@@ -45,6 +45,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         settingGesture()
         fontSizeRecalcForEachDevice()
     }
+
     private func settingView() {
         newDataTableView.delegate = self
         newDataTableView.dataSource = self
