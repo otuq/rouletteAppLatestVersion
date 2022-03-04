@@ -16,8 +16,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEA611362678688D00751566"
                BuildableName = "roulette.app"
-               BlueprintName = "roulette"
-               ReferencedContainer = "container:roulette.xcodeproj">
+               BlueprintName = "rouletteReplace"
+               ReferencedContainer = "container:rouletteReplace.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -34,8 +34,8 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CEA6114C2678689000751566"
                BuildableName = "rouletteTests.xctest"
-               BlueprintName = "rouletteTests"
-               ReferencedContainer = "container:roulette.xcodeproj">
+               BlueprintName = "rouletteReplaceTests"
+               ReferencedContainer = "container:rouletteReplace.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -45,7 +45,7 @@
                BlueprintIdentifier = "CEA611572678689000751566"
                BuildableName = "rouletteUITests.xctest"
                BlueprintName = "rouletteUITests"
-               ReferencedContainer = "container:roulette.xcodeproj">
+               ReferencedContainer = "container:rouletteReplace.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -66,8 +66,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEA611362678688D00751566"
             BuildableName = "roulette.app"
-            BlueprintName = "roulette"
-            ReferencedContainer = "container:roulette.xcodeproj">
+            BlueprintName = "rouletteReplace"
+            ReferencedContainer = "container:rouletteReplace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -83,8 +83,8 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CEA611362678688D00751566"
             BuildableName = "roulette.app"
-            BlueprintName = "roulette"
-            ReferencedContainer = "container:roulette.xcodeproj">
+            BlueprintName = "rouletteReplace"
+            ReferencedContainer = "container:rouletteReplace.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

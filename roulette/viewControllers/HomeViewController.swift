@@ -149,8 +149,8 @@ class HomeViewController: UIViewController {
     }
     @objc private func shareGesture() {
         let textString = "友人や家族にこのアプリを紹介しよう♪"
-        let urlString = "https://apps.apple.com/jp/app/thee-roulette/id1602651709"
-        let items = [textString, urlString]
+//        let urlString = "https://apps.apple.com/jp/app/thee-roulette/id1602651709"
+        let items = [textString, "URLないのよ〜"]
         let activityVC = UIActivityViewController(activityItems: items, applicationActivities: nil)
 
         present(activityVC, animated: true, completion: nil)

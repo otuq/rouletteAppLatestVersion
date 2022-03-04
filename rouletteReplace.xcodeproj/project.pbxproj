@@ -78,14 +78,14 @@
 		CE82BC2026831BC7009550EB /* ColorSelect.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ColorSelect.storyboard; sourceTree = "<group>"; };
 		CE82BC2226831DD3009550EB /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		CE82BC2326831DD3009550EB /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
-		CEA611372678688D00751566 /* roulette.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = roulette.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEA611372678688D00751566 /* rouletteReplace.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = rouletteReplace.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA6113A2678688D00751566 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEA6113C2678688D00751566 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		CEA611412678688D00751566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Roulette.storyboard; sourceTree = "<group>"; };
 		CEA611432678688F00751566 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CEA611462678688F00751566 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEA611482678688F00751566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CEA6114D2678689000751566 /* rouletteTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rouletteTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEA6114D2678689000751566 /* rouletteReplaceTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = rouletteReplaceTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEA611512678689000751566 /* RouletteTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteTests.swift; sourceTree = "<group>"; };
 		CEA611532678689000751566 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEA6116A267868D600751566 /* RouletteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteViewController.swift; sourceTree = "<group>"; };
@@ -148,8 +148,8 @@
 		CEA611382678688D00751566 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				CEA611372678688D00751566 /* roulette.app */,
-				CEA6114D2678689000751566 /* rouletteTests.xctest */,
+				CEA611372678688D00751566 /* rouletteReplace.app */,
+				CEA6114D2678689000751566 /* rouletteReplaceTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -248,9 +248,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		CEA611362678688D00751566 /* roulette */ = {
+		CEA611362678688D00751566 /* rouletteReplace */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CEA611612678689000751566 /* Build configuration list for PBXNativeTarget "roulette" */;
+			buildConfigurationList = CEA611612678689000751566 /* Build configuration list for PBXNativeTarget "rouletteReplace" */;
 			buildPhases = (
 				CEA611332678688D00751566 /* Sources */,
 				CEA611342678688D00751566 /* Frameworks */,
@@ -261,19 +261,19 @@
 			);
 			dependencies = (
 			);
-			name = roulette;
+			name = rouletteReplace;
 			packageProductDependencies = (
 				CE449650269D296B007E4F6A /* Eureka */,
 				CE69C68F27C564C200FD5426 /* Realm */,
 				CE69C69127C564C200FD5426 /* RealmSwift */,
 			);
 			productName = roulette;
-			productReference = CEA611372678688D00751566 /* roulette.app */;
+			productReference = CEA611372678688D00751566 /* rouletteReplace.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CEA6114C2678689000751566 /* rouletteTests */ = {
+		CEA6114C2678689000751566 /* rouletteReplaceTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = CEA611642678689000751566 /* Build configuration list for PBXNativeTarget "rouletteTests" */;
+			buildConfigurationList = CEA611642678689000751566 /* Build configuration list for PBXNativeTarget "rouletteReplaceTests" */;
 			buildPhases = (
 				CEA611492678689000751566 /* Sources */,
 				CEA6114A2678689000751566 /* Frameworks */,
@@ -284,9 +284,9 @@
 			dependencies = (
 				CEA6114F2678689000751566 /* PBXTargetDependency */,
 			);
-			name = rouletteTests;
+			name = rouletteReplaceTests;
 			productName = rouletteTests;
-			productReference = CEA6114D2678689000751566 /* rouletteTests.xctest */;
+			productReference = CEA6114D2678689000751566 /* rouletteReplaceTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -307,7 +307,7 @@
 					};
 				};
 			};
-			buildConfigurationList = CEA611322678688D00751566 /* Build configuration list for PBXProject "roulette" */;
+			buildConfigurationList = CEA611322678688D00751566 /* Build configuration list for PBXProject "rouletteReplace" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -324,8 +324,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				CEA611362678688D00751566 /* roulette */,
-				CEA6114C2678689000751566 /* rouletteTests */,
+				CEA611362678688D00751566 /* rouletteReplace */,
+				CEA6114C2678689000751566 /* rouletteReplaceTests */,
 			);
 		};
 /* End PBXProject section */
@@ -425,7 +425,7 @@
 /* Begin PBXTargetDependency section */
 		CEA6114F2678689000751566 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = CEA611362678688D00751566 /* roulette */;
+			target = CEA611362678688D00751566 /* rouletteReplace */;
 			targetProxy = CEA6114E2678689000751566 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -588,7 +588,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.roulette;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.rouletteReplace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "roulette type AdHoc";
 				SWIFT_VERSION = 5.0;
@@ -616,7 +616,7 @@
 				);
 				MARKETING_VERSION = 1.0.1;
 				OTHER_LDFLAGS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.roulette;
+				PRODUCT_BUNDLE_IDENTIFIER = com.otuq.rouletteReplace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "roulette type AdHoc";
 				SWIFT_VERSION = 5.0;
@@ -642,7 +642,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/roulette.app/roulette";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rouletteReplace.app/rouletteReplace";
 			};
 			name = Debug;
 		};
@@ -664,14 +664,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/roulette.app/roulette";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rouletteReplace.app/rouletteReplace";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		CEA611322678688D00751566 /* Build configuration list for PBXProject "roulette" */ = {
+		CEA611322678688D00751566 /* Build configuration list for PBXProject "rouletteReplace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEA6115F2678689000751566 /* Debug */,
@@ -680,7 +680,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEA611612678689000751566 /* Build configuration list for PBXNativeTarget "roulette" */ = {
+		CEA611612678689000751566 /* Build configuration list for PBXNativeTarget "rouletteReplace" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEA611622678689000751566 /* Debug */,
@@ -689,7 +689,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		CEA611642678689000751566 /* Build configuration list for PBXNativeTarget "rouletteTests" */ = {
+		CEA611642678689000751566 /* Build configuration list for PBXNativeTarget "rouletteReplaceTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				CEA611652678689000751566 /* Debug */,
