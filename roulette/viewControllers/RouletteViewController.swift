@@ -9,16 +9,27 @@ import AVFoundation
 import RealmSwift
 import UIKit
 
-class RouletteViewController: UIViewController {
-    // MARK: Properties
-    private let rouletteView = CreateRouletteView()
-    private let objectWidth = CGFloat(30).recalcValue
-    private var audioPlayer: AVAudioPlayer!
-    private let diameter: CGFloat = {
+protocol InterfaceInput: AnyObject {
+    var vc: RouletteViewController { get }
+    var vw: CreateRouletteView { get }
+    var bt: UIButton { get }
+    var lbs: [UILabel] { get }
+}
+extension InterfaceInput {
+    var d: CGFloat {
         let width = UIScreen.main.bounds.width
         let subtraction = (width / 13) / 2
         return (width - subtraction)
-    }() // 直径
+    }
+     var w: CGFloat {
+        CGFloat(30).recalcValue
+    }
+}
+class RouletteViewController: UIViewController {
+    // MARK: Properties
+    private let rouletteView = CreateRouletteView()
+    private var presenter: RoulettePresenter!
+
     var rouletteDataSet: (dataSet: RouletteData, list: List<RouletteGraphData>)! {
         didSet {
             guard rouletteDataSet != nil else { return print("detaSetがありません") }
@@ -27,116 +38,40 @@ class RouletteViewController: UIViewController {
         }
     }
     // MARK: Outlets,Actions
-    @IBOutlet var tapStartLabel: [UILabel]!
-    @IBOutlet var quitButton: UIButton!
+    @IBOutlet private var tapStartLabel: [UILabel]!
+    @IBOutlet private var quitButton: UIButton!
 
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
-        settingUI()
-        settingView()
-        settingGesture()
-        fontSizeRecalcForEachDevice()
-        blinkAnimation(labels: tapStartLabel)
-    }
-    private func settingUI() {
-        quitButton.imageSet()
-        quitButton.fontSizeRecalcForEachDevice()
-    }
-    private func settingView() {
-        let pointerImageView = UIImageView(image: roulettePointerImage(w: objectWidth))
-        let centerCircleLabel = rouletteCenterCircleLabel(w: objectWidth)
-        let frameCircleView = rouletteFrameCircle(w: diameter)
-        pointerImageView.center = CGPoint(x: view.center.x, y: (view.center.y - diameter / 2) - (objectWidth / 2) + 5 )
-        centerCircleLabel.center = view.center
-        frameCircleView.center = view.center
-
-        rouletteView.frame = view.frame
-        rouletteView.backgroundColor = .clear
-        rouletteView.createGraph()
-
-        view.addSubview(rouletteView)
-        view.addSubview(pointerImageView)
-        view.addSubview(centerCircleLabel)
-        view.addSubview(frameCircleView)
-        view.sendSubviewToBack(rouletteView)
-        view.bringSubviewToFront(pointerImageView)
         navigationController?.isNavigationBarHidden = true
+        initializePresenter()
+        presenter.viewDidload()
+        settingGesture()
+    }
+    private func initializePresenter() {
+        presenter = RoulettePresenter(with: self)
     }
     private func settingGesture() {
         let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
         view.addGestureRecognizer(startTapGesture)
         quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
     }
-    // デバイス毎にUIのテキストサイズを再計算
-    private func fontSizeRecalcForEachDevice() {
-        tapStartLabel.forEach { $0.fontSizeRecalcForEachDevice() }
-        quitButton.fontSizeRecalcForEachDevice()
-    }
     // ルーレットを中止
     @objc private func quitTapDismiss() {
-        let alertVC = UIAlertController(title: .none, message: "ルーレットを中止しますか？", preferredStyle: .alert)
-        let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
-        let action = UIAlertAction(title: "中止する", style: .default) { _ in
-            self.dismiss(animated: true, completion: nil)
-        }
-        alertVC.addAction(cancel)
-        alertVC.addAction(action)
-        present(alertVC, animated: true, completion: nil)
+        presenter.alertAppear()
     }
     // ルーレットを開始
     @objc private func viewTapStart(tapGesture: UITapGestureRecognizer) {
-        tapStartLabel.forEach { label in
-            label.isHidden = true
-        }
-        quitButton.isHidden = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.rouletteView.startRotateAnimation()
-            self.rouletteView.rouletteSoundSetting()
-        }
+        presenter.rouletteStart()
         view.removeGestureRecognizer(tapGesture)
     }
-    // テキストの点滅
-    private func blinkAnimation(labels: [UILabel]) {
-        labels.forEach { label in
-            UIView.transition(with: label, duration: 1.0, options: [.transitionCrossDissolve, .autoreverse, .repeat], animations: {
-                label.layer.opacity = 0
-            }, completion: { _ in
-                label.layer.opacity = 1
-            })
-        }
-    }
-    // ルーレットの針
-    private func roulettePointerImage(w: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContext(CGSize(width: w, height: w))
-        let path = UIBezierPath()
-        path.move(to: .zero)
-        path.addLine(to: CGPoint(x: w, y: 0))
-        path.addLine(to: CGPoint(x: w / 2, y: w))
-        path.addLine(to: CGPoint(x: 0, y: 0))
-        path.close()
-        UIColor.red.setFill()
-        path.fill()
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image!
-    }
-    // ルーレットの真ん中のオブジェクト
-    private func rouletteCenterCircleLabel(w: CGFloat) -> UILabel {
-        let circleLabel = UILabel()
-        circleLabel.bounds.size = CGSize(width: w, height: w)
-        circleLabel.decoration(bgColor: .white)
-        return circleLabel
-    }
-    // ルーレットの外側円線
-    private func rouletteFrameCircle(w: CGFloat) -> UIView {
-        let frameCircleView = UIView()
-        frameCircleView.bounds.size = CGSize(width: w, height: w)
-        frameCircleView.backgroundColor = .clear
-        frameCircleView.layer.cornerRadius = frameCircleView.bounds.width / 2
-        frameCircleView.layer.borderWidth = 2
-        frameCircleView.layer.masksToBounds = true
-        return frameCircleView
-    }
+}
+//MARK: -RouletteViewControllerExtension
+extension RouletteViewController: InterfaceInput {
+    var vc: RouletteViewController { self }
+    var vw: CreateRouletteView { rouletteView }
+    var bt: UIButton { quitButton }
+    var lbs: [UILabel] { tapStartLabel }
 }

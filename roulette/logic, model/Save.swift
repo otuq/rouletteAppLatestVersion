@@ -8,7 +8,7 @@
 import RealmSwift
 import UIKit
 
-class SaveRoulette {
+struct Save {
     // MARK: Properties
     private let referenceVC: NewDataViewController
     private let dataSet: RouletteData

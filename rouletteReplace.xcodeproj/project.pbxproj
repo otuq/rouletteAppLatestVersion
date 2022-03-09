@@ -7,22 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		CE032D9B27C3500C000F5892 /* CreateRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032D9A27C3500C000F5892 /* CreateRoulette.swift */; };
-		CE032DA327C395BB000F5892 /* CreateRouletteRotateAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DA227C395BB000F5892 /* CreateRouletteRotateAnimation.swift */; };
 		CE032DA827C3CEA9000F5892 /* UIExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DA727C3CEA9000F5892 /* UIExtension.swift */; };
-		CE032DAD27C3DCAA000F5892 /* SaveRoulette.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE032DAC27C3DCAA000F5892 /* SaveRoulette.swift */; };
-		CE15301326F332150051DCA3 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Colors.swift */; };
+		CE0589FE27D86A2300351320 /* AlertAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0589FD27D86A2300351320 /* AlertAppear.swift */; };
+		CE058A0027D879F900351320 /* Start.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE0589FF27D879F800351320 /* Start.swift */; };
+		CE058A0227D87C0700351320 /* Blink.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE058A0127D87C0700351320 /* Blink.swift */; };
+		CE15301326F332150051DCA3 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE15301226F332150051DCA3 /* Color.swift */; };
 		CE1A21E327C60312008EA814 /* RouletteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA611512678689000751566 /* RouletteTests.swift */; };
 		CE449651269D296B007E4F6A /* Eureka in Frameworks */ = {isa = PBXBuildFile; productRef = CE449650269D296B007E4F6A /* Eureka */; };
 		CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */; };
 		CE46A6FD269EB91500D33530 /* AppSettingTextColorCustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */; };
-		CE4AADFB268C475D00AFD70F /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4AADFA268C475D00AFD70F /* Model.swift */; };
+		CE4C872B27D7743A009B1CA6 /* RoulettePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE4C872A27D7743A009B1CA6 /* RoulettePresenter.swift */; };
 		CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */; };
 		CE5084A8269C341E0049ED7D /* AppSetting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE5084A7269C341E0049ED7D /* AppSetting.storyboard */; };
-		CE69C67F27C4C8EA00FD5426 /* FormRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE69C67E27C4C8EA00FD5426 /* FormRows.swift */; };
 		CE69C69027C564C200FD5426 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE69C68F27C564C200FD5426 /* Realm */; };
 		CE69C69227C564C200FD5426 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE69C69127C564C200FD5426 /* RealmSwift */; };
-		CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE79A56A268AE4A900BBA00C /* Degree.swift */; };
 		CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */; };
 		CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */; };
 		CE82BC1F26831741009550EB /* ColorSelectPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */; };
@@ -46,6 +44,13 @@
 		CEC590212680807E005A47D6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC590202680807E005A47D6 /* Extension.swift */; };
 		CEC5902626808559005A47D6 /* NewDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */; };
 		CEC5902726808559005A47D6 /* NewDataTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */; };
+		CED40E7027D7AFD600EBCE24 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E6D27D7AFD600EBCE24 /* Model.swift */; };
+		CED40E7127D7AFD600EBCE24 /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E6E27D7AFD600EBCE24 /* Save.swift */; };
+		CED40E7227D7AFD600EBCE24 /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E6F27D7AFD600EBCE24 /* Degree.swift */; };
+		CED40E7927D7B02200EBCE24 /* FormRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7427D7B02200EBCE24 /* FormRows.swift */; };
+		CED40E7A27D7B02200EBCE24 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7627D7B02200EBCE24 /* Animation.swift */; };
+		CED40E7B27D7B02200EBCE24 /* Create.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7727D7B02200EBCE24 /* Create.swift */; };
+		CED40E7C27D7B02200EBCE24 /* RouletteModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7827D7B02200EBCE24 /* RouletteModule.swift */; };
 		CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF696BD26B7D2DE00564381 /* Sound.xcassets */; };
 /* End PBXBuildFile section */
 
@@ -60,18 +65,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		CE032D9A27C3500C000F5892 /* CreateRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRoulette.swift; sourceTree = "<group>"; };
-		CE032DA227C395BB000F5892 /* CreateRouletteRotateAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateRouletteRotateAnimation.swift; sourceTree = "<group>"; };
 		CE032DA727C3CEA9000F5892 /* UIExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIExtension.swift; sourceTree = "<group>"; };
-		CE032DAC27C3DCAA000F5892 /* SaveRoulette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveRoulette.swift; sourceTree = "<group>"; };
-		CE15301226F332150051DCA3 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		CE0589FD27D86A2300351320 /* AlertAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertAppear.swift; sourceTree = "<group>"; };
+		CE0589FF27D879F800351320 /* Start.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Start.swift; sourceTree = "<group>"; };
+		CE058A0127D87C0700351320 /* Blink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blink.swift; sourceTree = "<group>"; };
+		CE15301226F332150051DCA3 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		CE46A6FA269EB91500D33530 /* AppSettingTextColorCustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingTextColorCustomCell.swift; sourceTree = "<group>"; };
 		CE46A6FB269EB91500D33530 /* AppSettingTextColorCustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AppSettingTextColorCustomCell.xib; sourceTree = "<group>"; };
-		CE4AADFA268C475D00AFD70F /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CE4C872A27D7743A009B1CA6 /* RoulettePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoulettePresenter.swift; sourceTree = "<group>"; };
 		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
-		CE69C67E27C4C8EA00FD5426 /* FormRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormRows.swift; sourceTree = "<group>"; };
-		CE79A56A268AE4A900BBA00C /* Degree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataTableViewCell.swift; sourceTree = "<group>"; };
 		CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
 		CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectPresentationController.swift; sourceTree = "<group>"; };
@@ -100,6 +103,13 @@
 		CEC590202680807E005A47D6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		CEC5902426808559005A47D6 /* NewDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataTableViewCell.swift; sourceTree = "<group>"; };
 		CEC5902526808559005A47D6 /* NewDataTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewDataTableViewCell.xib; sourceTree = "<group>"; };
+		CED40E6D27D7AFD600EBCE24 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CED40E6E27D7AFD600EBCE24 /* Save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
+		CED40E6F27D7AFD600EBCE24 /* Degree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
+		CED40E7427D7B02200EBCE24 /* FormRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormRows.swift; sourceTree = "<group>"; };
+		CED40E7627D7B02200EBCE24 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		CED40E7727D7B02200EBCE24 /* Create.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Create.swift; sourceTree = "<group>"; };
+		CED40E7827D7B02200EBCE24 /* RouletteModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouletteModule.swift; sourceTree = "<group>"; };
 		CEF696BD26B7D2DE00564381 /* Sound.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sound.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,16 +134,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CE032D9927C34FE8000F5892 /* module */ = {
+		CE058A0327D87F0700351320 /* universal */ = {
 			isa = PBXGroup;
 			children = (
-				CE032D9A27C3500C000F5892 /* CreateRoulette.swift */,
-				CE032DA227C395BB000F5892 /* CreateRouletteRotateAnimation.swift */,
-				CE032DAC27C3DCAA000F5892 /* SaveRoulette.swift */,
-				CE69C67E27C4C8EA00FD5426 /* FormRows.swift */,
+				CE0589FD27D86A2300351320 /* AlertAppear.swift */,
 			);
-			name = module;
-			path = "extension, model, logic";
+			path = universal;
+			sourceTree = "<group>";
+		};
+		CE058A0427D87F1D00351320 /* form */ = {
+			isa = PBXGroup;
+			children = (
+				CED40E7427D7B02200EBCE24 /* FormRows.swift */,
+			);
+			path = form;
 			sourceTree = "<group>";
 		};
 		CEA6112E2678688D00751566 = {
@@ -159,8 +173,9 @@
 			children = (
 				CEA6113A2678688D00751566 /* AppDelegate.swift */,
 				CEA6113C2678688D00751566 /* SceneDelegate.swift */,
-				CE032D9927C34FE8000F5892 /* module */,
-				CEC5901F2680805F005A47D6 /* extension, model, logic */,
+				CED40E7327D7B02200EBCE24 /* module */,
+				CED40E6C27D7AFD600EBCE24 /* logic, model */,
+				CEC5901F2680805F005A47D6 /* extension */,
 				CEC59022268080A4005A47D6 /* viewControllers */,
 				CEC5901A26807D5D005A47D6 /* storyboards */,
 				CEC5902326808510005A47D6 /* xib.swift */,
@@ -206,21 +221,20 @@
 			path = storyboards;
 			sourceTree = "<group>";
 		};
-		CEC5901F2680805F005A47D6 /* extension, model, logic */ = {
+		CEC5901F2680805F005A47D6 /* extension */ = {
 			isa = PBXGroup;
 			children = (
 				CEC590202680807E005A47D6 /* Extension.swift */,
 				CE032DA727C3CEA9000F5892 /* UIExtension.swift */,
-				CE15301226F332150051DCA3 /* Colors.swift */,
-				CE79A56A268AE4A900BBA00C /* Degree.swift */,
-				CE4AADFA268C475D00AFD70F /* Model.swift */,
+				CE15301226F332150051DCA3 /* Color.swift */,
 			);
-			path = "extension, model, logic";
+			path = extension;
 			sourceTree = "<group>";
 		};
 		CEC59022268080A4005A47D6 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				CE4C872A27D7743A009B1CA6 /* RoulettePresenter.swift */,
 				CEA6116A267868D600751566 /* RouletteViewController.swift */,
 				CEC5901626807D28005A47D6 /* HomeViewController.swift */,
 				CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */,
@@ -243,6 +257,38 @@
 			);
 			name = xib.swift;
 			path = viewControllers;
+			sourceTree = "<group>";
+		};
+		CED40E6C27D7AFD600EBCE24 /* logic, model */ = {
+			isa = PBXGroup;
+			children = (
+				CED40E6D27D7AFD600EBCE24 /* Model.swift */,
+				CED40E6E27D7AFD600EBCE24 /* Save.swift */,
+				CED40E6F27D7AFD600EBCE24 /* Degree.swift */,
+			);
+			path = "logic, model";
+			sourceTree = "<group>";
+		};
+		CED40E7327D7B02200EBCE24 /* module */ = {
+			isa = PBXGroup;
+			children = (
+				CE058A0427D87F1D00351320 /* form */,
+				CE058A0327D87F0700351320 /* universal */,
+				CED40E7527D7B02200EBCE24 /* roulette */,
+			);
+			path = module;
+			sourceTree = "<group>";
+		};
+		CED40E7527D7B02200EBCE24 /* roulette */ = {
+			isa = PBXGroup;
+			children = (
+				CED40E7727D7B02200EBCE24 /* Create.swift */,
+				CED40E7627D7B02200EBCE24 /* Animation.swift */,
+				CE0589FF27D879F800351320 /* Start.swift */,
+				CED40E7827D7B02200EBCE24 /* RouletteModule.swift */,
+				CE058A0127D87C0700351320 /* Blink.swift */,
+			);
+			path = roulette;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -387,28 +433,33 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */,
-				CE032DAD27C3DCAA000F5892 /* SaveRoulette.swift in Sources */,
+				CED40E7A27D7B02200EBCE24 /* Animation.swift in Sources */,
 				CEA6113B2678688D00751566 /* AppDelegate.swift in Sources */,
+				CED40E7927D7B02200EBCE24 /* FormRows.swift in Sources */,
 				CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */,
-				CE15301326F332150051DCA3 /* Colors.swift in Sources */,
+				CE15301326F332150051DCA3 /* Color.swift in Sources */,
 				CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
 				CE46A6FC269EB91500D33530 /* AppSettingTextColorCustomCell.swift in Sources */,
-				CE032DA327C395BB000F5892 /* CreateRouletteRotateAnimation.swift in Sources */,
+				CE4C872B27D7743A009B1CA6 /* RoulettePresenter.swift in Sources */,
 				CE5084A6269C33FA0049ED7D /* AppSettingViewController.swift in Sources */,
+				CED40E7227D7AFD600EBCE24 /* Degree.swift in Sources */,
+				CE0589FE27D86A2300351320 /* AlertAppear.swift in Sources */,
 				CE032DA827C3CEA9000F5892 /* UIExtension.swift in Sources */,
 				CEC590212680807E005A47D6 /* Extension.swift in Sources */,
-				CE4AADFB268C475D00AFD70F /* Model.swift in Sources */,
+				CE058A0027D879F900351320 /* Start.swift in Sources */,
+				CED40E7127D7AFD600EBCE24 /* Save.swift in Sources */,
 				CEA6116B267868D600751566 /* RouletteViewController.swift in Sources */,
 				CEC5902626808559005A47D6 /* NewDataTableViewCell.swift in Sources */,
 				CEC5901726807D28005A47D6 /* HomeViewController.swift in Sources */,
 				CE82BC1F26831741009550EB /* ColorSelectPresentationController.swift in Sources */,
+				CED40E7027D7AFD600EBCE24 /* Model.swift in Sources */,
+				CED40E7C27D7B02200EBCE24 /* RouletteModule.swift in Sources */,
 				CE82BC2426831DD3009550EB /* CollectionViewCell.swift in Sources */,
-				CE032D9B27C3500C000F5892 /* CreateRoulette.swift in Sources */,
 				CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */,
-				CE79A56B268AE4A900BBA00C /* Degree.swift in Sources */,
-				CE69C67F27C4C8EA00FD5426 /* FormRows.swift in Sources */,
+				CE058A0227D87C0700351320 /* Blink.swift in Sources */,
+				CED40E7B27D7B02200EBCE24 /* Create.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

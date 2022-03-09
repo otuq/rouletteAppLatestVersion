@@ -20,8 +20,8 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private var realm = try! Realm()
     private var getAllCells = [NewDataTableViewCell]()
     private var colors = [UIColor]()
-    private var saveRoulette: SaveRoulette {
-        let saveRoulette = SaveRoulette(self, dataSet)
+    private var saveRoulette: Save {
+        let saveRoulette = Save(self, dataSet)
         return saveRoulette
     }
     var dataSet = RouletteData()

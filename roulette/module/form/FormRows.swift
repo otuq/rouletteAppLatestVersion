@@ -8,7 +8,6 @@
 import AVFoundation
 import Eureka
 import SafariServices
-import UIKit
 
 class FormRows {
     // MARK: Properties
