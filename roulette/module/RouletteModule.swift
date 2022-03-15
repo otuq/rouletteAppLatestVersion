@@ -8,6 +8,20 @@
 import UIKit
 
 class RouletteModule {
+    private var input: InterfaceInput!
+    init(input: InterfaceInput) {
+        self.input = input
+    }
+    // ルーレット
+    func addRoulette() {
+        let rouletteView = input.vw as! CreateRouletteView
+        rouletteView.frame = input.vc.view.bounds
+        rouletteView.backgroundColor = .clear
+        rouletteView.createGraph()
+
+        input.vc.view.addSubview(rouletteView)
+        input.vc.view.sendSubviewToBack(rouletteView)
+    }
     // ルーレットの針
     func addPointer() {
         UIGraphicsBeginImageContext(CGSize(width: input.w, height: input.w))
@@ -22,12 +36,9 @@ class RouletteModule {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let imageView = UIImageView(image: image)
-        imageView.center = viewlayout()
+        imageView.center = CGPoint(x: input.vw.center.x, y: (input.vw.center.y - input.d / 2) - (input.w / 2) + 5 )
         input.vc.view.addSubview(imageView)
         input.vc.view.bringSubviewToFront(imageView)
-    }
-    private func viewlayout() -> CGPoint {
-        CGPoint(x: input.vw.center.x, y: (input.vw.center.y - input.d / 2) - (input.w / 2) + 5 )
     }
     // ルーレットの真ん中のオブジェクト
     func addCenterCircle() {
@@ -47,5 +58,17 @@ class RouletteModule {
         frameCircleView.layer.masksToBounds = true
         frameCircleView.center = input.vc.view.center
         input.vc.view.addSubview(frameCircleView)
+    }
+    //ルーレットの開始
+    func start() {
+        
+        input.lbs.forEach { label in
+            label.isHidden = true
+        }
+        input.bt.isHidden = true
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            input.vw.startRotateAnimation()
+            input.vw.rouletteSoundSetting()
+        }
     }
 }

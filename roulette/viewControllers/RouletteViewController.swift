@@ -9,12 +9,7 @@ import AVFoundation
 import RealmSwift
 import UIKit
 
-protocol InterfaceInput: AnyObject {
-    var vc: RouletteViewController { get }
-    var vw: CreateRouletteView { get }
-    var bt: UIButton { get }
-    var lbs: [UILabel] { get }
-}
+protocol InterfaceInput: AnyObject {}
 extension InterfaceInput {
     var d: CGFloat {
         let width = UIScreen.main.bounds.width
@@ -25,53 +20,57 @@ extension InterfaceInput {
         CGFloat(30).recalcValue
     }
 }
+
+protocol RouletteOutput: AnyObject {
+    func tapStart(complition: @escaping ([UILabel])->())
+    func tapQuit(complition: @escaping (UIViewController)->())
+}
+
 class RouletteViewController: UIViewController {
     // MARK: Properties
-    private let rouletteView = CreateRouletteView()
     private var presenter: RoulettePresenter!
-
-    var rouletteDataSet: (dataSet: RouletteData, list: List<RouletteGraphData>)! {
-        didSet {
-            guard rouletteDataSet != nil else { return print("detaSetがありません") }
-            print(rouletteDataSet.dataSet.sound)
-            rouletteView.rouletteDataSet = rouletteDataSet
-        }
-    }
+    private var gesture: UIGestureRecognizer!
+    
     // MARK: Outlets,Actions
     @IBOutlet private var tapStartLabel: [UILabel]!
     @IBOutlet private var quitButton: UIButton!
-
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         overrideUserInterfaceStyle = .light
         navigationController?.isNavigationBarHidden = true
-        initializePresenter()
-        presenter.viewDidload()
+        initialize()
+        settingUI()
         settingGesture()
+        presenter.viewDidload()
     }
-    private func initializePresenter() {
+    private func initialize() {
         presenter = RoulettePresenter(with: self)
+        view = presenter.rouletteView
+    }
+    private func settingUI() {
+        quitButton.imageSet()
     }
     private func settingGesture() {
-        let startTapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapStart))
-        view.addGestureRecognizer(startTapGesture)
-        quitButton.addTarget(self, action: #selector(quitTapDismiss), for: .touchUpInside)
+        gesture = UITapGestureRecognizer(target: self, action: #selector(startGesture))
+        view.addGestureRecognizer(gesture)
+        quitButton.addTarget(self, action: #selector(quitGesture), for: .touchUpInside)
     }
-    // ルーレットを中止
-    @objc private func quitTapDismiss() {
-        presenter.alertAppear()
+    @objc private func startGesture() {
+        presenter.tapStart()
     }
-    // ルーレットを開始
-    @objc private func viewTapStart(tapGesture: UITapGestureRecognizer) {
-        presenter.rouletteStart()
-        view.removeGestureRecognizer(tapGesture)
+    @objc private func quitGesture() {
+        presenter.tapQuit()
     }
 }
 //MARK: -RouletteViewControllerExtension
-extension RouletteViewController: InterfaceInput {
-    var vc: RouletteViewController { self }
-    var vw: CreateRouletteView { rouletteView }
-    var bt: UIButton { quitButton }
-    var lbs: [UILabel] { tapStartLabel }
+extension RouletteViewController: RouletteOutput {
+    func tapStart(complition: @escaping ([UILabel])->()) {
+        complition(tapStartLabel)
+        view.removeGestureRecognizer(gesture)
+    }
+    func tapQuit(complition: @escaping (UIViewController)->()){
+        complition(self)
+    }
 }

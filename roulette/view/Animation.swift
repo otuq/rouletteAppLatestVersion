@@ -9,25 +9,40 @@ import AVFoundation
 import RealmSwift
 import UIKit
 
-extension CreateRouletteView {
+protocol AnimationModuleProtocol {
+    var speed: CGFloat { get }
+    var view: UIView { get }
+    var range: [ClosedRange<Double>] { get }
+    var text: String { get }
+    var r: Int { get }
+    var g: Int { get }
+    var b: Int { get }
+}
+
+class RouletteAnimation: ShareProperty{
+    internal let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) // 止まる角度
+    internal let duration: TimeInterval = 10 // 回る時間(秒)
+    internal var startTime: CFTimeInterval! // アニメーション開始時間
+    private var audioPlayer: AVAudioPlayer!
+    private var input: AnimationModuleProtocol!
+    
+    init(input: AnimationModuleProtocol) {
+        self.input = input
+    }
     // ルーレットアニメーション
-    func startRotateAnimation() {
+    private func startRotateAnimation() {
         startTime = CACurrentMediaTime()
         let link = CADisplayLink(target: self, selector: #selector(updateValue))
         link.preferredFramesPerSecond = 100
         link.add(to: .current, forMode: .common)
     }
-
     @objc func updateValue(link: CADisplayLink) {
-        let dataSet = rouletteDataSet.dataSet
-        let dt = CGFloat((link.timestamp - self.startTime) / self.duration) // 進捗率
+        let dt = CGFloat((link.timestamp - startTime) / duration) // 進捗率
         let degree = Degree(p1: CGPoint(x: 0.2, y: 0), p2: CGPoint(x: 0.2, y: 1)) // 進捗率を元にイージングの計算
         let r = degree.solve(t: dt) // 計算の結果を返す //進捗率が1.0に達するとそれ以上増えないように設定されているみたい
         let stopAngle = (r * dtStop) // 止まる位置
-        let speed = dataSet.speed // 回転数
-        let rotation = ((around * speed + dtStop) * r) // 回転 360度*回転数+止まる角度*進捗率
-        transform = CGAffineTransform(rotationAngle: rotation)
-        //        print(r, stopAngle, rotation)
+        let rotation = ((CGFloat(around) * input.speed + dtStop) * r) // 回転 360度*回転数+止まる角度*進捗率
+        input.view.transform = CGAffineTransform(rotationAngle: rotation)
         // ルーレットのストップ
         if dt >= 0.99 {
             audioPlayer.volume = 0
@@ -36,10 +51,10 @@ extension CreateRouletteView {
             audioPlayer.stop()
             link.invalidate()
             // 止まった地点の数値が各グラフの範囲だった時の判定を返す。
-            graphRange.enumerated().forEach { index, range in
+            input.range.enumerated().forEach { index, range in
                 // ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
-                    let list = rouletteDataSet.1[index]
+                    let list = dataSet[index]
                     //                    print(list.text)
                     //                    print(dtStop)
                     //                    print(range)
@@ -60,12 +75,12 @@ extension CreateRouletteView {
         let resultView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: view.frame.width, height: resultLabel.frame.height)))
         let backView = UIView(frame: CGRect(origin: .zero, size: view.bounds.size))
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapDissmiss))
-
+        
         resultLabel.center = resultView.center
         resultLabel.attributedText = NSAttributedString(string: resultText, attributes: attribute)
         resultLabel.textAlignment = .center
         resultLabel.numberOfLines = 0
-
+        
         // 色の明るさでtextの色を変える
         if r & g & b >= 128 {
             resultLabel.textColor = .black
@@ -75,7 +90,7 @@ extension CreateRouletteView {
         resultView.transform = CGAffineTransform(translationX: view.frame.maxX, y: .zero)
         resultView.backgroundColor = UIColor(r: r, g: g, b: b)
         resultView.addSubview(resultLabel)
-
+        
         view.addSubview(backView)
         view.addSubview(resultView)
         view.addGestureRecognizer(tapGesture)
@@ -86,6 +101,23 @@ extension CreateRouletteView {
     @objc private func tapDissmiss() {
         print("tap")
         parentViewController?.dismiss(animated: true)
+    }
+    // ルーレットの音楽
+    func rouletteSoundSetting(dataSet: RouletteData) {
+        var audioPlayer: AVAudioPlayer!
+        guard let soundAsset = NSDataAsset(name: dataSet.sound) else {
+            print("not found sound data")
+            return
+        }
+        do {
+            audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
+            audioPlayer.prepareToPlay()
+            audioPlayer.numberOfLoops = -1
+            audioPlayer.play()
+        } catch {
+            print(error.localizedDescription)
+            audioPlayer = nil
+        }
     }
     // ルーレット結果の効果音
     private func soundEffect() {

@@ -8,15 +8,19 @@
 import UIKit
 
 class AlertAppear {
-    static let shared = AlertAppear()
-    func appear(input: UIViewController) {
+    private var input: InterfaceInput!
+    init(input: InterfaceInput) {
+        self.input = input
+    }
+    func appear() {
+        let vc = input.vc as? RouletteViewController
         let alertVC = UIAlertController(title: .none, message: "ルーレットを中止しますか？", preferredStyle: .alert)
         let cancel = UIAlertAction(title: "キャンセル", style: .cancel, handler: nil)
         let action = UIAlertAction(title: "中止する", style: .default) { _ in
-            input.dismiss(animated: true, completion: nil)
+            vc?.dismiss(animated: true, completion: nil)
         }
         alertVC.addAction(cancel)
         alertVC.addAction(action)
-        input.present(alertVC, animated: true, completion: nil)
+        vc?.present(alertVC, animated: true, completion: nil)
     }
 }

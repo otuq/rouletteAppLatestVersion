@@ -84,7 +84,8 @@ class HomeViewController: UIViewController {
         if let dataSet = dataSet {
             let storyboard = UIStoryboard(name: "Roulette", bundle: nil)
             let viewController = storyboard.instantiateViewController(withIdentifier: "RouletteViewController")as! RouletteViewController
-            viewController.rouletteDataSet = (dataSet, dataSet.list)
+//            viewController.rouletteDataSet = (dataSet, dataSet.list)
+
             let nav = UINavigationController(rootViewController: viewController)
             nav.modalPresentationStyle = .overFullScreen
             nav.modalTransitionStyle = .crossDissolve

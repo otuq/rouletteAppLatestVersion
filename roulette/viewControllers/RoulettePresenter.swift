@@ -6,41 +6,41 @@
 //
 
 import Foundation
+import RealmSwift
 
+protocol RouletteInput {
+    var dataSetPresenter: (dataSet: RouletteData, list: List<RouletteGraphData>) { get }
+}
 class RoulettePresenter {
+    var rouletteDataSet: (dataSet: RouletteData, list: List<RouletteGraphData>)!
     // このプロパティは循環参照を引き起こす可能性があってルーレットが終わった後にメモリが解放されないので弱参照にする
-    private weak var input: InterfaceInput!
+    private weak var output: RouletteOutput!
+    private var rouletteView: RouletteView!
     
-    init(with input: InterfaceInput) {
-        self.input = input
+    init(with output: RouletteOutput) {
+        self.output = output
     }
     func viewDidload() {
-        settingUI()
-        blinkAnimation()
-        rouletteModule()
+        rouletteCreate()
     }
-    func alertAppear() {
-        AlertAppear(input: input).appear()
+    private func rouletteCreate() {
+        rouletteView = RouletteView(input: self)
     }
-    func rouletteStart() {
-        RouletteStart(input: input).start()
+    func tapStart() {
+        output.tapStart { labels in
+            labels.forEach { $0.isHidden = true }
+        }
+        //view range speed textColor(rgb) rouletteVw Dataset
+        _ = RouletteAnimation(input: rouletteView)
     }
-    private func settingUI() {
-        input.bt.imageSet()
-        input.bt.fontSizeRecalcForEachDevice()
-        input.lbs.forEach{ $0.fontSizeRecalcForEachDevice() }
+    func tapQuit() {
+        output.tapQuit { vc in
+            AlertAppear.shared.appear(input: vc)
+        }
     }
-    private func blinkAnimation() {
-        Blink(input: input).blink()
-    }
-    private func rouletteModule() {
-        let module = RouletteModule(input: input)
-        module.addRoulette()
-        module.addPointer()
-        module.addCenterCircle()
-        module.addFrameCircle()
-    }
-    deinit {
-        print("deinit: presenter")
+}
+extension RoulettePresenter: RouletteInput {
+    var dataSetPresenter: (dataSet: RouletteData, list: List<RouletteGraphData>) {
+        rouletteDataSet
     }
 }
