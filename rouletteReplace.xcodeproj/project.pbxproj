@@ -21,6 +21,7 @@
 		CE688A4927E050F4006AC033 /* RouletteLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE688A4827E050F4006AC033 /* RouletteLayer.swift */; };
 		CE69C69027C564C200FD5426 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CE69C68F27C564C200FD5426 /* Realm */; };
 		CE69C69227C564C200FD5426 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CE69C69127C564C200FD5426 /* RealmSwift */; };
+		CE6D9A5E27E1C79200A9DFB4 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6D9A5D27E1C79200A9DFB4 /* DataModel.swift */; };
 		CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */; };
 		CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */; };
 		CE82BC1F26831741009550EB /* ColorSelectPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */; };
@@ -37,9 +38,7 @@
 		CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */; };
 		CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */; };
 		CEB6C2CE268EF68F00C597F1 /* SetData.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */; };
-		CEB82C7A27DB03B8002E3E9F /* Sound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB82C7927DB03B8002E3E9F /* Sound.swift */; };
-		CEB82C8027DB03C8002E3E9F /* work4.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB82C7F27DB03C8002E3E9F /* work4.swift */; };
-		CEB82C8227DB03CA002E3E9F /* work5.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB82C8127DB03CA002E3E9F /* work5.swift */; };
+		CEB82C7A27DB03B8002E3E9F /* RouletteSound.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEB82C7927DB03B8002E3E9F /* RouletteSound.swift */; };
 		CEC5901726807D28005A47D6 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901626807D28005A47D6 /* HomeViewController.swift */; };
 		CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC5901826807D3D005A47D6 /* NewDataViewController.swift */; };
 		CEC5901C26807D79005A47D6 /* Home.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEC5901B26807D79005A47D6 /* Home.storyboard */; };
@@ -51,7 +50,7 @@
 		CED40E7127D7AFD600EBCE24 /* Save.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E6E27D7AFD600EBCE24 /* Save.swift */; };
 		CED40E7227D7AFD600EBCE24 /* Degree.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E6F27D7AFD600EBCE24 /* Degree.swift */; };
 		CED40E7927D7B02200EBCE24 /* FormRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7427D7B02200EBCE24 /* FormRows.swift */; };
-		CED40E7A27D7B02200EBCE24 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7627D7B02200EBCE24 /* Animation.swift */; };
+		CED40E7A27D7B02200EBCE24 /* RouletteAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7627D7B02200EBCE24 /* RouletteAnimation.swift */; };
 		CED40E7C27D7B02200EBCE24 /* RouletteModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED40E7827D7B02200EBCE24 /* RouletteModule.swift */; };
 		CEF696BE26B7D2DE00564381 /* Sound.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEF696BD26B7D2DE00564381 /* Sound.xcassets */; };
 		CEFDCF4727DF0BDB00AAC7B7 /* RouletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFDCF4627DF0BDB00AAC7B7 /* RouletteView.swift */; };
@@ -78,6 +77,7 @@
 		CE5084A5269C33FA0049ED7D /* AppSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingViewController.swift; sourceTree = "<group>"; };
 		CE5084A7269C341E0049ED7D /* AppSetting.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AppSetting.storyboard; sourceTree = "<group>"; };
 		CE688A4827E050F4006AC033 /* RouletteLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteLayer.swift; sourceTree = "<group>"; };
+		CE6D9A5D27E1C79200A9DFB4 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		CE82294B2706D7B900C75D6D /* SetDataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataTableViewCell.swift; sourceTree = "<group>"; };
 		CE82BC1C2682FAFF009550EB /* ColorSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectViewController.swift; sourceTree = "<group>"; };
 		CE82BC1E26831740009550EB /* ColorSelectPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorSelectPresentationController.swift; sourceTree = "<group>"; };
@@ -99,9 +99,7 @@
 		CEA6C90027706B8700D5A9ED /* InputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputAccessoryView.swift; sourceTree = "<group>"; };
 		CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDataViewController.swift; sourceTree = "<group>"; };
 		CEB6C2CD268EF68F00C597F1 /* SetData.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SetData.storyboard; sourceTree = "<group>"; };
-		CEB82C7927DB03B8002E3E9F /* Sound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sound.swift; sourceTree = "<group>"; };
-		CEB82C7F27DB03C8002E3E9F /* work4.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = work4.swift; sourceTree = "<group>"; };
-		CEB82C8127DB03CA002E3E9F /* work5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = work5.swift; sourceTree = "<group>"; };
+		CEB82C7927DB03B8002E3E9F /* RouletteSound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteSound.swift; sourceTree = "<group>"; };
 		CEC5901626807D28005A47D6 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		CEC5901826807D3D005A47D6 /* NewDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewDataViewController.swift; sourceTree = "<group>"; };
 		CEC5901B26807D79005A47D6 /* Home.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Home.storyboard; sourceTree = "<group>"; };
@@ -113,7 +111,7 @@
 		CED40E6E27D7AFD600EBCE24 /* Save.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Save.swift; sourceTree = "<group>"; };
 		CED40E6F27D7AFD600EBCE24 /* Degree.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Degree.swift; sourceTree = "<group>"; };
 		CED40E7427D7B02200EBCE24 /* FormRows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FormRows.swift; path = form/FormRows.swift; sourceTree = "<group>"; };
-		CED40E7627D7B02200EBCE24 /* Animation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
+		CED40E7627D7B02200EBCE24 /* RouletteAnimation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouletteAnimation.swift; sourceTree = "<group>"; };
 		CED40E7827D7B02200EBCE24 /* RouletteModule.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouletteModule.swift; path = roulette/RouletteModule.swift; sourceTree = "<group>"; };
 		CEF696BD26B7D2DE00564381 /* Sound.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Sound.xcassets; sourceTree = "<group>"; };
 		CEFDCF4627DF0BDB00AAC7B7 /* RouletteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouletteView.swift; sourceTree = "<group>"; };
@@ -140,6 +138,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE6D9A5F27E1EC9700A9DFB4 /* presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE4C872A27D7743A009B1CA6 /* RoulettePresenter.swift */,
+			);
+			name = presenter;
+			path = viewControllers;
+			sourceTree = "<group>";
+		};
 		CEA6112E2678688D00751566 = {
 			isa = PBXGroup;
 			children = (
@@ -166,7 +173,8 @@
 				CED40E7327D7B02200EBCE24 /* module */,
 				CED40E6C27D7AFD600EBCE24 /* logic, model */,
 				CEC5901F2680805F005A47D6 /* extension */,
-				CEFDCF4827DF0BE200AAC7B7 /* view */,
+				CEFDCF4827DF0BE200AAC7B7 /* rouletteview */,
+				CE6D9A5F27E1EC9700A9DFB4 /* presenter */,
 				CEC59022268080A4005A47D6 /* viewControllers */,
 				CEC5901A26807D5D005A47D6 /* storyboards */,
 				CEC5902326808510005A47D6 /* xib.swift */,
@@ -225,7 +233,6 @@
 		CEC59022268080A4005A47D6 /* viewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				CE4C872A27D7743A009B1CA6 /* RoulettePresenter.swift */,
 				CEA6116A267868D600751566 /* RouletteViewController.swift */,
 				CEC5901626807D28005A47D6 /* HomeViewController.swift */,
 				CEB6C2CB268EF11D00C597F1 /* SetDataViewController.swift */,
@@ -254,6 +261,7 @@
 			isa = PBXGroup;
 			children = (
 				CED40E6D27D7AFD600EBCE24 /* Model.swift */,
+				CE6D9A5D27E1C79200A9DFB4 /* DataModel.swift */,
 				CED40E6E27D7AFD600EBCE24 /* Save.swift */,
 				CED40E6F27D7AFD600EBCE24 /* Degree.swift */,
 			);
@@ -275,21 +283,19 @@
 		CED40E7527D7B02200EBCE24 /* roulette */ = {
 			isa = PBXGroup;
 			children = (
-				CEB82C7927DB03B8002E3E9F /* Sound.swift */,
-				CEB82C7F27DB03C8002E3E9F /* work4.swift */,
-				CEB82C8127DB03CA002E3E9F /* work5.swift */,
 			);
 			path = roulette;
 			sourceTree = "<group>";
 		};
-		CEFDCF4827DF0BE200AAC7B7 /* view */ = {
+		CEFDCF4827DF0BE200AAC7B7 /* rouletteview */ = {
 			isa = PBXGroup;
 			children = (
 				CEFDCF4627DF0BDB00AAC7B7 /* RouletteView.swift */,
 				CE688A4827E050F4006AC033 /* RouletteLayer.swift */,
-				CED40E7627D7B02200EBCE24 /* Animation.swift */,
+				CED40E7627D7B02200EBCE24 /* RouletteAnimation.swift */,
+				CEB82C7927DB03B8002E3E9F /* RouletteSound.swift */,
 			);
-			path = view;
+			path = rouletteview;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -434,12 +440,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEC5901926807D3D005A47D6 /* NewDataViewController.swift in Sources */,
-				CED40E7A27D7B02200EBCE24 /* Animation.swift in Sources */,
+				CED40E7A27D7B02200EBCE24 /* RouletteAnimation.swift in Sources */,
 				CEA6113B2678688D00751566 /* AppDelegate.swift in Sources */,
 				CED40E7927D7B02200EBCE24 /* FormRows.swift in Sources */,
 				CE82BC1D2682FAFF009550EB /* ColorSelectViewController.swift in Sources */,
+				CE6D9A5E27E1C79200A9DFB4 /* DataModel.swift in Sources */,
 				CE15301326F332150051DCA3 /* Color.swift in Sources */,
-				CEB82C7A27DB03B8002E3E9F /* Sound.swift in Sources */,
+				CEB82C7A27DB03B8002E3E9F /* RouletteSound.swift in Sources */,
 				CEA6C90127706B8700D5A9ED /* InputAccessoryView.swift in Sources */,
 				CEB6C2CC268EF11D00C597F1 /* SetDataViewController.swift in Sources */,
 				CEA6113D2678688D00751566 /* SceneDelegate.swift in Sources */,
@@ -461,9 +468,7 @@
 				CE82BC2426831DD3009550EB /* CollectionViewCell.swift in Sources */,
 				CE82294D2706D7B900C75D6D /* SetDataTableViewCell.swift in Sources */,
 				CEFDCF4727DF0BDB00AAC7B7 /* RouletteView.swift in Sources */,
-				CEB82C8027DB03C8002E3E9F /* work4.swift in Sources */,
 				CE058A0227D87C0700351320 /* Blink.swift in Sources */,
-				CEB82C8227DB03CA002E3E9F /* work5.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

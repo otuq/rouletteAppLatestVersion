@@ -20,10 +20,9 @@ extension InterfaceInput {
         CGFloat(30).recalcValue
     }
 }
-
 protocol RouletteOutput: AnyObject {
-    func tapStart(complition: @escaping ([UILabel])->())
-    func tapQuit(complition: @escaping (UIViewController)->())
+    func hiddenLabel()
+    var dataPresent: (dataSet: RouletteData, list: List<RouletteGraphData>) { get }
 }
 
 class RouletteViewController: UIViewController {
@@ -35,6 +34,7 @@ class RouletteViewController: UIViewController {
     @IBOutlet private var tapStartLabel: [UILabel]!
     @IBOutlet private var quitButton: UIButton!
     
+    var rouletteDataSet: (dataSet: RouletteData, list: List<RouletteGraphData>)!
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +43,11 @@ class RouletteViewController: UIViewController {
         initialize()
         settingUI()
         settingGesture()
-        presenter.viewDidload()
     }
     private func initialize() {
         presenter = RoulettePresenter(with: self)
-        view = presenter.rouletteView
+        
+//        view.addSubview(rouletteView)
     }
     private func settingUI() {
         quitButton.imageSet()
@@ -58,19 +58,20 @@ class RouletteViewController: UIViewController {
         quitButton.addTarget(self, action: #selector(quitGesture), for: .touchUpInside)
     }
     @objc private func startGesture() {
-        presenter.tapStart()
+        presenter.rouletteStart()
     }
     @objc private func quitGesture() {
-        presenter.tapQuit()
+        AlertAppear.shared.appear(input: self)
     }
 }
 //MARK: -RouletteViewControllerExtension
 extension RouletteViewController: RouletteOutput {
-    func tapStart(complition: @escaping ([UILabel])->()) {
-        complition(tapStartLabel)
-        view.removeGestureRecognizer(gesture)
+    var dataPresent: (dataSet: RouletteData, list: List<RouletteGraphData>) {
+        rouletteDataSet
     }
-    func tapQuit(complition: @escaping (UIViewController)->()){
-        complition(self)
+    func hiddenLabel() {
+        tapStartLabel.forEach { lab in
+            lab.isHidden = true
+        }
     }
 }
