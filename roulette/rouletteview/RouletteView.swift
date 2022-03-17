@@ -10,6 +10,7 @@ import RealmSwift
 
 protocol ShareProperty {}
 extension ShareProperty {
+    typealias DataSet = (dataSet: RouletteData, list: List<RouletteGraphData>)
     internal var around: CGFloat { CGFloat.pi * 2 } // 360度 1回転
     internal var diameter: CGFloat {
         let width = UIScreen.main.bounds.width
@@ -17,28 +18,27 @@ extension ShareProperty {
         return (width - subtraction)
     }// 直径
 }
-
 class RouletteView: UIView, ShareProperty {
-    private var output: (dataSet: RouletteData, list: List<RouletteGraphData>)!
+    private var output: DataSet!
     private let roulettelayer = RouletteLayer.shared
     private var startRatio = 0.0 // グラフの描画開始点に使う
     internal var graphRange = [ClosedRange<Double>]() // 各グラフの範囲
 
-    init(output: (dataSet: RouletteData, list: List<RouletteGraphData>)) {
+    init(output: DataSet) {
         super.init(frame: .zero)
         self.output = output
-        addCreateGraph()
+        addGraphAndFrame()
     }
     //グラフレイヤーをviewに追加
-    private func addCreateGraph(){
+    private func addGraphAndFrame(){
         let parentLayer = CALayer() // ここに各グラフを統合する
         let frameLayer = CALayer() // ここに各グラフごとの境界線を統合する。
-        let frameCircleLayer = roulettelayer.graphFrameCircleBoarder()
-        let calcRatios = createRatios()
+        let frameCircleLayer = roulettelayer.innerCircleBorderLayer()
+        let calcRatios = calcRatios()
         calcRatios.enumerated().forEach { index, ratio in
             let graphData = output.list[index]
             let graphColor = UIColor.init(r: graphData.r, g: graphData.g, b: graphData.b).cgColor
-            let createGraph = self.createGraph(ratio: ratio, graphColor: graphColor)
+            let createGraph = self.createGraphAndFrame(ratio: ratio, graphColor: graphColor)
             parentLayer.addSublayer(createGraph.graph)
             frameLayer.addSublayer(createGraph.frame)
         }
@@ -47,12 +47,12 @@ class RouletteView: UIView, ShareProperty {
         self.layer.insertSublayer(parentLayer, at: 0)// 最背面に配置したい時insertで0番目にする。
     }
     // グラフの比率を算出
-    private func createRatios() -> [Double] {
+    private func calcRatios() -> [Double] {
         var ratios = [CGFloat]()
         for i in output.list {
-            let randomValue = Float.random(in: 1...10)
-            let sliderValue = Float(i.ratio)
-            let ratio = output.dataset?.randomFlag ? randomValue : sliderValue
+            let randomValue = CGFloat.random(in: 1...10)
+            let sliderValue = CGFloat(i.ratio)
+            let ratio = output.dataSet.randomFlag ? randomValue : sliderValue
             ratios.append(ratio)
         }
         // グラフの幅の数値の合計を100/合計値で比率を算出する。
@@ -62,11 +62,11 @@ class RouletteView: UIView, ShareProperty {
         return calcRatios
     }
     // 比率ごとにグラフとフレームを作成
-    private func createGraph(ratio: Double, graphColor: CGColor) -> (graph: CALayer, frame: CALayer) {
+    private func createGraphAndFrame(ratio: Double, graphColor: CGColor) -> (graph: CALayer, frame: CALayer) {
         let endRatio = startRatio + ratio
         let range = startRatio...endRatio
-        let frameBoarderLayer = roulettelayer.graphFrameBoarder(startRatio: startRatio)
-        let graphLayer = roulettelayer.drawGraph(fillColor: graphColor, startRatio, endRatio)
+        let frameBoarderLayer = roulettelayer.arcBorderLayer(startRatio: startRatio)
+        let graphLayer = roulettelayer.drawGraphLayer(fillColor: graphColor, startRatio, endRatio)
         graphRange.append(range)
         startRatio = endRatio // 次のグラフのスタート値を更新
         return (graphLayer, frameBoarderLayer)

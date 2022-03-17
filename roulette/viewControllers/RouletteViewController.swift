@@ -9,22 +9,11 @@ import AVFoundation
 import RealmSwift
 import UIKit
 
-protocol InterfaceInput: AnyObject {}
-extension InterfaceInput {
-    var d: CGFloat {
-        let width = UIScreen.main.bounds.width
-        let subtraction = (width / 13) / 2
-        return (width - subtraction)
-    }
-     var w: CGFloat {
-        CGFloat(30).recalcValue
-    }
-}
-protocol RouletteOutput: AnyObject {
+protocol RouletteOutput: AnyObject, ShareProperty {
+    var vc: UIViewController { get }
+    var dataPresent: DataSet { get }
     func hiddenLabel()
-    var dataPresent: (dataSet: RouletteData, list: List<RouletteGraphData>) { get }
 }
-
 class RouletteViewController: UIViewController {
     // MARK: Properties
     private var presenter: RoulettePresenter!
@@ -46,11 +35,12 @@ class RouletteViewController: UIViewController {
     }
     private func initialize() {
         presenter = RoulettePresenter(with: self)
-        
-//        view.addSubview(rouletteView)
     }
     private func settingUI() {
         quitButton.imageSet()
+        tapStartLabel.forEach { lab in
+            Animation.shared.blink(object: lab)
+        }
     }
     private func settingGesture() {
         gesture = UITapGestureRecognizer(target: self, action: #selector(startGesture))
@@ -66,7 +56,8 @@ class RouletteViewController: UIViewController {
 }
 //MARK: -RouletteViewControllerExtension
 extension RouletteViewController: RouletteOutput {
-    var dataPresent: (dataSet: RouletteData, list: List<RouletteGraphData>) {
+    var vc: UIViewController { self }
+    var dataPresent: DataSet {
         rouletteDataSet
     }
     func hiddenLabel() {

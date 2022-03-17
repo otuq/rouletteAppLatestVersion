@@ -10,7 +10,7 @@ import UIKit
 class RouletteLayer: ShareProperty {
     static let shared = RouletteLayer()
     // 円グラフの内側円線
-    func graphFrameCircleBoarder() -> CAShapeLayer {
+    func innerCircleBorderLayer() -> CAShapeLayer {
         let path = UIBezierPath()
         let layer = CAShapeLayer()
         path.addArc(withCenter: .zero, radius: (diameter / 2) - 3, startAngle: 0, endAngle: CGFloat(around), clockwise: true)
@@ -22,7 +22,7 @@ class RouletteLayer: ShareProperty {
         return layer
     }
     // 円弧形グラフごとの境界線
-    func graphFrameBoarder(startRatio: Double) -> CAShapeLayer {
+    func arcBorderLayer(startRatio: Double) -> CAShapeLayer {
         let path = UIBezierPath()
         let layer = CAShapeLayer()
         let angle = CGFloat(2 * Double.pi * startRatio / Double(around) - Double.pi / 2)
@@ -36,7 +36,7 @@ class RouletteLayer: ShareProperty {
         return layer
     }
     // パスを元にイメージレイヤーを作成し、カウント分のレイヤーを親レイヤーに追加していく。
-    func drawGraph(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) -> CAShapeLayer {
+    func drawGraphLayer(fillColor: CGColor, _ startRatio: Double, _ endRatio: Double) -> CAShapeLayer {
         let circlePath = graphPath(radius: diameter / 4, startAngle: startRatio, endAngle: endRatio)
         let layer = CAShapeLayer()
         layer.path = circlePath.cgPath

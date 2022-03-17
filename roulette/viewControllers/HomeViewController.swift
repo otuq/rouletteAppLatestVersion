@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     var dataSet: RouletteData?
     var parentLayer = CALayer()
     var statusBarStyleChange: UIStatusBarStyle = .darkContent
-    var startLabel = UILabel()
+    var startLabel = UILabel() //Save.swift
 
     // MARK: Outlets,Actions
     @IBOutlet var startButton: UIButton!

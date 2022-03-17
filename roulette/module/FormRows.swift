@@ -12,7 +12,6 @@ import SafariServices
 class FormRows {
     // MARK: Properties
     private var audioPlayer: AVAudioPlayer!
-
     // MARK: Methods
     private func soundSelect(soundString: String) {
         guard let soundAsset = NSDataAsset(name: soundString) else {

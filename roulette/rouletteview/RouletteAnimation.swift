@@ -5,24 +5,24 @@
 //  Created by USER on 2022/02/21.
 //
 
-import AVFoundation
 import RealmSwift
 import UIKit
+import AVFAudio
 
 class RouletteAnimation: ShareProperty{
     internal let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) // 止まる角度
     internal let duration: TimeInterval = 10 // 回る時間(秒)
-    internal var startTime: CFTimeInterval! // アニメーション開始時間
     private var audioPlayer: AVAudioPlayer!
-    private var input: (dataSet: RouletteData, list: List<RouletteGraphData>)!
+    internal var startTime: CFTimeInterval! // アニメーション開始時間
+    private var input: DataSet!
     private var view: RouletteView!
     
-    init(input: (dataSet: RouletteData, list: List<RouletteGraphData>), view: RouletteView) {
+    init(input: DataSet, view: RouletteView) {
         self.input = input
         self.view = view
     }
     // ルーレットアニメーション
-    private func startRotateAnimation() {
+    func startRotateAnimation() {
         startTime = CACurrentMediaTime()
         let link = CADisplayLink(target: self, selector: #selector(updateValue))
         link.preferredFramesPerSecond = 100
@@ -51,7 +51,7 @@ class RouletteAnimation: ShareProperty{
                     //                    print(dtStop)
                     //                    print(range)
                     alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) // ルーレットの結果を表示する。
-                    soundEffect()
+                    RouletteSound.shared.soundEffect(effectName: self.input.dataSet.effect)
                 }
             }
             return
@@ -93,54 +93,5 @@ class RouletteAnimation: ShareProperty{
     @objc private func tapDissmiss() {
         print("tap")
         view.parentViewController?.dismiss(animated: true)
-    }
-    // ルーレットの音楽
-    func rouletteSoundSetting(dataSet: RouletteData) {
-        var audioPlayer: AVAudioPlayer!
-        guard let soundAsset = NSDataAsset(name: dataSet.sound) else {
-            print("not found sound data")
-            return
-        }
-        do {
-            audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
-            audioPlayer.prepareToPlay()
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.play()
-        } catch {
-            print(error.localizedDescription)
-            audioPlayer = nil
-        }
-    }
-    // ルーレット結果の効果音
-    private func soundEffect() {
-        let dataSet = input.dataSet
-        guard let soundAsset = NSDataAsset(name: dataSet.effect) else {
-            print("not found")
-            return
-        }
-        do {
-            audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
-            audioPlayer.prepareToPlay()
-            audioPlayer.play()
-        } catch {
-            print(error.localizedDescription)
-            audioPlayer = nil
-        }
-    }
-    func rouletteSoundSetting(dataSet: RouletteData) {
-        var audioPlayer: AVAudioPlayer!
-        guard let soundAsset = NSDataAsset(name: dataSet.sound) else {
-            print("not found sound data")
-            return
-        }
-        do {
-            audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
-            audioPlayer.prepareToPlay()
-            audioPlayer.numberOfLoops = -1
-            audioPlayer.play()
-        } catch {
-            print(error.localizedDescription)
-            audioPlayer = nil
-        }
     }
 }

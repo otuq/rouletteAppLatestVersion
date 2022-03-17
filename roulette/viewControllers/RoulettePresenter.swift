@@ -8,10 +8,10 @@
 import Foundation
 
 protocol RouletteInput {
-    func loadRouletteView(dataSet: RouletteData) -> RouletteView
+    func createRouletteView()
+    func createRouletteModule()
     func rouletteStart()
 }
-
 class RoulettePresenter {
     // このプロパティは循環参照を引き起こす可能性があってルーレットが終わった後にメモリが解放されないので弱参照にする
     private weak var output: RouletteOutput!
@@ -19,16 +19,29 @@ class RoulettePresenter {
     
     init(with output: RouletteOutput) {
         self.output = output
+        createRouletteView()
+        createRouletteModule()
     }
 }
 extension RoulettePresenter: RouletteInput {
-    func loadRouletteView(dataSet: RouletteData) -> RouletteView {
+    internal func createRouletteView() {
         rouletteView = RouletteView(output: output.dataPresent)
-        return rouletteView
+        output.vc.view.addSubview(rouletteView)
     }
-    func rouletteStart() {
+    internal func createRouletteModule() {
+        let module = RouletteModule(output: output)
+        let pointerImageView = module.pointerImageView()
+        let centerCircleLabel = module.centerCircleLabel()
+        let frameCircleView = module.frameCircleView()
+        [pointerImageView, centerCircleLabel, frameCircleView].forEach { add in
+            output.vc.view.addSubview(add)
+        }
+        output.vc.view.bringSubviewToFront(pointerImageView)
+    }
+    internal func rouletteStart() {
         output.hiddenLabel()
-        _ = RouletteAnimation(input: output.dataPresent, view: rouletteView)
+        RouletteAnimation(input: output.dataPresent, view: rouletteView).startRotateAnimation()
+        RouletteSound.shared.rouletteSoundSetting(soundName: output.dataPresent.dataSet.sound)
     }
 }
 
