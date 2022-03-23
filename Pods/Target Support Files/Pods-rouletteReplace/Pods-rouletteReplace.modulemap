@@ -1,0 +1,6 @@
+framework module Pods_rouletteReplace {
+  umbrella header "Pods-rouletteReplace-umbrella.h"
+
+  export *
+  module * { export * }
+}

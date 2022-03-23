@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="ka6-FJ-tbL">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Edit data-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="NewDataViewController" id="Y6W-OH-hqX" customClass="NewDataViewController" customModule="rouletteReplace" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="PtC-i6-cwD">
+                                <rect key="frame" x="0.0" y="142" width="414" height="720"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
+                            <view alpha="0.90000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u4Y-SF-gxk">
+                                <rect key="frame" x="0.0" y="746" width="414" height="150"/>
+                                <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="5Yp-ET-Jzw">
+                                <rect key="frame" x="92" y="756" width="50" height="66"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J76-FZ-FCL" customClass="CustomButton" customModule="rouletteReplace" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="J76-FZ-FCL" secondAttribute="height" multiplier="1:1" id="0vl-Fb-qV8" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                            <constraint firstAttribute="width" constant="50" id="AnE-wy-djR" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                        </constraints>
+                                        <state key="normal" title="S">
+                                            <color key="titleColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Set" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="060-O5-yst">
+                                        <rect key="frame" x="15" y="50" width="20" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                        <color key="textColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="zhm-Dz-9bB">
+                                <rect key="frame" x="172" y="756" width="70" height="86"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKZ-ki-PIk" customClass="CustomButton" customModule="rouletteReplace" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="70" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="70" id="Ndi-fN-30U" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                            <constraint firstAttribute="width" secondItem="cKZ-ki-PIk" secondAttribute="height" multiplier="1:1" id="NwA-fK-MsG" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="50"/>
+                                        <state key="normal" title="+">
+                                            <color key="titleColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RLs-2R-r1m">
+                                        <rect key="frame" x="23" y="70" width="24.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                        <color key="textColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Gzw-3f-fq7">
+                                <rect key="frame" x="272" y="756" width="50" height="66"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A7y-e8-7Pi" customClass="CustomButton" customModule="rouletteReplace" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="A7y-e8-7Pi" secondAttribute="height" multiplier="1:1" id="7le-Xx-uUJ" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                            <constraint firstAttribute="width" constant="50" id="xXM-au-2HM" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                        </constraints>
+                                        <state key="normal" title="R">
+                                            <color key="titleColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vAd-JL-xsD">
+                                        <rect key="frame" x="13" y="50" width="24.5" height="16"/>
+                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="13"/>
+                                        <color key="textColor" white="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="No title" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NMv-Rm-8tP">
+                                <rect key="frame" x="82" y="98" width="250" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="6cY-CH-bnk" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                    <constraint firstAttribute="height" constant="34" id="7Jg-cU-0am" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                                </constraints>
+                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                            </textField>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="0.96999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="5Yp-ET-Jzw" firstAttribute="top" secondItem="zhm-Dz-9bB" secondAttribute="top" id="00b-Kx-Uzt" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstAttribute="bottom" secondItem="u4Y-SF-gxk" secondAttribute="bottom" id="2x2-2b-dbo" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="PtC-i6-cwD" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="HW0-ow-KwV" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="NMv-Rm-8tP" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="10" id="JZa-bc-pch" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="Gzw-3f-fq7" firstAttribute="top" secondItem="zhm-Dz-9bB" secondAttribute="top" id="N5k-e4-0AG" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="Gzw-3f-fq7" firstAttribute="leading" secondItem="zhm-Dz-9bB" secondAttribute="trailing" constant="30" id="PeY-Vh-W5J" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="u4Y-SF-gxk" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="SJs-wI-RWT" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="zhm-Dz-9bB" firstAttribute="leading" secondItem="5Yp-ET-Jzw" secondAttribute="trailing" constant="30" id="Xjr-LH-JTV" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="PtC-i6-cwD" firstAttribute="top" secondItem="NMv-Rm-8tP" secondAttribute="bottom" constant="10" id="aTv-9D-mdG" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="PtC-i6-cwD" secondAttribute="bottom" id="bPu-Wr-Z6Z" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="u4Y-SF-gxk" firstAttribute="top" secondItem="zhm-Dz-9bB" secondAttribute="top" priority="1" constant="-10" id="fKT-B9-qsr" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="zhm-Dz-9bB" secondAttribute="bottom" constant="20" id="h0z-iC-kK0" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="u4Y-SF-gxk" secondAttribute="trailing" id="mp0-Mg-vxF" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="zhm-Dz-9bB" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="oW9-Jc-K0y" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="PtC-i6-cwD" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="wxZ-rX-nVT" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                            <constraint firstItem="NMv-Rm-8tP" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="xiz-ha-OL9" customClass="CustomLayoutConstant" customModule="rouletteReplace" customModuleProvider="target"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Edit data" id="060-gX-v4A"/>
+                    <connections>
+                        <outlet property="addRowButton" destination="cKZ-ki-PIk" id="3dq-yu-bbQ"/>
+                        <outlet property="addRowLabel" destination="RLs-2R-r1m" id="kNm-17-hja"/>
+                        <outlet property="newDataTableView" destination="PtC-i6-cwD" id="Mmx-jt-o2q"/>
+                        <outlet property="operationView" destination="u4Y-SF-gxk" id="08w-Yr-ewd"/>
+                        <outlet property="randomSwitchButton" destination="A7y-e8-7Pi" id="dQp-dC-Bpk"/>
+                        <outlet property="randomSwitchLabel" destination="vAd-JL-xsD" id="yS4-hy-eUM"/>
+                        <outlet property="saveButton" destination="J76-FZ-FCL" id="dWZ-XP-00S"/>
+                        <outlet property="saveLabel" destination="060-O5-yst" id="VWi-5D-z0R"/>
+                        <outlet property="titleTextField" destination="NMv-Rm-8tP" id="LkM-e3-jiR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1931.8840579710147" y="88.392857142857139"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="m7P-az-7Re">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ka6-FJ-tbL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Q29-ND-EQP">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Y6W-OH-hqX" kind="relationship" relationship="rootViewController" id="DYA-Yv-cFa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQq-sT-jWy" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1021.7391304347827" y="88.392857142857139"/>
+        </scene>
+    </scenes>
+</document>

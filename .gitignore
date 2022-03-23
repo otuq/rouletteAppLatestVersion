@@ -3,3 +3,4 @@
 UserInterfaceState.xcuserstate
 .DS_Store
 *.swp
+*.generated.swift
