@@ -5,55 +5,64 @@
 //  Created by USER on 2021/06/21.
 //
 
-import RealmSwift
 import UIKit
 
+protocol NewDataOutput: AnyObject {
+    func setContents(dataSet: RouletteData)
+    func saveContents(dataSet: RouletteData)
+    func addRow() -> RouletteGraphTemporary
+}
+protocol NewDataPresenterInput {
+    var numberOfRows: Int { get }
+    func graphTemporary(index: Int) -> RouletteGraphTemporary
+}
 // グラフデータの流れ方
 // newData→temporarysに一時データを格納してsaveボタンを押された時にデータベースに保存
 // loadData→setVC→list（データベースに保存したデータ）のデータをtemporarysに格納する。
 class NewDataViewController: UIViewController, UITextFieldDelegate {
     // MARK: properties
     private let cellId = "cellId"
-    private let notification = NotificationCenter.default
-    var userInfo: [AnyHashable: Any]?
-    private var colorIndex = 0
-    private var realm = try! Realm()
-    private var getAllCells = [NewDataTableViewCell]()
     private var colors = [UIColor]()
-    private var saveRoulette: Save {
-        let saveRoulette = Save(self, dataSet)
-        return saveRoulette
-    }
-    var dataSet = RouletteData()
-
+    private var colorIndex = 0
+    private let notification = NotificationCenter.default
+    private var userInfo: [AnyHashable: Any]?
+    private var presenter: NewDataPresenter!
+    
     // MARK: Outlets,Actions
+    @IBOutlet private var titleTextField: UITextField!
+    @IBOutlet private var saveButton: UIButton!
+    @IBOutlet private var addRowButton: UIButton!
+    @IBOutlet private var saveLabel: UILabel!
+    @IBOutlet private var addRowLabel: UILabel!
+    @IBOutlet private var randomSwitchLabel: UILabel!
     @IBOutlet var newDataTableView: UITableView!
-    @IBOutlet var titleTextField: UITextField!
-    @IBOutlet var saveButton: UIButton!
-    @IBOutlet var addRowButton: UIButton!
     @IBOutlet var randomSwitchButton: UIButton!
-    @IBOutlet var saveLabel: UILabel!
-    @IBOutlet var addRowLabel: UILabel!
-    @IBOutlet var randomSwitchLabel: UILabel!
     @IBOutlet var operationView: UIView!
 
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialize()
         settingView()
         settingUI()
         settingGesture()
         fontSizeRecalcForEachDevice()
     }
-
+    private func initialize() {
+        guard let nav = presentingViewController as? UINavigationController,
+              let vc = nav.topViewController as? HomeViewController else { return }
+        presenter = NewDataPresenter(with: self, selected: vc.selected)
+    }
     private func settingView() {
         newDataTableView.delegate = self
         newDataTableView.dataSource = self
         newDataTableView.separatorStyle = .none
         newDataTableView.keyboardDismissMode = .interactive
-        newDataTableView.register(UINib(nibName: "NewDataTableViewCell", bundle: nil), forCellReuseIdentifier: cellId)
+        
+        newDataTableView.register(UINib(nibName: R.nib.newDataTableViewCell.name, bundle: nil), forCellReuseIdentifier: cellId)
         titleTextField.delegate = self
         statusBarStyleChange(style: .lightContent)
+        randomSwitchButton.flag = presenter.randomSwitchFlag
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBarButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
@@ -62,7 +71,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     @objc private func cancelBarButton() {
-        saveRoulette.closeWindow()
+        AlertAppear(with: self).goBackHome()
     }
     @objc private func editBarButton() {
         newDataTableView.setEditing(true, animated: true)
@@ -74,84 +83,49 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     }
     @objc private func keyboardWillShow(notification: Notification) {
         userInfo = (notification as NSNotification).userInfo
-        print("show")
     }
     @objc private func keyboardDidHide() {
         userInfo = nil
     }
     private func settingUI() {
-        titleTextField.text = dataSet.title
-        titleTextField.overrideUserInterfaceStyle = .light
-        randomSwitchButton.flag = dataSet.randomFlag
-        colorIndex = dataSet.colorIndex
-        stride(from: 0, to: 360, by: 18).forEach { i in
-            let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
-            colors.append(color)
-        }
-        saveButton.imageSet()
-        addRowButton.imageSet()
-        randomSwitchButton.imageSet()
-        DispatchQueue.main.async {
-            self.randomSwitch()
-        }
+        [saveButton, addRowButton, randomSwitchButton].forEach { $0?.imageSet() }
+        randomSwitchLabel.text = randomSwitchButton.flag ? "ON" : "OFF"
+        presenter.setContents()
     }
     private func settingGesture() {
-        saveButton.addTarget(self, action: #selector(saveRouletteData), for: .touchUpInside)
+        saveButton.addTarget(self, action: #selector(saveCompleted), for: .touchUpInside)
         addRowButton.addTarget(self, action: #selector(addRowInsert), for: .touchUpInside)
-        randomSwitchButton.addTarget(self, action: #selector(randomRatio), for: .touchUpInside)
+        randomSwitchButton.addTarget(self, action: #selector(ratioRandom), for: .touchUpInside)
     }
-    // データの保存
-    @objc private func saveRouletteData() {
-        let title = titleTextField.text ?? ""
-        let flag = randomSwitchButton.flag
-        saveRoulette.saveRouletteData(title: title, flag: flag, colorIndex: colorIndex)
+//     データの保存
+    @objc private func saveCompleted() {
+        presenter.saveContents()
     }
-    // 行の挿入
+//     行の挿入
     @objc private func addRowInsert() {
         let indexPath = IndexPath(row: 0, section: 0)
-        let addRow = RouletteGraphTemporary()
-        let rgb = colors[colorIndex]
-        addRow.rgbTemporary = ["r": rgb.r, "g": rgb.g, "b": rgb.b]
-        colorIndex = colorIndex < colors.count - 1 ? colorIndex + 1 : 0
-        // 先頭から行を追加していく
-        dataSet.temporarys.insert(addRow, at: 0)
+        presenter.addDataTemporary()
         newDataTableView.insertRows(at: [indexPath], with: .fade)
         newDataTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         newDataTableView.contentInset.bottom = newDataTableView.frame.height - newDataTableView.contentSize.height
-        randomSwitch()
     }
-    // ルーレットのグラフの比率をランダムにする。
-    @objc private func randomRatio() {
+//     ルーレットのグラフの比率をランダムにする。
+    @objc private func ratioRandom() {
         randomSwitchButton.flag.toggle()
-        randomSwitch()
+        randomSwitchLabel.text = randomSwitchButton.flag ? "ON" : "OFF"
+        newDataTableView.reloadData()
     }
-    private func randomSwitch() {
-        if randomSwitchButton.flag {
-            randomSwitchLabel.text = "ON"
-            getAllCells.enumerated().forEach { _, cell in
-                cell.rouletteRatioSlider.isUserInteractionEnabled = false
-                cell.rouletteRatioSlider.layer.opacity = 0.3
-            }
-        } else {
-            randomSwitchLabel.text = "OFF"
-            getAllCells.enumerated().forEach { _, cell in
-                cell.rouletteRatioSlider.isUserInteractionEnabled = true
-                cell.rouletteRatioSlider.layer.opacity = 1
-            }
-        }
-    }
-    // テキストサイズをデバイスごとに再計算
+//     テキストサイズをデバイスごとに再計算
     private func fontSizeRecalcForEachDevice() {
-        [saveButton, addRowButton, randomSwitchButton]
-            .forEach { $0.fontSizeRecalcForEachDevice() }
-        [saveLabel, addRowLabel, randomSwitchLabel]
-            .forEach { $0.fontSizeRecalcForEachDevice() }
+        [saveButton, addRowButton, randomSwitchButton].forEach { $0.fontSizeRecalcForEachDevice() }
+        [saveLabel, addRowLabel, randomSwitchLabel].forEach { $0.fontSizeRecalcForEachDevice() }
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        // keyboardが表示している時はinsetをkeyboardのframe、非表示の時はoperationViewのframe。keyboardが表示されている時でも最下のcellまでスクロールできるようにする。
+//        keyboardが表示している時はinsetをkeyboardのframe、非表示の時はoperationViewのframe。
+//        keyboardが表示されている時でも最下のcellまでスクロールできるようにする。
         if userInfo != nil {
             let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue // keyboardの座標を取得
             newDataTableView.contentInset.bottom = keyboardFrame.size.height
@@ -163,22 +137,20 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
 // MARK: - TableViewDelegate,Datasource
 extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        dataSet.temporarys.count
+        numberOfRows
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! NewDataTableViewCell
-        let temporary = dataSet.temporarys[indexPath.row]
+        let temporary = graphTemporary(index: indexPath.row)
         cell.graphDataTemporary = temporary
-        getAllCells.append(cell)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(80).recalcValue
     }
-
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            dataSet.temporarys.remove(at: indexPath.row)
+            presenter.deleteRow(indexPath)
             tableView.deleteRows(at: [indexPath], with: .fade)
         }
     }
@@ -186,8 +158,40 @@ extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
         true // セルのドラッグ＆ドロップを有効
     }
     func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        let data = dataSet.temporarys[sourceIndexPath.row]
-        dataSet.temporarys.remove(at: sourceIndexPath.row)
-        dataSet.temporarys.insert(data, at: destinationIndexPath.row)
+        presenter.moveRow(sourceIndexPath, destinationIndexPath)
+    }
+}
+extension NewDataViewController: NewDataOutput {
+    // 保存しているデータをセット
+    func setContents(dataSet: RouletteData) {
+        titleTextField.text = dataSet.title
+        titleTextField.overrideUserInterfaceStyle = .light
+        randomSwitchButton.flag = dataSet.randomFlag
+        colorIndex = dataSet.colorIndex
+        stride(from: 0, to: 360, by: 18).forEach { i in
+            let color = UIColor.hsvToRgb(h: Float(i), s: 128, v: 255)
+            colors.append(color)
+        }
+    }
+    // データ保存
+    func saveContents(dataSet: RouletteData) {
+        let title = titleTextField.text ?? ""
+        let flag = randomSwitchButton.flag
+        let save = SaveData(with: self, dataSet: dataSet)
+        save.saveRouletteData(title: title, flag: flag, colorIndex: colorIndex)
+    }
+    // 先頭から行を追加していく
+    func addRow() -> RouletteGraphTemporary {
+        let row = RouletteGraphTemporary()
+        let rgb = colors[colorIndex]
+        row.rgbTemporary = ["r": rgb.r, "g": rgb.g, "b": rgb.b]
+        colorIndex = colorIndex < colors.count - 1 ? colorIndex + 1 : 0
+        return row
+    }
+}
+extension NewDataViewController: NewDataPresenterInput {
+    var numberOfRows: Int { presenter.numberOfRows }
+    func graphTemporary(index: Int) -> RouletteGraphTemporary {
+        presenter.getGraphTemporary(index: index)
     }
 }

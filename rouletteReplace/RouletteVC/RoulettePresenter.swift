@@ -11,33 +11,32 @@ protocol RouletteInput {
     func viewDidLoad()
     func rouletteStart()
 }
-class RoulettePresenter {
+class RoulettePresenter: ShareProperty {
     // このプロパティは循環参照を引き起こす可能性があってルーレットが終わった後にメモリが解放されないので弱参照にする
     private weak var output: RouletteOutput!
     private var rouletteView: RouletteView!
-    
+    private var dataSet: DataSet?
+
     init(with output: RouletteOutput) {
         self.output = output
-        rouletteView = RouletteView(dataSet: output.dataPresent)
+        
+        guard let lastDataSet = LoadData.shared.lastSetData() else { return }
+        self.dataSet = (lastDataSet, lastDataSet.list)
+        if let dataSet = dataSet {
+            rouletteView = RouletteView(dataSet: dataSet)
+        }
     }
 }
 extension RoulettePresenter: RouletteInput {
-    internal func viewDidLoad() {
-        createRouletteView()
-        createRouletteModule()
+    func viewDidLoad() {
+        guard dataSet != nil else { return }
+        output.addModule(addView: rouletteView)
     }
-    internal func rouletteStart() {
+    func rouletteStart() {
         output.hiddenLabel()
-        RouletteAnimation(input: output.dataPresent, view: rouletteView).startRotateAnimation()
-        RouletteSound.shared.rouletteSoundSetting(soundName: output.dataPresent.dataSet.sound)
-    }
-    private func createRouletteView() {
-        output.vc.view.addSubview(rouletteView)
-    }
-    private func createRouletteModule() {
-        let module = RouletteModule(output: output)
-        module.addPointer()
-        module.addFrameCircle()
-        module.addCenterCircle()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.rouletteView.startRotateAnimation()
+            self.rouletteView.rouletteSoundSetting()
+        }
     }
 }

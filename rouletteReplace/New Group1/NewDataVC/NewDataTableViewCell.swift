@@ -16,7 +16,8 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
     private var lastOffset: CGFloat = 0.0
     private var contentHeight: CGFloat = 0.0
     private var newDataVC: NewDataViewController { parentViewController as! NewDataViewController }
-    private var cellIndex: Int { newDataVC.newDataTableView.indexPath(for: self)!.row } // 現在のcellのindex番号
+    private var cellIndex: Int { newDataVC.newDataTableView.indexPath(for: self)!.row }
+    
     private lazy var inputAccessory: InputAccessoryView = {
         let view = InputAccessoryView()
         view.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: 50)
@@ -33,35 +34,40 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
             rouletteSetColorLabel.backgroundColor = UIColor(r: rgb["r"]!, g: rgb["g"]!, b: rgb["b"]!)
             rouletteTextField.text = text
             rouletteRatioSlider.value = ratio
+            randomSwitchToggle()
         }
     }
     // MARK: Outlets,Actions
     @IBOutlet var rouletteSetColorLabel: UILabel!
     @IBOutlet var rouletteTextField: UITextField!
     @IBOutlet var rouletteRatioSlider: UISlider!
-
+    
     // MARK: Methods
     override func awakeFromNib() {
         super.awakeFromNib()
         overrideUserInterfaceStyle = .light
-        settingDelegate()
         settingGesture()
-        // CustomLayoutConstant（デバイス毎にAutoLayoutを再計算するカスタムメソッド）を設定しているためか描画のタイミングのずれがあって、rouletteSetColorLabelが狂うのでDispatchQueueで対応
-        DispatchQueue.main.async {
-            self.settingUI()
-        }
+        self.settingUI()
         notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
     }
     override var inputAccessoryView: UIView? {
         inputAccessory
     }
-    private func settingDelegate() {
-        rouletteTextField.delegate = self
-    }
+    
     private func settingGesture() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(selectColorViewFetch))
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(colorSelectTransition))
         rouletteSetColorLabel.addGestureRecognizer(gesture)
         rouletteRatioSlider.addTarget(self, action: #selector(saveRatio), for: .touchUpInside)
+        rouletteTextField.delegate = self
+    }
+    private func randomSwitchToggle() {
+        if newDataVC.randomSwitchButton.flag {
+            rouletteRatioSlider.isUserInteractionEnabled = false
+            rouletteRatioSlider.layer.opacity = 0.3
+        } else {
+            rouletteRatioSlider.isUserInteractionEnabled = true
+            rouletteRatioSlider.layer.opacity = 1
+        }
     }
     private func settingUI() {
         backgroundColor = .clear
@@ -74,20 +80,21 @@ class NewDataTableViewCell: UITableViewCell, UIViewControllerTransitioningDelega
         rouletteTextField.isUserInteractionEnabled = true
     }
     @objc func saveRatio(sender: UISlider) {
-        newDataVC.dataSet.temporarys[cellIndex].ratioTemporary = sender.value
+        let temporary = newDataVC.graphTemporary(index: cellIndex)
+        temporary.ratioTemporary = sender.value
     }
-    @objc func selectColorViewFetch() {
-        let storyboard = UIStoryboard(name: "ColorSelect", bundle: nil)
-        let colorSelectVC = storyboard.instantiateViewController(withIdentifier: "ColorSelectViewController")as! ColorSelectViewController
+    @objc func colorSelectTransition() {
+        let storyboard = UIStoryboard(name: R.storyboard.colorSelect.name, bundle: nil)
+        let colorSelectVC = storyboard.instantiateInitialViewController { coder in
+            let currentColor = self.rouletteSetColorLabel.backgroundColor
+            return ColorSelectViewController(coder: coder, currentColor: currentColor, cellIndex: self.cellIndex)
+        }
         // PresentationControllerをカスタマイズして色選択のモーダルウィンドウを作成
-        colorSelectVC.transitioningDelegate = self
-        colorSelectVC.modalPresentationStyle = .custom
-        // 色のラベルをタップした時にタップされたセルのindex番号を取得する。セルをタップした場合はindexPathSelectRowを使うがラベルにタップした時には検出されないので下記のコードで取得する。
-        // cellのindex番号を遷移先のVCに渡す
-        colorSelectVC.cellTag = cellIndex
-        colorSelectVC.currentColor = rouletteSetColorLabel.backgroundColor
-        // 親ViewControllerを取得　extensionにて
-        parentViewController?.present(colorSelectVC, animated: true, completion: nil)
+        if let colorSelectVC = colorSelectVC {
+            colorSelectVC.transitioningDelegate = self
+            colorSelectVC.modalPresentationStyle = .custom
+            parentViewController?.present(colorSelectVC, animated: true, completion: nil)
+        }
     }
     // PresentationControllerをカスタムするためのdelegateメソッド
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
@@ -101,33 +108,23 @@ extension NewDataTableViewCell: UITextFieldDelegate {
     }
     @objc func keyboardWillShow(notification: Notification) {
         guard let fld = editField else { return }
-        let userInfo = (notification as NSNotification).userInfo!
-        let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue // keyboardの座標を取得
+        // keyboardの座標を取得
         let fldFrame = newDataVC.view.convert(fld.frame, from: contentView) // textfieldの座標系をviewに合わせる
-        overlap = fldFrame.maxY - keyboardFrame.minY
-        if overlap > 0 {
-            let tableView = newDataVC.newDataTableView!
-            let frameHeight = tableView.frame.height
-            let contentHeight = tableView.contentSize.height
-            let operationHeight = newDataVC.operationView.frame.height
-            // contentOffsetの最下を算出する。
-            let limitOffset = frameHeight < contentHeight ? (contentHeight - frameHeight) + operationHeight : 0.0
-            // 隠れている部分をoverlap分下げて見えるようにする。
-            overlap += tableView.contentOffset.y + 20
-            tableView.setContentOffset(CGPoint(x: 0, y: overlap), animated: true)
-            // contentOffsetがlimitを超えてしまうとキーボードを閉じた時に余計にスクロールしたように表示されるので最下を超えないようにする。
-            lastOffset = limitOffset < tableView.contentOffset.y ? limitOffset : tableView.contentOffset.y
-            print(limitOffset)
+        let oparationViewHeight = newDataVC.operationView.frame.height
+        let offsetMove = KeyboardOffsetMove(notification: notification)
+        offsetMove.tableViewOffsetMove(fldFrame: fldFrame, tb: newDataVC.newDataTableView, plusValue: oparationViewHeight) { overlap, lastOffset in
+            self.overlap = overlap
+            self.lastOffset = lastOffset
         }
-        print("overlap: \(overlap), lastoffset: \(lastOffset)")
     }
     func textFieldDidEndEditing(_ textField: UITextField) {
         editField = nil
-        newDataVC.dataSet.temporarys[cellIndex].textTemporary = textField.text ?? ""
+        let temporary = newDataVC.graphTemporary(index: cellIndex)
+        temporary.textTemporary = textField.text ?? ""
     }
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        // リターンキーを押したら次のtextFieldにフォーカス。最後までいったらoffsetを戻しフォーカスを外す。
-        if newDataVC.dataSet.temporarys.count == cellIndex + 1 {
+        // リターンキーを押したら次のtextFieldに移動。最後までいったらoffsetを戻し編集を終了する。
+        if newDataVC.numberOfRows == cellIndex + 1 {
             newDataVC.newDataTableView.setContentOffset(CGPoint(x: 0, y: lastOffset), animated: true)
             textField.resignFirstResponder()
         } else {

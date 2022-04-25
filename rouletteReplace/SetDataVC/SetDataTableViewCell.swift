@@ -5,7 +5,6 @@
 //  Created by USER on 2021/10/01.
 //
 
-import RealmSwift
 import UIKit
 
 class SetDataTableViewCell: UITableViewCell {
@@ -24,9 +23,9 @@ class SetDataTableViewCell: UITableViewCell {
     var dataset: RouletteData? {
         didSet {
             guard let dataset = dataset else { return }
-            let list = dataset.list
+            let temporarys = dataset.temporarys
             textLabel?.text = dataset.title.isEmpty ? "No title" : dataset.title
-            createGraph(data: dataset, list: list)
+            createGraph(data: dataset, temporarys: temporarys)
         }
     }
     // MARK: Methods
@@ -124,11 +123,10 @@ class SetDataTableViewCell: UITableViewCell {
         parentLayer.addSublayer(layer)
     }
     // グラフの幅の数値の合計を100/合計値で比率を算出する。
-    private func drawRatios(list: List<RouletteGraphData>) -> [Double] {
-        let list = list
+    private func drawRatios(temporarys: [RouletteGraphTemporary]) -> [Double] {
         var ratios = [CGFloat]()
-        for i in list {
-            let ratio = CGFloat(i.ratio)
+        for i in temporarys {
+            let ratio = CGFloat(i.ratioTemporary)
             ratios.append(ratio)
         }
         let totalValue = ratios.reduce(0) { $0 + $1 }
@@ -136,12 +134,13 @@ class SetDataTableViewCell: UITableViewCell {
         return ratios.map { Double($0 * totalRatio) }
     }
     // viewControllerにグラフを追加
-    private func createGraph(data: RouletteData, list: List<RouletteGraphData>) {
-        let drawRatios = drawRatios(list: list)
+    private func createGraph(data: RouletteData, temporarys: [RouletteGraphTemporary]) {
+        let drawRatios = drawRatios(temporarys: temporarys)
         drawRatios.enumerated().forEach { index, ratio in
-            let graphData = list[index]
-            let color = UIColor(r: graphData.r, g: graphData.g, b: graphData.b).cgColor
-            let textString = graphData.text
+            let temporarys = temporarys[index]
+            let rgb = temporarys.rgbTemporary
+            let color = UIColor(r: rgb["r"]!, g: rgb["g"]!, b: rgb["b"]!).cgColor
+            let textString = temporarys.textTemporary
             let textColor = UIColor.black
             let endRatio = startRatio + ratio
             let range = startRatio...endRatio

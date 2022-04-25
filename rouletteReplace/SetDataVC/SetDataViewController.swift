@@ -7,28 +7,10 @@
 
 import UIKit
 
-protocol SetDataOutput: AnyObject {
-    var rootVC: HomeViewController? { get }
-    func transitionNewDataVC(vc: UIViewController)
-    func alertAppear()
-}
-extension SetDataViewController: SetDataOutput {
-    var rootVC: HomeViewController? {
-        guard let nav = self.presentingViewController as? UINavigationController,
-              let rootVC = nav.viewControllers.first as? HomeViewController else { return nil }
-        return rootVC
-    }
-    func transitionNewDataVC(vc: UIViewController) {
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    func alertAppear() {
-        AlertAppear.shared.cancel(vc: self)
-    }
-}
 class SetDataViewController: UIViewController {
     // MARK: - properties
     private let cellId = "cellId"
-    private var presenter: SetDataInput!
+    private let presenter = SetDataPresenter()
     
     // MARK: - Outlets,Actions
     @IBOutlet var setDataTableView: UITableView!
@@ -37,7 +19,6 @@ class SetDataViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         statusBarStyleChange(style: .lightContent)
-        initialize()
         settingView()
         settingGesture()
     }
@@ -49,9 +30,6 @@ class SetDataViewController: UIViewController {
             }
         }
     }
-    private func initialize() {
-        presenter = SetDataPresenter(with: self)
-    }
     private func settingView() {
         setDataTableView.delegate = self
         setDataTableView.dataSource = self
@@ -62,7 +40,8 @@ class SetDataViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
     }
     @objc private func cancelBarButton() {
-        guard let rootVC = rootVC else { return }
+        guard let nav = self.presentingViewController as? UINavigationController,
+              let rootVC = nav.viewControllers.first as? HomeViewController else { return }
         rootVC.setDataButton.isSelected = false
         statusBarStyleChange(style: .darkContent)
         dismiss(animated: true, completion: nil)
@@ -83,11 +62,13 @@ extension SetDataViewController: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! SetDataTableViewCell
-        cell.dataset = presenter.getData(indexPath: indexPath)
+        cell.dataset = presenter.getDatas(indexPath: indexPath)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.newDataVCTransition(indexPath: indexPath)
+        presenter.newDataVCTransition(indexPath: indexPath) { vc in
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(80).recalcValue
@@ -95,9 +76,11 @@ extension SetDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // データベースからルーレット情報を削除する。
-            presenter.deleteData(indexPath: indexPath)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            presenter.deleteData(indexPath: indexPath) {
+                AlertAppear(with: self).cancel()
+            } completion: {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
         }
     }
 }
-

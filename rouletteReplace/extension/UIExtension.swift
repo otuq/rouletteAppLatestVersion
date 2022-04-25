@@ -46,9 +46,9 @@ extension UIViewController {
     }
 }
 extension UIAlertController {
-    func selectTwoChoice(titleA: String, titleB: String, action: @escaping () -> Void) {
-        let actionA = UIAlertAction(title: titleA, style: .cancel, handler: .none)
-        let actionB = UIAlertAction(title: titleB, style: .default) { _ in
+    func selectJob(cancel: String, execute: String, action: @escaping () -> Void) {
+        let actionA = UIAlertAction(title: cancel, style: .cancel, handler: .none)
+        let actionB = UIAlertAction(title: execute, style: .default) { _ in
             action()
         }
         addAction(actionA)

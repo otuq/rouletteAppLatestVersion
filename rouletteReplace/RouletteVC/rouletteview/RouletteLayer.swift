@@ -8,7 +8,10 @@
 import UIKit
 
 class RouletteLayer: ShareProperty {
-    static let shared = RouletteLayer()
+    private var viewPoint: CGPoint!
+    init(viewPoint: CGPoint) {
+        self.viewPoint = viewPoint
+    }
     // 円グラフの内側円線
     func innerCircleBorderLayer() -> CAShapeLayer {
         let path = UIBezierPath()
@@ -58,7 +61,8 @@ class RouletteLayer: ShareProperty {
             endAngle: CGFloat(2 * Double.pi * endAngle / Double(around) - Double.pi / 2),
             clockwise: true
         )
-        path.apply(CGAffineTransform(translationX: path.bounds.midX, y: path.bounds.midY))
+        // グラフの位置をviewに合わせる
+        path.apply(CGAffineTransform(translationX: viewPoint.x, y: viewPoint.y))
         return path
     }
 }
