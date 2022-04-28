@@ -24,7 +24,7 @@ class NewDataPresenter {
     init(with output: NewDataOutput, selected: Bool) {
         self.output = output
         // 新規と編集の分岐
-        if !(selected), let dataSet = LoadData.shared.lastSetData() {
+        if !(selected), let dataSet = FetchData.shared.latestData() {
             self.dataSet = dataSet
             dataSet.list.forEach { graphData in
                 let temporary = RouletteGraphTemporary()

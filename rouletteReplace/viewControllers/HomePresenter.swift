@@ -22,7 +22,7 @@ class HomePresenter {
     
     init(with output: HomeOutput) {
         self.output = output
-        self.dataSet = LoadData.shared.lastSetData()
+        self.dataSet = FetchData.shared.latestData()
     }
 }
 extension HomePresenter: HomeInput {

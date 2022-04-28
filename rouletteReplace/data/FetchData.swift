@@ -1,5 +1,5 @@
 //
-//  Load.swift
+//  FetchData.swift
 //  rouletteReplace
 //
 //  Created by USER on 2022/03/23.
@@ -8,8 +8,11 @@
 import Foundation
 import RealmSwift
 
-struct LoadData {
-    static let shared = LoadData()
+protocol ShareModel {
+    typealias DataSet = (dataSet: RouletteData, list: List<RouletteGraphData>)
+}
+struct FetchData: ShareModel {
+    static let shared = FetchData()
     private var realm = try! Realm()
     private var resultsData: Results<RouletteData>?
     
@@ -26,7 +29,7 @@ struct LoadData {
             realm.delete(resultsData[indexPath.row])
         }
     }
-    func lastSetData() -> RouletteData? {
+    func latestData() -> RouletteData? {
         let sortData = resultsData?.sorted(byKeyPath: "lastDate", ascending: true)
         return sortData?.last
     }

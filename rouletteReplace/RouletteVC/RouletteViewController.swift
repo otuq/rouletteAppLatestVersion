@@ -5,23 +5,12 @@
 //  Created by USER on 2021/06/15.
 //
 
-import RealmSwift
 import UIKit
 
-protocol RouletteOutput: AnyObject, ShareProperty {
+protocol RouletteOutput: AnyObject {
     func addModule(addView: UIView)
-    func hiddenLabel()
+    func hiddenModule()
     func rouletteDismiss()
-}
-protocol ShareProperty {}
-extension ShareProperty {
-    typealias DataSet = (dataSet: RouletteData, list: List<RouletteGraphData>)
-    var around: CGFloat { CGFloat.pi * 2 } // 360度 1回転
-    var diameter: CGFloat {
-        let width = UIScreen.main.bounds.width
-        let subtraction = (width / 13) / 2
-        return (width - subtraction)
-    }// 直径
 }
 class RouletteViewController: UIViewController {
     // MARK: Properties
@@ -77,10 +66,11 @@ extension RouletteViewController: RouletteOutput {
         view.sendSubviewToBack(addView)
         view.bringSubviewToFront(pointer)
     }
-    func hiddenLabel() {
-        tapStartLabel.forEach { lab in
-            lab.isHidden = true
+    func hiddenModule() {
+        tapStartLabel.forEach { label in
+            label.isHidden = true
         }
+        quitButton.isHidden = true
     }
     func rouletteDismiss() {
         let gesture = UITapGestureRecognizer(target: self, action: #selector(tapDismiss))

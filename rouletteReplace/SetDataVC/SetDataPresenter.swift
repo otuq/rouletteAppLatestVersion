@@ -14,8 +14,8 @@ protocol SetDataInput {
     func deleteData(indexPath: IndexPath, execute: () -> Void, completion: () -> Void)
 }
 class SetDataPresenter {
-    private var load: LoadData!
-    init() { self.load = LoadData() }
+    private var load: FetchData!
+    init() { self.load = FetchData.shared }
 }
 extension SetDataPresenter: SetDataInput {
     var numberOfRows: Int { load.dataCount }
@@ -39,7 +39,7 @@ extension SetDataPresenter: SetDataInput {
         return dataSet
     }
     func deleteData(indexPath: IndexPath, execute: () -> Void, completion: () -> Void) {
-        let currentData = load.lastSetData()
+        let currentData = load.latestData()
         let selectData = load.sortData()
         if currentData?.dataId == selectData?[indexPath.row].dataId {
             execute()

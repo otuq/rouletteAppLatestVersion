@@ -7,6 +7,15 @@
 
 import UIKit
 
+protocol ShareProperty {}
+extension ShareProperty {
+    var around: CGFloat { CGFloat.pi * 2 } // 360度 1回転
+    var diameter: CGFloat {
+        let width = UIScreen.main.bounds.width
+        let subtraction = (width / 13) / 2
+        return (width - subtraction)
+    }// 直径
+}
 class RouletteLayer: ShareProperty {
     private var viewPoint: CGPoint!
     init(viewPoint: CGPoint) {

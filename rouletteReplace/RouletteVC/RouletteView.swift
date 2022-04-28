@@ -8,7 +8,7 @@
 import AVFoundation
 import UIKit
 
-class RouletteView: UIView, ShareProperty {
+class RouletteView: UIView, ShareProperty, ShareModel {
     private let dtStop = CGFloat.random(in: 0...CGFloat.pi * 2) // 止まる角度
     private let duration: TimeInterval = 10 // 回る時間(秒)
     private var audioPlayer: AVAudioPlayer?
@@ -34,13 +34,15 @@ class RouletteView: UIView, ShareProperty {
         calcRatios.enumerated().forEach { index, ratio in
             let dataSet = rouletteDataSet.dataSet
             let list = rouletteDataSet.list[index]
+            let endRatio = startRatio + ratio
             let graphColor = UIColor(r: list.r, g: list.g, b: list.b).cgColor
-            let createGraph = self.createGraphAndFrame(ratio: ratio, graphColor: graphColor)
+            let createGraph = self.createGraphAndFrame(endRatio: endRatio, graphColor: graphColor)
             let rouletteText = rouletteText(list.text, dataSet.textColor, textSize: 16, ratio: ratio)
             rouletteText.center = self.center
             parentLayer.addSublayer(createGraph.graph)
             frameLayer.addSublayer(createGraph.frame)
             addSubview(rouletteText)
+            startRatio = endRatio // 次のグラフのスタート値を更新
         }
         frameLayer.addSublayer(frameCircleLayer)
         self.layer.addSublayer(frameLayer)
@@ -57,18 +59,15 @@ class RouletteView: UIView, ShareProperty {
         }
         // グラフの幅の数値の合計を100/合計値で比率を算出する。
         let totalValue = ratios.reduce(0) { $0 + $1 }
-        let totalRatio = self.around / CGFloat(totalValue)
-        let calcRatios = ratios.map { Double($0 * totalRatio) }
-        return calcRatios
+        let totalRatio = around / totalValue
+        return ratios.map { Double($0 * totalRatio) }
     }
     // 比率ごとにグラフとフレームを作成
-    private func createGraphAndFrame(ratio: Double, graphColor: CGColor) -> (graph: CALayer, frame: CALayer) {
-        let endRatio = startRatio + ratio
+    private func createGraphAndFrame(endRatio: Double, graphColor: CGColor) -> (graph: CALayer, frame: CALayer) {
         let range = startRatio...endRatio
         let frameBoarderLayer = roulettelayer.arcBorderLayer(startRatio: startRatio)
         let graphLayer = roulettelayer.drawGraphLayer(fillColor: graphColor, startRatio, endRatio)
         graphRange.append(range)
-        startRatio = endRatio // 次のグラフのスタート値を更新
         return (graphLayer, frameBoarderLayer)
     }
     required init?(coder: NSCoder) {
@@ -76,17 +75,9 @@ class RouletteView: UIView, ShareProperty {
     }
     private func rouletteText(_ text: String, _ textColor: UIColor, textSize: CGFloat, ratio: CGFloat) -> UIView {
         let textLabelView = UIView(frame: CGRect(origin: .zero, size: CGSize(width: diameter - 20, height: 20)))
-        let textLabel = UILabel()
         let textAngleRatio = startRatio + (ratio / 2) // 2番目のレイヤーだとしたら1番目のendratioからratioの半分の位置が文字列の角度 start:25 ratio40 文字列角度45
-        let textAngle = CGFloat(2 * Double.pi * textAngleRatio / Double(around) + Double.pi / 2) //
-        textLabel.frame.size = CGSize(width: textLabelView.frame.width / 2, height: textLabelView.frame.height)
-        let attributes: [NSAttributedString.Key: Any] = [
-            .font: UIFont.systemFont(ofSize: textSize),
-            .foregroundColor: textColor
-        ]
-        textLabel.attributedText = NSAttributedString(string: text, attributes: attributes)
-        textLabelView.addSubview(textLabel)
-        textLabelView.transform = CGAffineTransform(rotationAngle: textAngle)
+        let textAngle = CGFloat(2 * Double.pi * textAngleRatio / Double(around) + Double.pi / 2)
+        textLabelView.rouletteTextSetting(text, textColor, textAngle, textSize: 16)
         return textLabelView
     }
     // ルーレットアニメーション
@@ -114,9 +105,9 @@ class RouletteView: UIView, ShareProperty {
                 // ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
                     let list = rouletteDataSet.list[index]
-                    print(list.text)
-                    print(dtStop)
-                    print(range)
+//                    print(list.text)
+//                    print(dtStop)
+//                    print(range)
                     alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) // ルーレットの結果を表示する。
                     soundEffect()
                 }
@@ -135,7 +126,6 @@ class RouletteView: UIView, ShareProperty {
             audioPlayer?.prepareToPlay()
             audioPlayer?.numberOfLoops = -1
             audioPlayer?.play()
-            print(soundAsset.name)
         } catch {
             print(error.localizedDescription)
             audioPlayer = nil
@@ -151,7 +141,6 @@ class RouletteView: UIView, ShareProperty {
             audioPlayer = try AVAudioPlayer(data: soundAsset.data, fileTypeHint: "wav")
             audioPlayer?.prepareToPlay()
             audioPlayer?.play()
-            print(soundAsset.name)
         } catch {
             print("エラー：\(error.localizedDescription)")
             audioPlayer = nil
