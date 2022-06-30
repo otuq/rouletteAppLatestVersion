@@ -8,7 +8,7 @@
 import UIKit
 
 protocol HomeOutput: AnyObject {
-    func createStartLabel(dataSet: RouletteData)
+    func setTitle(dataSet: RouletteData)
     func rouletteVCTransition()
     func newDataVCTransition()
     func setDataVCTranstion()
@@ -22,7 +22,6 @@ protocol HomeToNewDataOutput: AnyObject {
 class HomeViewController: UIViewController {
     // MARK: Properties
     private var presenter: HomeInput!
-//    private var newDataPresenter:
     var statusBarStyleChange: UIStatusBarStyle = .darkContent
     
     // MARK: Outlets,Actions
@@ -41,8 +40,9 @@ class HomeViewController: UIViewController {
         settingUI()
         settingGesture()
     }
-    private func initialize() {
+    func initialize() {
         presenter = HomePresenter(with: self)
+        presenter.setTitle()
     }
     // ステータスバーのスタイルを変更
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -83,19 +83,19 @@ class HomeViewController: UIViewController {
         presenter.shareVCTransition()
     }
     func addStartLabel() {
-        presenter.createStartLabel()
-    }
-}
-extension HomeViewController: HomeOutput {
-    func createStartLabel(dataSet: RouletteData) {
         let label = StartLabel.shared.create()
-        titleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
         startButton.titleLabel?.removeFromSuperview()
         label.center = view.center
         newDataButton.isSelected = false
         setDataButton.isSelected = false
-        statusBarStyleChange(style: .darkContent)
         view.addSubview(label)
+        statusBarStyleChange(style: .darkContent)
+    }
+}
+extension HomeViewController: HomeOutput {
+    func setTitle(dataSet: RouletteData) {
+        titleLabel.text = dataSet.title.isEmpty ? "No title": dataSet.title
+        addStartLabel()
     }
     func rouletteVCTransition() {
         let vc = R.storyboard.roulette.rouletteViewController()
@@ -113,7 +113,6 @@ extension HomeViewController: HomeOutput {
     }
     func editDataVCTransition() {
         let vc = R.storyboard.newData.newDataViewController()
-        
         Transition.shared.modalPresent(parentVC: self, presentingVC: vc, presentation: .overFullScreen)
     }
     func appSettingVCTransition() {

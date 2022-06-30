@@ -30,6 +30,7 @@ struct SaveData {
         if homeVC.newDataButton.isSelected {
             newData()
             updateData(title, flag, colorIndex)
+            homeVC.initialize()
             homeVC.addStartLabel()
             vc.dismiss(animated: true)
             print("データを新規作成しました。")

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol HomeInput: AnyObject {
-    func createStartLabel()
+    func setTitle()
     func rouletteVCTransition()
     func newDataVCTransition()
     func setVCTranstion()
@@ -26,9 +26,9 @@ class HomePresenter {
     }
 }
 extension HomePresenter: HomeInput {
-    func createStartLabel() {
+    func setTitle() {
         guard let dataSet = dataSet else { return }
-        output.createStartLabel(dataSet: dataSet)
+        output.setTitle(dataSet: dataSet)
     }
     func rouletteVCTransition() {
         guard dataSet != nil else { return }
