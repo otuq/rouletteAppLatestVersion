@@ -12,6 +12,7 @@ protocol NewDataOutput: AnyObject {
     func saveContents(dataSet: RouletteData)
     func addRow() -> RouletteGraphTemporary
 }
+// protocolを定義してpresenterのプロパティやメソッドを他のファイルでも使えるように
 protocol NewDataPresenterInput {
     var numberOfRows: Int { get }
     func graphTemporary(index: Int) -> RouletteGraphTemporary
@@ -27,8 +28,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private let notification = NotificationCenter.default
     private var userInfo: [AnyHashable: Any]?
     private var presenter: NewDataPresenter!
-    // SetDataVCから受け取るグラフデータ
-    var graphTemporary: [RouletteGraphTemporary]?
+    var selectIndex: Int?
     
     // MARK: Outlets,Actions
     @IBOutlet private var titleTextField: UITextField!
@@ -40,7 +40,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var newDataTableView: UITableView!
     @IBOutlet var randomSwitchButton: UIButton!
     @IBOutlet var operationView: UIView!
-
+    
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,9 +51,14 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         fontSizeRecalcForEachDevice()
     }
     private func initialize() {
+        // ここはグローバル変数なのでなんとかしたい
+        if let selectIndex = selectIndex {
+            self.presenter = NewDataPresenter(with: self, index: selectIndex)
+        } else {
         guard let nav = presentingViewController as? UINavigationController,
               let vc = nav.topViewController as? HomeViewController else { return }
-        self.presenter = NewDataPresenter(with: self, selected: vc.selected)
+            self.presenter = NewDataPresenter(with: self, selected: vc.selected)
+        }
     }
     private func settingView() {
         newDataTableView.delegate = self
@@ -65,10 +70,10 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         titleTextField.delegate = self
         statusBarStyleChange(style: .lightContent)
         randomSwitchButton.flag = presenter.randomSwitchFlag
-
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(cancelBarButton))
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(editBarButton))
-
+        
         notification.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
@@ -99,11 +104,11 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         addRowButton.addTarget(self, action: #selector(addRowInsert), for: .touchUpInside)
         randomSwitchButton.addTarget(self, action: #selector(ratioRandom), for: .touchUpInside)
     }
-//     データの保存
+    //     データの保存
     @objc private func saveCompleted() {
         presenter.saveContents()
     }
-//     行の挿入
+    //     行の挿入
     @objc private func addRowInsert() {
         let indexPath = IndexPath(row: 0, section: 0)
         presenter.addDataTemporary()
@@ -111,13 +116,13 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         newDataTableView.scrollToRow(at: indexPath, at: .top, animated: true)
         newDataTableView.contentInset.bottom = newDataTableView.frame.height - newDataTableView.contentSize.height
     }
-//     ルーレットのグラフの比率をランダムにする。
+    //     ルーレットのグラフの比率をランダムにする。
     @objc private func ratioRandom() {
         randomSwitchButton.flag.toggle()
         randomSwitchLabel.text = randomSwitchButton.flag ? "ON" : "OFF"
         newDataTableView.reloadData()
     }
-//     テキストサイズをデバイスごとに再計算
+    //     テキストサイズをデバイスごとに再計算
     private func fontSizeRecalcForEachDevice() {
         [saveButton, addRowButton, randomSwitchButton].forEach { $0.fontSizeRecalcForEachDevice() }
         [saveLabel, addRowLabel, randomSwitchLabel].forEach { $0.fontSizeRecalcForEachDevice() }
@@ -126,8 +131,8 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         view.endEditing(true)
     }
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        keyboardが表示している時はinsetをkeyboardのframe、非表示の時はoperationViewのframe。
-//        keyboardが表示されている時でも最下のcellまでスクロールできるようにする。
+        //        keyboardが表示している時はinsetをkeyboardのframe、非表示の時はoperationViewのframe。
+        //        keyboardが表示されている時でも最下のcellまでスクロールできるようにする。
         if userInfo != nil {
             let keyboardFrame = (userInfo?[UIResponder.keyboardFrameEndUserInfoKey]as! NSValue).cgRectValue // keyboardの座標を取得
             newDataTableView.contentInset.bottom = keyboardFrame.size.height
@@ -139,16 +144,12 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
 // MARK: - TableViewDelegate,Datasource
 extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        graphTemporary != nil ? (graphTemporary?.count)! : numberOfRows
+        numberOfRows
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! NewDataTableViewCell
-        if let graphTemporary = graphTemporary {
-            cell.graphDataTemporary = graphTemporary[indexPath.row]
-        }else{
-            let temporary = graphTemporary(index: indexPath.row)
-            cell.graphDataTemporary = temporary
-        }
+        let temporary = graphTemporary(index: indexPath.row)
+        cell.graphDataTemporary = temporary
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -195,6 +196,7 @@ extension NewDataViewController: NewDataOutput {
         return row
     }
 }
+// protocolを定義してpresenterのプロパティやメソッドを他のファイルでも使えるように
 extension NewDataViewController: NewDataPresenterInput {
     var numberOfRows: Int { presenter.numberOfRows }
     func graphTemporary(index: Int) -> RouletteGraphTemporary {

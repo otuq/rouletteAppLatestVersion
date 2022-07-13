@@ -28,6 +28,12 @@ class NewDataPresenter {
             self.dataSet = getRouletteGraph(dataSet: dataSet)
         }
     }
+    init(with output: NewDataOutput, index: Int) {
+        self.output = output
+        if let dataSet = FetchData.shared.sortData() {
+            self.dataSet = getRouletteGraph(dataSet: dataSet[index])
+        }
+    }
     private func getRouletteGraph(dataSet: RouletteData) -> RouletteData {
         let getDataSet = dataSet
         getDataSet.list.forEach { graphData in

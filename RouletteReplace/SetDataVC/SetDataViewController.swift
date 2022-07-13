@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SetDataViewController: UIViewController {
     // MARK: - properties
     private let cellId = "cellId"
@@ -66,9 +67,9 @@ extension SetDataViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter.newDataVCTransition(indexPath: indexPath) { vc in
-            navigationController?.pushViewController(vc, animated: true)
-        }
+        guard let newDataVC = R.storyboard.newData.newDataViewController() else { return }
+        newDataVC.selectIndex = indexPath.row
+        navigationController?.pushViewController(newDataVC, animated: true)
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(80).recalcValue
