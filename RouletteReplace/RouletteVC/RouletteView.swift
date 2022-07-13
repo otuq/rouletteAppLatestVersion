@@ -94,9 +94,6 @@ class RouletteView: UIView, ShareProperty, ShareModel {
         let stopAngle = (r * dtStop) // 止まる位置
         let rotation = ((CGFloat(around) * rouletteDataSet.dataSet.speed + dtStop) * r) // 回転 360度*回転数+止まる角度*進捗率
         transform = CGAffineTransform(rotationAngle: rotation)
-//        if dt >= 0.99 {
-//            audioPlayer?.volume = 0
-//        }
         // ルーレットのストップ
         if stopAngle >= dtStop {
             link.invalidate()
@@ -105,9 +102,6 @@ class RouletteView: UIView, ShareProperty, ShareModel {
                 // ルーレットの結果は針に対して回転する角度の対比側のグラフの範囲が結果になる。 30度回転した場合は針に対して反対の330度が結果になる。
                 if range.contains(Double(around - stopAngle)) {
                     let list = rouletteDataSet.list[index]
-//                    print(list.text)
-//                    print(dtStop)
-//                    print(range)
                     alertResultRoulette(resultText: list.text, r: list.r, g: list.g, b: list.b) // ルーレットの結果を表示する。
                     soundEffect()
                 }
