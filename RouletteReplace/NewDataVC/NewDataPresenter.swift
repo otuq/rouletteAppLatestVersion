@@ -25,17 +25,21 @@ class NewDataPresenter {
         self.output = output
         // 新規と編集の分岐
         if !(selected), let dataSet = FetchData.shared.latestData() {
-            self.dataSet = dataSet
-            dataSet.list.forEach { graphData in
-                let temporary = RouletteGraphTemporary()
-                temporary.textTemporary = graphData.text
-                temporary.ratioTemporary = graphData.ratio
-                temporary.rgbTemporary["r"] = graphData.r
-                temporary.rgbTemporary["g"] = graphData.g
-                temporary.rgbTemporary["b"] = graphData.b
-                dataSet.temporarys.append(temporary)
-            }
+            self.dataSet = getRouletteGraph(dataSet: dataSet)
         }
+    }
+    private func getRouletteGraph(dataSet: RouletteData) -> RouletteData {
+        let getDataSet = dataSet
+        getDataSet.list.forEach { graphData in
+            let temporary = RouletteGraphTemporary()
+            temporary.textTemporary = graphData.text
+            temporary.ratioTemporary = graphData.ratio
+            temporary.rgbTemporary["r"] = graphData.r
+            temporary.rgbTemporary["g"] = graphData.g
+            temporary.rgbTemporary["b"] = graphData.b
+            getDataSet.temporarys.append(temporary)
+        }
+        return getDataSet
     }
 }
 extension NewDataPresenter: NewDataInput {

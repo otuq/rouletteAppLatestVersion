@@ -17,6 +17,7 @@ protocol HomeOutput: AnyObject {
     func shareVCTransition()
 }
 protocol HomeToNewDataOutput: AnyObject {
+    // newDataButtonのisSelectedの状態を渡す
     var selected: Bool { get }
 }
 class HomeViewController: UIViewController {

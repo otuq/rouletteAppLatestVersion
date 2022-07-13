@@ -39,7 +39,7 @@ class ColorSelectViewController: UIViewController {
     private func settingView() {
         colorSelectCollectionView.delegate = self
         colorSelectCollectionView.dataSource = self
-        colorSelectCollectionView.register(UINib(nibName: R.nib.collectionViewCell.name, bundle: nil), forCellWithReuseIdentifier: cellId)
+        colorSelectCollectionView.register(UINib(nibName: R.nib.colorSelectCollectionViewCell.name, bundle: nil), forCellWithReuseIdentifier: cellId)
     }
 }
 // MARK: - CollectionViewDelegate,Datasource

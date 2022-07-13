@@ -27,6 +27,8 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private let notification = NotificationCenter.default
     private var userInfo: [AnyHashable: Any]?
     private var presenter: NewDataPresenter!
+    // SetDataVCから受け取るグラフデータ
+    var graphTemporary: [RouletteGraphTemporary]?
     
     // MARK: Outlets,Actions
     @IBOutlet private var titleTextField: UITextField!
@@ -51,7 +53,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private func initialize() {
         guard let nav = presentingViewController as? UINavigationController,
               let vc = nav.topViewController as? HomeViewController else { return }
-        presenter = NewDataPresenter(with: self, selected: vc.selected)
+        self.presenter = NewDataPresenter(with: self, selected: vc.selected)
     }
     private func settingView() {
         newDataTableView.delegate = self
@@ -137,12 +139,16 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
 // MARK: - TableViewDelegate,Datasource
 extension NewDataViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        numberOfRows
+        graphTemporary != nil ? (graphTemporary?.count)! : numberOfRows
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)as! NewDataTableViewCell
-        let temporary = graphTemporary(index: indexPath.row)
-        cell.graphDataTemporary = temporary
+        if let graphTemporary = graphTemporary {
+            cell.graphDataTemporary = graphTemporary[indexPath.row]
+        }else{
+            let temporary = graphTemporary(index: indexPath.row)
+            cell.graphDataTemporary = temporary
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

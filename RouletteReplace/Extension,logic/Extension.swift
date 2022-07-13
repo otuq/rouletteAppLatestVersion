@@ -42,6 +42,10 @@ extension CGFloat {
         return self
     }
 }
+extension Notification.Name {
+    // SetDataVCのdidselectのindex
+    static let indexPost = Notification.Name("indexPost")
+}
 // AutoLayoutをデバイス毎に再計算
 class CustomLayoutConstant: NSLayoutConstraint {
     override var constant: CGFloat {

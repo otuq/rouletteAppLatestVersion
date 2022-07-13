@@ -20,14 +20,15 @@ class SetDataPresenter {
 extension SetDataPresenter: SetDataInput {
     var numberOfRows: Int { load.dataCount }
     func newDataVCTransition(indexPath: IndexPath, completion: (NewDataViewController) -> Void) {
-        guard let vc = R.storyboard.newData.newDataViewController(),
+        guard let newDataVC = R.storyboard.newData.newDataViewController(),
               let sortDatas = load.sortData() else { return }
         let dataSet = sortDatas[indexPath.row]
         dataSet.list.forEach { list in
             let temporary = temporary(list: list)
             dataSet.temporarys.append(temporary)
         }
-        completion(vc)
+        newDataVC.graphTemporary = dataSet.temporarys
+        completion(newDataVC)
     }
     func getDatas(indexPath: IndexPath) -> RouletteData? {
         guard let sortDatas = load.sortData() else { return nil }

@@ -48,6 +48,16 @@
                ReferencedContainer = "container:rouletteReplace.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CE24AE8F287E9A9B00C99A05"
+               BuildableName = "rouletteReplaceUITests.xctest"
+               BlueprintName = "rouletteReplaceUITests"
+               ReferencedContainer = "container:rouletteReplace.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
