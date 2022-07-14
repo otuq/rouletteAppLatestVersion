@@ -26,9 +26,7 @@ class AlertAppear {
         alertController.addAction(alertAction)
         vc.present(alertController, animated: true, completion: nil)
     }
-    func goBackHome() {
-        let message = "編集を終了してウィンドウを閉じますか？"
-        let cancelTitle = "編集を続ける", executeTitle = "ウィンドウを閉じる"
+    func goBackHome(message: String, cancelTitle: String, executeTitle: String) {
         alertAction(message, cancelTitle, executeTitle) {
             guard let nav = self.vc.presentingViewController as? UINavigationController,
                   let homeVC = nav.topViewController as? HomeViewController else { return print("NG") }

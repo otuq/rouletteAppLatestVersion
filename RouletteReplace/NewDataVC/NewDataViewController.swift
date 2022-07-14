@@ -17,9 +17,6 @@ protocol NewDataPresenterInput {
     var numberOfRows: Int { get }
     func graphTemporary(index: Int) -> RouletteGraphTemporary
 }
-// グラフデータの流れ方
-// newData→temporarysに一時データを格納してsaveボタンを押された時にデータベースに保存
-// loadData→setVC→list（データベースに保存したデータ）のデータをtemporarysに格納する。
 class NewDataViewController: UIViewController, UITextFieldDelegate {
     // MARK: properties
     private let cellId = "cellId"
@@ -28,7 +25,7 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
     private let notification = NotificationCenter.default
     private var userInfo: [AnyHashable: Any]?
     private var presenter: NewDataPresenter!
-    var selectIndex: Int?
+    var selectIndex: Int? // SetDataVCの選択されたセルのインデックスを受け取る
     
     // MARK: Outlets,Actions
     @IBOutlet private var titleTextField: UITextField!
@@ -51,7 +48,6 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         fontSizeRecalcForEachDevice()
     }
     private func initialize() {
-        // ここはグローバル変数なのでなんとかしたい
         if let selectIndex = selectIndex {
             self.presenter = NewDataPresenter(with: self, index: selectIndex)
         } else {
@@ -78,7 +74,9 @@ class NewDataViewController: UIViewController, UITextFieldDelegate {
         notification.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
     }
     @objc private func cancelBarButton() {
-        AlertAppear(with: self).goBackHome()
+        let message = "編集を終了してウィンドウを閉じますか？"
+        let cancelTitle = "編集を続ける", executeTitle = "ウィンドウを閉じる"
+        AlertAppear(with: self).goBackHome(message: message, cancelTitle: cancelTitle, executeTitle: executeTitle)
     }
     @objc private func editBarButton() {
         newDataTableView.setEditing(true, animated: true)

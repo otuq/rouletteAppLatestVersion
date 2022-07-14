@@ -50,7 +50,9 @@ class RouletteViewController: UIViewController {
         view.removeGestureRecognizer(tapGesture)
     }
     @objc private func quitGesture() {
-        AlertAppear(with: self).goBackHome()
+        let message = "ルーレットを中止しますか？"
+        let cancelTitle = "続ける", executeTitle = "中止してウィンドウを閉じる"
+        AlertAppear(with: self).goBackHome(message: message, cancelTitle: cancelTitle, executeTitle: executeTitle)
     }
 }
 extension RouletteViewController: RouletteOutput {
@@ -77,7 +79,6 @@ extension RouletteViewController: RouletteOutput {
         view.addGestureRecognizer(gesture)
     }
     @objc private func tapDismiss() {
-        print("tap")
         dismiss(animated: true)
     }
 }

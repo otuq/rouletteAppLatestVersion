@@ -23,6 +23,7 @@ protocol HomeToNewDataOutput: AnyObject {
 class HomeViewController: UIViewController {
     // MARK: Properties
     private var presenter: HomeInput!
+    private var startLabel = UILabel()
     var statusBarStyleChange: UIStatusBarStyle = .darkContent
     
     // MARK: Outlets,Actions
@@ -84,12 +85,13 @@ class HomeViewController: UIViewController {
         presenter.shareVCTransition()
     }
     func addStartLabel() {
-        let label = StartLabel.shared.create()
         startButton.titleLabel?.removeFromSuperview()
-        label.center = view.center
+        startLabel.removeFromSuperview()
+        startLabel = StartLabel.shared.create()
+        startLabel.center = view.center
         newDataButton.isSelected = false
         setDataButton.isSelected = false
-        view.addSubview(label)
+        view.addSubview(startLabel)
         statusBarStyleChange(style: .darkContent)
     }
 }
