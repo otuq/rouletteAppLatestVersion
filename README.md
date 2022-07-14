@@ -1,7 +1,4 @@
-# rouletteAppLatestVersiond
-
-# newRead
-概要
+# rouletteAppLatestVersion
 
 ## description
 説明
