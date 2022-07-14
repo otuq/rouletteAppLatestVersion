@@ -7,7 +7,7 @@
 [AppStoreで配信しています。](https://apps.apple.com/jp/app/thee-roulette/id1602651709)<br>
 
 こちらリポジトリはAppStoreで配信しているものをポートフォリオ用に編集し直したものです。<br>
-AppStoreで配信しているものと若干異なっています。（広告が貼られていない等）<br>
+AppStoreで配信しているものと若干異なっています。（広告が貼られていません）<br>
 
 ## Detail
 詳細<br>
