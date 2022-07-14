@@ -13,11 +13,12 @@ AppStoreで配信しているものと若干異なっています。（広告が
 アプリで使われている技術  
 UIViewController  
 UITableViewController  
-UICollectionViewController
+UICollectionViewController  
 UINavigationController  
 UIAlertController  
 UIActivityViewController  
 UIPresentationController  
+UIColorPickerViewController
 AVFoundation  
 SafariServices      
 RealmSwift  
