@@ -1,5 +1,4 @@
 # rouletteAppLatestVersion
-[サンプル画像](https://github.com/otuq/rouletteAppLatestVersion/blob/master/sampleImage.jpeg)
 
 ## description
 説明<br>
