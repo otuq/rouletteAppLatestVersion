@@ -18,7 +18,7 @@ UINavigationController
 UIAlertController  
 UIActivityViewController  
 UIPresentationController  
-UIColorPickerViewController
+UIColorPickerViewController  
 AVFoundation  
 SafariServices      
 RealmSwift  
